@@ -43,10 +43,7 @@ public class MemberTests {
 
         // db에 들어갔는지 확인
         assertTrue(memberRepository.existsByEmail("admin@test.com"));
-
-
-system.out.println("ㅎㅎㅎㅎ");
-
+        System.out.println("희진!");
     }
 
     @Test
