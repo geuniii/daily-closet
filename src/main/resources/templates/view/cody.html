@@ -9,75 +9,159 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th scope="col">상의</th>
-                <th scope="col">아우터</th>
-                <th scope="col">하의</th>
-                <th scope="col">가방</th>
-                <th scope="col">신발</th>
+                <th width="20%">상의</th>
+                <th width="20%">아우터</th>
+                <th width="20%">하의</th>
+                <th width="20%">가방</th>
+                <th width="20%">신발</th>
             </tr>
             </thead>
+
             <tbody>
+            <tr>
+                <!--                아우터-->
+                <td>
+                    <img id="outerCody" src="">
+
+                </td>
+                    <!--                상의-->
+                <td>
+                    <img id="topCody" src="">
+                </td>
+
+<!--                                하의-->
+                <td>
+                    <img id="bottomCody" src="">
+                </td>
 
 
-            <td th:each="item:${topList}">
-                <div>
-                    <img class="likeimgbox" th:src="${item.urls.get(0)}">
-                </div>
-            </td>
+                    <!--                가방-->
+                <td>
+                    <img id="accCody" src="">
+                </td>
 
-            <td th:each="item:${outerList}">
-                <div>
-                    <img class="likeimgbox" th:src="${item.urls.get(0)}">
-                </div>
-            </td>
+                    <!--                신발-->
+                <td>
+                    <img id="shoesCody" src="">
+                </td>
 
-            <td th:each="item:${bottomList}">
-                <div>
-                    <img class="likeimgbox" th:src="${item.urls.get(0)}">
-                </div>
-            </td>
-
-            <td th:each="item:${accList}">
-                <div>
-                    <img class="likeimgbox" th:src="${item.urls.get(0)}">
-                </div>
-            </td>
-
-            <td th:each="item:${shoesList}">
-                <div>
-                    <img class="likeimgbox" th:src="${item.urls.get(0)}">
-                </div>
-            </td>
+            </tr>
 
             </tbody>
+
         </table>
 
-        </div>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th width="20%">상의</th>
+                <th width="20%">아우터</th>
+                <th width="20%">하의</th>
+                <th width="20%">가방</th>
+                <th width="20%">신발</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <!--                아우터-->
+                <td>
+                    <li th:if="${outerList.size()== 0}">Add Outer List</li>
+                    <li th:each="item:${outerList}">
+                        <img class="likeimgbox" th:src="${item.urls.get(0)}">
+                    </li>
+                </td>
+                    <!--                상의-->
+                <td>
+                    <li th:if="${topList.size()== 0}">Add Top List</li>
+                    <li th:each="item:${topList}">
+                        <img class="likeimgbox" th:src="${item.urls.get(0)}">
+                    </li>
+                </td>
+
+                <!--                하의-->
+                <td>
+                    <li th:if="${bottomList.size()== 0}">Add Bottom List</li>
+                    <li th:each="item:${bottomList}">
+                        <img class="likeimgbox" th:src="${item.urls.get(0)}">
+                    </li>
+                </td>
+
+
+                    <!--                가방-->
+                <td>
+                    <li th:if="${accList.size()== 0}">Add Acc List</li>
+                    <li th:each="item:${accList}">
+                        <img class="likeimgbox" th:src="${item.urls.get(0)}">
+                    </li>
+                </td>
+
+                    <!--                신발-->
+                <td>
+                    <li th:if="${shoesList.size()== 0}">Add Shoes List</li>
+                    <li class="shoes" th:each="item:${shoesList}">
+                        <img class="likeimgbox" th:src="${item.urls.get(0)}">
+                    </li>
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
 
     </div>
-</div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Soir.</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
-            </div>
-        </div>
-    </div>
+</div>
 </div>
 
 </div>
+
+<script type="text/javascript">
+    $(function (){
+        $(".likeimgbox").click(function (){
+            changePick()
+        })
+    })
+
+    var outerCody = document.querySelector("#outerCody");
+    var topCody = document.querySelector("#topCody");
+    var bottomCody = document.querySelector("#bottomCody");
+    var accCody = document.querySelector("#accCody");
+    var shoesCody = document.querySelector("#shoesCody");
+
+    var likeimgbox = document.querySelectorAll(".likeimgbox");
+
+    for(var i = 0; i<likeimgbox.length; i++){
+        likeimgbox[i].addEventListener("click", changePick);
+    }
+
+    function changePick(){
+        console.log("눌렸다!")
+        var pickCategory = this.getAttribute("class");
+        var pickSrc = this.getAttribute("src");
+
+        shoesCody.setAttribute("src", pickSrc);
+
+        // if(pickCategory==outers){
+        //     outerCody.setAttribute("src", pickSrc);
+        // }
+        // if(pickCategory==tops){
+        //     topCody.setAttribute("src", pickSrc);
+        // }
+        // if(pickCategory==bottoms){
+        //     bottomCody.setAttribute("src", pickSrc);
+        // }
+        // if(pickCategory==accs){
+        //     accCody.setAttribute("src", pickSrc);
+        // }
+        // if(pickCategory==shoes){
+        //     shoesCody.setAttribute("src", pickSrc);
+        // }
+    }
+
+
+</script>
 
 </html>
