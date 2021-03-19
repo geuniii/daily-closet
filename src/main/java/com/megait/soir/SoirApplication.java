@@ -9,10 +9,7 @@ import org.springframework.context.ApplicationContext;
 public class SoirApplication {
 
 	public static void main(String[] args) {
-		System.out.println("zzz");
-		System.out.println("zzz");
 		SpringApplication.run(SoirApplication.class, args);
-
 	}
 
 }

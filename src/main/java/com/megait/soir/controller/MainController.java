@@ -283,11 +283,11 @@ public class MainController {
                 outer.add(likeList.get(i));
                 System.out.println(likeList.get(i).getParentCategory().getName());
             }
-            if(likeList.get(i).getParentCategory().getName().equals("하의")){
+            if(likeList.get(i).getParentCategory().getName().equals("바지")){
                 bottom.add(likeList.get(i));
                 System.out.println(likeList.get(i).getParentCategory().getName());
             }
-            if(likeList.get(i).getParentCategory().getName().equals("신발")){
+            if(likeList.get(i).getParentCategory().getName().equals("신발")||likeList.get(i).getParentCategory().getName().equals("스니커즈") ){
                 shoes.add(likeList.get(i));
                 System.out.println(likeList.get(i).getParentCategory().getName());
             }
