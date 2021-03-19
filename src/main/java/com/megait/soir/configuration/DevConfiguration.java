@@ -28,7 +28,7 @@ public class DevConfiguration {
                 .type(MemberType.USER)
                 .build();
 
-//        member.generateEmailCheckToken();
+        member.generateEmailCheckToken();
         memberRepository.save(member);
         log.info("TestUser(" + member.getEmail() + ") has been created.");
     }
