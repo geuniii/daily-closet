@@ -4,43 +4,51 @@
       layout:decorate="layout">
 
 <div layout:fragment="content">
-    <div class="container px-5 py-5">
+    <div class="container px-5 py-5" id="likelist_container">
         <form method="post" name="cartForm" th:action="@{/cart/list}">
-        <table class="table table-bordered table-responsive-sm">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col" style="width:8%">select</th>
-                <th scope="col">image</th>
-                <th scope="col">name</th>
-                <th scope="col">price</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="item:${likeList}">
-                <td class="text-center align-middle">
+            <h2>Wish list</h2>
+            <p>마음에 드는 상품을 골라 코디해보세요.</p>
 
-                    <input type="checkbox" id="customCheck1" name="item_id" th:value="${item.id}">
+            <div id="wishlist_table_box">
+                <table id="wishlist_table" class="table table-bordered table-responsive-sm">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col" style="width:8%">select</th>
+                        <th scope="col">image</th>
+                        <th scope="col">name</th>
+                        <th scope="col">price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item:${likeList}">
+                        <td class="text-center align-middle">
 
-                </td>
-                <td class="align-middle text-center"
-                    th:onclick="location.href='/store/detail/[[${item.id}]]'">
-                    <img th:src="${item.image1}" style="width: 50px;"></td>
+                            <input type="checkbox" id="customCheck1" name="item_id" th:value="${item.id}">
 
-                <td class="align-middle" th:text="${item.name}"></td>
+                        </td>
+                        <td class="align-middle text-center"
+                            th:onclick="location.href='/store/detail/[[${item.id}]]'">
+                            <img th:src="${item.image1}" style="width: 50px;"></td>
 
-                <td class="align-middle">
-                    ₩ <span th:text="${#numbers.formatInteger(item.price, 3, 'COMMA')}"></span>
+                        <td class="align-middle" th:text="${item.name}"></td>
 
-                </td>
+                        <td class="align-middle">
+                            ₩ <span th:text="${#numbers.formatInteger(item.price, 3, 'COMMA')}"></span>
 
-            </tr>
-            </tbody>
-            <tfoot>
-            <td colspan="4" class="text-center">
-                <button class="btn btn-dark" onclick="forms['cartForm'].submit()">Add Cart</button>
-            </td>
-            </tfoot>
-        </table>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <td colspan="4" class="text-center">
+                        <button class="btn btn-light" onclick="forms['cartForm'].submit()">Add Cart</button>
+                    </td>
+                    </tfoot>
+                </table>
+            </div>
+
+
+
         </form>
     </div>
 </div>

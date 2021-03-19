@@ -103,7 +103,7 @@ p {
 }
 .banner {
     text-align: center;
-    color: darkgray;
+    color: gray;
 }
 .container {
     max-width: 1500px;
@@ -294,4 +294,18 @@ p {
     border: 1px solid grey;
     width: 100px;
     height: 100px;
+}
+
+#likelist_container{
+    text-align: center;
+}
+
+#wishlist_table_box{
+    text-align: center;
+}
+
+#wishlist_table{
+    margin-left: 21%;
+    text-align: center;
+    width: 800px;
 }
