@@ -147,6 +147,11 @@ p {
     margin-left: 30%;
 }
 
+#carousel{
+    width: 50%;
+    height: 250px;
+}
+
 
 #pagebox{
     width: 1500px;

@@ -20,14 +20,14 @@ public class SoirRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        List<Category> list = categoryRepository.findAll();
-        StringBuilder sb = new StringBuilder();
-
-        for (Category c : list){
-            sb.append(c.getName()).append(" ");
-        }
-
-        log.info("Category : " + sb.toString());
+//        List<Category> list = categoryRepository.findAll();
+//        StringBuilder sb = new StringBuilder();
+//
+//        for (Category c : list){
+//            sb.append(c.getName()).append(" ");
+//        }
+//
+//        log.info("Category : " + sb.toString());
 
     }
 

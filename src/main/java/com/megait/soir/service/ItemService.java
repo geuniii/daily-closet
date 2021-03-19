@@ -1,11 +1,7 @@
 package com.megait.soir.service;
 
 
-import com.megait.soir.domain.Album;
-import com.megait.soir.domain.Book;
 import com.megait.soir.domain.Item;
-import com.megait.soir.repository.AlbumRepository;
-import com.megait.soir.repository.BookRepository;
 import com.megait.soir.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
@@ -29,8 +25,6 @@ import java.util.Optional;
 public class ItemService {
 
     private final ItemRepository itemRepository;
-    private final AlbumRepository albumRepository;
-    private final BookRepository bookRepository;
 
     @PostConstruct
     public void initAlbumItems() throws IOException, ParseException {
@@ -125,37 +119,29 @@ public class ItemService {
         }
     }
 
-    @PostConstruct
-    public void initBookItems() throws IOException {
-//        Resource resource = new ClassPathResource("album.CSV");
-//        List<String> list = Files.readAllLines(resource.getFile().toPath(), StandardCharsets.UTF_8);
+//    @PostConstruct
+//    public void initBookItems() throws IOException {
+////        Resource resource = new ClassPathResource("album.CSV");
+////        List<String> list = Files.readAllLines(resource.getFile().toPath(), StandardCharsets.UTF_8);
+////
+////        Stream<String> stream = list.stream();
+////
+////        Stream<Item> stream2 = stream.map(
+////                line->{
+////                    String[] split = line.split("\\|");
+////                    Book book = new Book();
+////                    book.setName(split[0]);
+////                    book.setImageUrl(split[1]);
+////                    book.setPrice(Integer.parseInt(split[2]));
+////                    return book;
+////                });
+////
+////        List<Item> items = stream2.collect(Collectors.toList());
+////
+////        // 위에서 만든 List<에 저장
+////        itemRepository.saveAll(items);
 //
-//        Stream<String> stream = list.stream();
-//
-//        Stream<Item> stream2 = stream.map(
-//                line->{
-//                    String[] split = line.split("\\|");
-//                    Book book = new Book();
-//                    book.setName(split[0]);
-//                    book.setImageUrl(split[1]);
-//                    book.setPrice(Integer.parseInt(split[2]));
-//                    return book;
-//                });
-//
-//        List<Item> items = stream2.collect(Collectors.toList());
-//
-//        // 위에서 만든 List<에 저장
-//        itemRepository.saveAll(items);
-
-    }
-
-    public List<Album> getAlbumList() {
-        return albumRepository.findAll();
-    }
-
-    public List<Book> getBookList() {
-        return bookRepository.findAll();
-    }
+//    }
 
     public List<Item> getItemList() {
         return itemRepository.findAll();
