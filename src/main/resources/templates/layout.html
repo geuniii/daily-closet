@@ -10,11 +10,11 @@
     <!-- CDN -->
     <!-- Style CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap-theme.min.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap-theme.min.css">
 
     <!-- JS CDN -->
     <!-- bootstrap -->
-    <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <!-- font awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
@@ -34,46 +34,14 @@
 </head>
 <body id="back">
 
-<!-- header -->
-<th:block th:replace="common_fragments::header"></th:block>
+    <!-- header -->
+    <th:block th:replace="common_fragments::header"></th:block>
 
-<!-- contents -->
-<!-- content fragment를 이곳에 배치할 수 있도록 block 생성 -->
-<th:block layout:fragment="content" class="bg-light"></th:block>
+    <!-- contents -->
+    <!-- content fragment를 이곳에 배치할 수 있도록 block 생성 -->
+    <th:block layout:fragment="content" class="bg-light" id="content"></th:block>
 
-<!-- footer -->
-<th:block th:replace="common_fragments::footer"></th:block>
+    <!-- footer -->
+    <th:block th:replace="common_fragments::footer"></th:block>
 </body>
-
-<script>
-    // const init = () => {
-    //     console.log('initiated')
-    //     const foundBtn = document.getElementById("findBtn");
-    //     foundBtn.addEventListener('click', (e) => {
-    //         e.preventDefault();
-    //         fetch("http://localhost:8080/find-pw", {method: 'POST'})
-    //             .then(res => res.json())
-    //             .then(json => console.log(json.toString()));
-    //     })
-    // }
-    // init();
-
-
-    // $(function(){
-    //     $("#findBtn").click(function(e){
-    //         e.preventDefault();
-    //         console.log('hihihi');
-    //         // $.ajax({
-    //         //     url : "http://localhost:8080/find-pw",
-    //         //     type : "POST",
-    //         //     data : {
-    //         //         email : $("#email").val()
-    //         //     },
-    //         //     success : function(result) {
-    //         //         alert(result);
-    //         //     },
-    //         // })
-    //     });
-    // })
-</script>
 </html>

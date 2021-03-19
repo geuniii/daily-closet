@@ -4,9 +4,11 @@ import com.google.gson.JsonObject;
 import com.megait.soir.domain.Item;
 import com.megait.soir.domain.Member;
 import com.megait.soir.domain.OrderItem;
-import com.megait.soir.domain.ParentCategory;
 import com.megait.soir.repository.MemberRepository;
-import com.megait.soir.service.*;
+import com.megait.soir.service.EmailCheckStatus;
+import com.megait.soir.service.ItemService;
+import com.megait.soir.service.MemberService;
+import com.megait.soir.service.OrderService;
 import com.megait.soir.user.CurrentUser;
 import com.megait.soir.user.SignUpForm;
 import com.megait.soir.user.SignUpValidator;
@@ -19,8 +21,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.*;
-
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -32,31 +34,76 @@ public class MainController {
     private final ItemService itemService;
     private final MemberRepository memberRepository;
     private final OrderService orderService;
-    private final SendEmailService sendEmailService;
 
 
     @GetMapping("/") // root context가 들어오면 index page를 보여준다.
-    public String index(@CurrentUser Member member, Model model) {
+    public String index(@CurrentUser Member member, Model model){
 
-        if (member != null) {
+        if(member != null){
             model.addAttribute("member", member);
         }
-        model.addAttribute("albumList", itemService.getItemList());
-        model.addAttribute("bookList", itemService.getItemList());
-        model.addAttribute("title", "Soir.");
+        model.addAttribute("itemList", itemService.getItemList());
+        model.addAttribute("title", "Daily Closet");
         return "/view/index";
     }
 
+    @GetMapping("/best")
+    public String best(Model model){
+        model.addAttribute("itemList", itemService.getItemList());
+
+        return "/view/best";
+    }
+
+    @GetMapping("/outer")
+    public String outer(Model model){
+        model.addAttribute("itemList", itemService.getItemList());
+
+        return "/view/category/outer";
+    }
+
+    @GetMapping("/top")
+    public String top(Model model){
+        model.addAttribute("itemList", itemService.getItemList());
+
+        return "/view/category/top";
+    }
+
+    @GetMapping("/bottom")
+    public String bottom(Model model){
+        model.addAttribute("itemList", itemService.getItemList());
+
+        return "/view/category/bottom";
+    }
+
+    @GetMapping("/shoes")
+    public String shoes(Model model){
+        model.addAttribute("itemList", itemService.getItemList());
+
+        return "/view/category/shoes";
+    }
+
+    @GetMapping("/acc")
+    public String acc(Model model){
+        model.addAttribute("itemList", itemService.getItemList());
+
+        return "/view/category/acc";
+    }
+
+    @GetMapping("/styling")
+    public String styling(){
+        return "/view/styling";
+    }
+
     @GetMapping("/signup")
-    public String signUp(Model model) {
+    public String signUp(Model model){
         model.addAttribute(new SignUpForm()); // 빈 DTO를 view에게 전달?
         return "/view/signup";
     }
 
     @PostMapping("/signup") // post 요청 시 실행되는 메소드 -> 즉 회원가입 form 작성 시 수행된다.
-    public String signUpSubmit(@Valid SignUpForm signUpForm, Errors errors) {
+    public String signUpSubmit(@Valid SignUpForm signUpForm, Errors errors){
 
-        if (errors.hasErrors()) { // annotation error가 발생 시 error가 담김 -> errors의 error 포함 여부로 판단.
+        if(errors.hasErrors()){ // annotation error가 발생 시 error가 담김 -> errors의 error 포함 여부로 판단.
             log.info("validation error occur!");
             return "/view/signup";
         }
@@ -73,10 +120,10 @@ public class MainController {
 
 
     @GetMapping("/check-email-token")
-    public String checkEmailToken(String email, String token, Model model) {
+    public String checkEmailToken(String email, String token, Model model){
         EmailCheckStatus status = memberService.processSignUp(email, token);
 
-        switch (status) {
+        switch (status){
             case WRONG_EMAIL:
                 model.addAttribute("error", "wrong email.");
                 break;
@@ -99,26 +146,26 @@ public class MainController {
 
 
     @GetMapping("/login")
-    public String login() {
+    public String login(){
 
         return "/view/login";
     }
 
 
     @GetMapping("/send-reset-password-link")
-    public String sendResetPasswordView() {
+    public String sendResetPasswordView(){
 
         return "/view/send-reset-password-link";
     }
 
 
     @PostMapping("/send-reset-password-link")
-    public String sendResetPassword(String email, Model model) {
+    public String sendResetPassword(String email, Model model){
         // 해당 email로 '/reset-password?email=이메일&token=토큰' 형태의 문장을 email로 전송
 
-        try {
+        try{
             memberService.sendResetPasswordEmail(email);
-        } catch (IllegalArgumentException e) {
+        }catch (IllegalArgumentException e){
             model.addAttribute("error_code", "password.reset.failed");
             return "/view/notify";
         }
@@ -131,7 +178,7 @@ public class MainController {
 
 
     @GetMapping("/reset-password")
-    public String resetPasswordView(String email, String token, Model model) {
+    public String resetPasswordView(String email, String token, Model model){
         // email과 token 무결성 체크
         boolean result = memberService.checkEmailToken(email, token);
 
@@ -144,7 +191,7 @@ public class MainController {
 
 
     @PostMapping("/reset-password")
-    public String resetPassword(String email, String password, Model model) {
+    public String resetPassword(String email, String password, Model model){
         // 패스워드 변경 실행
         memberService.resetPassword(email, password);
         model.addAttribute("result_code", "password.reset.complete");
@@ -156,64 +203,63 @@ public class MainController {
 
 
     @GetMapping("/store/detail/{id}")
-    public String detail(@CurrentUser Member member, @PathVariable Long id, Model model) {
-        log.info("id : " + id);
+    public String detail(@CurrentUser Member member, @PathVariable Long id, Model model){
 
         Item item = itemService.findItem(id);
-
         model.addAttribute("like_status", false);
-        if (member != null) {
+
+        if(member != null){
             member = memberRepository.findByEmail(member.getEmail());
             model.addAttribute("like_status", member.getLikes().contains(item));
         }
-        model.addAttribute("item", item);
 
-        System.out.println();
+        model.addAttribute("item", item);
 
         return "/view/detail";
     }
 
+
     @GetMapping("/store/like")
     @ResponseBody
-    public String addLike(@CurrentUser Member member, @RequestParam("id") Long itemId) {
+    public String addLike(@CurrentUser Member member, @RequestParam("id") Long itemId){
+        // think : user 정보 어떻게 가져오지? -> @CurrentUser
 
+        // JSON 객체 생성(비동기)
+        JsonObject json = new JsonObject();
         boolean result = false;
 
-        // JSON 객체를 만든다.
-        JsonObject jsonObject = new JsonObject();
+        // 사용자의 likes field에 해당 상품을 추가한다.
+        try{
 
-        //사용자의 likes (Member 엔티티의 likes)에 해당 상품을 추가
-
-        try {
             result = memberService.addLike(member, itemId);
-            // 찜 목록 추가
-            if (result) {
-                jsonObject.addProperty("message", "찜 목록에 추가하였습니다");
+            if(result){
+                json.addProperty("message", "add Complete!");
             }
-            // 찜 목록 삭제
             else {
-                jsonObject.addProperty("message", "찜 목록에서 삭제되었습니다");
+                json.addProperty("message", "remove Complete!");
             }
-            jsonObject.addProperty("status", result);
-        } catch (IllegalArgumentException e) {
-            jsonObject.addProperty("message", "잘못된 정보입니다");
-        } catch (UsernameNotFoundException e) {
 
+        }catch (IllegalArgumentException e){
+            json.addProperty("message", "Wrong info");
+        }catch (UsernameNotFoundException e){
+            json.addProperty("message", "Please login.");
         }
-        return jsonObject.toString();
+
+        return json.toString();
     }
 
 
     @GetMapping("/store/like-list")
-    public String likeList(@CurrentUser Member member, Model model) {
+    public String likeList(@CurrentUser Member member, Model model){
         List<Item> likeList = memberService.getLikeList(member);
         model.addAttribute("likeList", likeList);
+
         return "/view/like-list";
     }
 
 
     @PostMapping("/cart/list")
-    public String addCart(@RequestParam("item_id") String[] itemId, @CurrentUser Member member, Model model) {
+    public String addCart(@RequestParam("item_id") String[] itemId, @CurrentUser Member member, Model model){
 
         // itemId parameter를 Long type으로 변환한다.
         // ["20", "30"] -> [20L, 30L]
@@ -227,107 +273,18 @@ public class MainController {
 
 
     @GetMapping("/cart/list")
-    public String cartList(@CurrentUser Member member, Model model) {
+    public String cartList(@CurrentUser Member member, Model model){
         // view page 구현
-        try {
+        try{
             List<OrderItem> cartList = orderService.getCart(member);
             model.addAttribute("cartList", cartList);
             model.addAttribute("totalPrice", orderService.getTotalPrice(cartList));
 
-        } catch (IllegalArgumentException e) {
+        }catch (IllegalArgumentException e){
             model.addAttribute("error_message", e.getMessage());
         }
 
         return "/view/cart";
-    }
-
-    @PostMapping("/find-pw")
-    @ResponseBody
-    // @EventListener(ApplicationReadyEvent.class)
-    public String find_pw_form(String email) throws Exception {
-        log.info("aaa");
-
-        String uuid = null;
-        for (int i = 0; i < 5; i++) {
-            uuid = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주었다.
-            uuid = uuid.substring(0, 10); //uuid를 앞에서부터 10자리 잘라줌.
-            System.out.println(i + ") " + uuid);
-        }
-
-
-        sendEmailService.sendEmail(email, "회원님의 임시비밀번호는 : " + uuid + " 입니다.", "Daily Closet 에서 임시 비밀번호 발급 ");
-        memberService.resetPassword(email, uuid);
-
-        JsonObject json = new JsonObject();
-        json.addProperty("status", 200);
-        return json.toString();
-
-    }
-
-    @GetMapping("/store/cody")
-    public String cody(@CurrentUser Member member, Model model) {
-
-        List<Item> likeList = memberService.getLikeList(member);
-        List<Item> top = new ArrayList<>();
-        List<Item> outer = new ArrayList<>();
-        List<Item> bottom = new ArrayList<>();
-        List<Item> acc = new ArrayList<>();
-        List<Item> shoes = new ArrayList<>();
-
-        for(int i = 0; i<likeList.size(); i++){
-            if(likeList.get(i).getParentCategory().getName().equals("상의")){
-                top.add(likeList.get(i));
-                System.out.println(likeList.get(i).getParentCategory().getName());
-            }
-            if(likeList.get(i).getParentCategory().getName().equals("아우터")){
-                outer.add(likeList.get(i));
-                System.out.println(likeList.get(i).getParentCategory().getName());
-            }
-            if(likeList.get(i).getParentCategory().getName().equals("하의")){
-                bottom.add(likeList.get(i));
-                System.out.println(likeList.get(i).getParentCategory().getName());
-            }
-            if(likeList.get(i).getParentCategory().getName().equals("신발")){
-                shoes.add(likeList.get(i));
-                System.out.println(likeList.get(i).getParentCategory().getName());
-            }
-            if(likeList.get(i).getParentCategory().getName().equals("가방")){
-                acc.add(likeList.get(i));
-                System.out.println(likeList.get(i).getParentCategory().getName());
-            }
-        }
-
-
-
-//        Iterator<Item> iterator = likeList.iterator();
-//        while (iterator.hasNext()) {
-//            System.out.println(iterator.next().getParentCategory().getName());
-//
-//            if (iterator.next().getParentCategory().getName().equals("상의")) {
-//                top.add(iterator.next());
-//                System.out.println("여기");
-//            }
-//            if (iterator.next().getParentCategory().getName().equals("아우터")) {
-//                outer.add(iterator.next());
-//            }
-//            if (iterator.next().getParentCategory().getName().equals("하의")) {
-//                bottom.add(iterator.next());
-//            }
-//            if (iterator.next().getParentCategory().getName().equals("가방")) {
-//                acc.add(iterator.next());
-//            }
-//            if (iterator.next().getParentCategory().getName().equals("신발")) {
-//                shoes.add(iterator.next());
-//            }
-//        }
-        model.addAttribute("topList", top);
-        model.addAttribute("outerList", outer);
-        model.addAttribute("bottomList", bottom);
-        model.addAttribute("accList", acc);
-        model.addAttribute("shoesList", shoes);
-
-        System.out.println("찜리스트--------->" + likeList.toString());
-        return "/view/cody";
     }
 
 }

@@ -8,26 +8,16 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-import java.io.IOException;
-import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+
     @Autowired
     private MemberService memberService;
 
@@ -42,31 +32,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return repository;
     }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOriginPattern("*");
-        configuration.addAllowedHeader("*");
-        configuration.addAllowedMethod("*");
-        configuration.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
-        http.csrf().ignoringAntMatchers("/find-pw");  //
-        http.cors()
-
-                // login 기능 추가
-                .and().formLogin()
-                .loginPage("/login")
-                .permitAll()
-
-                .and().authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers(
                         "/common.css",
                         "/css/**",
@@ -78,39 +46,45 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .mvcMatchers(
                         "/",
+                        "/best",
+                        "outer",
+                        "top",
+                        "bottom",
+                        "shoes",
+                        "acc",
                         "/login",
-                        "/signup",
+                        "signup",
                         "/check-email-result",
                         "/check-email-token",
                         "/send-reset-password-link",
                         "/reset-password",
                         "/view/notify",
                         "/store/detail/**",
-                        "/store/like",
-                        "/find-pw/**",
-                        "/store/cody"
-
+                        "/store/like"
                 )
                 .permitAll()
 
                 .mvcMatchers(HttpMethod.GET, "/item/*")
                 .permitAll()
 
-                .anyRequest().permitAll()
+                .anyRequest().authenticated();
+
+        // login 기능 추가
+        http.formLogin()
+                .loginPage("/login")
+                .permitAll();
+
+        // login 유지 기능 추가
+        http.rememberMe()
+                .userDetailsService(memberService); // 인증 관련 buisiness logig을 담당하는 Service 객체를 설정해줌
 
 
-
-
-                // login 유지 기능 추가
-                .and().rememberMe()
-                .userDetailsService(memberService) // 인증 관련 buisiness logig을 담당하는 Service 객체를 설정해줌
-
-                // logout 기능 추가
-                .and().logout()
+        // logout 기능 추가
+        http.logout()
                 .logoutUrl("/logout") // 해당 location은 default
                 .invalidateHttpSession(true) // logout 시 session을 갱신한다.
                 .logoutSuccessUrl("/"); // logout 성공 시 이동할 경로
-
-
     }
+
+
 }

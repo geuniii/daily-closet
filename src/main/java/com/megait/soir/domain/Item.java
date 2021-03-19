@@ -1,6 +1,5 @@
 package com.megait.soir.domain;
 
-import com.megait.soir.converter.ItemImageListConverter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,31 +17,57 @@ public class Item {
     private Long id;
 
     private String brand;
-
     private String name;
-
     private long price;
-
     private String code;
+    private int liked;
+
+//    @ManyToMany(mappedBy = "sizes")
+//    private List<String> size; // TODO : 이거 List말고 그냥 배열로 넣으면 안되까
 
     private String img_name;
 
-    @Convert(converter = ItemImageListConverter.class)
-    @Column(length = 2048)
-    private List<String> urls = new ArrayList<>();
+    @Transient
+    private  ArrayList<String> urlArr;
 
-    @Convert(converter = ItemImageListConverter.class)
-    @Column(length = 2048)
-    private List<String> sizes = new ArrayList<>();
+    // TODO : 이거 List<String>으로 해도되지않을까..???
+    @Column(name="image1")
+    private String image1;
 
-    private int liked;
+    @Column(name="image2")
+    private String image2;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private ParentCategory parentCategory;
+    @Column(name="image3")
+    private String image3;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private ChildCategory childCategory;
+    @Column(name="image4")
+    private String image4;
 
+    @Column(name="image5")
+    private String image5;
+
+    @Column(name="image6")
+    private String image6;
+
+    @Column(name="image7")
+    private String image7;
+
+    @Column(name="image8")
+    private String image8;
+
+    @Column(name="image9")
+    private String image9;
+
+    @Column(name="image10")
+    private String image10;
+
+
+
+    //    @OneToMany(mappedBy = "item")
+//    private List<String> imageUrl;
+
+//    @ManyToMany(mappedBy = "items")
+//    private List<Category> categories;
 
 
 }

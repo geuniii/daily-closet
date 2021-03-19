@@ -131,11 +131,11 @@ public class MemberService implements UserDetailsService {
         if(member == null){
             throw new IllegalArgumentException("잘못된 이메일");
         }
-        // TODO 이메일 재전송 코드 리팩토링
+
         // 이메일 검증 링크 생성
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(member.getEmail());  // 수신자
-        mailMessage.setSubject("My Store - 비밀번호 재생성 메일");  // 제목
+        mailMessage.setSubject("Daily Closet : 비밀번호 재생성 메일");  // 제목
         mailMessage.setText(
                 "/reset-password?email=" + member.getEmail()
                         + "&token=" + member.getEmailCheckToken()
