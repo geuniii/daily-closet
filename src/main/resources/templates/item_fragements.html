@@ -6,16 +6,16 @@
 <div th:fragment="item_list(itemList)">
     <div class="row" style="text-align: center; margin-bottom: 100px;">
         <div th:each="item:${itemList}" class="col-sm-2 justify-content-center" style="text-align: center; margin: 50px;">
-            <div class="card" style="width:200px; margin-left: 50px; text-align: center;">
-                <img class="card-img-top" th:src="${item.urls.get(0)}" alt="Card image">
-                <div class="card-body">
-                    <h6 class="card-title" th:text="${item.name}"></h6>
-                    <p class="card-text">
-                        ₩<span th:text="${#numbers.formatInteger(item.price, 3,'COMMA')}"></span>
-                    </p>
-                    <a th:href="@{/store/detail/{id}(id=${item.id})}" class="btn btn-dark stretched-link">see more</a>
+            <div class="component">
+                <img id="component_img" th:src="${item.urls.get(0)}">
+                <div id="component_info">
+                    <p id="component_name" th:text="${item.name}"></p>
+                    <p id="component_price">₩<span th:text="${#numbers.formatInteger(item.price, 3,'COMMA')}"></span></p>
+                    <a th:href="@{/store/detail/{id}(id=${item.id})}" class="btn btn-light stretched-link">see more</a>
                 </div>
+
             </div>
+
         </div>
     </div>
 </div>

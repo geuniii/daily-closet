@@ -8,6 +8,7 @@ import com.megait.soir.service.*;
 import com.megait.soir.user.CurrentUser;
 import com.megait.soir.user.SignUpForm;
 import com.megait.soir.user.SignUpValidator;
+import com.megait.soir.user.UpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -34,7 +35,6 @@ public class MainController {
     private final CodyService codyService;
     private final ReviewService reviewService;
 
-
     @GetMapping("/") // root context가 들어오면 index page를 보여준다.
     public String index(@CurrentUser Member member, Model model) {
 
@@ -45,6 +45,51 @@ public class MainController {
         model.addAttribute("bookList", itemService.getItemList());
         model.addAttribute("title", "Soir.");
         return "/view/index";
+    }
+
+
+    // 회원정보 조회
+    @GetMapping("/memberInfo")
+    public String findMember(@CurrentUser Member member, Model model) {
+        model.addAttribute(member);
+        return "/view/memberInfo";
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // 회원정보 수정 Get
+    @GetMapping("/update-memberInfo")
+    public String update(@CurrentUser Member member, Model model) {
+        model.addAttribute(member);
+        model.addAttribute(new UpdateForm());
+        return "/view/update-memberInfo";
+    }
+    // 회원정보 수정 Post
+    @PostMapping("/update-memberInfo") // post 요청 시 실행되는 메소드 -> 즉 회원가입 form 작성 시 수행된다.
+    public String updateSubmit(@CurrentUser Member member, @Valid UpdateForm updateForm) {
+
+        memberService.updateMember(member, updateForm);
+        return "redirect:/"; // root로 redirect
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ajax
+
+    // 회원탈퇴
+    @PostMapping("/delete/{id}")
+    @ResponseBody
+    public String delete(@PathVariable Long id) {
+        memberService.delete(id);
+        System.out.println("======================================================컨트롤러==============================");
+        return "{'status':200}";
+    }
+
+
+    @GetMapping("/best")
+    public String best(Model model){
+        model.addAttribute("itemList", itemService.getItemList());
+
+        return "/view/best";
     }
 
     @GetMapping("/signup")
@@ -270,12 +315,16 @@ public class MainController {
 
         model.addAttribute(new CodyForm());
 
+
+
         List<Item> likeList = memberService.getLikeList(member);
         List<Item> top = new ArrayList<>();
         List<Item> outer = new ArrayList<>();
         List<Item> bottom = new ArrayList<>();
         List<Item> acc = new ArrayList<>();
         List<Item> shoes = new ArrayList<>();
+
+        System.out.println("오잉!!!!!!!!"+likeList.get(0).getBrand());
 
         for(int i = 0; i<likeList.size(); i++){
             if(likeList.get(i).getParentCategory().getName().equals("상의")){

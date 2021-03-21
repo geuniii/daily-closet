@@ -4,7 +4,6 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"> <!--CDN 링크 -->
-
 </head>
 
 <!-- fragment 선언 -->
@@ -19,7 +18,7 @@
 
 
     <!-- navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top " id="navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top" id="navbar">
         <div>
             <a class="navbar-brand" href="/" th:href="@{/}"><p id="navlogo"> Daily Closet</p></a>
         </div>
@@ -27,48 +26,52 @@
 
         <!-- nav에 item 넣기 -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto" id="nav_left">
 
                 <!--                <li class="nav-item">-->
                 <!--                    <a class="nav-link" th:href="@{/logout}" sec:authorize="isAuthenticated()"><h5>Logout</h5></a>-->
                 <!--                </li> -> logout을 li가 아닌 form으로 구현-->
 
-
                 <li class="nav-item">
-                    <a id="navp" class="nav-link" th:href="@{/}">Outer</a>
+                    <a id="navp" class="nav-link" th:href="@{/best}">BEST</a>
                 </li>
                 <li class="nav-item">
-                    <a id="navp" class="nav-link" th:href="@{/}">Top</a>
+                    <a id="navp" class="nav-link" th:href="@{/outer}">Outer</a>
                 </li>
                 <li class="nav-item">
-                    <a id="navp" class="nav-link" th:href="@{/}">Bottom</a>
+                    <a id="navp" class="nav-link" th:href="@{/top}">Top</a>
                 </li>
                 <li class="nav-item">
-                    <a id="navp" class="nav-link" th:href="@{/}">Shoes</a>
+                    <a id="navp" class="nav-link" th:href="@{/bottom}">Bottom</a>
                 </li>
                 <li class="nav-item">
-                    <a id="navp" class="nav-link" th:href="@{/}">Acc</a>
+                    <a id="navp" class="nav-link" th:href="@{/shoes}">Shoes</a>
+                </li>
+                <li class="nav-item">
+                    <a id="navp" class="nav-link" th:href="@{/acc}">Acc</a>
                 </li>
 
                 <!-- dropdown -->
-<!--                <li class="nav-item dropdown">-->
-<!--                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expended="false">-->
-<!--                    <div class="dropdown-menu" data-toggle="pill">-->
-<!--                        <a class="dropdown-item">Outer</a>-->
-<!--                        <a class="dropdown-item">Tops</a>-->
-<!--                        <a class="dropdown-item">Bottoms</a>-->
-<!--                        <a class="dropdown-item">Shoes</a>-->
-<!--                        <div class="dropdown-divider"></div>-->
-<!--                        <a class="dropdown-item">Etc.</a>-->
-<!--                    </div>-->
-<!--                    </a>-->
-<!--                </li>-->
+                <!--                <li class="nav-item dropdown">-->
+                <!--                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expended="false">-->
+                <!--                    <div class="dropdown-menu" data-toggle="pill">-->
+                <!--                        <a class="dropdown-item">Outer</a>-->
+                <!--                        <a class="dropdown-item">Tops</a>-->
+                <!--                        <a class="dropdown-item">Bottoms</a>-->
+                <!--                        <a class="dropdown-item">Shoes</a>-->
+                <!--                        <div class="dropdown-divider"></div>-->
+                <!--                        <a class="dropdown-item">Etc.</a>-->
+                <!--                    </div>-->
+                <!--                    </a>-->
+                <!--                </li>-->
             </ul>
         </div>
+
         <div class="collapse navbar-collapse" id="navbar_right">
             <ul class="navbar-nav mr-auto" id="usernav">
+
                 <li class="nav-item">
-                    <a class="nav-link" id="navp_right" th:href="@{/}" sec:authorize="isAuthenticated()" th:text="${#authentication?.name}"></a>
+                    <a class="navp_right" th:href="@{/memberInfo}" sec:authorize="isAuthenticated()" th:text="${#authentication?.name}"></a>
                     <!--                    <input type="hidden" id="current_user" value='${#authentication.name}'>-->
                 </li>
                 <li class="nav-item">
@@ -80,9 +83,6 @@
                 <li class="nav-item">
                     <a id="navp_right" class="nav-link" th:href="@{/cart/list}" sec:authorize="isAuthenticated()">Cart</a>
                 </li>
-                <li class="nav-item">
-                    <a id="navp_right" class="nav-link" th:href="@{/store/like-list}" sec:authorize="isAuthenticated()">Wish List</a>
-                </li>
 
                 <li class="nav-item"><a class="nav-link" th:href="@{/store/like-list}" sec:authorize="isAuthenticated()"><i class="fas fa-heart"></i></a></li>
 
@@ -91,31 +91,31 @@
                 </li>
 
                 <form class="form-inline" th:action="@{/logout}" th:method="post" >
-                    <button type="submit" id="navp_right" class="nav-item" sec:authorize="isAuthenticated()">Logout</button>
+                    <button type="submit" id="logoutbtn" class="nav-item" sec:authorize="isAuthenticated()">Logout</button>
                 </form>
             </ul>
 
             <!-- Search bar -->
-            <form class="form-inline my-2 my-lg-0" action="#">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">search</button>
-            </form>
+            <!--            <form class="form-inline my-2 my-lg-0" action="#">-->
+            <!--                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+            <!--                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">search</button>-->
+            <!--            </form>-->
 
         </div>
     </nav>
     <div class="alert alert-warning" role="alert" th:if="${member != null && !member.emailVerified}">
         Please check your <a class="alert-link">account certification email</a>.
-        <!-- TODO <a> link click 시 email 재전송 -->
+
     </div>
 </div>
 
 
 
 <!-- footer -->
-<div id="footer" th:fragment="footer" class="jumbotron text-center bg-light banner" style="margin-bottom: 0">
+<div id="footer" th:fragment="footer" class="jumbotron text-center bg-white banner" style="margin-bottom: 0">
 
 
-    <p>&copy;2021. Soir. All Rights Reserved.</p>
+    <small>&copy;2021. Daily Closet. All Rights Reserved.</small>
 </div>
 
 </html>
