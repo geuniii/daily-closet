@@ -6,7 +6,7 @@
 <div layout:fragment="content" class="container" style="background-color: #FFFFFF;">
     <div class="row justify-content-center py-5">
 
-        <form class="needs-validation" id="codyForm" th:action="@{/cody}" th:object="${codyForm}" method="post"
+        <form class="needs-validation" th:id="codyForm" th:action="@{/cody}" th:object="${codyForm}" method="post"
               novalidate>
             <table class="table table-bordered">
                 <thead>
@@ -17,35 +17,35 @@
                     <th width="20%">가방</th>
                     <th width="20%">신발</th>
                 </tr>
+                </tr>
                 </thead>
 
                 <tbody>
                 <tr>
                     <!--                아우터-->
                     <td>
-                        <input type="image" id="outerCody" class="imgbox_middle" th:if="${outerList.size()!= 0}"
-                               th:src="${outerList.get(0).getUrls().get(0)}">
+                        <img th:id="outerCody" class="imgbox_middle" th:if="${outerList.size()!= 0}"
+                             th:src="${outerList.get(0).getUrls().get(0)}">
                         <input type="hidden" th:if="${outerList.size()!= 0}" th:value="${outerList.get(0).getId()}"
                                th:attr="name='outerId'"></input>
 
                     </td>
                     <!--                상의-->
                     <td>
-                        <input type="image" id="topCody" class="imgbox_middle" th:if="${topList.size()!= 0}"
-                               th:src="${topList.get(0).getUrls().get(0)}" th:required="required">
+                        <img th:id="topCody" class="imgbox_middle" th:if="${topList.size()!= 0}"
+                             th:src="${topList.get(0).getUrls().get(0)}" th:required="required">
                         <div class="invalid-feedback">
                             <h5>Please select a top.</h5>
                         </div>
                         <input type="hidden" th:if="${topList.size()!= 0}" th:value="${topList.get(0).getId()}"
                                th:attr="name='topId'"></input>
 
-
                     </td>
 
                     <!--                                하의-->
                     <td>
-                        <input type="image" id="bottomCody" class="imgbox_middle" th:if="${bottomList.size()!= 0}"
-                               th:src="${bottomList.get(0).getUrls().get(0)}" th:required="required">
+                        <img th:id="bottomCody" class="imgbox_middle" th:if="${bottomList.size()!= 0}"
+                             th:src="${bottomList.get(0).getUrls().get(0)}" th:required="required">
                         <div class="invalid-feedback">
                             <h5>Please select a bottom.</h5>
                         </div>
@@ -53,12 +53,10 @@
                                th:attr="name='bottomId'"></a>
 
                     </td>
-
-
                     <!--                가방-->
                     <td>
-                        <input type="image" id="accCody" class="imgbox_middle" th:if="${accList.size()!= 0}"
-                               th:src="${accList.get(0).getUrls().get(0)}">
+                        <img th:id="accCody" class="imgbox_middle" th:if="${accList.size()!= 0}"
+                             th:src="${accList.get(0).getUrls().get(0)}">
                         <input type="hidden" th:if="${accList.size()!= 0}" th:value="${accList.get(0).getId()}"
                                th:attr="name='accId'"></input>
 
@@ -66,12 +64,11 @@
 
                     <!--                신발-->
                     <td>
-                        <!--                                                <img id="shoesCodyex"-->
-                        <!--                                                     src="C:\Users\pc\Desktop\daily-closet-main (2)\daily-closet-main (1)\daily-closet-main\src\main\resources\assets\images\102618.png">-->
-                        <!--                                            <img id="shoesCodyex" src="..\..\assets\images\102621.png">-->
 
-                        <input type="image" id="shoesCody" class="imgbox_middle" th:if="${shoesList.size()!= 0}"
-                               th:src="${shoesList.get(0).getUrls().get(0)}" th:required="required">
+                        <!--                        <img th:id="shoesCodyex" src="..\..\assets\images\102621.png">-->
+
+                        <img th:id="shoesCody" class="imgbox_middle" th:if="${shoesList.size()!= 0}"
+                             th:src="${shoesList.get(0).getUrls().get(0)}" th:required="required">
                         <div class="invalid-feedback">
                             <h5>Please select the shoes</h5>
                         </div>
@@ -84,12 +81,12 @@
                 </tr>
 
                 <tr>
-                    <input type="button" id="submit_btn" class="w-50 btn btn-dark btn-lg" value="submit">
+                    <input type="button" th:id="submit_btn" class="w-50 btn btn-dark btn-lg" value="submit">
                 </tr>
-
-                </tbody>
-
             </table>
+
+            </tbody>
+
 
         </form>
 
@@ -111,14 +108,14 @@
                 <td>
                     <li th:if="${outerList.size()== 0}">Add Outer List</li>
                     <li th:each="item:${outerList}">
-                        <img class="likeimgbox" th:src="${item.urls.get(0)}">
+                        <img th:class="likeimgbox" class="likeimgbox" th:src="${item.urls.get(0)}" th:alt ="outer">
                     </li>
                 </td>
                 <!--                상의-->
                 <td>
                     <li th:if="${topList.size()== 0}">Add Top List</li>
                     <li th:each="item:${topList}">
-                        <img class="likeimgbox" th:src="${item.urls.get(0)}">
+                        <img th:class="likeimgbox" class="likeimgbox" th:src="${item.urls.get(0)}" th:alt ="top">
                     </li>
                 </td>
 
@@ -126,7 +123,7 @@
                 <td>
                     <li th:if="${bottomList.size()== 0}">Add Bottom List</li>
                     <li th:each="item:${bottomList}">
-                        <img class="likeimgbox" th:src="${item.urls.get(0)}">
+                        <img th:class="likeimgbox" class="likeimgbox" th:src="${item.urls.get(0)}" th:alt ="bottom">
                     </li>
                 </td>
 
@@ -135,15 +132,15 @@
                 <td>
                     <li th:if="${accList.size()== 0}">Add Acc List</li>
                     <li th:each="item:${accList}">
-                        <img class="likeimgbox" th:src="${item.urls.get(0)}">
+                        <img th:class="likeimgbox" class="likeimgbox" th:src="${item.urls.get(0)}" th:alt ="acc">
                     </li>
                 </td>
 
                 <!--                신발-->
                 <td>
                     <li th:if="${shoesList.size()== 0}">Add Shoes List</li>
-                    <li class="shoes" th:each="item:${shoesList}">
-                        <img class="likeimgbox" th:src="${item.urls.get(0)}">
+                    <li th:class="shoes" th:each="item:${shoesList}">
+                        <img th:class="likeimgbox" class="likeimgbox" th:src="${item.urls.get(0)}" th:alt ="shoes">
                     </li>
                 </td>
 
@@ -155,78 +152,84 @@
 
     </div>
 
+
+    <script type="text/javascript">
+
+
+
+        $(document).ready(function (){
+            $("#submit_btn").click(function () {
+                console.log("눌렀어!")
+                if ($("#topCody").getAttribute("src") == null) {
+                    console.log("상의 선택해")
+                    alert("Please select a top.");
+                    return false;
+
+                }
+
+                if ($("#bottomCody").getAttribute("src") == null) {
+                    console.log("하의 선택해")
+                    alert("Please select a bottom");
+                    return false;
+                }
+
+                if ($("#shoesCody").getAttribute("src") == null) {
+                    console.log("신발 선택해")
+                    alert("Please select the shoes.");
+                    return false;
+                }
+
+                $("#codyForm").submit();
+            });
+        });
+
+
+        $(document).ready(function () { // document loading 후 실행할 함수
+
+            var outerCody = document.querySelector("#outerCody");
+            var topCody = document.querySelector("#topCody");
+            var bottomCody = document.querySelector("#bottomCody");
+            var accCody = document.querySelector("#accCody");
+            var shoesCody = document.querySelector("#shoesCody");
+
+            var imgbox = document.querySelectorAll(".likeimgbox");
+
+
+            for (var i = 0; i < imgbox.length; i++) {
+                imgbox[i].addEventListener("click", changepic); // 이벤트 처리 부여
+            }
+
+
+            function changepic() {
+                console.log("눌렸다!")
+                var pickSrc = this.getAttribute("src");
+
+                if(this.getAttribute("alt")=="shoes"){
+                    shoesCody.setAttribute("src", pickSrc);
+                }
+
+                if(this.getAttribute("alt")=="outer"){
+                    outerCody.setAttribute("src", pickSrc);
+                };
+
+                if(this.getAttribute("alt")=="top"){
+                    topCody.setAttribute("src", pickSrc);
+                };
+                if(this.getAttribute("alt")=="bottom"){
+                    bottomCody.setAttribute("src", pickSrc);
+                };
+                if(this.getAttribute("alt")=="acc"){
+                    accCody.setAttribute("src", pickSrc);
+                };
+                if(this.getAttribute("alt")=="shoes"){
+                    shoesCody.setAttribute("src", pickSrc);
+                };
+
+            }
+
+        });
+
+    </script>
 </div>
-
-<script type="text/javascript">
-
-    var outerCody = document.querySelector("#outerCody");
-    var topCody = document.querySelector("#topCody");
-    var bottomCody = document.querySelector("#bottomCody");
-    var accCody = document.querySelector("#accCody");
-    var shoesCody = document.querySelector("#shoesCody");
-
-    var imgbox = document.querySelectorAll(".likeimgbox");
-
-    for (var i = 0; i < imgbox.length; i++) {
-        console.log("----------->", likeimgbox.values())
-        imgbox[i].addEventListener("click", changepic); // 이벤트 처리 부여
-
-    }
-
-
-    $("#submit_btn").click(function () {
-        console.log("눌렀어!")
-        if ($("#topCody").src == null) {
-            console.log("상의 선택해")
-            alert("Please select a top.");
-            return false;
-            e
-        }
-
-        if ($("#bottomCody").src == null) {
-            console.log("하의 선택해")
-            alert("Please select a bottom");
-            return false;
-        }
-
-        if ($("#shoesCody").src == null) {
-            console.log("신발 선택해")
-            alert("Please select the shoes.");
-            return false;
-        }
-
-        $("#codyForm").submit();
-    });
-
-
-    $(document).ready(function () { // document loading 후 실행할 함수
-
-        var outerCody = document.querySelector("#outerCody");
-        var topCody = document.querySelector("#topCody");
-        var bottomCody = document.querySelector("#bottomCody");
-        var accCody = document.querySelector("#accCody");
-        var shoesCody = document.querySelector("#shoesCody");
-
-        var imgbox = document.querySelectorAll(".likeimgbox");
-
-        for (var i = 0; i < imgbox.length; i++) {
-            console.log("----------->", likeimgbox.values())
-            imgbox[i].addEventListener("click", changepic); // 이벤트 처리 부여
-
-        }
-
-
-        function changepic() {
-            console.log("눌렸다!")
-            var pickCategory = this.getAttribute("class");
-            var pickSrc = this.getAttribute("src");
-            shoesCody.setAttribute("src", pickSrc);
-        }
-
-
-    })
-
-
-</script>
 
 </html>
