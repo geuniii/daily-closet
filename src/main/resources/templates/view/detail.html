@@ -4,79 +4,82 @@
       layout:decorate="layout" th:with="title='Detail Page'">
 
 <div layout:fragment="content" class="container" style="background-color: #FFFFFF;">
-    <div class="row justify-content-center py-5" id="detailbox">
+    <div class="row justify-content-center py-5">
         <div id="product_img">
             <div id="brandname">
-                <h3><b th:text="${item.brand}"></b></h3>
+                <h3><b>Brand name</b></h3>
             </div>
             <div id="imgbox">
-                <img id="nowimg" th:src="${item.image1}">
+                <img th:src="${item.urls.get(0)}">
             </div>
-            <div id="imgboxs_mini">
-                <div class="imgbox_mini" th:if="${item.image1 != null}"><img class="mini" id="img1" th:src="${item.image1}"></div>
-                <div class="imgbox_mini" th:if="${item.image2 != null}"><img class="mini" id="img2" th:src="${item.image2}"></div>
-                <div class="imgbox_mini" th:if="${item.image3 != null}"><img class="mini" id="img3" th:src="${item.image3}"></div>
-                <div class="imgbox_mini" th:if="${item.image4 != null}"><img class="mini" id="img4" th:src="${item.image4}"></div>
-                <div class="imgbox_mini" th:if="${item.image5 != null}"><img class="mini" id="img5" th:src="${item.image5}"></div>
-                <div class="imgbox_mini" th:if="${item.image6 != null}"><img class="mini" id="img6" th:src="${item.image6}"></div>
-                <div class="imgbox_mini" th:if="${item.image7 != null}"><img class="mini" id="img7" th:src="${item.image7}"></div>
-                <div class="imgbox_mini" th:if="${item.image8 != null}"><img class="mini" id="img8" th:src="${item.image8}"></div>
-                <div class="imgbox_mini" th:if="${item.image9 != null}"><img class="mini" id="img9" th:src="${item.image9}"></div>
-                <div class="imgbox_mini" th:if="${item.image10 != null}"><img class="mini" id="img10" th:src="${item.image10}"></div>
 
+            <div id="imgboxs_mini">
+                <div id="imgbox_mini"><img id="mini" th:src="${item.urls.get(0)}"></div>
+                <div th:if="${item.urls.size()} >=2" id="imgbox_mini"><img id="mini" th:src="${item.urls.get(1)}"></div>
+                <div th:if="${item.urls.size()} >=3" id="imgbox_mini"><img id="mini" th:src="${item.urls.get(2)}"></div>
+                <div th:if="${item.urls.size()} >=4" id="imgbox_mini"><img id="mini" th:src=${item.urls.get(3)}></div>
+                <div th:if="${item.urls.size()} >=5" id="imgbox_mini"><img id="mini" th:src=${item.urls.get(4)}></div>
+                <div th:if="${item.urls.size()} >=6" id="imgbox_mini"><img id="mini" th:src=${item.urls.get(5)}></div>
+                <div th:if="${item.urls.size()} >=7" id="imgbox_mini"><img id="mini" th:src=${item.urls.get(6)}></div>
+                <div th:if="${item.urls.size()} >=8" id="imgbox_mini"><img id="mini" th:src=${item.urls.get(7)}></div>
+                <div th:if="${item.urls.size()} >=9" id="imgbox_mini"><img id="mini" th:src=${item.urls.get(8)}></div>
+                <div th:if="${item.urls.size()} >=10" id="imgbox_mini"><img id="mini" th:src=${item.urls.get(9)}></div>
             </div>
         </div>
 
         <div id="product_info">
-            <h4 th:text="${item.name}"/>
-            <p th:text="${item.brand}" id="brandinfo"/> / <p th:text="${item.code}" id="codeinfo"/>
             <hr>
-            <i id="ic-like" th:class="${like_status} ? 'fas fa-heart':'far fa-heart'"> <p id="likecount" th:text="${item.liked}"/><p id="likeinfo"> people like this product. </p></i>
-            <p><h6>Gender</h6>Unisex</p>
+            <h4>Product Info</h4><p th:text="${item.name}"/><hr>
+            <p><h6>Brand / Id</h6>브랜드 / 아이디</p>
+            <i id="ic-like" class="far fa-heart"> 좋아요 개수</i>
+            <p><h6>Gender</h6>성별</p>
             <p><h6>Size</h6>사이즈 드롭다운 배치</p>
             <p><h6>Price</h6>₩ <span th:text="${#numbers.formatInteger(item.price, 3, 'COMMA')}"></span></p>
-
-            <hr>
             <div id="buyandcartbtn">
-                <button type="button" class="btn btn-light" id="buybtn">Buy Now</button>
-                <form id="cartform" th:action="@{/cart/list}" method="post" style="text-align: center;">
+                <button type="button" id="buybtn">Buy Now</button>
+                <form th:action="@{/cart/list}" method="post" style="text-align: center;">
                     <button id="cartbtn"
                             type="submit"
                             name="item_id"
-                            class="btn btn-light"
                             th:value="${item.id}">
                         Add Cart</button>
                 </form>
-<!--                <i id="ic-like" th:class="${like_status} ? 'fas fa-heart':'far fa-heart'"/>-->
+
+                <button id="like" class="btn btn-dark col-12 mx-1 my-21">
+                    <i id="like_status" th:class="${like_status} ? 'fas fa-heart':'far fa-heart'" class="far fa-heart"></i>
+                    찜하기
+                </button>
+                <!--                <button type="button" id="cartbtn">Add Cart</i></button>-->
             </div>
 
         </div>
+
+        <div class="row">
+            <p class="col-1" style="text-align:right">${currentUser.getEmail()}: </p>
+            <input name="context" style="text-align:center" type="text" class="col-10 form-control" id="content"
+                   placeholder="Write down your comments" th:required="required">
+            <button class="lg_btn btn-dark" onclick="commentWrite();">SUBMIT</button>
+        </div>
+
+        <br/>
+
+        <div th:if="${item.getReview().size()!=0}" class="row" style="text-align:center"
+             th:each="review:${item.getReview()}">
+
+            <div th:if="${review.getParentId()!=0}">
+                <p class="col-1" th:text="${review.getMember.getEmail()}"/>
+                <p class="col-7">${review.getContent()}</p>
+                <p class="col-3" th:type="${review.getCreateDate()}"></p>
+                <button class="btn btn-link" style="color:gray;font-size:small"
+                        th:if="${currentUser.getId()}==${review.getMember().getId()}"
+                        th:onclick="deleteComment(${review.getId()})">DELETE
+                </button>
+
+            </div>
+
+
+        </div>
     </div>
-
-    <!--    <div class="row justify-content-center py-5">-->
-    <!--        <h4 class="justify-content-center" th:text="${item.name}"></h4>-->
-    <!--    </div>-->
-    <!--    <div class="row justify-content-center">-->
-    <!--        ₩ <span th:text="${#numbers.formatInteger(item.price, 3, 'COMMA')}"></span>-->
-    <!--    </div>-->
-    <!--    <hr class = "col-12 my-4"/>-->
-    <!--    <div class="row justify-content-center" style="text-align: center;">-->
-    <!--        <div class="pb-5 row">-->
-    <!--            <form th:action="@{/cart/list}" method="post" style="text-align: center;">-->
-    <!--                <button class="btn btn-dark col-12 mx-1 my-2"-->
-    <!--                        type="submit"-->
-    <!--                        name="item_id"-->
-    <!--                        th:value="${item.id}">-->
-    <!--                    add cart</button>-->
-    <!--            </form>-->
-
-    <!--            <button id="like" class="btn btn-dark col-12 mx-1 my-21">Like-->
-    <!--                <i id="ic-like" th:class="${like_status} ? 'fas fa-heart':'far fa-heart'" class="far fa-heart"></i>-->
-    <!--            </button>-->
-
-    <!--        </div>-->
-    <!--    </div>-->
-
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
@@ -84,7 +87,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Soir.</h5>
+                    <h5 class="modal-title" id="exampleModalCenterTitle">My Store</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -99,53 +102,52 @@
         </div>
     </div>
 
-
-
     <script th:inline="javascript">
-        $(document).ready(function (){ // document loading 후 실행할 함수
-
-            <!-- TODO : 이미지 누르면 해당 이미지를 큰 사진으로 보여주기-->
-            var bigpic = document.querySelector("#nowimg");
-            var smallpics = document.querySelectorAll(".mini"); // 작은 사진
-
-            for(var i=0; i<smallpics.length; i++) {
-                smallpics[i].addEventListener("click", changepic); // 이벤트 처리 부여
-
-            }
-
-            function changepic(){
-                // 사진 변경 함수
-                var smallPicAttribute = this.getAttribute("src");
-                bigpic.setAttribute("src", smallPicAttribute);
-            }
-
-            $("#like").click(function () {
-                $.ajax({
-                    type: 'GET',
-                    url: '/store/like',
-                    data: 'id=[[${item.id}]]',
-                    dataType: 'json',
-                    success: function (result) {
-                        $('.modal-body').html(result.message);
-                        $('#exampleModalCenter').modal('show');
-
-                        // TODO 하트 아이콘 클릭시 변경이 안됨.. 이겨해결해야함
-                        if(result.status) {
-                            $("#ic-like").attr('class', 'fas fa-heart'); // solid 하트 띄움
-                            // jQuery attr : attribute 속성 변경 시 사용
-                        } else{
-                            $("#ic-like").attr('class', 'far fa-heart'); // border 하트 띄움
-                        }
-                    }
-                });
+        function commentWrite() {
+            $.ajax({
+                type: "POST",
+                url: "/review",
+                // data: {itemId: ${currentUser.getId()}, title: $("#title").val(), content: $("#content").val()},
+                data: {itemId:102618, content: $("#content").val()},
+                dataType: 'json',
+                success: () => {
+                    console.log("commentWrite()성공");
+                    // window.location.href = '${pageContext.request.contextPath }/store/detail?id=${item.id }';
+                }
+                // error: () => {
+                //     console.log("commentWrite()실패");
+                //
+                // }
             });
 
+        }
 
-            // $("#imgbox_mini").click(function (mini){
-            //     var big = document.getElementById('nowimg');
-            //     big.src = document.getElementById('mini').src;
-            // })
+        $(document).ready(function (){
+            $("#like").click(function (){
+                $.ajax({
+                    type: 'GET', // 요청 방식
+                    url: '/store/like', // 요청 보낼 주소
+                    data: 'id=[[${item.id}]]', // 보낼 파라미터
+                    // 127.0.0.1:8080/store/like?id=28
+                    dataType: 'json', // 응답메시지의 content-type 을 json으로 (json타입으로 받겠다!)
+                    success: function (result){
+                        // Modal 띄우기
+                        $('.modal-body').html(result.message);
+                        <!--                        $('#exampleModalCenter').modal('show');-->
+                        if(result.status){
+                            $("like_status").attr('class','fas fa-heart');
+                        }
+                        else{
+                            $("like_status").attr('class','far fa-heart');
+                        }
+
+                        // TODO 빈 하트모양 아이콘을 꽉찬 하트모양 아이콘으로 변경
+                    }
+
+                });
+            });
         });
+
     </script>
 </div>
 
