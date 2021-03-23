@@ -4,21 +4,19 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Getter @Setter
+@Setter @Getter
 public class Delivery {
-
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    private Orders order;
-
+    // 외부 Entity를 삽입하겠다.
     @Embedded
-    private Address address;
-
+    private ShippingInfo shippingInfo;
     @Enumerated(EnumType.STRING)
-    private DeliveryStatus status;
+    private DeliveryStatus deliveryStatus;
+    // one to one Orders
+    @OneToOne
+    private Orders order;
 }
-

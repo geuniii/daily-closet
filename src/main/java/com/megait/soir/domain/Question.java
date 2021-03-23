@@ -6,10 +6,11 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity @Getter @Setter
+@Entity
+@Getter @Setter
 public class Question {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String questionTitle;
@@ -19,8 +20,7 @@ public class Question {
     // many to one Member
     @ManyToOne
     private Member member;
-
-    // TODO : fail to run
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private Answer answer;
+    // one to one Answer
+    @OneToOne
+    private Answer answer;
 }

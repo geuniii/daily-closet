@@ -40,20 +40,14 @@ public class Member {
     private List<Item> likes = new ArrayList<>();
     // convention : NullPointerException 방지
 
-    // 아래부터 추가된 필드
-    private String phone;
-
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
-
-
-
-
     @OneToMany(mappedBy = "member") // Orders와 1:N 양방향
     private List<Orders> orders = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member") // member : Questions = 1:N
-    private List<Question> questions = new ArrayList<>();
+    @OneToMany(mappedBy = "member")
+    private List<Cody> codies = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<Review> reviews = new ArrayList<>();
 
     @Transactional
     public void generateEmailCheckToken() {

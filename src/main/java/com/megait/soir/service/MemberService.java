@@ -8,6 +8,7 @@ import com.megait.soir.repository.ItemRepository;
 import com.megait.soir.repository.MemberRepository;
 import com.megait.soir.user.MemberUser;
 import com.megait.soir.user.SignUpForm;
+import com.megait.soir.user.UpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.SimpleMailMessage;
@@ -34,6 +35,36 @@ public class MemberService implements UserDetailsService {
     private final JavaMailSender javaMailSender;
     private final PasswordEncoder passwordEncoder; // password encoding
     private final ItemRepository itemRepository;
+
+    // 회원정보 수정
+    @Transactional
+    public Member updateMember(Member member, UpdateForm updateForm) {
+        Member member1 = memberRepository.getOne(member.getId());
+        member1.getAddress().setZipcode(updateForm.getZipcode());
+        member1.getAddress().setCity(updateForm.getCity());
+        member1.getAddress().setStreet(updateForm.getStreet());
+        return member1;
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ajax
+
+    // 회원탈퇴
+    @Transactional
+    public void delete(Long id) {
+        Member member = memberRepository.findById(id).orElseThrow(()
+                -> new IllegalArgumentException("해당 아이디가 없습니다. id=" + id));
+        // memberRepository.delete(posts)
+        // JpaRepository에서 이미 delete 메소드를 지원하고 있으니 이를 활용함.
+        // 엔티티를 파라미터로 삭제할 수도 있고, dleteById 메소드를 이용하면
+        // id로 삭제할 수 있음.
+        // 존재하는 Member 인지 확인을 위해 엔티티 조회 후 그대로 삭제함.
+        System.out.println("=============================================================================서비스==============================================");
+        memberRepository.delete(member);
+    }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     @Transactional
@@ -131,11 +162,11 @@ public class MemberService implements UserDetailsService {
         if(member == null){
             throw new IllegalArgumentException("잘못된 이메일");
         }
-
+        // TODO 이메일 재전송 코드 리팩토링
         // 이메일 검증 링크 생성
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(member.getEmail());  // 수신자
-        mailMessage.setSubject("Daily Closet : 비밀번호 재생성 메일");  // 제목
+        mailMessage.setSubject("My Store - 비밀번호 재생성 메일");  // 제목
         mailMessage.setText(
                 "/reset-password?email=" + member.getEmail()
                         + "&token=" + member.getEmailCheckToken()
