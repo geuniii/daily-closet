@@ -63,6 +63,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/common.css",
                         "/css/**",
                         "/images/**",
+                        "/assets/**",
                         "/js/**",
                         "**/*.ico"
                 )

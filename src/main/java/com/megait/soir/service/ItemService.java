@@ -2,9 +2,7 @@ package com.megait.soir.service;
 
 
 import com.megait.soir.domain.*;
-import com.megait.soir.repository.AlbumRepository;
-import com.megait.soir.repository.BookRepository;
-import com.megait.soir.repository.ItemRepository;
+import com.megait.soir.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
@@ -32,10 +30,11 @@ public class ItemService {
     private final ItemRepository itemRepository;
     private final AlbumRepository albumRepository;
     private final BookRepository bookRepository;
+    private final ParentCategoryRepository parentCategoryRepository;
+    private final ChildCategoryRepository childCategoryRepository;
 
     @PostConstruct
     public void initAlbumItems() throws IOException, ParseException {
-
 
         Resource resource = new ClassPathResource("items.json");
         JSONParser parser = new JSONParser();
@@ -43,8 +42,6 @@ public class ItemService {
         String uri = resource.getFile().toPath().toString();
 
         JSONArray obj = (JSONArray) parser.parse(new FileReader(uri));
-
-
 
         for (int i = 0; i < obj.size(); i++) {
             JSONObject object = (JSONObject) obj.get(i);
@@ -56,19 +53,27 @@ public class ItemService {
             item.setCode((String) object.get("item_code"));
             item.setImg_name((String) object.get("img_name"));
 
-            //category
-            ParentCategory parent = new ParentCategory();
-            parent.setName((String) object.get("big_category"));
-            item.setParentCategory(parent);
+            //parentcategory
+            ParentCategory parent = parentCategoryRepository.findByName((String)object.get("big_category"));
+            if(parent == null){
+                ParentCategory newParent = new ParentCategory();
+                newParent.setName((String) object.get("big_category"));
+                item.setParentCategory(newParent);
+            }
+            else{
+                item.setParentCategory(parent);
+            }
 
-            ChildCategory child = new ChildCategory();
-            child.setName((String) object.get("small_category"));
-            child.setParentCategory(parent);
-            item.setChildCategory(child);
-
-            System.out.println("부모-------->"+parent.getName());
-            System.out.println("자식-------->"+child.getName());
-
+            //childcategory
+            ChildCategory child = childCategoryRepository.findByname((String) object.get("small_category"));
+            if(child == null){
+                ChildCategory newChild = new ChildCategory();
+                newChild.setName((String) object.get("small_category"));
+                item.setChildCategory(newChild);
+            }
+            else{
+                item.setChildCategory(child);
+            }
             // image urls
             JSONArray urlArr = (JSONArray) object.get("detail_img");
 

@@ -315,8 +315,6 @@ public class MainController {
 
         model.addAttribute(new CodyForm());
 
-
-
         List<Item> likeList = memberService.getLikeList(member);
         List<Item> top = new ArrayList<>();
         List<Item> outer = new ArrayList<>();
@@ -324,7 +322,6 @@ public class MainController {
         List<Item> acc = new ArrayList<>();
         List<Item> shoes = new ArrayList<>();
 
-        System.out.println("오잉!!!!!!!!"+likeList.get(0).getBrand());
 
         for(int i = 0; i<likeList.size(); i++){
             if(likeList.get(i).getParentCategory().getName().equals("상의")){

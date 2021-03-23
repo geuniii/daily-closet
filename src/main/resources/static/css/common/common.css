@@ -129,7 +129,7 @@ li{
     margin: 20px;
 }
 
-.likeimgbox{
+.outerimgbox .topimgbox .bottomimgbox .accimgbox .shoesimgbox{
     writing-mode:vertical-lr;
     width: 100px;
     height: 100px;
