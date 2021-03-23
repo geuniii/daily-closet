@@ -63,7 +63,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/common.css",
                         "/css/**",
                         "/images/**",
-                        "/assets/**",
                         "/js/**",
                         "**/*.ico"
                 )
@@ -86,7 +85,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/best",
                         "/delete/**"
 
-
                 )
                 .permitAll()
 
@@ -94,9 +92,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
 
                 .anyRequest().permitAll()
-        // login 유지 기능 추가
+
+
+
+
+                // login 유지 기능 추가
                 .and().rememberMe()
                 .userDetailsService(memberService) // 인증 관련 buisiness logig을 담당하는 Service 객체를 설정해줌
+
                 // logout 기능 추가
                 .and().logout()
                 .logoutUrl("/logout") // 해당 location은 default

@@ -70,7 +70,7 @@
                        class="far fa-heart"></i>
                     찜하기
                 </button>
-
+<<<<<<< HEAD
             </div>
 
             <div class="row">
@@ -78,11 +78,16 @@
                 <input name="context" style="text-align:center" type="text" class="col-10 form-control" id="content"
                        placeholder="Write down your comments" th:required="required">
                 <button class="lg_btn btn-dark" onclick="commentWrite();">SUBMIT</button>
-
+=======
+>>>>>>> origin/jaejae
             </div>
 
         </div>
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/jaejae
         <div th:if="${item.getReview().size()!=0}" class="row" style="text-align:center"
              th:each="review:${item.getReview()}">
 
@@ -97,6 +102,10 @@
 
             </div>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/jaejae
         </div>
     </div>
 
@@ -174,6 +183,11 @@
                     dataType: 'json', // 응답메시지의 content-type 을 json으로 (json타입으로 받겠다!)
                     success: function (result){
                         // Modal 띄우기
+<<<<<<< HEAD
+                        <!--                        $('.modal-body').html(result.message);-->
+=======
+<!--                        $('.modal-body').html(result.message);-->
+>>>>>>> origin/jaejae
                         <!--                        $('#exampleModalCenter').modal('show');-->
                         if(result.status){
                             $("like_status").attr('class','fas fa-heart');

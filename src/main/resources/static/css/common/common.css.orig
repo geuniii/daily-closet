@@ -129,8 +129,11 @@ li{
     margin: 20px;
 }
 
-.outerimgbox , .topimgbox,  .bottomimgbox,  .accimgbox,  .shoesimgbox{
-
+<<<<<<< HEAD
+.outerimgbox .topimgbox .bottomimgbox .accimgbox .shoesimgbox{
+=======
+.likeimgbox{
+>>>>>>> origin/jaejae
     writing-mode:vertical-lr;
     width: 100px;
     height: 100px;

@@ -26,8 +26,12 @@
 
         <!-- nav에 item 넣기 -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
+<<<<<<< HEAD
             <ul class="navbar-nav mr-auto" id="nav_left">
+=======
+            <ul class="navbar-nav mr-auto" id="
+            nav_left">
+>>>>>>> origin/jaejae
 
                 <!--                <li class="nav-item">-->
                 <!--                    <a class="nav-link" th:href="@{/logout}" sec:authorize="isAuthenticated()"><h5>Logout</h5></a>-->

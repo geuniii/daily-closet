@@ -83,9 +83,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/find-pw/**",
                         "/cody",
                         "/review",
+<<<<<<< HEAD
+                        "/best"
+=======
                         "/best",
                         "/delete/**"
-
+>>>>>>> origin/jaejae
 
                 )
                 .permitAll()
@@ -94,9 +97,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
 
                 .anyRequest().permitAll()
-        // login 유지 기능 추가
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/jaejae
+
+
+
+                // login 유지 기능 추가
                 .and().rememberMe()
                 .userDetailsService(memberService) // 인증 관련 buisiness logig을 담당하는 Service 객체를 설정해줌
+
+<<<<<<< HEAD
+                // login 유지 기능 추가
+                .and().rememberMe()
+                .userDetailsService(memberService) // 인증 관련 buisiness logig을 담당하는 Service 객체를 설정해줌
+
+=======
+>>>>>>> origin/jaejae
                 // logout 기능 추가
                 .and().logout()
                 .logoutUrl("/logout") // 해당 location은 default

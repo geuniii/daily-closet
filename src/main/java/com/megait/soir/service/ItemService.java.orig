@@ -58,6 +58,11 @@ public class ItemService {
         String uri = resource.getFile().toPath().toString();
 
         JSONArray obj = (JSONArray) parser.parse(new FileReader(uri));
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/jaejae
 
         for (int i = 0; i < obj.size(); i++) {
             JSONObject object = (JSONObject) obj.get(i);
@@ -91,8 +96,22 @@ public class ItemService {
             else{
                 item.setChildCategory(child);
             }
+=======
 
+            //category
+            ParentCategory parent = new ParentCategory();
+            parent.setName((String) object.get("big_category"));
+            item.setParentCategory(parent);
 
+            ChildCategory child = new ChildCategory();
+            child.setName((String) object.get("small_category"));
+            child.setParentCategory(parent);
+            item.setChildCategory(child);
+
+            System.out.println("부모-------->"+parent.getName());
+            System.out.println("자식-------->"+child.getName());
+
+>>>>>>> origin/jaejae
             // image urls
             JSONArray urlArr = (JSONArray) object.get("detail_img");
 
