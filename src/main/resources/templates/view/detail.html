@@ -72,7 +72,15 @@
                 </button>
             </div>
 
+            <div class="row">
+                <p class="col-1" style="text-align:right" th:value="${currentUser.getEmail()}+': '"/>
+                <input name="context" style="text-align:center" type="text" class="col-10 form-control" id="content"
+                       placeholder="Write down your comments" th:required="required">
+                <button class="lg_btn btn-dark" onclick="commentWrite();">SUBMIT</button>
+            </div>
+
         </div>
+
 
         <div th:if="${item.getReview().size()!=0}" class="row" style="text-align:center"
              th:each="review:${item.getReview()}">
@@ -88,31 +96,9 @@
 
             </div>
 
-
         </div>
     </div>
 
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Soir.</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
