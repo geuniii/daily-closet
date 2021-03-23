@@ -15,9 +15,6 @@ public class CodyService {
 
     public Cody createNewCody(Member member,CodyForm codyForm) {
 
-        if (codyForm.getTopId()==null){
-            codyForm.setTopId(0L);
-        }
 
         Cody cody = Cody.builder()
                 .member(member)
@@ -26,12 +23,14 @@ public class CodyService {
                 .shoesId(codyForm.getShoesId())
                 .build();
 
+        System.out.println("TOP----->"+cody.getTopId());
+
         if(codyForm.getOuterId()!=null){
-            cody.setOuterId((codyForm.getOuterId()));
+            cody.setOuterId(codyForm.getOuterId());
         }
 
         if(codyForm.getAccId()!=null){
-            cody.setAccId(((codyForm.getAccId())));
+            cody.setAccId(codyForm.getAccId());
         }
 
         codyRepository.save(cody);

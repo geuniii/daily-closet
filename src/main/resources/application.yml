@@ -25,7 +25,6 @@ spring:
           starttls:
             enable: true
 
-
 logging:
   level:
     org.hibernate.SQL: debug

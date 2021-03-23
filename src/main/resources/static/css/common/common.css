@@ -129,7 +129,8 @@ li{
     margin: 20px;
 }
 
-.likeimgbox{
+.outerimgbox , .topimgbox,  .bottomimgbox,  .accimgbox,  .shoesimgbox{
+
     writing-mode:vertical-lr;
     width: 100px;
     height: 100px;
@@ -348,4 +349,14 @@ li{
     margin-left: 21%;
     text-align: center;
     width: 800px;
+}
+/*#reviewbox{*/
+/*    width: 1200px;*/
+/*    height: 400px;*/
+/*    margin: 15px 15px 15px -10px;*/
+/*}*/
+#reivewInput{
+    width: 600px;
+    height: 100px;
+    margin: 15px 15px 15px -10px;
 }

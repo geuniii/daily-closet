@@ -35,7 +35,4 @@ public class Review {
 
     private LocalDateTime createDate;
 
-//    @UpdateTimestamp
-//    private Timestamp updateDate;
-
 }

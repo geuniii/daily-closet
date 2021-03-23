@@ -41,18 +41,6 @@ public class MainController {
     private final CodyService codyService;
     private final ReviewService reviewService;
 
-//    @GetMapping("/") // root context가 들어오면 index page를 보여준다.
-//    public String index(@CurrentUser Member member, Model model) {
-//
-//        if (member != null) {
-//            model.addAttribute("member", member);
-//        }
-//        model.addAttribute("albumList", itemService.getItemList());
-//        model.addAttribute("bookList", itemService.getItemList());
-//        model.addAttribute("title", "Soir.");
-//        return "/view/index";
-//    }
-    // 재우
     @GetMapping("/") // root context가 들어오면 index page를 보여준다.
     public String index(@CurrentUser Member member, Model model, String keyword, String searchType){
 
@@ -366,16 +354,12 @@ public class MainController {
 
         model.addAttribute(new CodyForm());
 
-
-
         List<Item> likeList = memberService.getLikeList(member);
         List<Item> top = new ArrayList<>();
         List<Item> outer = new ArrayList<>();
         List<Item> bottom = new ArrayList<>();
         List<Item> acc = new ArrayList<>();
         List<Item> shoes = new ArrayList<>();
-
-        System.out.println("오잉!!!!!!!!"+likeList.get(0).getBrand());
 
         for(int i = 0; i<likeList.size(); i++){
             if(likeList.get(i).getParentCategory().getName().equals("상의")){
@@ -426,12 +410,30 @@ public class MainController {
 //        return "redirect:/store/detail?{itemId}";
 //    }
 
-    @PostMapping("/review")
-    public String review(Long itemId, String content) throws Exception{
-        Item item = itemService.findItem(itemId);
-        reviewService.createNewReview(item,content);
+//    @PostMapping("/review")
+//    public String review(Long itemId, String content) throws Exception{
+//        Item item = itemService.findItem(itemId);
+//        reviewService.createNewReview(item,content);
+//
+//        return "redirect:/store/detail?{itemId}";
+//    }
 
-        return "redirect:/store/detail?{itemId}";
+    @GetMapping("/review/{id}")
+    public String writeReview(@CurrentUser Member member, @PathVariable Long id, Model model) {
+//
+//        Item item = itemService.findItem(id);
+//
+//        model.addAttribute("like_status", false);
+//        if (member != null) {
+//            member = memberRepository.findByEmail(member.getEmail());
+//            model.addAttribute("like_status", member.getLikes().contains(item));
+//        }
+//        model.addAttribute("item", item);
+//        model.addAttribute("currentUser",member);
+//
+//        System.out.println();
+
+        return "/view/write-review";
     }
 
 }
