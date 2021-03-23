@@ -1,17 +1,22 @@
 package com.megait.soir.controller;
 
 import com.google.gson.JsonObject;
-import com.megait.soir.domain.Item;
-import com.megait.soir.domain.Member;
-import com.megait.soir.domain.OrderItem;
-import com.megait.soir.domain.ParentCategory;
+import com.megait.soir.form.CodyForm;
+import com.megait.soir.domain.*;
 import com.megait.soir.repository.MemberRepository;
 import com.megait.soir.service.*;
 import com.megait.soir.user.CurrentUser;
 import com.megait.soir.user.SignUpForm;
 import com.megait.soir.user.SignUpValidator;
+import com.megait.soir.user.UpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.codec.json.AbstractJackson2Decoder;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,18 +38,109 @@ public class MainController {
     private final MemberRepository memberRepository;
     private final OrderService orderService;
     private final SendEmailService sendEmailService;
+    private final CodyService codyService;
+    private final ReviewService reviewService;
 
-
+//    @GetMapping("/") // root context가 들어오면 index page를 보여준다.
+//    public String index(@CurrentUser Member member, Model model) {
+//
+//        if (member != null) {
+//            model.addAttribute("member", member);
+//        }
+//        model.addAttribute("albumList", itemService.getItemList());
+//        model.addAttribute("bookList", itemService.getItemList());
+//        model.addAttribute("title", "Soir.");
+//        return "/view/index";
+//    }
+    // 재우
     @GetMapping("/") // root context가 들어오면 index page를 보여준다.
-    public String index(@CurrentUser Member member, Model model) {
+    public String index(@CurrentUser Member member, Model model, String keyword, String searchType){
 
-        if (member != null) {
-            model.addAttribute("member", member);
+    if(member != null){
+        model.addAttribute("member", member);
+    }
+
+    model.addAttribute("title", "Soir.");
+
+    //common_fragments 에서 SearchType 받아서 처리 (검색)
+    if(keyword != null){
+        if(searchType.equals("item_all"))
+            model.addAttribute("clothsList", itemService.findByAllKeyword(keyword));
+        else if(searchType.equals("item_name"))
+            model.addAttribute("clothsList", itemService.findByNameKeyword(keyword));
+        else if(searchType.equals("brand_name"))
+            model.addAttribute("clothsList", itemService.findByBrandKeyword(keyword));
+    }
+    else{
+        model.addAttribute("clothsList", itemService.getItemList());
+
+    }
+    return "/view/index";
+    }
+/////////
+
+    // 회원정보 조회
+    @GetMapping("/memberInfo")
+    public String findMember(@CurrentUser Member member, Model model) {
+        model.addAttribute(member);
+        return "/view/memberInfo";
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // 회원정보 수정 Get
+    @GetMapping("/update-memberInfo")
+    public String update(@CurrentUser Member member, Model model) {
+        model.addAttribute(member);
+        model.addAttribute(new UpdateForm());
+        return "/view/update-memberInfo";
+    }
+    // 회원정보 수정 Post
+    @PostMapping("/update-memberInfo") // post 요청 시 실행되는 메소드 -> 즉 회원가입 form 작성 시 수행된다.
+    public String updateSubmit(@CurrentUser Member member, @Valid UpdateForm updateForm) {
+
+        memberService.updateMember(member, updateForm);
+        return "redirect:/"; // root로 redirect
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ajax
+
+    /**
+     * 회원탈퇴
+     * @param id
+     * @return
+     */
+    @PostMapping("/delete/{id}")
+    @ResponseBody
+    public Map<String, Object> delete(@PathVariable Long id) {
+        memberService.delete(id);
+        System.out.println("======================================================컨트롤러==============================");
+
+        Map<String, Object> json = new HashMap<>();
+        json.put("status", 200);
+        json.put("id", id);
+        return json;
+    }
+
+    /**
+     * 카테고리 아이템 조회
+     * @param itemRequest
+     * @param model
+     * @return
+     */
+    @GetMapping("/itemList")
+    public String itemList(ItemRequest itemRequest ,Model model) {
+        String categoryName = itemRequest.getCategoryName();
+        Pageable pageable = itemService.getPageable(itemRequest);
+        if (itemRequest.getCategoryName().equals("best")) {
+            model.addAttribute("itemList", itemService.getBestItemList());
+        } else {
+            model.addAttribute("itemList", itemService.getParentCategoryItemList(categoryName, pageable));
         }
-        model.addAttribute("albumList", itemService.getItemList());
-        model.addAttribute("bookList", itemService.getItemList());
-        model.addAttribute("title", "Soir.");
-        return "/view/index";
+        // <h2 th:text="This is ${title} Page."><h2>
+        model.addAttribute("title", categoryName);
+        return "/view/category/category";
     }
 
     @GetMapping("/signup")
@@ -167,6 +263,7 @@ public class MainController {
             model.addAttribute("like_status", member.getLikes().contains(item));
         }
         model.addAttribute("item", item);
+        model.addAttribute("currentUser",member);
 
         System.out.println();
 
@@ -264,8 +361,12 @@ public class MainController {
 
     }
 
-    @GetMapping("/store/cody")
+    @GetMapping("/cody")
     public String cody(@CurrentUser Member member, Model model) {
+
+        model.addAttribute(new CodyForm());
+
+
 
         List<Item> likeList = memberService.getLikeList(member);
         List<Item> top = new ArrayList<>();
@@ -273,6 +374,8 @@ public class MainController {
         List<Item> bottom = new ArrayList<>();
         List<Item> acc = new ArrayList<>();
         List<Item> shoes = new ArrayList<>();
+
+        System.out.println("오잉!!!!!!!!"+likeList.get(0).getBrand());
 
         for(int i = 0; i<likeList.size(); i++){
             if(likeList.get(i).getParentCategory().getName().equals("상의")){
@@ -283,11 +386,11 @@ public class MainController {
                 outer.add(likeList.get(i));
                 System.out.println(likeList.get(i).getParentCategory().getName());
             }
-            if(likeList.get(i).getParentCategory().getName().equals("하의")){
+            if(likeList.get(i).getParentCategory().getName().equals("바지")){
                 bottom.add(likeList.get(i));
                 System.out.println(likeList.get(i).getParentCategory().getName());
             }
-            if(likeList.get(i).getParentCategory().getName().equals("신발")){
+            if(likeList.get(i).getParentCategory().getName().equals("신발")||likeList.get(i).getParentCategory().getName().equals("스니커즈") ){
                 shoes.add(likeList.get(i));
                 System.out.println(likeList.get(i).getParentCategory().getName());
             }
@@ -296,30 +399,6 @@ public class MainController {
                 System.out.println(likeList.get(i).getParentCategory().getName());
             }
         }
-
-
-
-//        Iterator<Item> iterator = likeList.iterator();
-//        while (iterator.hasNext()) {
-//            System.out.println(iterator.next().getParentCategory().getName());
-//
-//            if (iterator.next().getParentCategory().getName().equals("상의")) {
-//                top.add(iterator.next());
-//                System.out.println("여기");
-//            }
-//            if (iterator.next().getParentCategory().getName().equals("아우터")) {
-//                outer.add(iterator.next());
-//            }
-//            if (iterator.next().getParentCategory().getName().equals("하의")) {
-//                bottom.add(iterator.next());
-//            }
-//            if (iterator.next().getParentCategory().getName().equals("가방")) {
-//                acc.add(iterator.next());
-//            }
-//            if (iterator.next().getParentCategory().getName().equals("신발")) {
-//                shoes.add(iterator.next());
-//            }
-//        }
         model.addAttribute("topList", top);
         model.addAttribute("outerList", outer);
         model.addAttribute("bottomList", bottom);
@@ -328,6 +407,31 @@ public class MainController {
 
         System.out.println("찜리스트--------->" + likeList.toString());
         return "/view/cody";
+    }
+
+    @PostMapping("/cody")
+    public String codySubmit(@CurrentUser Member member, @Valid CodyForm codyForm, @Valid long topId) {
+
+        Cody cody = codyService.createNewCody(member,codyForm);
+
+        return "redirect:/cody"; // root로 redirect
+
+    }
+
+//    @PostMapping("/review")
+//    public String review(@CurrentUser Member member,  @RequestParam("id") Long itemId, @RequestParam("parentId")long parentId, @RequestParam("title")String title, @RequestParam("content") String content){
+//        Item item = itemService.findItem(itemId);
+//        reviewService.createNewReview(member,item,parentId,title,content);
+//
+//        return "redirect:/store/detail?{itemId}";
+//    }
+
+    @PostMapping("/review")
+    public String review(Long itemId, String content) throws Exception{
+        Item item = itemService.findItem(itemId);
+        reviewService.createNewReview(item,content);
+
+        return "redirect:/store/detail?{itemId}";
     }
 
 }

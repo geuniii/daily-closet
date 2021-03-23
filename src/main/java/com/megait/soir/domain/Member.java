@@ -43,6 +43,12 @@ public class Member {
     @OneToMany(mappedBy = "member") // Orders와 1:N 양방향
     private List<Orders> orders = new ArrayList<>();
 
+    @OneToMany(mappedBy = "member")
+    private List<Cody> codies = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<Review> reviews = new ArrayList<>();
+
     @Transactional
     public void generateEmailCheckToken() {
         /*

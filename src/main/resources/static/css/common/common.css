@@ -20,11 +20,11 @@ body {
     text-align: center;
 }
 
-.lead {
+.lead{
     color: white;
 }
 
-#header {
+#header{
     background-color: white;
 }
 
@@ -33,25 +33,27 @@ body {
     text-align: left;
     margin-left: auto;
     margin-right: auto;
-    background-color: #FFFFFF;
+    background-color: pink;
 }
 
-#logo {
+
+
+#logo{
     color: white;
     font-family: 'Oi', cursive;
 }
 
-#headlogo {
+#headlogo{
     margin-top: 50px;
     height: 280px;
 }
 
-#navlogo {
+#navlogo{
     font-size: 1.0em;
     font-weight: 700;
     margin-top: 25px;
     margin-right: 5px;
-    margin-left: 10px;
+    margin-left: 20px;
 }
 
 table {
@@ -68,10 +70,11 @@ h1 {
     font-size: 4.0em;
     color: white;
     font-family: 'Oi', cursive;
-    text-shadow: -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
 }
 
 h2 {
@@ -90,7 +93,7 @@ h5 {
     font-size: 1.6em;
 }
 
-h6 {
+h6{
     font-size: 1.4em;
     font-weight: 500;
 }
@@ -98,20 +101,24 @@ h6 {
 p {
     font-size: 1.4em;
 }
-
 .banner {
     text-align: center;
-    color: darkgray;
+    color: gray;
+}
+.container {
+    max-width: 1500px;
 }
 
-.container {
-    max-width: 960px;
+li{
+    list-style:none;
 }
 
 .imgbox_middle {
     margin: 5px;
     padding: 7px;
     display: inline;
+    width:200px;
+    height:200px;
 }
 
 .codybox {
@@ -123,67 +130,142 @@ p {
 }
 
 .likeimgbox{
-    width: 50px;
-    height: 50px;
+    writing-mode:vertical-lr;
+    width: 100px;
+    height: 100px;
+}
+
+.vertical-data{
+    writing-mode:vertical-lr
 }
 
 
-#back {
+#back{
+    margin-left: 0;
     background-color: white;
 }
 
-#navbar {
+#navbar{
     height: 70px;
 }
 
 
-#navp {
+#navp{
     text-align: center;
     font-weight: 700;
     font-size: 1.0em;
+    margin-top: 7px;
     margin-left: 10px;
-    margin-right: 10px;
+    /*margin-right: 10px;*/
     /*background-color: #474747;*/
     /*color: white;*/
     /*border-radius: 100px;*/
     /*box-shadow: 2px 2px gray;*/
 }
 
-#usernav {
-    float: right;
+#usernav{
     text-align: right;
-    font-weight: 700px;
+    float: right;
 }
 
-#navbar_right {
+#nav_left{
+    margin-left: 20%;
+}
+
+#navbar_right{
+    margin-top: 7px;
     display: inline;
     float: right;
     text-align: right;
     font-weight: 700;
     font-size: 1.0em;
-    margin-left: 55%;
-    margin-right: 10px;
+    margin-left: 30%;
 }
 
-#brandname {
+#carousel{
+    width: 50%;
+    height: 250px;
+}
+
+
+#pagebox{
+    width: 1500px;
+}
+
+
+#logoutbtn{
+    /*margin-top: 7px;*/
+    background-color: white;
+    color: grey;
+    margin-left: 10px;
+    font-weight: 600;
+    font-size: 1.0em;
+}
+
+.component{
+    text-align: center;
+}
+
+#component_img{
+    width: 300px;
+    height: 400px;
+    margin: 15px 15px 15px -10px;
+}
+
+#component_info{
+    text-align: center;
+    margin-left: 40px;
+}
+
+#component_name{
+    display: block;
+    text-align: center;
+}
+
+#catetitle{
+    margin-left: 360px;
+    text-align: center;
+    width: 50%;
+
+}
+
+#detailbox{
+    margin-bottom: 50px;
+}
+
+#brandname{
     text-align: left;
     display: block;
 }
 
-#imgbox {
-    border: 1px solid grey;
+#imgbox{
     width: 400px;
     height: 400px;
     margin: 20px;
+    margin-bottom: 50px;
 }
 
-#imgboxs_mini {
+#nowimg{
+    width: 400px;
+    height: 500px;
+}
+
+#product_info{
+    width: 450px;
+}
+
+#brandinfo, #codeinfo{
+    display: inline;
+}
+
+#imgboxs_mini{
+    text-align: center;
     width: 400px;
     height: 40px;
-    margin-top: 15px;
+    margin-top: 130px;
 }
 
-#imgbox_mini {
+.imgbox_mini{
     width: 40px;
     height: 40px;
     display: inline;
@@ -191,37 +273,79 @@ p {
     padding: 7px;
 }
 
-
-#mini {
+.mini{
     width: 40px;
     height: 40px;
+    border: 1px solid lightgrey;
 }
 
-#product_img {
+#product_img{
     margin-right: 20px;
 }
 
-#product_info {
-    margin-top: 20px;
+#product_info{
+    margin-top: 100px;
     margin-left: 5%;
     text-align: left;
 }
 
-#buyandcartbtn {
+#ic-like{
+    display: inline;
+}
+
+#likecount{
+    display: inline;
+}
+
+#likeinfo{
+    display: inline;
+}
+
+#buyandcartbtn{
     margin-top: 20px;
 }
 
-#buybtn {
-    border: 1px solid grey;
+#buybtn{
     padding: 10px;
-    margin-top: 10px;
+    /*margin-top: 10px;*/
     margin-bottom: 0px;
     margin-right: 10px;
 }
 
-#cartbtn {
+#cartbtn{
     display: inline;
-    border: 1px solid grey;
     padding: 10px;
-    margin-bottom: 0px;
+}
+
+#cartform{
+    margin-top: 5px;
+    display: inline;
+}
+
+
+#codybox{
+    text-align: center;
+    display: inline;
+}
+
+.cody{
+    display: inline;
+    text-align: center;
+    border: 1px solid grey;
+    width: 100px;
+    height: 100px;
+}
+
+#likelist_container{
+    text-align: center;
+}
+
+#wishlist_table_box{
+    text-align: center;
+}
+
+#wishlist_table{
+    margin-left: 21%;
+    text-align: center;
+    width: 800px;
 }

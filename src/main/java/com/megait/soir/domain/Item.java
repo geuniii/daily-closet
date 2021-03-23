@@ -43,6 +43,9 @@ public class Item {
     @ManyToOne(cascade = CascadeType.ALL)
     private ChildCategory childCategory;
 
+    @OneToMany(mappedBy = "item")
+    private List<Review> review  = new ArrayList<>();;
+
 
 
 }

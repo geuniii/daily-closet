@@ -13,6 +13,9 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -125,6 +128,71 @@ public class ItemService {
     public List<Item> getItemList() {
         return itemRepository.findAll();
     }
+    // 재우
+    //Get Item by All keyword (name, brand 전체검색)
+    public List<Item> findByAllKeyword(String keyword){
+        return itemRepository.findByAllKeyword(keyword);
+    }
+
+        //Get Item by Name keyword (name 만 검색)
+        public List<Item> findByNameKeyword(String keyword){
+            return itemRepository.findByNameKeyword(keyword);
+        }
+
+        //Get Item by Brand keyword (brand 만 검색)
+        public List<Item> findByBrandKeyword(String keyword){
+            return itemRepository.findByBrandKeyword(keyword);
+        }
+        //
+
+    /**
+     * 베스트 아이템 조회
+     * @return
+     */
+    public List<Item> getBestItemList() {
+        return itemRepository.findAll(Sort.by(Sort.Direction.DESC, "liked"));
+    }
+
+    /**
+     * 카테고리 아이템 조회
+     * @param category
+     * @param pageable
+     * @return
+     */
+    public List<Item> getParentCategoryItemList(String category, Pageable pageable) {
+        if (category.indexOf("_") > -1) {
+            return itemRepository.findItemByParentCategory(category.split("_")[0], category.split("_")[1], pageable);
+        } else {
+            return itemRepository.findItemByParentCategory(category, pageable);
+        }
+
+    }
+
+    /**
+     * 베스트 아이템 페이징처리 및 정렬 가져오기
+     * @param itemRequest
+     * @return
+     */
+    public Pageable getPageable(ItemRequest itemRequest) {
+        String sort = itemRequest.getSort() != null ? itemRequest.getSort() : "name";
+        int page = itemRequest.getPage();
+        int limit = itemRequest.getLimit();
+
+        if (limit == 0) {
+            limit = 20;
+        }
+
+        Sort sortBy = null;
+        if (sort == "price_high") {
+            sortBy = Sort.by(Sort.Direction.DESC, "price");
+        } else if (sort == "price_low") {
+            sortBy = Sort.by(Sort.Direction.ASC, "price");
+        } else {
+            sortBy = Sort.by(Sort.Direction.ASC, sort);
+        }
+
+        return PageRequest.of(page, limit, sortBy);
+    }
 
     public Item findItem(Long id){
 
@@ -136,4 +204,6 @@ public class ItemService {
         Optional<Item> optional = itemRepository.findById(id);
         return optional.orElseGet(() -> itemRepository.findById(id).get());
     }
+
+
 }
