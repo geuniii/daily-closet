@@ -434,4 +434,10 @@ public class MainController {
         return "redirect:/store/detail?{itemId}";
     }
 
+    @GetMapping("/find-my-location")
+    public String geolocation(String city){
+        System.out.println(city);
+        return "/view/browser-location";
+    }
+
 }
