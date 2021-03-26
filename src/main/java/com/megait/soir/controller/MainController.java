@@ -40,6 +40,7 @@ public class MainController {
     private final SendEmailService sendEmailService;
     private final CodyService codyService;
     private final ReviewService reviewService;
+    private final CityNameService cityNameService;
 
 //    @GetMapping("/") // root context가 들어오면 index page를 보여준다.
 //    public String index(@CurrentUser Member member, Model model) {
@@ -436,7 +437,11 @@ public class MainController {
 
     @GetMapping("/find-my-location")
     public String geolocation(String city){
-        System.out.println(city);
+        String cityName;
+        if(city != null) { //NullPointException
+            cityName = cityNameService.renameCity(city); //city 값과 cityName 값이 다를 경우에 사용할 것
+            System.out.println(cityName);
+        }
         return "/view/browser-location";
     }
 
