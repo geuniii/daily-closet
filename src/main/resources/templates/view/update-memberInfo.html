@@ -84,7 +84,7 @@
                     url: '/delete/' + id,
                     dataType: 'json',
                     contentType:'application/json; charset=utf-8'
-                }).done(function() {
+                }).complete(function() {
                     alert('회원탈퇴가 되었습니다.');
                     window.location.href = '/';
                 }).fail(function (error) {
@@ -94,6 +94,7 @@
         };
         main.init();
     </script>
+
 <!--    <script>-->
 <!--        var main = {-->
 <!--            init : function () {-->
@@ -122,5 +123,6 @@
 <!--        };-->
 <!--        main.init();-->
 <!--    </script>-->
+
 </div>
 </html>

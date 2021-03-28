@@ -63,6 +63,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/common.css",
                         "/css/**",
                         "/images/**",
+                        "/assets/**",
                         "/js/**",
                         "**/*.ico"
                 )
@@ -83,7 +84,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/cody",
                         "/review",
                         "/best",
-                        "/delete/**"
+                        "/delete/**",
+                        "/review/delete",
+                        "/review/modify"
 
                 )
                 .permitAll()
@@ -92,14 +95,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
 
                 .anyRequest().permitAll()
-
-
-
-
-                // login 유지 기능 추가
+        // login 유지 기능 추가
                 .and().rememberMe()
                 .userDetailsService(memberService) // 인증 관련 buisiness logig을 담당하는 Service 객체를 설정해줌
-
                 // logout 기능 추가
                 .and().logout()
                 .logoutUrl("/logout") // 해당 location은 default
@@ -108,7 +106,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
         http.cors().configurationSource(corsConfigurationSource());
+        http.rememberMe()
+                .key("autologin") //쿠키에 사용되는 값을 암호화하기 위한 키(key)값
+                .tokenRepository(tokenRepository()) //DataSource 추가
+                .tokenValiditySeconds(604800); //일주일
+        http.logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true) //세션 삭제
+                .deleteCookies("remember-me", "JSESSIONID");
     }
+
+
 
 
 }

@@ -3,6 +3,7 @@ package com.megait.soir.controller;
 import com.google.gson.JsonObject;
 import com.megait.soir.form.CodyForm;
 import com.megait.soir.domain.*;
+import com.megait.soir.form.ReviewForm;
 import com.megait.soir.repository.MemberRepository;
 import com.megait.soir.service.*;
 import com.megait.soir.user.CurrentUser;
@@ -11,12 +12,9 @@ import com.megait.soir.user.SignUpValidator;
 import com.megait.soir.user.UpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.codec.json.AbstractJackson2Decoder;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +30,8 @@ import java.util.*;
 @RequiredArgsConstructor
 public class MainController {
 
+    private Logger logger = LoggerFactory.getLogger(MainController.class);
+
     private final SignUpValidator signUpValidator;
     private final MemberService memberService;
     private final ItemService itemService;
@@ -41,18 +41,6 @@ public class MainController {
     private final CodyService codyService;
     private final ReviewService reviewService;
 
-//    @GetMapping("/") // root context가 들어오면 index page를 보여준다.
-//    public String index(@CurrentUser Member member, Model model) {
-//
-//        if (member != null) {
-//            model.addAttribute("member", member);
-//        }
-//        model.addAttribute("albumList", itemService.getItemList());
-//        model.addAttribute("bookList", itemService.getItemList());
-//        model.addAttribute("title", "Soir.");
-//        return "/view/index";
-//    }
-    // 재우
     @GetMapping("/") // root context가 들어오면 index page를 보여준다.
     public String index(@CurrentUser Member member, Model model, String keyword, String searchType){
 
@@ -256,7 +244,9 @@ public class MainController {
         log.info("id : " + id);
 
         Item item = itemService.findItem(id);
+//        List<Review> reviewList = reviewService.findAll(item);
 
+        model.addAttribute(new ReviewForm());
         model.addAttribute("like_status", false);
         if (member != null) {
             member = memberRepository.findByEmail(member.getEmail());
@@ -264,6 +254,7 @@ public class MainController {
         }
         model.addAttribute("item", item);
         model.addAttribute("currentUser",member);
+//        model.addAttribute("reviewList",reviewList);
 
         System.out.println();
 
@@ -366,16 +357,12 @@ public class MainController {
 
         model.addAttribute(new CodyForm());
 
-
-
         List<Item> likeList = memberService.getLikeList(member);
         List<Item> top = new ArrayList<>();
         List<Item> outer = new ArrayList<>();
         List<Item> bottom = new ArrayList<>();
         List<Item> acc = new ArrayList<>();
         List<Item> shoes = new ArrayList<>();
-
-        System.out.println("오잉!!!!!!!!"+likeList.get(0).getBrand());
 
         for(int i = 0; i<likeList.size(); i++){
             if(likeList.get(i).getParentCategory().getName().equals("상의")){
@@ -410,28 +397,37 @@ public class MainController {
     }
 
     @PostMapping("/cody")
-    public String codySubmit(@CurrentUser Member member, @Valid CodyForm codyForm, @Valid long topId) {
+    public String codySubmit(@CurrentUser Member member, @Valid CodyForm codyForm) {
 
         Cody cody = codyService.createNewCody(member,codyForm);
 
         return "redirect:/cody"; // root로 redirect
-
     }
 
-//    @PostMapping("/review")
-//    public String review(@CurrentUser Member member,  @RequestParam("id") Long itemId, @RequestParam("parentId")long parentId, @RequestParam("title")String title, @RequestParam("content") String content){
-//        Item item = itemService.findItem(itemId);
-//        reviewService.createNewReview(member,item,parentId,title,content);
-//
-//        return "redirect:/store/detail?{itemId}";
-//    }
-
+    // 새 글 올리기
     @PostMapping("/review")
-    public String review(Long itemId, String content) throws Exception{
-        Item item = itemService.findItem(itemId);
-        reviewService.createNewReview(item,content);
+    public String create(@CurrentUser Member member, @Valid ReviewForm reviewForm) throws Exception {
+        log.info("POST /review : " + reviewForm.toString());
+        Item item = itemService.findItem(reviewForm.getItemId());
+        log.info("item Id:"+reviewForm.getItemId());
 
-        return "redirect:/store/detail?{itemId}";
+        reviewService.createReview(member,item,reviewForm);
+        return "redirect:/store/detail/"+reviewForm.getItemId();
     }
 
+    // 리뷰 수정
+    @PutMapping("/review")
+    public void modify(Review review, @Valid ReviewForm reviewForm) throws Exception{
+        log.info("PUT data : " + reviewForm.toString());
+        reviewService.update(review, reviewForm);
+    }
+
+    // 리뷰 삭제
+    @PostMapping("/review/delete")
+    public String deleteReview(@RequestParam("reviewId") Long reviewId, @RequestParam("itemId") Long itemId ){
+        log.info("DELETE no : " + reviewId);
+        reviewService.deleteReview(reviewId);
+        return "redirect:/store/detail/"+itemId;
+
+    }
 }

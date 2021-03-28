@@ -30,4 +30,7 @@ public class Orders {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<Review> reviews = new ArrayList<>();
+
 }

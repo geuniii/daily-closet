@@ -134,16 +134,16 @@ public class ItemService {
         return itemRepository.findByAllKeyword(keyword);
     }
 
-        //Get Item by Name keyword (name 만 검색)
-        public List<Item> findByNameKeyword(String keyword){
-            return itemRepository.findByNameKeyword(keyword);
-        }
+    //Get Item by Name keyword (name 만 검색)
+    public List<Item> findByNameKeyword(String keyword){
+        return itemRepository.findByNameKeyword(keyword);
+    }
 
-        //Get Item by Brand keyword (brand 만 검색)
-        public List<Item> findByBrandKeyword(String keyword){
-            return itemRepository.findByBrandKeyword(keyword);
-        }
-        //
+    //Get Item by Brand keyword (brand 만 검색)
+    public List<Item> findByBrandKeyword(String keyword){
+        return itemRepository.findByBrandKeyword(keyword);
+    }
+    //
 
     /**
      * 베스트 아이템 조회
@@ -203,6 +203,7 @@ public class ItemService {
 //       Optional은 null 방지 클래스
         Optional<Item> optional = itemRepository.findById(id);
         return optional.orElseGet(() -> itemRepository.findById(id).get());
+//
     }
 
 
