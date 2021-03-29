@@ -14,15 +14,11 @@ public class ResourceConfiguration implements WebMvcConfigurer {
         registry.addResourceHandler(
                 "/images/**",
                 "/css/**",
-                "/js/**",
-                "/assets/**"
+                "/js/**"
         ).addResourceLocations(
                 "classpath:/static/images/",
                 "classpath:/static/css/",
-                "classpath:/static/js/",
-                "classpath:/static/assets/",
-                "classpath:/templates/view/"
-                ); // static resources의 location 지정
+                "classpath:/static/js/"); // static resources의 location 지정
         // classpath : main(= /)
     }
 }

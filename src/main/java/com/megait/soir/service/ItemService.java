@@ -2,9 +2,7 @@ package com.megait.soir.service;
 
 
 import com.megait.soir.domain.*;
-import com.megait.soir.repository.AlbumRepository;
-import com.megait.soir.repository.BookRepository;
-import com.megait.soir.repository.ItemRepository;
+import com.megait.soir.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
@@ -33,117 +31,111 @@ import java.util.Optional;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+    private final ParentCategoryRepository parentCategoryRepository;
+    private final ChildCategoryRepository childCategoryRepository;
     private final AlbumRepository albumRepository;
     private final BookRepository bookRepository;
 
     @PostConstruct
-    public void initAlbumItems() throws IOException, ParseException {
-
-
-        Resource resource = new ClassPathResource("items.json");
-        JSONParser parser = new JSONParser();
-
-        String uri = resource.getFile().toPath().toString();
-
-        JSONArray obj = (JSONArray) parser.parse(new FileReader(uri));
-
-
-
-        for (int i = 0; i < obj.size(); i++) {
-            JSONObject object = (JSONObject) obj.get(i);
-            Item item = new Item();
-            item.setId((long) object.get("id"));
-            item.setBrand((String) object.get("brand"));
-            item.setName((String) object.get("name"));
-            item.setPrice((long) object.get("price"));
-            item.setCode((String) object.get("item_code"));
-            item.setImg_name((String) object.get("img_name"));
-
-            //category
-            ParentCategory parent = new ParentCategory();
-            parent.setName((String) object.get("big_category"));
-            item.setParentCategory(parent);
-
-            ChildCategory child = new ChildCategory();
-            child.setName((String) object.get("small_category"));
-            child.setParentCategory(parent);
-            item.setChildCategory(child);
-
-            System.out.println("부모-------->"+parent.getName());
-            System.out.println("자식-------->"+child.getName());
-
-            // image urls
-            JSONArray urlArr = (JSONArray) object.get("detail_img");
-
-
-            Iterator<String> iterator1 = urlArr.iterator();
-            while (iterator1.hasNext()) {
-                item.getUrls().add(iterator1.next());
-            }
-
-            // sizes
-            JSONArray sizeArr = (JSONArray) object.get("size");
-
-            Iterator<String> iterator2 = sizeArr.iterator();
-            while (iterator2.hasNext()) {
-                item.getSizes().add(iterator2.next());
-            }
-
-            itemRepository.save(item);
-        }
-    }
-
-    @PostConstruct
-    public void initBookItems() throws IOException {
-//        Resource resource = new ClassPathResource("album.CSV");
-//        List<String> list = Files.readAllLines(resource.getFile().toPath(), StandardCharsets.UTF_8);
+//    public void initAlbumItems() throws IOException, ParseException {
 //
-//        Stream<String> stream = list.stream();
 //
-//        Stream<Item> stream2 = stream.map(
-//                line->{
-//                    String[] split = line.split("\\|");
-//                    Book book = new Book();
-//                    book.setName(split[0]);
-//                    book.setImageUrl(split[1]);
-//                    book.setPrice(Integer.parseInt(split[2]));
-//                    return book;
-//                });
+//        Resource resource = new ClassPathResource("items.json");
+//        JSONParser parser = new JSONParser();
 //
-//        List<Item> items = stream2.collect(Collectors.toList());
+//        String uri = resource.getFile().toPath().toString();
 //
-//        // 위에서 만든 List<에 저장
-//        itemRepository.saveAll(items);
+//        JSONArray obj = (JSONArray) parser.parse(new FileReader(uri));
+//
+//        /**
+//         * 수정
+//         */
+//
+//        for (int i = 0; i < obj.size(); i++) {
+//            JSONObject object = (JSONObject) obj.get(i);
+//            Item item = new Item();
+//            item.setId((long) object.get("id"));
+//            item.setBrand((String) object.get("brand"));
+//            item.setName((String) object.get("name"));
+//            item.setPrice((long) object.get("price"));
+//            item.setCode((String) object.get("item_code"));
+//            item.setImg_name((String) object.get("img_name"));
+//
+//            //category
+//            ParentCategory parentCategory = parentCategoryRepository.findOneByName((String) object.get("big_category"));
+//            if (parentCategory != null) {
+//                item.setParentCategory(parentCategory);
+//            } else {
+//                parentCategory = new ParentCategory();
+//                parentCategory.setName((String) object.get("big_category"));
+//                item.setParentCategory(parentCategory);
+//            }
+//
+//            ChildCategory childCategory = childCategoryRepository.findOneByName((String) object.get("small_category"));
+//            if (childCategory != null) {
+//                item.setChildCategory(childCategory);
+//            } else {
+//                childCategory = new ChildCategory();
+//                childCategory.setName((String) object.get("small_category"));
+//                childCategory.setParentCategory(parentCategory);
+//                item.setChildCategory(childCategory);
+//            }
 
-    }
+//
+//            //category
+//            ParentCategory parent = new ParentCategory();
+//            parent.setName((String) object.get("big_category"));
+//            item.setParentCategory(parent);
+//
+//            ChildCategory child = new ChildCategory();
+//            child.setName((String) object.get("small_category"));
+//            child.setParentCategory(parent);
+//            item.setChildCategory(child);
 
-    public List<Album> getAlbumList() {
-        return albumRepository.findAll();
-    }
-
-    public List<Book> getBookList() {
-        return bookRepository.findAll();
-    }
+//            System.out.println("부모-------->" + parentCategory.getName());
+//            System.out.println("자식-------->" + childCategory.getName());
+//
+//            // image urls
+//            JSONArray urlArr = (JSONArray) object.get("detail_img");
+//
+//
+//            Iterator<String> iterator1 = urlArr.iterator();
+//            while (iterator1.hasNext()) {
+//                item.getUrls().add(iterator1.next());
+//            }
+//
+//            // sizes
+//            JSONArray sizeArr = (JSONArray) object.get("size");
+//
+//            Iterator<String> iterator2 = sizeArr.iterator();
+//            while (iterator2.hasNext()) {
+//                item.getSizes().add(iterator2.next());
+//            }
+//
+//            itemRepository.save(item);
+//        }
+//    }
 
     public List<Item> getItemList() {
         return itemRepository.findAll();
     }
+
     // 재우
     //Get Item by All keyword (name, brand 전체검색)
     public List<Item> findByAllKeyword(String keyword){
         return itemRepository.findByAllKeyword(keyword);
     }
 
-    //Get Item by Name keyword (name 만 검색)
-    public List<Item> findByNameKeyword(String keyword){
-        return itemRepository.findByNameKeyword(keyword);
-    }
+        //Get Item by Name keyword (name 만 검색)
+        public List<Item> findByNameKeyword(String keyword){
+            return itemRepository.findByNameKeyword(keyword);
+        }
 
-    //Get Item by Brand keyword (brand 만 검색)
-    public List<Item> findByBrandKeyword(String keyword){
-        return itemRepository.findByBrandKeyword(keyword);
-    }
-    //
+        //Get Item by Brand keyword (brand 만 검색)
+        public List<Item> findByBrandKeyword(String keyword){
+            return itemRepository.findByBrandKeyword(keyword);
+        }
+        //
 
     /**
      * 베스트 아이템 조회
@@ -159,7 +151,7 @@ public class ItemService {
      * @param pageable
      * @return
      */
-    public List<Item> getParentCategoryItemList(String category, Pageable pageable) {
+    public List <Item> getParentCategoryItemList(String category, Pageable pageable) {
         if (category.indexOf("_") > -1) {
             return itemRepository.findItemByParentCategory(category.split("_")[0], category.split("_")[1], pageable);
         } else {
@@ -203,7 +195,6 @@ public class ItemService {
 //       Optional은 null 방지 클래스
         Optional<Item> optional = itemRepository.findById(id);
         return optional.orElseGet(() -> itemRepository.findById(id).get());
-//
     }
 
 

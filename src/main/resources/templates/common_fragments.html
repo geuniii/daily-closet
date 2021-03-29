@@ -26,8 +26,8 @@
 
         <!-- nav에 item 넣기 -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-            <ul class="navbar-nav mr-auto" id="nav_left">
+            <ul class="navbar-nav mr-auto" id="
+            nav_left">
 
                 <!--                <li class="nav-item">-->
                 <!--                    <a class="nav-link" th:href="@{/logout}" sec:authorize="isAuthenticated()"><h5>Logout</h5></a>-->
@@ -85,6 +85,11 @@
                 <li class="nav-item">
                     <a id="navp_right" class="nav-link" th:href="@{/signup}" sec:authorize="!isAuthenticated()">Sign up</a>
                 </li>
+
+                <li class="nav-item">
+                    <a id="navp_right" class="nav-link" th:href="@{/weather/index}" sec:authorize="!isAuthenticated()">Weather</a>
+                </li>
+
                 <li class="nav-item">
                     <a id="navp_right" class="nav-link" th:href="@{/cart/list}" sec:authorize="isAuthenticated()">Cart</a>
                 </li>

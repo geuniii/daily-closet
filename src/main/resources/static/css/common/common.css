@@ -113,10 +113,6 @@ li{
     list-style:none;
 }
 
-ol{
-    list-style:none;
-}
-
 .imgbox_middle {
     margin: 5px;
     padding: 7px;
@@ -133,8 +129,7 @@ ol{
     margin: 20px;
 }
 
-.outerimgbox , .topimgbox,  .bottomimgbox,  .accimgbox,  .shoesimgbox{
-
+.likeimgbox{
     writing-mode:vertical-lr;
     width: 100px;
     height: 100px;
@@ -142,9 +137,6 @@ ol{
 
 .vertical-data{
     writing-mode:vertical-lr
-}
-.review-tr{
-    text-align: center;
 }
 
 
@@ -356,14 +348,4 @@ ol{
     margin-left: 21%;
     text-align: center;
     width: 800px;
-}
-/*#reviewbox{*/
-/*    width: 1200px;*/
-/*    height: 400px;*/
-/*    margin: 15px 15px 15px -10px;*/
-/*}*/
-#reivewInput{
-    width: 600px;
-    height: 100px;
-    margin: 15px 15px 15px -10px;
 }
