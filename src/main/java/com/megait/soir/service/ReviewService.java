@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Service
@@ -22,7 +23,7 @@ public class ReviewService {
                 .title(reviewForm.getTitle())
                 .content(reviewForm.getContents())
                 .member(member)
-                .createDate(LocalDateTime.now())
+                .createDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .build();
 
         reviewRepository.save(review);
@@ -38,18 +39,26 @@ public class ReviewService {
         reviewRepository.delete(review);
     }
 
-    public void update(Review review, ReviewForm reviewForm) {
+    public void updateReview(Review review, ReviewForm reviewForm) {
 
         Optional<Review> updateReview = reviewRepository.findById(review.getId());
 
         if(updateReview!=null){
             review.setTitle(reviewForm.getTitle());
             review.setContent(reviewForm.getContents());
-            review.setUpdateDate(LocalDateTime.now());
+            review.setUpdateDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         }
 
         reviewRepository.save(review);
     }
 
 
+    public Optional<Review> findById(Long reviewId) {
+        Optional<Review> review = reviewRepository.findById(reviewId);
+
+        if(review==null){
+            new IllegalArgumentException("해당 리뷰가 없습니다. Id "+ reviewId);
+        }
+        return review;
+    }
 }

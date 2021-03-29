@@ -5,9 +5,30 @@
 
 <div layout:fragment="content" class="container" style="background-color: #FFFFFF;">
     <div class="row justify-content-center py-5">
-
         <form class="needs-validation" th:id="codyForm" th:action="@{/cody}" th:object="${codyForm}" method="post"
               novalidate>
+<!--            <div class="container">-->
+
+<!--                <div class="row" style="position: relative; height: 500px; width: 500px; border:1px solid black;">-->
+<!--                    <div class="col" style="position: absolute">-->
+<!--                        <img th:id="outerCody" class="imgbox_middle" >-->
+<!--                    </div>-->
+<!--                    <div class="col" style="position: absolute">-->
+<!--                        <img th:id="topCody" class="imgbox_middle">-->
+<!--                    </div>-->
+<!--                    <div class="w-100" style="position: absolute"></div>-->
+<!--                    <div class="col" style="position: absolute">-->
+<!--                        <img th:id="topCody" class="imgbox_middle">-->
+<!--                    </div>-->
+<!--                    <div class="col" style="position: absolute">-->
+<!--                        <img th:id="accCody" class="imgbox_middle">-->
+<!--                    </div>-->
+<!--                    <div class="col" style="position: absolute">-->
+<!--                        <img th:id="shoesCody" class="imgbox_middle">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
             <table class="table table-bordered">
                 <thead>
                 <tr>
@@ -29,21 +50,18 @@
                     </td>
                     <!--                상의-->
                     <td>
-                        <img th:id="topCody" class="imgbox_middle"
-                             >
+                        <img th:id="topCody" class="imgbox_middle">
                         <input th:id="topId" type="hidden" th:attr="name='topId'"></input>
                     </td>
 
                     <!--                                하의-->
                     <td>
-                        <img th:id="bottomCody" class="imgbox_middle"
-                             >
+                        <img th:id="bottomCody" class="imgbox_middle">
                         <input th:id="bottomId" type="hidden" th:attr="name='bottomId'"></input>
                     </td>
                     <!--                가방-->
                     <td>
-                        <img th:id="accCody" class="imgbox_middle"
-                            >
+                        <img th:id="accCody" class="imgbox_middle">
                         <input th:id="accId" type="hidden" th:attr="name='accId'"></input>
                     </td>
 
@@ -51,11 +69,8 @@
                     <td>
                         <img th:id="shoesCody" class="imgbox_middle">
 
-                        <input th:id="shoesId" type="hidden" th:attr="name='shoesId'"
-                              ></input>
+                        <input th:id="shoesId" type="hidden" th:attr="name='shoesId'"></input>
                     </td>
-
-
                 </tr>
 
                 <tr>
@@ -67,7 +82,6 @@
 
 
         </form>
-
 
         <table class="table table-bordered">
             <thead>

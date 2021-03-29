@@ -409,18 +409,26 @@ public class MainController {
     public String create(@CurrentUser Member member, @Valid ReviewForm reviewForm) throws Exception {
         log.info("POST /review : " + reviewForm.toString());
         Item item = itemService.findItem(reviewForm.getItemId());
-        log.info("item Id:"+reviewForm.getItemId());
-
+        // 리뷰 수정
+        if(reviewForm.getReviewId()!=null){
+            Optional<Review> optional = reviewService.findById(reviewForm.getReviewId());
+            if(optional!=null){
+                Review review = optional.get();
+                reviewService.updateReview(review,reviewForm);
+                return "redirect:/store/detail/"+reviewForm.getItemId();
+            }
+        }
+        // 리뷰 생성
         reviewService.createReview(member,item,reviewForm);
         return "redirect:/store/detail/"+reviewForm.getItemId();
     }
-
-    // 리뷰 수정
-    @PutMapping("/review")
-    public void modify(Review review, @Valid ReviewForm reviewForm) throws Exception{
-        log.info("PUT data : " + reviewForm.toString());
-        reviewService.update(review, reviewForm);
-    }
+//
+//    // 리뷰 수정
+//    @PutMapping("/review")
+//    public void modify(Review review, @Valid ReviewForm reviewForm) throws Exception{
+//        log.info("PUT data : " + reviewForm.toString());
+//        reviewService.update(review, reviewForm);
+//    }
 
     // 리뷰 삭제
     @PostMapping("/review/delete")
