@@ -5,13 +5,12 @@
 
 <div layout:fragment="content" class="container" style="background-color: #FFFFFF;">
     <!-- 현재 날 조회 목록 -->
-    <div class="container">
-        <p>locationName <input id="locationName" type="text" ></p>
-        <p>date <input id="date" type="text" value="20210325"></p>
-        <p>submit <input type="button" value="submit"></p>
-
-        <div class="row">
-            <button id="locationBtn" class="w-10 btn btn-dark btn">Search my location</button>
+    <h1>10Days Weather</h1>
+    <div>
+        <label for="city"><b>City :</b></label>
+       <input class="w-25" id="city" type="text" placeholder="검색하고 싶은 도시를 입력해주세요.">
+        <div>
+            <button type="button" class="btn btn-light" id="btn-weatherList">조회</button>
         </div>
     </div>
     <table class="table table-horizontal table-bordered">
@@ -24,177 +23,50 @@
             <th>온도</th>
         </tr>
         </thead>
-        <tbody th:each="weather:${weatherList}" id="tbody">
-            <tr align="center">
-                <!--
-                    private Long id;
-                    private String baseDate;
-                    private String meridiem;
-                    private String city;
-                    private Long temperature;
-                    private String localWeather;
-                -->
+        <tbody id="weatherList">
+            <tr th:each="weather:${weatherList}" align="center">
                 <td th:text="${weather.baseDate}"></td>
-                <td th:text="${weather.meridiem}"></td>
                 <td th:text="${weather.city}"></td>
-                <td th:text="${weather.temperature}"></td>
                 <td th:text="${weather.localWeather}"></td>
-
+                <td th:text="${weather.meridiem}"></td>
+                <td th:text="${weather.temperature}"></td>
             </tr>
         </tbody>
     </table>
-
-    <script>
-        const KEY ="AIzaSyBRIdueEX0Qeqz8Wyztxks_rSof_IdTNWM";
-        // const LAT = "35.824941";
-        // const LNG = "128.464810";
-
-        //경북 = 35.824941 128.464810
-        // let url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+LAT+","+LNG+"&key="+KEY;
-
-
-        $("#locationBtn").click(function(){
-            // e.preventDefault();
-            let url;
-            let city;
-
-            navigator.geolocation.getCurrentPosition(function(pos) {
-                var latitude = pos.coords.latitude;
-                var longitude = pos.coords.longitude;
-                url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+latitude+","+longitude+"&key="+KEY;
-                console.log("lat: "+latitude+", lng:"+longitude);
-
-                fetch(url)
-                    .then(response => response.json())
-                    .then(data => {
-                        //console.log(data);
-                        let parts = data.results[0].formatted_address
-                        city = parts.split(" ")[1];
-
-                        console.log(city+" fetch");
-
-                        window.location.href='/weather?city='+city;//
-                    });
-            });
-
-            // console.log(city+" ajax");
-            // let geolocation = {city};
-            // $.ajax({
-            //     url : "/weather",
-            //     type : "GET",
-            //     data : geolocation,
-            //     success : function(data) {
-            //         // alert(data);
-            //     },
-            // })//ajax
-        });
-    </script>
 </div>
-<!--<script>-->
-<!--    function realTimeWeather() {-->
-
-<!--        var today = new Date();-->
-<!--        var week = new Array('일','월','화','수','목','금','토');-->
-<!--        var year = today.getFullYear();-->
-<!--        var month = today.getMonth()+1;-->
-<!--        var day = today.getDate();-->
-<!--        var hours = today.getHours();-->
-<!--        var minutes = today.getMinutes();-->
-
-<!--        $('.weather-date').html(month +"월 " + day + "일 " + week[today.getDay()]+"요일");-->
-
-<!--        /*-->
-<!--         * 기상청 30분마다 발표-->
-<!--         * 30분보다 작으면, 한시간 전 hours 값-->
-<!--         */-->
-<!--        if(minutes < 30){-->
-<!--            hours = hours - 1;-->
-<!--            if(hours < 0){-->
-<!--                // 자정 이전은 전날로 계산-->
-<!--                today.setDate(today.getDate() - 1);-->
-<!--                day = today.getDate();-->
-<!--                month = today.getMonth()+1;-->
-<!--                year = today.getFullYear();-->
-<!--                hours = 23;-->
-<!--            }-->
-<!--        }-->
-
-<!--        /* example-->
-<!--         * 9시 -> 09시 변경 필요-->
-<!--         */-->
-
-<!--        if(hours < 10) {-->
-<!--            hours = '0'+hours;-->
-<!--        }-->
-<!--        if(month < 10) {-->
-<!--            month = '0' + month;-->
-<!--        }-->
-<!--        if(day < 10) {-->
-<!--            day = '0' + day;-->
-<!--        }-->
-
-<!--        today = year+""+month+""+day;-->
-
-<!--        /* 좌표 */-->
-<!--        var _nx = x좌표,-->
-<!--            _ny = y좌표,-->
-<!--            apikey = "API KEY",-->
-<!--            ForecastGribURL = "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastGrib";-->
-<!--        ForecastGribURL += "?ServiceKey=" + apikey;-->
-<!--        ForecastGribURL += "&base_date=" + today;-->
-<!--        ForecastGribURL += "&base_time=" + hours +"00";-->
-<!--        ForecastGribURL += "&nx=" + _nx + "&ny=" + _ny;-->
-<!--        ForecastGribURL += "&pageNo=1&numOfRows=7";-->
-<!--        ForecastGribURL += "&_type=json";-->
-
-<!--        $.ajax({-->
-<!--            url: ForecastGribURL-->
-<!--            ,type: 'get'-->
-<!--            ,success: function(msg) {-->
-
-<!--                var text = msg.responseText,-->
-<!--                    text = text.replace(/(<([^>]+)>)/ig,""); //HTML 태그 모두 공백으로 대체-->
-<!--                text = '[' + text + ']';-->
-<!--                var json = $.parseJSON(text);-->
-
-<!--                var rain_state = json[0].response.body.items.item[1].obsrValue;-->
-<!--                var rain = json[0].response.body.items.item[3].obsrValue;-->
-<!--                var sky = json[0].response.body.items.item[4].obsrValue;-->
-<!--                var temperature = json[0].response.body.items.item[5].obsrValue;-->
-
-<!--                $('.weather-temp').html(temperature.toFixed(1) + " ℃");-->
-<!--                $('#RN1').html("시간당강수량 : "+ rain +"mm");-->
-
-<!--                if(rain_state != 0) {-->
-<!--                    switch(rain_state) {-->
-<!--                        case 1:-->
-<!--                            $('.weather-state-text').html("비");-->
-<!--                            break;-->
-<!--                        case 2:-->
-<!--                            $('.weather-state-text').html("비/눈");-->
-<!--                            break;-->
-<!--                        case 3:-->
-<!--                            $('.weather-state-text').html("눈");-->
-<!--                            break;-->
-<!--                    }-->
-<!--                }else {-->
-<!--                    switch(sky) {-->
-<!--                        case 1:-->
-<!--                            $('.weather-state-text').html("맑음");-->
-<!--                            break;-->
-<!--                        case 2:-->
-<!--                            $('.weather-state-text').html("구름조금");-->
-<!--                            break;-->
-<!--                        case 3:-->
-<!--                            $('.weather-state-text').html("구름많음");-->
-<!--                            break;-->
-<!--                        case 4:-->
-<!--                            $('.weather-state-text').html("흐림");-->
-<!--                            break;-->
-<!--                    }-->
-<!--                } //if 종료-->
-<!--            } //success func 종료-->
-<!--        })-->
-<!--    }-->
-<!--</script>-->
 </html>
+
+<script>
+    var main = {
+        init : function () {
+            var _this = this;
+            $('#btn-weatherList').on('click', function () {
+                _this.weatherList();
+            });
+        },
+        weatherList : function () {
+            var data = {
+                baseDate: $('#baseDate').val(),
+                meridiem: $('#meridiem').val(),
+                city: $('#city').val(),
+                temperature: $('#temperature').val(),
+                localWeather: $('#localWeather').val()
+            };
+            $.ajax({
+                type: 'get',
+                url: '/weather/weatherList?city=' + data.city,
+                // dataType: 'json',
+                // contentType: 'application/json; charset=utf-8',
+                // data: JSON.stringify(data),
+                cache: false
+            }).done(function (fragment) {
+                $('#weatherList').replaceWith(fragment);
+                alert("날씨 조회에 성공했습니다.")
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        }
+    };
+    main.init();
+
+</script>

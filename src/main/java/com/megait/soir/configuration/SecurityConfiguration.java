@@ -50,8 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.csrf().ignoringAntMatchers("/find-pw");//
-        http.csrf().ignoringAntMatchers("/find-my-location");//
+        http.csrf().ignoringAntMatchers("/find-pw");  //
         http.cors()
 
                 // login 기능 추가
@@ -84,8 +83,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/cody",
                         "/review",
                         "/best",
+                        "/delete/**",
+                        "/weather/**"
 
-                        "/delete/**"
 
                 )
                 .permitAll()

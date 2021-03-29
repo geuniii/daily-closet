@@ -11,12 +11,8 @@ import com.megait.soir.user.SignUpValidator;
 import com.megait.soir.user.UpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.codec.json.AbstractJackson2Decoder;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,7 +36,6 @@ public class MainController {
     private final SendEmailService sendEmailService;
     private final CodyService codyService;
     private final ReviewService reviewService;
-    private final CityNameService cityNameService;
     private final WeatherService weatherService;
 
 //    @GetMapping("/") // root context가 들어오면 index page를 보여준다.
@@ -54,6 +49,8 @@ public class MainController {
 //        model.addAttribute("title", "Soir.");
 //        return "/view/index";
 //    }
+
+
     // 재우
     @GetMapping("/") // root context가 들어오면 index page를 보여준다.
     public String index(@CurrentUser Member member, Model model, String keyword, String searchType){
@@ -78,6 +75,31 @@ public class MainController {
 
     }
     return "/view/index";
+    }
+
+    /**
+     * 날씨 전체조회
+     * @return
+     */
+    @GetMapping("/weather/index")
+    public String weatherList(Model model) {
+        model.addAttribute("weatherList", weatherService.findAllDesc());
+
+        return "/view/weather";
+    }
+
+
+
+    /**
+     * 도시 날씨 조회
+     * @param city
+     * @param model
+     * @return
+     */
+    @GetMapping("/weather/weatherList")
+    public String weatherCityList(String city, Model model) {
+        model.addAttribute("weatherList", weatherService.findByWeatherCity(city));
+        return "/view/weather :: #weatherList";
     }
 /////////
 
@@ -132,7 +154,7 @@ public class MainController {
      * @return
      */
     @GetMapping("/itemList")
-    public String itemList(ItemRequest itemRequest ,Model model) {
+    public String itemList(ItemRequest itemRequest, Model model) {
         String categoryName = itemRequest.getCategoryName();
         Pageable pageable = itemService.getPageable(itemRequest);
         if (itemRequest.getCategoryName().equals("best")) {
@@ -434,44 +456,6 @@ public class MainController {
         reviewService.createNewReview(item,content);
 
         return "redirect:/store/detail?{itemId}";
-    }
-
-//    @GetMapping("/find-my-location")
-//    public String geolocation(String city){
-//        String cityName;
-//        if(city != null) { //NullPointException
-//            cityName = cityNameService.renameCity(city); //city 값과 cityName 값이 다를 경우에 사용할 것
-//            System.out.println(cityName);
-//        }
-//        return "/view/browser-location";
-//    }
-//
-//    /**
-//     * 날씨 전체조회
-//     * @return
-//     */
-//    @GetMapping("/weather")
-//    public String weatherList(Model model) {
-//        model.addAttribute("weatherList", weatherService.findAllDesc());
-//        return "/view/weather";
-//    }
-
-    @GetMapping("/weather")
-    public String weatherList(Model model, String city) {
-        String cityName ="";
-        if (city != null) { //NullPointException
-            cityName = cityNameService.renameCity(city); //city 값과 cityName 값이 다를 경우에 사용할 것
-            model.addAttribute("weatherList", weatherService.findCurrentLocalWeather(cityName));
-            //System.out.println(cityName);
-            //System.out.println(weatherService.findCurrentLocalWeather(cityName));
-        }
-        else {
-
-
-            model.addAttribute("weatherList", weatherService.findAllDesc());
-        }
-
-        return "/view/weather";
     }
 
 }

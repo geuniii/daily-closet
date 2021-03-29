@@ -45,7 +45,7 @@ public class MemberTests {
         assertTrue(memberRepository.existsByEmail("admin@test.com"));
 
 
-System.out.println("ㅎㅎㅎㅎ");
+system.out.println("ㅎㅎㅎㅎ");
 
     }
 

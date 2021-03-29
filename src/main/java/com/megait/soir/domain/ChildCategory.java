@@ -7,19 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
+@Getter @Setter
+@Builder @AllArgsConstructor
 @NoArgsConstructor
 public class ChildCategory {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     private long id;
 
     private String name;
 
+    /**
+     * 수정
+     */
     // Item
     @OneToMany(mappedBy = "childCategory", cascade={CascadeType.ALL})
     private List<Item> items = new ArrayList<>();
@@ -28,3 +28,19 @@ public class ChildCategory {
     @ManyToOne(cascade = CascadeType.ALL)
     private ParentCategory parentCategory;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

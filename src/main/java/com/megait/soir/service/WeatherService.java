@@ -2,6 +2,7 @@ package com.megait.soir.service;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.megait.soir.domain.Item;
 import com.megait.soir.domain.Region;
 import com.megait.soir.domain.Weather;
 import com.megait.soir.domain.WeatherListResponse;
@@ -246,26 +247,24 @@ public class WeatherService {
     @Transactional
     public List<WeatherListResponse> findAllDesc() {
         return weatherRepository.findAllDesc().stream()
-                .map(WeatherListResponse::new) // new WeatherResponse(weather);
+                .map(WeatherListResponse::new)
                 .collect(Collectors.toList());
 
     }
+    //
 
-    public List<Weather> findCurrentLocalWeather(String city){
-        return weatherRepository.findByCurrentLocalWeather(city);
+    @Transactional
+    public List <WeatherListResponse> findByWeatherCity( String weatherCity) {
+        return weatherRepository.findByWeatherCityAndBaseDateAndMeridiemOrderByBaseDateDesc(
+                weatherCity, getMeridiem(getCurrentDate()).toUpperCase(),
+                getCurrentDate().split(":")[0], getAddDate(10)
+            )
+            .stream()
+            .map(WeatherListResponse::new)
+            .collect(Collectors.toList());
     }
 
-
-
-//    public List<WeatherListResponse> findCurrentCity(String city){
-//        return weatherRepository.findByRegionCityName(city).stream()
-//                .map(WeatherListResponse::new)
-//                .collect(Collectors.toList());
-//    }
-
-
-
-
+    // 재우
 
 //    private String callWeatherApi(int apiType, String regionId) {
 //        String url = "http://apis.data.go.kr/1360000/MidFcstInfoService/getMidTa";
