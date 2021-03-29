@@ -53,7 +53,7 @@
         console.log(city+" ajax");
         let geolocation = {city};
         $.ajax({
-            url : "/find-my-location",
+            url : "/find-my-weather",
             type : "GET",
             data : geolocation,
             success : function(data) {

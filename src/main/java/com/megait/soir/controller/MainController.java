@@ -41,6 +41,7 @@ public class MainController {
     private final CodyService codyService;
     private final ReviewService reviewService;
     private final CityNameService cityNameService;
+    private final WeatherService weatherService;
 
 //    @GetMapping("/") // root context가 들어오면 index page를 보여준다.
 //    public String index(@CurrentUser Member member, Model model) {
@@ -435,14 +436,42 @@ public class MainController {
         return "redirect:/store/detail?{itemId}";
     }
 
-    @GetMapping("/find-my-location")
-    public String geolocation(String city){
-        String cityName;
-        if(city != null) { //NullPointException
+//    @GetMapping("/find-my-location")
+//    public String geolocation(String city){
+//        String cityName;
+//        if(city != null) { //NullPointException
+//            cityName = cityNameService.renameCity(city); //city 값과 cityName 값이 다를 경우에 사용할 것
+//            System.out.println(cityName);
+//        }
+//        return "/view/browser-location";
+//    }
+//
+//    /**
+//     * 날씨 전체조회
+//     * @return
+//     */
+//    @GetMapping("/weather")
+//    public String weatherList(Model model) {
+//        model.addAttribute("weatherList", weatherService.findAllDesc());
+//        return "/view/weather";
+//    }
+
+    @GetMapping("/weather")
+    public String weatherList(Model model, String city) {
+        String cityName ="";
+        if (city != null) { //NullPointException
             cityName = cityNameService.renameCity(city); //city 값과 cityName 값이 다를 경우에 사용할 것
-            System.out.println(cityName);
+            model.addAttribute("weatherList", weatherService.findCurrentLocalWeather(cityName));
+            //System.out.println(cityName);
+            //System.out.println(weatherService.findCurrentLocalWeather(cityName));
         }
-        return "/view/browser-location";
+        else {
+
+
+            model.addAttribute("weatherList", weatherService.findAllDesc());
+        }
+
+        return "/view/weather";
     }
 
 }
