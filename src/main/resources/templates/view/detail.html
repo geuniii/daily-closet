@@ -136,14 +136,14 @@
                         <table class="table">
                             <tr>
                                 <input type="hidden" th:id="title" th:attr="name='itemId'" th:value="${item.getId()}">
-                                <input type="hidden" th:id="review-id" th:attr="name='reviewId'">
+                                <input type="hidden" th:id="modal-review-id" th:attr="name='reviewId'">
                                 <td>Title</td>
-                                <td><input class="form-control" th:id="review-title" th:attr="name='title'" type="text">
+                                <td><input class="form-control" id="modal-review-title" th:attr="name='title'" type="text">
                                 </td>
                             </tr>
                             <tr>
                                 <td>Content</td>
-                                <td><textarea class="form-control" th:id="review-content" th:attr="name='contents'"
+                                <td><textarea class="form-control" id="modal-review-content" th:attr="name='contents'"
                                               rows="10"></textarea></td>
                             </tr>
                         </table>
@@ -224,13 +224,17 @@
             var id = reviewForm.reviewId.value;
 
             $("#modal-title").text("Modify Your Review");
-            document.getElementById("review-title").value = title;
-            document.getElementById("review-content").value = content;
-            document.getElementById("review-id").value = id;
+            $('#modal-review-title').val(title);
+            $('#modal-review-content').val(content);
+            $('#modal-review-id').val(id);
 
-            console.log(document.getElementById("review-title").value);
-            console.log(document.getElementById("review-content").value);
-            console.log(document.getElementById("review-id").value);
+            // document.getElementById("review-title").value = title;
+            // document.getElementById("review-content").value = content;
+            // document.getElementById("review-id").value = id;
+
+            console.log(document.getElementById("modal-review-title").value);
+            console.log(document.getElementById("modal-review-content").value);
+            console.log(document.getElementById("modal-review-id").value);
 
             $("#writeReview").modal();
         };

@@ -84,7 +84,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/review",
                         "/best",
                         "/delete/**",
-                        "/weather/**"
+                        "/weather/**",
+                        "/review/delete",
+                        "/review/modify"
 
 
                 )

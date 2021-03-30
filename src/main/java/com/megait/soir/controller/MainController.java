@@ -280,7 +280,9 @@ public class MainController {
         log.info("id : " + id);
 
         Item item = itemService.findItem(id);
+//        List<Review> reviewList = reviewService.findAll(item);
 
+        model.addAttribute(new ReviewForm());
         model.addAttribute("like_status", false);
         if (member != null) {
             member = memberRepository.findByEmail(member.getEmail());
@@ -288,6 +290,7 @@ public class MainController {
         }
         model.addAttribute("item", item);
         model.addAttribute("currentUser",member);
+//        model.addAttribute("reviewList",reviewList);
 
         System.out.println();
 
