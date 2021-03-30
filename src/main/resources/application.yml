@@ -7,8 +7,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-
     properties:
+      hibernate:
+        event:
+          merge:
+            entity_copy_observer: allow
       format_sql: true
   profiles:
     active: dev

@@ -85,9 +85,14 @@
                 <li class="nav-item">
                     <a id="navp_right" class="nav-link" th:href="@{/signup}" sec:authorize="!isAuthenticated()">Sign up</a>
                 </li>
+
                 <li class="nav-item">
                     <a id="navp_right" class="nav-link" th:href="@{/weather}" sec:authorize="!isAuthenticated()">Weather</a>
                 </li>
+                <li class="nav-item">
+                    <a id="navp_right" class="nav-link" th:href="@{/weather}" sec:authorize="isAuthenticated()">Weather</a>
+                </li>
+
                 <li class="nav-item">
                     <a id="navp_right" class="nav-link" th:href="@{/cart/list}" sec:authorize="isAuthenticated()">Cart</a>
                 </li>

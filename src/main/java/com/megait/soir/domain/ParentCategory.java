@@ -19,6 +19,10 @@ public class ParentCategory {
 
     private String name;
 
+    /**
+     *  수정
+     */
+
     // Item
     @OneToMany(mappedBy = "parentCategory", cascade={CascadeType.ALL})
     private List <Item> items = new ArrayList<>();
@@ -27,3 +31,5 @@ public class ParentCategory {
     @OneToMany(mappedBy = "parentCategory", cascade={CascadeType.ALL})
     private List <ChildCategory> childCategories = new ArrayList<>();
 }
+
+

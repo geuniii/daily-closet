@@ -2,9 +2,7 @@ package com.megait.soir.service;
 
 
 import com.megait.soir.domain.*;
-import com.megait.soir.repository.AlbumRepository;
-import com.megait.soir.repository.BookRepository;
-import com.megait.soir.repository.ItemRepository;
+import com.megait.soir.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
@@ -33,8 +31,8 @@ import java.util.Optional;
 public class ItemService {
 
     private final ItemRepository itemRepository;
-    private final AlbumRepository albumRepository;
-    private final BookRepository bookRepository;
+    private final ParentCategoryRepository parentCategoryRepository;
+    private final ChildCategoryRepository childCategoryRepository;
 
     @PostConstruct
     public void initAlbumItems() throws IOException, ParseException {
@@ -59,18 +57,28 @@ public class ItemService {
             item.setCode((String) object.get("item_code"));
             item.setImg_name((String) object.get("img_name"));
 
-            //category
-            ParentCategory parent = new ParentCategory();
-            parent.setName((String) object.get("big_category"));
-            item.setParentCategory(parent);
+            //parentcategory
+            ParentCategory parent = parentCategoryRepository.findByName((String)object.get("big_category"));
+            if(parent == null){
+                ParentCategory newParent = new ParentCategory();
+                newParent.setName((String) object.get("big_category"));
+                item.setParentCategory(newParent);
+            }
+            else{
+                item.setParentCategory(parent);
+            }
 
-            ChildCategory child = new ChildCategory();
-            child.setName((String) object.get("small_category"));
-            child.setParentCategory(parent);
-            item.setChildCategory(child);
+            //childcategory
+            ChildCategory child = childCategoryRepository.findByname((String) object.get("small_category"));
+            if(child == null){
+                ChildCategory newChild = new ChildCategory();
+                newChild.setName((String) object.get("small_category"));
+                item.setChildCategory(newChild);
+            }
+            else{
+                item.setChildCategory(child);
+            }
 
-            System.out.println("부모-------->"+parent.getName());
-            System.out.println("자식-------->"+child.getName());
 
             // image urls
             JSONArray urlArr = (JSONArray) object.get("detail_img");
@@ -92,42 +100,10 @@ public class ItemService {
             itemRepository.save(item);
         }
     }
-
-    @PostConstruct
-    public void initBookItems() throws IOException {
-//        Resource resource = new ClassPathResource("album.CSV");
-//        List<String> list = Files.readAllLines(resource.getFile().toPath(), StandardCharsets.UTF_8);
-//
-//        Stream<String> stream = list.stream();
-//
-//        Stream<Item> stream2 = stream.map(
-//                line->{
-//                    String[] split = line.split("\\|");
-//                    Book book = new Book();
-//                    book.setName(split[0]);
-//                    book.setImageUrl(split[1]);
-//                    book.setPrice(Integer.parseInt(split[2]));
-//                    return book;
-//                });
-//
-//        List<Item> items = stream2.collect(Collectors.toList());
-//
-//        // 위에서 만든 List<에 저장
-//        itemRepository.saveAll(items);
-
-    }
-
-    public List<Album> getAlbumList() {
-        return albumRepository.findAll();
-    }
-
-    public List<Book> getBookList() {
-        return bookRepository.findAll();
-    }
-
     public List<Item> getItemList() {
         return itemRepository.findAll();
     }
+
     // 재우
     //Get Item by All keyword (name, brand 전체검색)
     public List<Item> findByAllKeyword(String keyword){
@@ -159,7 +135,7 @@ public class ItemService {
      * @param pageable
      * @return
      */
-    public List<Item> getParentCategoryItemList(String category, Pageable pageable) {
+    public List <Item> getParentCategoryItemList(String category, Pageable pageable) {
         if (category.indexOf("_") > -1) {
             return itemRepository.findItemByParentCategory(category.split("_")[0], category.split("_")[1], pageable);
         } else {
