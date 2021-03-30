@@ -1,6 +1,7 @@
 package com.megait.soir.domain;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,8 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Setter @Getter @Builder
-@AllArgsConstructor @NoArgsConstructor
+@Setter @Getter
 public class Review {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,8 +20,8 @@ public class Review {
     private String title;
     private String content;
     private String img;
-
-    private long parentId;
+    private LocalDateTime dateTime;
+    private Long parentId;
 
     @ManyToOne
     private Item item;

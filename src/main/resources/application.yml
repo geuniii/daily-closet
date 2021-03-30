@@ -7,8 +7,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-
     properties:
+      hibernate:
+        event:
+          merge:
+            entity_copy_observer: allow
       format_sql: true
   profiles:
     active: dev
@@ -24,37 +27,10 @@ spring:
           auth: true
           starttls:
             enable: true
-  config:
-    activate:
-      on-profile:
-
-#logging:
-#  level:
-#    org.hibernate.SQL: debug
-
 
 
 logging:
-  file:
-       name: logs/application.log
   level:
-    org.thymeleaf: INFO
-    org.springframework.web: INFO
-    org.hibernate.SQL: INFO
-    org.quartz.core: INFO
-    org.h2.server.web: INFO
+    org.hibernate.SQL: debug
 
-#
-#logging:
-#  file: logs/application.log
-#  level:
-#    org.thymeleaf: DEBUG
-#    org.springframework.web: DEBUG
-#    org.hibernate.SQL: DEBUG
-#    org.quartz.core: DEBUG
-#    org.h2.server.web: DEBUG
-#
-#
-#logging:
-#  config: classpath:logback-spring.xml
-#
+
