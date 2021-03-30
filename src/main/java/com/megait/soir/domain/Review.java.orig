@@ -1,0 +1,61 @@
+package com.megait.soir.domain;
+
+<<<<<<< HEAD
+import lombok.*;
+=======
+import lombok.Getter;
+import lombok.Setter;
+>>>>>>> d41c4b0 (Commit 03.21)
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
+import java.security.Timestamp;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+<<<<<<< HEAD
+@Setter @Getter @Builder
+@AllArgsConstructor @NoArgsConstructor
+=======
+@Setter @Getter
+>>>>>>> d41c4b0 (Commit 03.21)
+public class Review {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+    private String content;
+    private String img;
+<<<<<<< HEAD
+
+    private long parentId;
+=======
+    private LocalDateTime dateTime;
+    private Long parentId;
+>>>>>>> d41c4b0 (Commit 03.21)
+
+    @ManyToOne
+    private Item item;
+
+    @ManyToOne
+    private Member member;
+
+    // many to one Orders
+    @ManyToOne
+    private Orders order;
+
+<<<<<<< HEAD
+    private String createDate;
+
+    private String updateDate;
+=======
+    private LocalDateTime createDate;
+
+//    @UpdateTimestamp
+//    private Timestamp updateDate;
+>>>>>>> d41c4b0 (Commit 03.21)
+
+}
