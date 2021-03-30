@@ -3,6 +3,7 @@ package com.megait.soir.controller;
 import com.google.gson.JsonObject;
 import com.megait.soir.form.CodyForm;
 import com.megait.soir.domain.*;
+import com.megait.soir.form.ReviewForm;
 import com.megait.soir.repository.MemberRepository;
 import com.megait.soir.service.*;
 import com.megait.soir.user.CurrentUser;
@@ -11,7 +12,6 @@ import com.megait.soir.user.SignUpValidator;
 import com.megait.soir.user.UpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
@@ -390,16 +390,12 @@ public class MainController {
 
         model.addAttribute(new CodyForm());
 
-
-
         List<Item> likeList = memberService.getLikeList(member);
         List<Item> top = new ArrayList<>();
         List<Item> outer = new ArrayList<>();
         List<Item> bottom = new ArrayList<>();
         List<Item> acc = new ArrayList<>();
         List<Item> shoes = new ArrayList<>();
-
-        System.out.println("오잉!!!!!!!!"+likeList.get(0).getBrand());
 
         for(int i = 0; i<likeList.size(); i++){
             if(likeList.get(i).getParentCategory().getName().equals("상의")){
@@ -434,7 +430,7 @@ public class MainController {
     }
 
     @PostMapping("/cody")
-    public String codySubmit(@CurrentUser Member member, @Valid CodyForm codyForm, @Valid long topId) {
+    public String codySubmit(@CurrentUser Member member, @Valid CodyForm codyForm) {
 
         Cody cody = codyService.createNewCody(member,codyForm);
 
@@ -467,12 +463,13 @@ public class MainController {
 //        reviewService.update(review, reviewForm);
 //    }
 
-    @PostMapping("/review")
-    public String review(Long itemId, String content) throws Exception{
-        Item item = itemService.findItem(itemId);
-        reviewService.createNewReview(item,content);
+    // 리뷰 삭제
+    @PostMapping("/review/delete")
+    public String deleteReview(@RequestParam("reviewId") Long reviewId, @RequestParam("itemId") Long itemId ){
+        log.info("DELETE no : " + reviewId);
+        reviewService.deleteReview(reviewId);
+        return "redirect:/store/detail/"+itemId;
 
-        return "redirect:/store/detail?{itemId}";
     }
 
 }
