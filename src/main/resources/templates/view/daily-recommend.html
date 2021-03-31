@@ -5,9 +5,24 @@
       layout:decorate="layout" th:with="title='daily-recommend'">
 
 <div layout:fragment="content" class="container" style="background-color: #FFFFFF;">
-<div class="container">
-    <div class="row">
-        <div class="col-md-2"></div>
+    <div class="container">
+        <!--시계-->
+        <div class="row">
+            <h1 id="clock" style="color:whitesmoke;">00:00</h1>
+        </div>
+        <!--현재 날씨-->
+        <div class="row">
+            <h1> </h1>
+            <div th:each="weather:${currentTemperature}">
+                <span id="weather_view1" th:text="${weather.localWeather}" style="color:black; font-family: Cochin"></span>
+                <span id="weather_view2" th:text="${weather.meridiem}  " style="color:black; font-family: Charter"></span>
+                <span id="weather_view3" th:text="${weather.temperature}" style="color:black; font-family: Shobhika "></span>
+            </div>
+            <h1> </h1>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2"></div>
             <div class="col-md-8">
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
@@ -36,9 +51,46 @@
                     </button>
                 </div>
             </div>
-        <div class="col-md-2"></div>
+            <div class="col-md-2"></div>
         </div>
+
+        <div class="row">
+
+        </div>
+
+
     </div>
+
+    <script>
+        var clockTarget = document.getElementById("clock");
+        function clock() {
+            var date = new Date();
+            var month = date.getMonth();
+            var clockDate = date.getDate();
+            var day = date.getDay();
+            var week = ['일', '월', '화', '수', '목', '금', '토'];
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var seconds = date.getSeconds();
+            clockTarget .innerText = `${month+1}월 ${clockDate}일 ${week[day]}요일` +
+                `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes }`  : minutes }:${seconds < 10 ? `0${seconds }`  : seconds }`;
+            // 월은 0부터 1월이기때문에 +1일
+            // 시간 분 초는 한자리수이면 시계가 어색해보일까봐 10보다 작으면 앞에0을 붙혀주는 작업을 3항연산으로
+        }
+        function init() {
+            clock();
+// 최초에 함수를 한번 실행시켜주고
+            setInterval(clock, 1000);
+// setInterval이라는 함수로 매초마다 실행
+// 1000 = 1초
+        }
+        init();
+    </script>
+    <script>
+
+
+    </script>
+
 
 </div>
 </div>

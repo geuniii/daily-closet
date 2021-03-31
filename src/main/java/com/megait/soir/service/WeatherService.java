@@ -266,6 +266,9 @@ public class WeatherService {
     public List<Weather> findCurrentLocalWeather(String city){
         return weatherRepository.findByCurrentLocalWeather(city);
     }
+    public List<Weather> findCurrentDateTemperature(String currentdate, String city, String meridien){
+        return weatherRepository.findCurrentDateTemperature(currentdate, city, meridien);
+    }
 
 
     // 재우

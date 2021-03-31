@@ -20,6 +20,9 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
@@ -38,6 +41,7 @@ public class MainController {
     private final ReviewService reviewService;
     private final WeatherService weatherService;
     private final CityNameService cityNameService;
+    private final DateService dateService;
 
 //    @GetMapping("/") // root context가 들어오면 index page를 보여준다.
 //    public String index(@CurrentUser Member member, Model model) {
@@ -118,7 +122,14 @@ public class MainController {
      * @return
      */
     @GetMapping("/daily-recommend")
-    public String recommend(){
+    public String daily_recommend(Model model){
+        String weatherCity = "서울_인천_경기도";;
+
+        String baseDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
+        String meridien = dateService.currentHour();
+
+        model.addAttribute("currentTemperature", weatherService.findCurrentDateTemperature(baseDate, "서울_인천_경기도", meridien));
+        //model.addAttribute("currentTemperature",weatherService.findByCurrentWeather("서울_인천_경기도", currentdate));
 
         return "/view/daily-recommend";
     }
@@ -497,5 +508,6 @@ public class MainController {
         return "redirect:/store/detail/"+itemId;
 
     }
+
 
 }

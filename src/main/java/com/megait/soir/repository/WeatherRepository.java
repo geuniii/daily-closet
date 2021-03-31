@@ -18,15 +18,31 @@ public interface WeatherRepository extends JpaRepository<Weather, Long> {
 //    @Query(value = "SELECT * FROM WEATHER WHERE (MERIDIEM LIKE '%mer%') AND (CITY LIKE '%서%') AND (BASE_DATE BETWEEN '20210325' AND '20210402')", nativeQuery = true)
 //    List <Weather> findByNameLike(String city);
 //
+    ///////////////////
     @Query(value = "select * from  WEATHER w where w.meridiem = :meridiem and w.city like %:weatherCity% and w.BASE_DATE BETWEEN :startDate and :endDate", nativeQuery = true)
     List <Weather> findByWeatherCityAndBaseDateAndMeridiemOrderByBaseDateDesc(
             @Param("weatherCity")String weatherCity,
             @Param("meridiem")String meridiem,
             @Param("startDate")String startDate,
             @Param("endDate")String endDate);
-
+/////////////////////
     //원하는 지역만 찾을때 사용
     @Query(value = "select * from  WEATHER e where e.city like %:city% ", nativeQuery = true)
     List <Weather> findByCurrentLocalWeather(@Param("city") String city);
 
+//    @Query(value = "select * from  weather w where w.meridiem like%:meridiem% and " +
+//            "w.city like %:city% and w.BASE_DATE like %:currentdate ", nativeQuery = true)
+//    List <Weather> findByCurrentWeather(
+//            @Param("city")String weatherCity,
+//            //@Param("meridiem")String meridiem,
+//            @Param("currentdate")String currentdate);
+    @Query(value = "select * from  WEATHER e where e.base_date like %:base_date%  and e.city like %:city% and e.meridiem like %:meridiem%", nativeQuery = true)
+    List <Weather> findCurrentDateTemperature(@Param("base_date") String currentDate,
+                                              @Param("city") String city,
+                                              @Param("meridiem") String meridiem
+                                              );
+
+
+
+   // List<Weather> findAllByCityAndBaseDate(String city, String baseDate);
 }
