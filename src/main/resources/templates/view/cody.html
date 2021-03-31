@@ -7,80 +7,36 @@
     <div class="row justify-content-center py-5">
         <form class="needs-validation" th:id="codyForm" th:action="@{/cody}" th:object="${codyForm}" method="post"
               novalidate>
-            <!--            <div class="container">-->
-
-            <!--                <div class="row" style="position: relative; height: 500px; width: 500px; border:1px solid black;">-->
-            <!--                    <div class="col" style="position: absolute">-->
-            <!--                        <img th:id="outerCody" class="imgbox_middle" >-->
-            <!--                    </div>-->
-            <!--                    <div class="col" style="position: absolute">-->
-            <!--                        <img th:id="topCody" class="imgbox_middle">-->
-            <!--                    </div>-->
-            <!--                    <div class="w-100" style="position: absolute"></div>-->
-            <!--                    <div class="col" style="position: absolute">-->
-            <!--                        <img th:id="topCody" class="imgbox_middle">-->
-            <!--                    </div>-->
-            <!--                    <div class="col" style="position: absolute">-->
-            <!--                        <img th:id="accCody" class="imgbox_middle">-->
-            <!--                    </div>-->
-            <!--                    <div class="col" style="position: absolute">-->
-            <!--                        <img th:id="shoesCody" class="imgbox_middle">-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
-
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th width="20%">아우터</th>
-                    <th width="20%">상의</th>
-                    <th width="20%">하의</th>
-                    <th width="20%">가방</th>
-                    <th width="20%">신발</th>
-                </tr>
-                </tr>
-                </thead>
-
-                <tbody>
-                <tr>
-                    <!--                아우터-->
-                    <td>
-                        <img th:id="outerCody" class="imgbox_middle" >
-                        <input th:id="outerId" type="hidden" th:attr="name='outerId'"></input>
-                    </td>
-                    <!--                상의-->
-                    <td>
-                        <img th:id="topCody" class="imgbox_middle">
-                        <input th:id="topId" type="hidden" th:attr="name='topId'"></input>
-                    </td>
-
-                    <!--                                하의-->
-                    <td>
-                        <img th:id="bottomCody" class="imgbox_middle">
-                        <input th:id="bottomId" type="hidden" th:attr="name='bottomId'"></input>
-                    </td>
-                    <!--                가방-->
-                    <td>
-                        <img th:id="accCody" class="imgbox_middle">
-                        <input th:id="accId" type="hidden" th:attr="name='accId'"></input>
-                    </td>
-
-                    <!--                신발-->
-                    <td>
-                        <img th:id="shoesCody" class="imgbox_middle">
-
-                        <input th:id="shoesId" type="hidden" th:attr="name='shoesId'"></input>
-                    </td>
-                </tr>
-
-                <tr>
-                    <input type="button" th:id="submit_btn" class="w-50 btn btn-dark btn-lg" value="submit">
-                </tr>
-            </table>
-
-            </tbody>
-
-
+            <div class="container">
+                <div class="row" style="position: relative; height: 500px; width: 500px; background-color: #F8EAC3">
+                    <!--                               하의-->
+                    <div class="col" style="position: absolute">
+                        <img th:id="bottomCody" style="position: absolute; top:0px; left: 150px; width:70%;">
+                        <input th:id="bottomId" type="hidden" th:attr="name='bottomId'">
+                    </div>
+                    <!--                                상의-->
+                    <div class="col" style="position: absolute">
+                        <img th:id="topCody" style="position: absolute; top:0px; left: 25px; width:60%">
+                        <input th:id="topId" type="hidden" th:attr="name='topId'">
+                    </div>
+                    <!--                                아우터-->
+                    <div class="col" style="position: absolute">
+                        <img th:id="outerCody" style="position: absolute;top:100px; left: 85px; width:50%">
+                        <input th:id="outerId" type="hidden" th:attr="name='outerId'">
+                    </div>
+                    <!--                                ACC-->
+                    <div class="col" style="position: absolute">
+                        <img th:id="accCody" style="position: absolute;top:210px; left: 0px; width:40%">
+                        <input th:id="accId" type="hidden" th:attr="name='accId'">
+                    </div>
+                    <!--                                신발-->
+                    <div class="col" style="position: absolute">
+                        <img th:id="shoesCody" style="position: absolute; top:340px; left: 275px; width:25%">
+                        <input th:id="shoesId" type="hidden" th:attr="name='shoesId'">
+                    </div>
+                </div>
+            </div>
+            <input type="button" th:id="submit_btn" class="w-50 btn btn-dark btn-lg" value="submit">
         </form>
 
         <table class="table table-bordered">
@@ -196,7 +152,6 @@
             var shoesId = document.querySelector("#shoesId");
 
 
-
             for (var i = 0; i < outerbox.length; i++) {
                 outerbox[i].addEventListener("click", changepic);
             }
@@ -221,32 +176,32 @@
 
                 if (this.getAttribute("class") == "shoesimgbox") {
                     shoesCody.setAttribute("src", pickSrc);
-                    shoesId.setAttribute("value",pickAlt);
+                    shoesId.setAttribute("value", pickAlt);
                     console.log(shoesId.getAttribute(value))
                 }
 
                 if (this.getAttribute("class") == "outerimgbox") {
                     outerCody.setAttribute("src", pickSrc);
-                    outerId.setAttribute("value",pickAlt);
+                    outerId.setAttribute("value", pickAlt);
                     console.log(shoesId.getAttribute(value))
                 }
                 ;
 
                 if (this.getAttribute("class") == "topimgbox") {
                     topCody.setAttribute("src", pickSrc);
-                    topId.setAttribute("value",pickAlt);
+                    topId.setAttribute("value", pickAlt);
                     console.log(shoesId.getAttribute(value))
                 }
                 ;
                 if (this.getAttribute("class") == "bottomimgbox") {
                     bottomCody.setAttribute("src", pickSrc);
-                    bottomId.setAttribute("value",pickAlt);
+                    bottomId.setAttribute("value", pickAlt);
                     console.log(shoesId.getAttribute(value))
                 }
                 ;
                 if (this.getAttribute("class") == "accimgbox") {
                     accCody.setAttribute("src", pickSrc);
-                    accId.setAttribute("value",pickAlt);
+                    accId.setAttribute("value", pickAlt);
                     console.log(shoesId.getAttribute(value))
                 }
                 ;
