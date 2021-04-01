@@ -1,0 +1,56 @@
+package com.megait.soir.service;
+
+import com.megait.soir.form.CodyForm;
+import com.megait.soir.domain.Cody;
+import com.megait.soir.domain.Member;
+import com.megait.soir.repository.CodyRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class CodyService {
+
+    private final CodyRepository codyRepository;
+
+    public Cody createNewCody(Member member,CodyForm codyForm) {
+
+<<<<<<< HEAD
+        if (codyForm.getTopId()==null){
+            codyForm.setTopId(0L);
+        }
+=======
+>>>>>>> origin/origin/geunii
+
+        Cody cody = Cody.builder()
+                .member(member)
+                .topId(codyForm.getTopId())
+                .bottomId(codyForm.getBottomId())
+                .shoesId(codyForm.getShoesId())
+                .build();
+
+<<<<<<< HEAD
+        if(codyForm.getOuterId()!=null){
+            cody.setOuterId((codyForm.getOuterId()));
+        }
+
+        if(codyForm.getAccId()!=null){
+            cody.setAccId(((codyForm.getAccId())));
+=======
+        System.out.println("TOP----->"+cody.getTopId());
+
+        if(codyForm.getOuterId()!=null){
+            cody.setOuterId(codyForm.getOuterId());
+        }
+
+        if(codyForm.getAccId()!=null){
+            cody.setAccId(codyForm.getAccId());
+>>>>>>> origin/origin/geunii
+        }
+
+        codyRepository.save(cody);
+
+        return cody;
+
+    }
+}

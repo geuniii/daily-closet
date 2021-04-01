@@ -66,6 +66,9 @@ public class MemberService implements UserDetailsService {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
     @Transactional
      public EmailCheckStatus processSignUp(String email, String token) {
@@ -225,6 +228,19 @@ public class MemberService implements UserDetailsService {
     }
 
     public List<Item> getLikeList(Member member) {
-        return memberRepository.findByEmail(member.getEmail()).getLikes();
+
+        List<Item> likeList;
+
+        try {
+            likeList = memberRepository.findByEmail(member.getEmail()).getLikes();
+
+            if (likeList.isEmpty()) {
+                throw new IllegalArgumentException("empty.list");
+            }
+        }catch (Exception e){
+            throw new IllegalArgumentException("empty.list");
+        }
+
+        return likeList;
     }
 }

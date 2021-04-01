@@ -6,12 +6,12 @@
 <div th:fragment="item_list(itemList)">
     <div class="row" style="text-align: center; margin-bottom: 100px;">
         <div th:each="item:${itemList}" class="col-sm-2 justify-content-center" style="text-align: center; margin: 50px;">
-            <div class="component">
+            <div class="component" >
                 <img id="component_img" th:src="${item.urls.get(0)}">
                 <div id="component_info">
                     <p id="component_name" th:text="${item.name}"></p>
                     <hr>
-                    <p id="component_name" th:text="${item.brand}"></p>
+                    <small id="component_name" th:text="${item.brand}"></small>
                     <p id="component_price">₩<span th:text="${#numbers.formatInteger(item.price, 3,'COMMA')}"></span></p>
                     <a th:href="@{/store/detail/{id}(id=${item.id})}" class="btn btn-light stretched-link">see more</a>
                 </div>
@@ -20,5 +20,45 @@
 
         </div>
     </div>
+
+    <nav aria-label="Page navigation example">
+        <p th:text="${itemRequest.page}"></p>
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous"> <!-- TODO -->
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            <!-- TODO -->
+            <li th:if="${itemRequest.page-2>0}">
+                <a class="page_link" th:href="@{/itemList(categoryName='best',page=${itemRequest.page-1},limit=20,sort='name')}"></a>
+            </li>
+
+            <li th:if="${itemRequest.page-1>0}">
+                <a class="page_link" th:href="@{/itemList(categoryName='best',page=${itemRequest.page},limit=20,sort='name')}"></a>
+            </li>
+
+            <li th:if="${itemRequest.page}">
+                <a class="page_link" th:href="@{/itemList(categoryName='best',page=${itemRequest.page+2},limit=20,sort='name')}"></a>
+            </li>
+
+            <li th:if="${itemRequest.page+1}"> <!-- TODO : max Index 받아오는 로직 짜기 -->
+                <a class="page_link" th:href="@{/itemList(categoryName='best',page=${itemRequest.page+2},limit=20,sort='name')}"></a>
+            </li>
+
+            <li th:if="${itemRequest.page+2}">
+                <a class="page_link" th:href="@{/itemList(categoryName='best',page=${itemRequest.page-2},limit=20,sort='name')}"></a>
+            </li>
+
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
 </div>
+
+
 </html>

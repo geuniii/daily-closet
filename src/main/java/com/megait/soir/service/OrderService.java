@@ -3,15 +3,18 @@ package com.megait.soir.service;
 import com.megait.soir.domain.*;
 import com.megait.soir.repository.ItemRepository;
 import com.megait.soir.repository.MemberRepository;
+import com.megait.soir.repository.OrderItemRepository;
 import com.megait.soir.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.hibernate.criterion.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class OrderService {
@@ -19,7 +22,7 @@ public class OrderService {
     private final MemberRepository memberRepository;
     private final OrderRepository orderRepository;
     private final ItemRepository itemRepository;
-
+    private final OrderItemRepository orderItemRepository;
     @Transactional
     public void addCart(Member member, List<Long> itemIdList){
         member = memberRepository.getOne(member.getId());
@@ -68,6 +71,25 @@ public class OrderService {
         }
 
         return cartOrder.getOrderItems();
+
+    }
+
+
+
+    @Transactional
+    public void minusCart(Member member, Long deleteItemId){
+        // 장바구니 목록 삭제하기
+        Orders orders = orderRepository.findByMemberAndStatus(member, Status.CART);
+        List<OrderItem> orderItemList = orders.getOrderItems();
+
+        //
+        log.info("deleteItemId : " + deleteItemId);
+        orderItemList.removeIf(item -> item.getId().equals(deleteItemId));
+        orderItemRepository.deleteById(deleteItemId);
+        log.info("orderItemList : " + orderItemList.toString());
+
+        //orders.setOrderItems(orderItemList);
+        orderRepository.save(orders);
 
     }
     

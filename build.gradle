@@ -59,9 +59,6 @@ dependencies {
 	// JSON
 	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 
-	compile('org.springframework.boot:spring-boot-starter-mustache')
-
-
 }
 
 test {

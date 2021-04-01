@@ -9,4 +9,5 @@ public interface OrderRepository extends JpaRepository<Orders, Long> {
 
     Orders findByMemberAndStatus(Member member, Status status);
     // 회원과 status 정보를 가지고 원하는 Orders 객체를 찾는다.
+
 }

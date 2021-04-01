@@ -5,6 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oi&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
 
 * {
@@ -29,26 +30,39 @@ body {
 }
 
 #wrapper {
-    width: 980px;
+    /*width: 980px;*/
     text-align: left;
     margin-left: auto;
     margin-right: auto;
-    background-color: pink;
 }
 
 
 
 #logo{
-    color: white;
-    font-family: 'Oi', cursive;
+    padding-top: 70px;
+    font-size: 5.0em;
+    color: black;
+    font-family: 'Permanent Marker', cursive;
+    margin-bottom: 50px;
+}
+
+
+#bigLogo{
+    margin-top: 100px;
+    font-size: 9.0em;
+    font-family: "Permanent Marker", cursive;
+    text-shadow: 0px 0px 0px 5px grey;
+
 }
 
 #headlogo{
-    margin-top: 50px;
-    height: 280px;
+    background-color: darkgray;
+    font-family: "Permanent Marker", cursive;
+    height: 300px;
 }
 
 #navlogo{
+    font-family: "Permanent Marker", cursive;
     font-size: 1.0em;
     font-weight: 700;
     margin-top: 25px;
@@ -56,9 +70,21 @@ body {
     margin-left: 20px;
 }
 
+
+.pageLogo{
+    font-family: "Permanent Marker", cursive;
+    margin-left: 25px;
+    margin-top: 50px;
+}
+
 table {
     border-spacing: 0;
     border-collapse: collapse;
+}
+
+.xs{
+    text-align: left;
+    font-size: 0.8rem;
 }
 
 td {
@@ -113,10 +139,6 @@ li{
     list-style:none;
 }
 
-ol{
-    list-style:none;
-}
-
 .imgbox_middle {
     margin: 5px;
     padding: 7px;
@@ -133,18 +155,15 @@ ol{
     margin: 20px;
 }
 
-.outerimgbox , .topimgbox,  .bottomimgbox,  .accimgbox,  .shoesimgbox {
+.outerimgbox , .topimgbox,  .bottomimgbox,  .accimgbox,  .shoesimgbox{
 
     writing-mode:vertical-lr;
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
 }
 
 .vertical-data{
     writing-mode:vertical-lr
-}
-.review-tr{
-    text-align: center;
 }
 
 
@@ -154,6 +173,7 @@ ol{
 }
 
 #navbar{
+    background-color: darkgray;
     height: 70px;
 }
 
@@ -171,23 +191,18 @@ ol{
     /*box-shadow: 2px 2px gray;*/
 }
 
-#usernav{
-    text-align: right;
-    float: right;
+
+#searchType{
+    margin: 10px;
 }
 
-#nav_left{
-    margin-left: 20%;
-}
 
 #navbar_right{
     margin-top: 7px;
     display: inline;
     float: right;
-    text-align: right;
     font-weight: 700;
     font-size: 1.0em;
-    margin-left: 30%;
 }
 
 #carousel{
@@ -195,18 +210,30 @@ ol{
     height: 250px;
 }
 
+.user{
+    display: inline;
+    text-decoration: black;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#memberInfo{
+    color: darkgrey;
+}
+
 
 #pagebox{
-    width: 1500px;
+    width: 95%;
 }
 
 
 #logoutbtn{
     /*margin-top: 7px;*/
-    background-color: white;
+    background-color: rgba( 255, 255, 255, 0 );
     color: grey;
-    margin-left: 10px;
-    font-weight: 600;
+    margin-top: 5px;
+    margin-left: 7px;
+    font-weight: 400;
     font-size: 1.0em;
 }
 
@@ -309,9 +336,68 @@ ol{
     display: inline;
 }
 
+
+#likeitem_table {
+    text-align: center;
+    width: 70%;
+    margin-left: 10%;
+}
+
+#likeitem_div{
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.col-4{
+    max-width: 350px;
+    margin-bottom: 20px;
+}
+
+#likeitem_imgbox{
+    display: inline;
+    margin: 15px;
+    width: 210px;
+    height: 210px;
+    text-align: center;
+
+}
+
+#likeitem_img{
+    margin-left: 60px;
+    display: block;
+    border: 1px solid darkgrey;
+    border-radius: 100px;
+    width: 200px;
+    height:200px;
+    text-align: center;
+}
+
+#likeitem_info{
+    text-align: left;
+    width: 210px;
+}
+
+#likeitem_name{
+    margin-top: 15px;
+    margin-left: 60px;
+    width: 50px;
+}
+
+#likeitem_price{
+    margin-left: 60px;
+}
+
 #buyandcartbtn{
     margin-top: 20px;
 }
+
+/*#like{*/
+/*    margin-top: 20px;*/
+/*}*/
+
+/*#wr-review{*/
+/*    margin-top: 20px;*/
+/*}*/
 
 #buybtn{
     padding: 10px;
@@ -328,6 +414,28 @@ ol{
 #cartform{
     margin-top: 5px;
     display: inline;
+}
+
+#cart_table{
+    text-align: center;
+    width: 70%;
+    margin-left: 15%;
+}
+
+#cart_minus{
+    display: inline;
+}
+
+#cartMinusBtn{
+    background: none;
+}
+
+#minus_icon{
+    background: none;
+}
+
+#like, #wr-review{
+    padding: 10px;
 }
 
 
@@ -368,8 +476,4 @@ ol{
     margin: 15px 15px 15px -10px;
 }
 
-#codyContainer{
-    text-align: center;
-    width: 900px;
-    height: 300px;
-}
+
