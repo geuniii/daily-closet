@@ -7,8 +7,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-
     properties:
+      hibernate:
+        event:
+          merge:
+            entity_copy_observer: allow
       format_sql: true
   profiles:
     active: dev
@@ -16,11 +19,15 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username:
-    password:
+    username: myprojecttest995@gmail.com
+    password: 1q2w3e4r!@
     properties:
-    mail.smtp.auth: true
-    mail.smtp.starttls.enable: true
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
 
 logging:
   level:

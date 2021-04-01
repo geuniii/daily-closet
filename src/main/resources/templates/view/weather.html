@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Weather'">
+
+<div layout:fragment="content" class="container" style="background-color: #FFFFFF;">
+    <!-- 현재 날 조회 목록 -->
+    <h1>10Days Weather</h1>
+    <div>
+        <label for="city"><b>City :</b></label>
+       <input class="w-25" id="city" type="text" placeholder="검색하고 싶은 도시를 입력해주세요.">
+        <div>
+            <button type="button" class="btn btn-light" id="btn-weatherList">조회</button>
+        </div>
+    </div>
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr align="center">
+            <th>날짜</th>
+            <th>지역</th>
+            <th>예보</th>
+            <th>오전/오후</th>
+            <th>온도</th>
+        </tr>
+        </thead>
+        <tbody id="weatherList">
+            <tr th:each="weather:${weatherList}" align="center">
+                <td th:text="${weather.baseDate}"></td>
+                <td th:text="${weather.city}"></td>
+                <td th:text="${weather.localWeather}"></td>
+                <td th:text="${weather.meridiem}"></td>
+                <td th:text="${weather.temperature}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</html>
+
+<script>
+    var main = {
+        init : function () {
+            var _this = this;
+            $('#btn-weatherList').on('click', function () {
+                _this.weatherList();
+            });
+        },
+        weatherList : function () {
+            var data = {
+                baseDate: $('#baseDate').val(),
+                meridiem: $('#meridiem').val(),
+                city: $('#city').val(),
+                temperature: $('#temperature').val(),
+                localWeather: $('#localWeather').val()
+            };
+            $.ajax({
+                type: 'get',
+                url: '/weather/weatherList?city=' + data.city,
+                // dataType: 'json',
+                // contentType: 'application/json; charset=utf-8',
+                // data: JSON.stringify(data),
+                cache: false
+            }).done(function (fragment) {
+                $('#weatherList').replaceWith(fragment);
+                alert("날씨 조회에 성공했습니다.")
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        }
+    };
+    main.init();
+
+</script>

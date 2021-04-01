@@ -109,6 +109,45 @@ p {
     max-width: 1500px;
 }
 
+li{
+    list-style:none;
+}
+
+ol{
+    list-style:none;
+}
+
+.imgbox_middle {
+    margin: 5px;
+    padding: 7px;
+    display: inline;
+    width:200px;
+    height:200px;
+}
+
+.codybox {
+    border: 1px solid grey;
+    display: inline;
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+}
+
+.outerimgbox , .topimgbox,  .bottomimgbox,  .accimgbox,  .shoesimgbox {
+
+    writing-mode:vertical-lr;
+    width: 200px;
+    height: 200px;
+}
+
+.vertical-data{
+    writing-mode:vertical-lr
+}
+.review-tr{
+    text-align: center;
+}
+
+
 #back{
     margin-left: 0;
     background-color: white;
@@ -317,4 +356,20 @@ p {
     margin-left: 21%;
     text-align: center;
     width: 800px;
+}
+/*#reviewbox{*/
+/*    width: 1200px;*/
+/*    height: 400px;*/
+/*    margin: 15px 15px 15px -10px;*/
+/*}*/
+#reivewInput{
+    width: 600px;
+    height: 100px;
+    margin: 15px 15px 15px -10px;
+}
+
+#codyContainer{
+    text-align: center;
+    width: 900px;
+    height: 300px;
 }

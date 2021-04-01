@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<<<<<<< HEAD
+      layout:decorate="layout" th:with="title='Hello!'">
+=======
+        layout:decorate="layout" th:with="title='Hello!'">
+>>>>>>> main
+
+<th:block layout:fragement="css">
+    <link rel="stylesheet" th:href="@{/css/user/style.css}">
+</th:block>
+
+<div layout:fragment="content" class="container" style="background-color: white;">
+<<<<<<< HEAD
+    <h2> This is main page. </h2>
+=======
+    <br/><br/>
+    <div class="py-`5` ml-2">
+        <h2>Today's Pick!</h2>
+        <p>Hottest Cody</p>
+    </div>
+    <!-- 재우 -->
+    <th:block th:insert="item_fragements :: item_list(${clothsList})"/>
+    <hr class="col-10 my-4">
+    <div class="py-5 ml-2">
+        <h2>Category name</h2>
+        <p>옷정보..</p>
+    </div>
+>>>>>>> main
+
+</div>
+
+</html>
