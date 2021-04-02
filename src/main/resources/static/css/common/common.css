@@ -125,14 +125,6 @@ ol{
     height:200px;
 }
 
-.codybox {
-    border: 1px solid grey;
-    display: inline;
-    width: 100px;
-    height: 100px;
-    margin: 20px;
-}
-
 .outerimgbox , .topimgbox,  .bottomimgbox,  .accimgbox,  .shoesimgbox{
 
     writing-mode:vertical-lr;
