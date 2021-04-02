@@ -91,9 +91,9 @@
         <button type="button" class="btn btn-light" onclick="navEvent('acc-id')">ACC</button>
     </div>
 
-    <div class="container px-5 py-5">
+    <div class="container px-5 py-5" style="text-align: center">
         <!--                아우터-->
-        <div class="likeList row" id="outerList" style="display: none">
+        <div class="likeList" id="outerList" style="display: none">
             <li th:if="${outerList.size()== 0}">Add Outer List</li>
             <li th:each="item:${outerList}">
                 <img th:class="outerimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
@@ -102,7 +102,7 @@
         </div>
 
         <!--                상의-->
-        <div class="likeList row" id="topList" style="display: none">
+        <div class="likeList" id="topList" style="display: none">
             <li th:if="${topList.size()== 0}">Add Top List</li>
             <li th:each="item:${topList}">
                 <img th:class="topimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
@@ -112,7 +112,7 @@
 
 
         <!--                하의-->
-        <div class="likeList row" id="bottomList" style="display: none">
+        <div class="likeList" id="bottomList" style="display: none">
             <li th:if="${bottomList.size()== 0}">Add Bottom List</li>
             <li th:each="item:${bottomList}">
                 <img th:class="bottomimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
@@ -121,7 +121,7 @@
         </div>
 
         <!--                가방-->
-        <div class="likeList row" id="accList" style="display: none">
+        <div class="likeList" id="accList" style="display: none">
             <li th:if="${accList.size()== 0}">Add Acc List</li>
             <li th:each="item:${accList}">
                 <img th:class="accimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
@@ -130,7 +130,7 @@
         </div>
 
         <!--                신발-->
-        <div class="likeList row" id="shoesList" style="display: none">
+        <div class="likeList" id="shoesList" style="display: none">
             <li th:if="${shoesList.size()== 0}">Add Shoes List</li>
             <li th:class="shoes" th:each="item:${shoesList}">
                 <img th:class="shoesimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
