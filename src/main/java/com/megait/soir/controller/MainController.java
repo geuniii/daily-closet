@@ -365,6 +365,16 @@ public class MainController {
         return "/view/cart";
     }
 
+    @GetMapping("/cart/minus")
+    public String cartMinus(@RequestParam("id") String itemId, @CurrentUser Member member, Model model){
+        // cart 아이템 삭제
+
+        Long deleteItemId = Long.parseLong(itemId);
+        orderService.minusCart(member, deleteItemId);
+
+        return cartList(member, model);
+    }
+
     @PostMapping("/find-pw")
     @ResponseBody
     // @EventListener(ApplicationReadyEvent.class)

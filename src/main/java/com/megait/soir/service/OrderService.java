@@ -7,15 +7,15 @@ import com.megait.soir.repository.OrderItemRepository;
 import com.megait.soir.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.criterion.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-@Service
 @Slf4j
+@Service
 @RequiredArgsConstructor
 public class OrderService {
 
@@ -23,7 +23,6 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final ItemRepository itemRepository;
     private final OrderItemRepository orderItemRepository;
-
     @Transactional
     public void addCart(Member member, List<Long> itemIdList){
         member = memberRepository.getOne(member.getId());
@@ -93,11 +92,11 @@ public class OrderService {
         orderRepository.save(orders);
 
     }
-    
-    
+
+
     public int getTotalPrice(List<OrderItem> list){
         // 장바구니에 담긴 Item 객체들의 총 가격을 계산
 //        return list.stream().mapToInt(OrderItem::getOrderPrice).sum();
-         return list.stream().mapToInt(orderItem -> orderItem.getOrderPrice()).sum();
+        return list.stream().mapToInt(orderItem -> orderItem.getOrderPrice()).sum();
     }
 }
