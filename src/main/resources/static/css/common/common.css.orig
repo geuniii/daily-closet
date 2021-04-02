@@ -387,6 +387,8 @@ ol{
     display: inline;
 }
 
+<<<<<<< HEAD
+=======
 #cart_table{
     text-align: center;
     width: 70%;
@@ -416,6 +418,7 @@ ol{
     display: inline;
 }
 
+>>>>>>> 798598d (update : 04.02 14:07)
 .cody{
     display: inline;
     text-align: center;

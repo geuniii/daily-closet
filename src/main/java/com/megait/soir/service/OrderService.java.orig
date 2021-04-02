@@ -71,6 +71,8 @@ public class OrderService {
         return cartOrder.getOrderItems();
 
     }
+<<<<<<< HEAD
+=======
 
 
 
@@ -89,6 +91,7 @@ public class OrderService {
         orderRepository.save(orders);
 
     }
+>>>>>>> 798598d (update : 04.02 14:07)
     
     
     public int getTotalPrice(List<OrderItem> list){

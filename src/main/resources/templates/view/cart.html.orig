@@ -9,12 +9,19 @@
         <p class="text-center" th:if="${'empty.cart' == error_message}">empty cart.</p>
         <hr class = "col-12 my-4"/>
 
+<<<<<<< HEAD
+=======
         <br/>
+>>>>>>> 798598d (update : 04.02 14:07)
         <form th:if="${error_message == null}" th:action="@{/cart/list}" method="post" name="buyForm">
             <table class="table table-bordered table-responsive-sm">
 
+<<<<<<< HEAD
+                <thead class="thead-dark">
+=======
                 <br/>
                 <thead class="thead-light">
+>>>>>>> 798598d (update : 04.02 14:07)
                 <tr>
                     <th scope="col" style="width:8%">select</th>
                     <th scope="col">image</th>
