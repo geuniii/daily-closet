@@ -27,10 +27,37 @@ spring:
           auth: true
           starttls:
             enable: true
+  config:
+    activate:
+      on-profile:
+
+#logging:
+#  level:
+#    org.hibernate.SQL: debug
+
 
 
 logging:
+  file:
+       name: logs/application.log
   level:
-    org.hibernate.SQL: debug
+    org.thymeleaf: INFO
+    org.springframework.web: INFO
+    org.hibernate.SQL: INFO
+    org.quartz.core: INFO
+    org.h2.server.web: INFO
 
-
+#
+#logging:
+#  file: logs/application.log
+#  level:
+#    org.thymeleaf: DEBUG
+#    org.springframework.web: DEBUG
+#    org.hibernate.SQL: DEBUG
+#    org.quartz.core: DEBUG
+#    org.h2.server.web: DEBUG
+#
+#
+#logging:
+#  config: classpath:logback-spring.xml
+#

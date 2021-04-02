@@ -125,9 +125,6 @@ ol{
     height:200px;
 }
 
-<<<<<<< HEAD
-.outerimgbox , .topimgbox,  .bottomimgbox,  .accimgbox,  .shoesimgbox{
-=======
 .codybox {
     border: 1px solid grey;
     display: inline;
@@ -137,9 +134,9 @@ ol{
 }
 
 .outerimgbox , .topimgbox,  .bottomimgbox,  .accimgbox,  .shoesimgbox {
->>>>>>> 12d8068b7897e7051c5ee42dab992e6182cb95a8
 
-    writing-mode:vertical-lr;
+    /*writing-mode:vertical-lr;*/
+    text-align: center;
     width: 200px;
     height: 200px;
 }
@@ -149,6 +146,43 @@ ol{
 }
 .review-tr{
     text-align: center;
+}
+.slidecontainer {
+    width: 50%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background: #A9A9A9;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #161616;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #161616;
+    cursor: pointer;
 }
 
 
@@ -244,7 +278,6 @@ ol{
 #detailbox{
     margin-bottom: 50px;
 }
-
 #brandname{
     text-align: left;
     display: block;
@@ -290,10 +323,30 @@ ol{
     height: 40px;
     border: 1px solid lightgrey;
 }
+.color_box{
+    text-align: center;
+}
+.color_square{
+    width: 35px;
+    height: 35px;
+    margin-right: 5%;
+}
 
 #product_img{
     margin-right: 20px;
 }
+
+#codybox{
+    margin-right: 20px;
+}
+
+#cody_info{
+    width: 450px;
+    text-align: center;
+    margin-left: 5%;
+    margin-top: 150px;
+}
+
 
 #product_info{
     margin-top: 100px;
@@ -334,12 +387,38 @@ ol{
     display: inline;
 }
 
+<<<<<<< HEAD
+=======
+#cart_table{
+    text-align: center;
+    width: 70%;
+    margin-left: 15%;
+}
+
+#cart_minus{
+    display: inline;
+}
+
+#cartMinusBtn{
+    color: black;
+    background: none;
+}
+
+#minus_icon{
+    background: none;
+}
+
+#like, #wr-review{
+    padding: 10px;
+}
+
 
 #codybox{
     text-align: center;
     display: inline;
 }
 
+>>>>>>> 798598d (update : 04.02 14:07)
 .cody{
     display: inline;
     text-align: center;
@@ -347,6 +426,8 @@ ol{
     width: 100px;
     height: 100px;
 }
+
+
 
 #likelist_container{
     text-align: center;
@@ -366,14 +447,29 @@ ol{
 /*    height: 400px;*/
 /*    margin: 15px 15px 15px -10px;*/
 /*}*/
+
 #reivewInput{
     width: 600px;
     height: 100px;
     margin: 15px 15px 15px -10px;
 }
 
-#codyContainer{
+.likeListForCody{
     text-align: center;
     width: 900px;
     height: 300px;
+}
+
+.likeList{
+    text-align: center;
+}
+
+.codyContainer{
+    text-align: center;
+    height: 900px;
+    display: inline;
+}
+.pagetitle{
+    text-align: left;
+    margin-left: 100px;
 }

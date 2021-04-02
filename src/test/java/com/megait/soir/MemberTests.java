@@ -45,7 +45,9 @@ public class MemberTests {
         assertTrue(memberRepository.existsByEmail("admin@test.com"));
 
 
-system.out.println("ㅎㅎㅎㅎ");
+System.out.println("ㅎㅎㅎㅎ");
+>>>>>>> origin/jaejae
+>>>>>>> origin/origin/geunii
 
     }
 

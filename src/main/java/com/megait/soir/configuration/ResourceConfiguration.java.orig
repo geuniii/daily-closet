@@ -23,10 +23,10 @@ public class ResourceConfiguration implements WebMvcConfigurer {
                 "classpath:/static/assets/",
                 "classpath:/templates/view/"
 <<<<<<< HEAD
-        ); // static resources의 location 지정
-        // classpath : main(= /)
-=======
         );
->>>>>>> 12d8068b7897e7051c5ee42dab992e6182cb95a8
+=======
+                ); // static resources의 location 지정
+        // classpath : main(= /)
+>>>>>>> 9fe35e5 (commit 03.29 00:52)
     }
 }
