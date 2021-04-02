@@ -135,7 +135,8 @@ ol{
 
 .outerimgbox , .topimgbox,  .bottomimgbox,  .accimgbox,  .shoesimgbox {
 
-    writing-mode:vertical-lr;
+    /*writing-mode:vertical-lr;*/
+    text-align: center;
     width: 200px;
     height: 200px;
 }
