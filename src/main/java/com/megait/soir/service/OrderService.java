@@ -3,6 +3,7 @@ package com.megait.soir.service;
 import com.megait.soir.domain.*;
 import com.megait.soir.repository.ItemRepository;
 import com.megait.soir.repository.MemberRepository;
+import com.megait.soir.repository.OrderItemRepository;
 import com.megait.soir.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ public class OrderService {
     private final MemberRepository memberRepository;
     private final OrderRepository orderRepository;
     private final ItemRepository itemRepository;
+    private final OrderItemRepository orderItemRepository;
 
     @Transactional
     public void addCart(Member member, List<Long> itemIdList){
