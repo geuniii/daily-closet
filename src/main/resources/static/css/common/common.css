@@ -160,20 +160,12 @@ ol{
     margin: 20px;
 }
 
-<<<<<<< HEAD
 .outerimgbox , .topimgbox,  .bottomimgbox,  .accimgbox,  .shoesimgbox {
 
     /*writing-mode:vertical-lr;*/
     text-align: center;
     width: 200px;
     height: 200px;
-=======
-.outerimgbox , .topimgbox,  .bottomimgbox,  .accimgbox,  .shoesimgbox{
-
-    writing-mode:vertical-lr;
-    width: 100px;
-    height: 100px;
->>>>>>> 9fe35e5 (commit 03.29 00:52)
 }
 
 .vertical-data{
@@ -182,7 +174,6 @@ ol{
 .review-tr{
     text-align: center;
 }
-<<<<<<< HEAD
 .slidecontainer {
     width: 50%;
 }
@@ -220,8 +211,6 @@ ol{
     background: #161616;
     cursor: pointer;
 }
-=======
->>>>>>> 9fe35e5 (commit 03.29 00:52)
 
 
 #back{
@@ -543,20 +532,11 @@ ol{
     text-align: center;
     width: 800px;
 }
-<<<<<<< HEAD
 
-=======
-/*#reviewbox{*/
-/*    width: 1200px;*/
-/*    height: 400px;*/
-/*    margin: 15px 15px 15px -10px;*/
-/*}*/
->>>>>>> 9fe35e5 (commit 03.29 00:52)
 #reivewInput{
     width: 600px;
     height: 100px;
     margin: 15px 15px 15px -10px;
-<<<<<<< HEAD
 }
 
 .likeListForCody{
@@ -578,6 +558,3 @@ ol{
     text-align: left;
     margin-left: 100px;
 }
-=======
-}
->>>>>>> 9fe35e5 (commit 03.29 00:52)

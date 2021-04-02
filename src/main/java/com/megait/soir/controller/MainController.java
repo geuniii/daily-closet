@@ -12,11 +12,6 @@ import com.megait.soir.user.SignUpValidator;
 import com.megait.soir.user.UpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-<<<<<<< HEAD
-=======
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
->>>>>>> 9fe35e5 (commit 03.29 00:52)
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
@@ -33,8 +28,6 @@ import java.util.*;
 @RequiredArgsConstructor
 public class MainController {
 
-    private Logger logger = LoggerFactory.getLogger(MainController.class);
-
     private final SignUpValidator signUpValidator;
     private final MemberService memberService;
     private final ItemService itemService;
@@ -45,7 +38,6 @@ public class MainController {
     private final ReviewService reviewService;
     private final WeatherService weatherService;
 
-<<<<<<< HEAD
 //    @GetMapping("/") // root context가 들어오면 index page를 보여준다.
 //    public String index(@CurrentUser Member member, Model model) {
 //
@@ -60,8 +52,6 @@ public class MainController {
 
 
     // 재우
-=======
->>>>>>> 9fe35e5 (commit 03.29 00:52)
     @GetMapping("/") // root context가 들어오면 index page를 보여준다.
     public String index(@CurrentUser Member member, Model model, String keyword, String searchType){
 
@@ -466,7 +456,6 @@ public class MainController {
     public String create(@CurrentUser Member member, @Valid ReviewForm reviewForm) throws Exception {
         log.info("POST /review : " + reviewForm.toString());
         Item item = itemService.findItem(reviewForm.getItemId());
-<<<<<<< HEAD
         // 리뷰 수정
         if(reviewForm.getReviewId()!=null){
             Optional<Review> optional = reviewService.findById(reviewForm.getReviewId());
@@ -495,27 +484,6 @@ public class MainController {
         reviewService.deleteReview(reviewId);
         return "redirect:/store/detail/"+itemId;
 
-=======
-        log.info("item Id:"+reviewForm.getItemId());
-
-        reviewService.createReview(member,item,reviewForm);
-        return "redirect:/store/detail/"+reviewForm.getItemId();
     }
 
-    // 리뷰 수정
-    @PutMapping("/review")
-    public void modify(Review review, @Valid ReviewForm reviewForm) throws Exception{
-        log.info("PUT data : " + reviewForm.toString());
-        reviewService.update(review, reviewForm);
->>>>>>> 9fe35e5 (commit 03.29 00:52)
-    }
-
-    // 리뷰 삭제
-    @PostMapping("/review/delete")
-    public String deleteReview(@RequestParam("reviewId") Long reviewId, @RequestParam("itemId") Long itemId ){
-        log.info("DELETE no : " + reviewId);
-        reviewService.deleteReview(reviewId);
-        return "redirect:/store/detail/"+itemId;
-
-    }
 }

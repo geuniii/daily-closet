@@ -101,12 +101,8 @@
     </div>
 
     <!--delete review Modal -->
-<<<<<<< HEAD
     <div class="modal fade" id="delReviewModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle"
          aria-hidden="true">
-=======
-    <div class="modal fade" id="delReviewModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
->>>>>>> 9fe35e5 (commit 03.29 00:52)
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <form class="needs-validation" th:id="deleteReview" th:action="@{/review/delete}" th:method="post">
@@ -137,7 +133,6 @@
                         <h4 id="modal-title" class="modal-title"></h4>
                     </div>
                     <div class="modal-body">
-<<<<<<< HEAD
                         <table class="table">
                             <tr>
                                 <input type="hidden" th:id="title" th:attr="name='itemId'" th:value="${item.getId()}">
@@ -149,18 +144,6 @@
                             <tr>
                                 <td>Content</td>
                                 <td><textarea class="form-control" id="modal-review-content" th:attr="name='contents'"
-=======
-
-                        <table class="table">
-                            <tr>
-                                <input type="hidden" th:id="title" th:attr="name='itemId'" th:value="${item.getId()}">
-                                <td>Title</td>
-                                <td><input class="form-control" th:id="title" th:attr="name='title'" type="text"></td>
-                            </tr>
-                            <tr>
-                                <td>Content</td>
-                                <td><textarea class="form-control" th:id="contents" th:attr="name='contents'"
->>>>>>> 9fe35e5 (commit 03.29 00:52)
                                               rows="10"></textarea></td>
                             </tr>
                         </table>
@@ -215,47 +198,6 @@
             }
 
         });
-        $(document).ready(function () {
-
-            // 새 글 쓰기 버튼 클릭
-            $("#createBtn").click(function () {
-                $("#modal-title").text("Write Your Review");
-                $("#writeReview").modal();
-            });
-
-            // 삭제하기 버튼 클릭
-            $("#delete-review").click(function () {
-                $("#modal-title").text("Delete Your Review");
-                var reviewId = document.getElementById('delete-review').value;
-                $("#reviewId").val(reviewId);
-                console.log(reviewId);
-                $("#delReviewModal").modal();
-            });
-
-            // 수정하기 버튼 클릭
-            $("#modify-review").click(function () {
-                $("#modal-title").text("Modify Your Review");
-                $("#writeReview").modal();
-            });
-
-        });
-
-        function deleteReview(reviewId) {
-            $.ajax({
-                type: 'post', // 요청 방식
-                url: '/review/delete', // 요청 보낼 주소
-                // data:"id":reviewId,
-                data: {
-                    "reviewId": reviewId
-                }, // 보낼 파라미터
-                dataType: 'json', // 응답메시지의 content-type 을 json으로 (json타입으로 받겠다!)
-                success: function (result) {
-                    // Modal 띄우기
-                    $('.modal-body').html(result.message);
-                    $('#modal').modal('show');
-                }
-            });
-        };
 
         $(document).ready(function () {
 

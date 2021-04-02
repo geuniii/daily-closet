@@ -9,17 +9,10 @@
             <div class="col" width="20%" style="font-weight: bold">
                 WRITER
             </div>
-<<<<<<< HEAD
             <div class="col-6" width="60%" style="font-weight: bold">
                 TITLE
             </div>
             <div class="col" width="20%" style="font-weight: bold">
-=======
-            <div class="col-6" width="60%">
-                TITLE
-            </div>
-            <div class="col" width="20%">
->>>>>>> 9fe35e5 (commit 03.29 00:52)
                 WRITE DATE
             </div>
         </div>
@@ -28,7 +21,6 @@
 
         <div class="container">
             <div th:if="${reviewList.size==0}">No Reviews</div>
-<<<<<<< HEAD
                 <form class="row" th:each="review:${reviewList}" action="javascript:;" onsubmit="modifyReview(this)">
                     <input type="hidden" name="reviewTitle" th:value="${review.title}" >
                     <input type="hidden" name="reviewContent" th:value="${review.content}">
@@ -58,30 +50,6 @@
                         </div>
                     </div>
                 </form>
-=======
-            <div class="row" th:each="review:${reviewList}">
-                <div class="col" th:text="${review.member.email}" width="10%"></div>
-                <div class="col" th:text="${review.title}" width="80%"></div>
-                <div class="col" th:text="${review.createDate}" width="10%"></div>
-                <div class="w-100"></div>
-                <div class="col">
-                    <details>
-                        <summary style="text-align: right">details</summary>
-                        <div class="col" th:text="${review.content}" width="80%"></div>
-                        <button class="btn btn-link" style="color:gray;font-size:small"
-                                th:if="${currentUser.id}==${review.member.id}" th:id="delete-review"
-                                th:value="${review.id}">DELETE
-                        </button>
-                        <button class="btn btn-link" style="color:gray;font-size:small"
-                                th:if="${currentUser.id}==${review.member.id}" th:id="modify-review">MODIFY
-                        </button>
-                        <button class="btn btn-link" style="color:gray;font-size:small"
-                                th:if="${currentUser.id}!=${review.member.id}" th:id="reply-review">REPLY
-                        </button>
-                    </details>
-                </div>
-            </div>
->>>>>>> 9fe35e5 (commit 03.29 00:52)
         </div>
 
     </div>

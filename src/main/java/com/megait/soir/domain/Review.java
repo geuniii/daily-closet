@@ -35,10 +35,6 @@ public class Review {
 
     private String createDate;
 
-<<<<<<< HEAD
     private String updateDate;
-=======
-    private LocalDateTime updateDate;
->>>>>>> 9fe35e5 (commit 03.29 00:52)
 
 }

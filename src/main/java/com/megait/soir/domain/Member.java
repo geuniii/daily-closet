@@ -46,7 +46,7 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Cody> codies = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member",cascade={CascadeType.ALL})
+    @OneToMany(mappedBy = "member")
     private List<Review> reviews = new ArrayList<>();
 
     @Transactional
