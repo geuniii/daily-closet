@@ -3,15 +3,15 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout">
 
-<div layout:fragment="content">
+<div layout:fragment="content" class="container" style="background-color: white;">
     <div class="container px-5 py-5">
         <h3 class="text-center">My Cart</h3>
         <p class="text-center" th:if="${'empty.cart' == error_message}">empty cart.</p>
-        <hr class = "col-12 my-4"/>
+        <!--        <hr class = "col-12 my-4"/>-->
 
         <br/>
         <form th:if="${error_message == null}" th:action="@{/cart/list}" method="post" name="buyForm">
-            <table class="table table-bordered table-responsive-sm">
+            <table id="cart_table" class="table table-bordered table-responsive-sm">
 
                 <br/>
                 <thead class="thead-light">
@@ -34,6 +34,19 @@
                         th:onclick="itemDetail([[${orderItem.item.id}]])"></td>
                     <td class="align-middle">
                         ₩ <span th:text="${#numbers.formatInteger(orderItem.item.price, 3, 'COMMA')}"></span>
+                        <a style="background-color: white;" id="cart_minus" th:href="@{/cart/minus(id=${orderItem.id})}">
+                            <i id="minus_icon" class="fas fa-minus-circle"></i>
+                        </a>
+
+
+                        <!--                        <form id="minusform" th:action="@{/cart/minus}" method="post" style="text-align: center;">-->
+                        <!--                            <button id="cartMinusBtn"-->
+                        <!--                                    type="submit"-->
+                        <!--                                    name="orderItem_id"-->
+                        <!--                                    th:value="${orderItem.id}">-->
+
+                        <!--                            </button>-->
+                        <!--                        </form>-->
                     </td>
                 </tr>
                 </tbody>

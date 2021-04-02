@@ -2,7 +2,7 @@
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="layout" th:with="title='Hello!'">
+      layout:decorate="layout">
 
 <th:block layout:fragement="css">
     <link rel="stylesheet" th:href="@{/css/user/style.css}">
@@ -11,17 +11,8 @@
 <div layout:fragment="content" class="container" style="background-color: white;">
     <br/><br/>
     <div class="py-`5` ml-2">
-        <h2>Today's Pick!</h2>
-        <p>Hottest Cody</p>
+        <span id="bigLogo">main page</span>
     </div>
-    <!-- 재우 -->
-    <th:block th:insert="item_fragements :: item_list(${clothsList})"/>
-    <hr class="col-10 my-4">
-    <div class="py-5 ml-2">
-        <h2>Category name</h2>
-        <p>옷정보..</p>
-    </div>
-
 </div>
 
 </html>
