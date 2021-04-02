@@ -1,6 +1,9 @@
 package com.megait.soir.repository;
 
+import com.megait.soir.domain.Category;
+import com.megait.soir.domain.ChildCategory;
 import com.megait.soir.domain.Item;
+import com.megait.soir.domain.ParentCategory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -33,6 +36,14 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     @Query(value = "select * from  Item e where e.Brand like %:keyword%", nativeQuery = true)
     List<Item> findByBrandKeyword(@Param("keyword") String keyword);
+
+//    @Query(value = "select * from  ITEM e where e.PARENT_CATEGORY_ID  like %:parent_category_id%  and " +
+//            "e.CHILD_CATEGORY_ID like %:child_category_id%", nativeQuery = true)
+//    List <Item> findRecommendCategory(@Param("parent_category_id") Long parent,
+//                                      @Param("child_category_id") Long child
+//    );
+
+    List<Item> findAllByParentCategoryAndChildCategory(ParentCategory parent, ChildCategory child);
 }
 
 

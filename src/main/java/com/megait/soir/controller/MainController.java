@@ -122,14 +122,43 @@ public class MainController {
      * @return
      */
     @GetMapping("/daily-recommend")
-    public String daily_recommend(Model model){
-        String weatherCity = "서울_인천_경기도";;
+    public String daily_recommend(Model model, String city){
+        //String weatherCity = "서울_인천_경기도";;
 
         String baseDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
         String meridien = dateService.currentHour();
+        if(city != null) {
+            String cityName = cityNameService.renameCity(city);
+            model.addAttribute("currentTemperature", weatherService.findCurrentDateTemperature(baseDate, cityName, meridien));
+            model.addAttribute("weatherList", weatherService.findCurrentLocalWeather(cityName));
+            System.out.println("주소가 null 아님");
 
-        model.addAttribute("currentTemperature", weatherService.findCurrentDateTemperature(baseDate, "서울_인천_경기도", meridien));
-        //model.addAttribute("currentTemperature",weatherService.findByCurrentWeather("서울_인천_경기도", currentdate));
+        }
+        else{
+            model.addAttribute("currentTemperature", weatherService.findCurrentDateTemperature(baseDate, "서울_인천_경기도", meridien));
+            System.out.println("주소가 null일 경우");
+        }
+        // 부모
+        // id=3 상의 {자식 id : id=2 후드티셔츠, id=4 맨투맨 6, 5, 7}
+        // id=12 아우터 {자식 id : 29,28,27,26,24,23,22,21,20,19,18,17,15,14,13,11}
+        // id=31 바지 {자식 id : 36,35,34,33,32,31,30,}
+
+        //아우터
+        Long parent1 = Long.valueOf("12");
+        Long child1 = Long.valueOf("29");
+        //상의
+        Long parent2 = Long.valueOf("3");
+        Long child2 = Long.valueOf("2");
+        //하의
+        Long parent3 = Long.valueOf("31");
+        Long child3 = Long.valueOf("36");
+
+        //아우터 가져오기
+        model.addAttribute("outer", itemService.findRecommendCategory(parent1, child1));
+        //상의 가져오기
+        model.addAttribute("top", itemService.findRecommendCategory(parent2, child2));
+        //하의 가져오기
+        model.addAttribute("bottom", itemService.findRecommendCategory(parent3, child3));
 
         return "/view/daily-recommend";
     }
