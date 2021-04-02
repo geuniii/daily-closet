@@ -427,8 +427,9 @@ public class MainController {
         model.addAttribute("bottomList", bottom);
         model.addAttribute("accList", acc);
         model.addAttribute("shoesList", shoes);
+        model.addAttribute("member", member);
 
-        System.out.println("찜리스트--------->" + likeList.toString());
+        System.out.println("상의--------->" + top);
         return "/view/cody";
     }
 

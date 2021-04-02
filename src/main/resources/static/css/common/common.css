@@ -125,11 +125,19 @@ ol{
     height:200px;
 }
 
-.outerimgbox , .topimgbox,  .bottomimgbox,  .accimgbox,  .shoesimgbox{
-
-    writing-mode:vertical-lr;
+.codybox {
+    border: 1px solid grey;
+    display: inline;
     width: 100px;
     height: 100px;
+    margin: 20px;
+}
+
+.outerimgbox , .topimgbox,  .bottomimgbox,  .accimgbox,  .shoesimgbox {
+
+    writing-mode:vertical-lr;
+    width: 200px;
+    height: 200px;
 }
 
 .vertical-data{
@@ -358,4 +366,10 @@ ol{
     width: 600px;
     height: 100px;
     margin: 15px 15px 15px -10px;
+}
+
+#codyContainer{
+    text-align: center;
+    width: 900px;
+    height: 300px;
 }
