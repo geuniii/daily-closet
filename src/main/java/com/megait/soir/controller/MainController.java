@@ -3,6 +3,7 @@ package com.megait.soir.controller;
 import com.google.gson.JsonObject;
 import com.megait.soir.form.CodyForm;
 import com.megait.soir.domain.*;
+import com.megait.soir.form.ReviewForm;
 import com.megait.soir.repository.MemberRepository;
 import com.megait.soir.service.*;
 import com.megait.soir.user.CurrentUser;
@@ -11,12 +12,7 @@ import com.megait.soir.user.SignUpValidator;
 import com.megait.soir.user.UpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.codec.json.AbstractJackson2Decoder;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,7 +36,22 @@ public class MainController {
     private final SendEmailService sendEmailService;
     private final CodyService codyService;
     private final ReviewService reviewService;
+    private final WeatherService weatherService;
 
+//    @GetMapping("/") // root context가 들어오면 index page를 보여준다.
+//    public String index(@CurrentUser Member member, Model model) {
+//
+//        if (member != null) {
+//            model.addAttribute("member", member);
+//        }
+//        model.addAttribute("albumList", itemService.getItemList());
+//        model.addAttribute("bookList", itemService.getItemList());
+//        model.addAttribute("title", "Soir.");
+//        return "/view/index";
+//    }
+
+
+    // 재우
     @GetMapping("/") // root context가 들어오면 index page를 보여준다.
     public String index(@CurrentUser Member member, Model model, String keyword, String searchType){
 
@@ -64,6 +75,31 @@ public class MainController {
 
     }
     return "/view/index";
+    }
+
+    /**
+     * 날씨 전체조회
+     * @return
+     */
+    @GetMapping("/weather/index")
+    public String weatherList(Model model) {
+        model.addAttribute("weatherList", weatherService.findAllDesc());
+
+        return "/view/weather";
+    }
+
+
+
+    /**
+     * 도시 날씨 조회
+     * @param city
+     * @param model
+     * @return
+     */
+    @GetMapping("/weather/weatherList")
+    public String weatherCityList(String city, Model model) {
+        model.addAttribute("weatherList", weatherService.findByWeatherCity(city));
+        return "/view/weather :: #weatherList";
     }
 /////////
 
@@ -118,7 +154,7 @@ public class MainController {
      * @return
      */
     @GetMapping("/itemList")
-    public String itemList(ItemRequest itemRequest ,Model model) {
+    public String itemList(ItemRequest itemRequest, Model model) {
         String categoryName = itemRequest.getCategoryName();
         Pageable pageable = itemService.getPageable(itemRequest);
         if (itemRequest.getCategoryName().equals("best")) {
@@ -244,7 +280,9 @@ public class MainController {
         log.info("id : " + id);
 
         Item item = itemService.findItem(id);
+//        List<Review> reviewList = reviewService.findAll(item);
 
+        model.addAttribute(new ReviewForm());
         model.addAttribute("like_status", false);
         if (member != null) {
             member = memberRepository.findByEmail(member.getEmail());
@@ -252,6 +290,7 @@ public class MainController {
         }
         model.addAttribute("item", item);
         model.addAttribute("currentUser",member);
+//        model.addAttribute("reviewList",reviewList);
 
         System.out.println();
 
@@ -388,52 +427,53 @@ public class MainController {
         model.addAttribute("bottomList", bottom);
         model.addAttribute("accList", acc);
         model.addAttribute("shoesList", shoes);
+        model.addAttribute("member", member);
 
-        System.out.println("찜리스트--------->" + likeList.toString());
+        System.out.println("상의--------->" + top);
         return "/view/cody";
     }
 
     @PostMapping("/cody")
-    public String codySubmit(@CurrentUser Member member, @Valid CodyForm codyForm, @Valid long topId) {
+    public String codySubmit(@CurrentUser Member member, @Valid CodyForm codyForm) {
 
         Cody cody = codyService.createNewCody(member,codyForm);
 
         return "redirect:/cody"; // root로 redirect
-
     }
 
-//    @PostMapping("/review")
-//    public String review(@CurrentUser Member member,  @RequestParam("id") Long itemId, @RequestParam("parentId")long parentId, @RequestParam("title")String title, @RequestParam("content") String content){
-//        Item item = itemService.findItem(itemId);
-//        reviewService.createNewReview(member,item,parentId,title,content);
+    // 새 글 올리기
+    @PostMapping("/review")
+    public String create(@CurrentUser Member member, @Valid ReviewForm reviewForm) throws Exception {
+        log.info("POST /review : " + reviewForm.toString());
+        Item item = itemService.findItem(reviewForm.getItemId());
+        // 리뷰 수정
+        if(reviewForm.getReviewId()!=null){
+            Optional<Review> optional = reviewService.findById(reviewForm.getReviewId());
+            if(optional!=null){
+                Review review = optional.get();
+                reviewService.updateReview(review,reviewForm);
+                return "redirect:/store/detail/"+reviewForm.getItemId();
+            }
+        }
+        // 리뷰 생성
+        reviewService.createReview(member,item,reviewForm);
+        return "redirect:/store/detail/"+reviewForm.getItemId();
+    }
 //
-//        return "redirect:/store/detail?{itemId}";
+//    // 리뷰 수정
+//    @PutMapping("/review")
+//    public void modify(Review review, @Valid ReviewForm reviewForm) throws Exception{
+//        log.info("PUT data : " + reviewForm.toString());
+//        reviewService.update(review, reviewForm);
 //    }
 
-//    @PostMapping("/review")
-//    public String review(Long itemId, String content) throws Exception{
-//        Item item = itemService.findItem(itemId);
-//        reviewService.createNewReview(item,content);
-//
-//        return "redirect:/store/detail?{itemId}";
-//    }
+    // 리뷰 삭제
+    @PostMapping("/review/delete")
+    public String deleteReview(@RequestParam("reviewId") Long reviewId, @RequestParam("itemId") Long itemId ){
+        log.info("DELETE no : " + reviewId);
+        reviewService.deleteReview(reviewId);
+        return "redirect:/store/detail/"+itemId;
 
-    @GetMapping("/review/{id}")
-    public String writeReview(@CurrentUser Member member, @PathVariable Long id, Model model) {
-//
-//        Item item = itemService.findItem(id);
-//
-//        model.addAttribute("like_status", false);
-//        if (member != null) {
-//            member = memberRepository.findByEmail(member.getEmail());
-//            model.addAttribute("like_status", member.getLikes().contains(item));
-//        }
-//        model.addAttribute("item", item);
-//        model.addAttribute("currentUser",member);
-//
-//        System.out.println();
-
-        return "/view/write-review";
     }
 
 }

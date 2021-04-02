@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class CodyForm {
+
     private Long outerId;
     private Long topId;
     private Long bottomId;

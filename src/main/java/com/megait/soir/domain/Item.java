@@ -37,6 +37,9 @@ public class Item {
 
     private int liked;
 
+    /**
+     * 수정
+     */
     @ManyToOne(cascade = CascadeType.ALL)
     private ParentCategory parentCategory;
 

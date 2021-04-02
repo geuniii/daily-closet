@@ -57,7 +57,6 @@ public class Member {
         따라서 JpaRepository를 상속받은 interface를 통해 수정하지 않고 값을 변경할 경우 해당 annotation을 사용한다.
         이 경우 method 시작 시점에 transaction이 begin되고, exception이 나지 않을 경우 commit된다(exception 발생 시 rollback)
          */
-
         //email token value 생성
         emailCheckToken = UUID.randomUUID().toString();
     }
