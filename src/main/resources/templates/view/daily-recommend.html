@@ -4,6 +4,8 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout" th:with="title='daily-recommend'">
 
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
 <div layout:fragment="content" class="container" style="background-color: #FFFFFF;">
     <div class="container">
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -17,21 +19,20 @@
                 font-family: 'Gamja Flower', cursive;
                 font-size: 25px;
             }
-
-
         </style>
-
-
 
         <!--현재 날씨-->
         <div class="row">
             <h1> </h1>
             <!--날씨 아이콘-->
             <div id="loadWeatherIcon">....</div>
+            <p>&nbsp</p>
             <!--현재 온도-->
             <span id="loadWeather">현재 날씨 로드중...</span>
+            <p>&nbsp</p>
             <!--시계-->
             <span id="clock">00:00</span>
+            <hr style="color:#FFFFFF;">
             <!--현위치 주소-->
             <span id="full_address">현재 위치 로드중...</span>
 
@@ -45,6 +46,12 @@
 <!--                <span th:text="${clothes_outer.url}"></span>-->
 <!--            </div>-->
             <h1> </h1>
+<!--            <h1>fas fa-cloud-rain</h1>-->
+
+<!--            <i class='fas fa-cloud-rain'></i>-->
+<!--            <i class='fas fa-cloud-rain' style='font-size:24px'></i>-->
+<!--            <i class='fas fa-cloud-rain' style='font-size:36px'></i>-->
+<!--            <i class='fas fa-cloud-rain' style='font-size:48px;color:red'></i>-->
         </div>
 <hr style="color: #FFFFFF">
         <div class="row">
@@ -161,11 +168,6 @@
     <!--현재 위치값(좌표,주소값) 스크립트 -->
     <script>
         const KEY ="AIzaSyBRIdueEX0Qeqz8Wyztxks_rSof_IdTNWM";
-        //const OpenWeatherKey = "32dfb5f4525c5b244a15ba405f09c370";
-
-        // $("#locationBtn").click(function(){
-            // e.preventDefault();
-       // $("#locationBtn").click(function(){
             let url;
             let city;
             let city_address;
@@ -247,28 +249,48 @@
                         //let image = data.weather[0].icon;
                         let icon = "http://openweathermap.org/img/w/"+data.weather[0].icon+".png";
                         currentWeather.innerText = temperature +"°C";
-                        loadWeatherIcon.innerHTML="<img src='"+ icon+"' height='230' width='280'>"
+                        switch (data.weather[0].description){
+                            case "clear sky":{
+                                loadWeatherIcon.innerHTML="<i class='fas fa-sun fa-5x'></i>"
+                                break;
+                            }
+                            case "few clouds":{
+                                loadWeatherIcon.innerHTML="<i class='fas fa-cloud-su fa-5x'></i>"
+                                break;
+                            }
+                            case "scattered clouds": case "broken clouds":{
+                                loadWeatherIcon.innerHTML="<i class='fas fa-cloud fa-5x'></i>"
+                                break;
+                            }
+                            // case "broken clouds":{
+                            //     loadWeatherIcon.innerHTML="<i class='wi wi-cloudy' height='230' width='280'></i>"
+                            // }
+                            case "shower rain":{
+                                loadWeatherIcon.innerHTML="<i class='fas fa-cloud-showers-heavy fa-5x'></i>"
+                                break;
+                            }
+                            case "rain":{
+                                loadWeatherIcon.innerHTML="<i class='fas fa-cloud-rain fa-5x'></i>"
+                                break;
+                            }
+                            case "thunderstorm":{
+                                loadWeatherIcon.innerHTML="<i class='fas fa-poo-storm fa-5x'></i>"
+                                break;
+                            }
+                            case "snow":{
+                                loadWeatherIcon.innerHTML="<i class='fas fa-snowflake fa-5x'></i>"
+                                break;
+                            }
+                            case "mist":{
+                                loadWeatherIcon.innerHTML="<i class='fas fa-smog fa-5x'></i>"
+                                break;
+                            }
+
+                        }
+                        // loadWeatherIcon.innerHTML="<img src='"+ icon+"' height='230' width='280'>"
+
 
                     });
-
-                // $.ajax({
-                //     url: "/daily-recommend",
-                //     dataType: "json",
-                //     type: "GET",
-                //     async: "false",
-                //     success: function(resp) {
-                //         console.log(resp);
-                //         console.log("현재온도 : "+ (resp.main.temp- 273.15) );
-                //         console.log("현재습도 : "+ resp.main.humidity);
-                //         console.log("날씨 : "+ resp.weather[0].main );
-                //         console.log("상세날씨설명 : "+ resp.weather[0].description );
-                //         console.log("날씨 이미지 : "+ resp.weather[0].icon );
-                //         console.log("바람   : "+ resp.wind.speed );
-                //         console.log("나라   : "+ resp.sys.country );
-                //         console.log("도시이름  : "+ resp.name );
-                //         console.log("구름  : "+ (resp.clouds.all) +"%" );
-                //     }
-                // })
             });
 
     </script>

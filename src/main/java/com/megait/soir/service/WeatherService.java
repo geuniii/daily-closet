@@ -23,6 +23,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -270,6 +271,19 @@ public class WeatherService {
     public List<Weather> findCurrentDateTemperature(String currentdate, String city, String meridien){
         return weatherRepository.findCurrentDateTemperature(currentdate, city, meridien);
     }
+//    public int WeeklyTemperatureAverage(String city){
+//         int sum= 0;
+//         int average=0;
+//         List<Weather.WeatherMapping> temp = weatherRepository.findAllBy(city);
+//
+//        Iterator iter  = temp.iterator();
+//        while (iter.hasNext()){
+//            sum += Long.valueOf("iter.next()");
+//            average = sum/temp.size();
+//        }
+//        System.out.println(average);
+//        return average;
+//    }
 
 
 
