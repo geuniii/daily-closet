@@ -181,5 +181,22 @@ public class ItemService {
         return optional.orElseGet(() -> itemRepository.findById(id).get());
     }
 
+    //추천 옷 (아우터, 상의 ,하의 )
+    public Item findRecommendCategory(Long parent, Long child){
+        ParentCategory parentCategory = parentCategoryRepository.getOne(parent);
+        ChildCategory childCategory = childCategoryRepository.getOne(child);
+
+        // 카테고리에 해당하는 아이템들을 받는다.
+        List<Item> itemList = itemRepository.findAllByParentCategoryAndChildCategory(parentCategory, childCategory);
+
+        // 이 중 랜덤하게 1개를 선택한다.
+        int index = (int)(Math.random() * itemList.size());
+        Item item = itemList.get(index);
+
+        // 아이템의 url들 중, 0번 url을 mainUrl로
+        item.setMainUrl(item.getUrls().get(0));
+        return item;
+    }
+
 
 }

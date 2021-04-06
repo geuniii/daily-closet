@@ -264,30 +264,10 @@ public class WeatherService {
             .collect(Collectors.toList());
     }
 
-    // 재우
-
-//    private String callWeatherApi(int apiType, String regionId) {
-//        String url = "http://apis.data.go.kr/1360000/MidFcstInfoService/getMidTa";
-//        if (apiType == API_TYPE_WEATHER) {
-//            // 날씨
-//            url = "http://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst";
-//        } else {
-//            // 온도
-//            url = "http://apis.data.go.kr/1360000/MidFcstInfoService/getMidTa";
-//        }
-//        RestTemplate restTemplate = restTemplateBuilder.build();
-////        String url = "http://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst?serviceKey=%2Ftpu%2FYUap%2BAKJVZ8wBRmoDcQjhE1QN01m5tAt0uNquuFM7au5V4OsdaTslntZyw1hpcWY2kCq3G973tnedGbuw%3D%3D&pageNo=1&numOfRows=10&dataType=JSON&regId=11B00000&tmFc=202103230600";
-//        String tmFc = "202103240600";
-//        Map<String, String> params = new HashMap<>();
-//        params.put("ServiceKey", urlEncode("/tpu/YUap+AKJVZ8wBRmoDcQjhE1QN01m5tAt0uNquuFM7au5V4OsdaTslntZyw1hpcWY2kCq3G973tnedGbuw=="));
-//        params.put("pageNo", "1");
-//        params.put("numOfRows", "10");
-//        params.put("dataType", "JSON");
-//        params.put("regId", regionId);
-//        params.put("tmFc", tmFc);
-//
-//        String result = restTemplate.getForObject(url, String.class, params);
-////        String result = restTemplate.getForObject(url, String.class);
-//        System.out.println(result);
-//    }
+    public List<Weather> findCurrentLocalWeather(String city){
+        return weatherRepository.findByCurrentLocalWeather(city);
+    }
+    public List<Weather> findCurrentDateTemperature(String currentdate, String city, String meridien){
+        return weatherRepository.findCurrentDateTemperature(currentdate, city, meridien);
+    }
 }

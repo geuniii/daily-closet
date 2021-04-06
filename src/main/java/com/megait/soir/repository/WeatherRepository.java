@@ -23,9 +23,20 @@ public interface WeatherRepository extends JpaRepository<Weather, Long> {
             @Param("weatherCity")String weatherCity,
             @Param("meridiem")String meridiem,
             @Param("startDate")String startDate,
-            @Param("endDate")String endDate);
+            @Param("endDate")String endDate
+    );
 
 //    @Query(value = "select * from  Item e where e.Name like %:keyword% or e.Brand like %:keyword%", nativeQuery = true)
 //    List<Item> findByAllKeyword(@Param("keyword") String keyword);
 
+    //원하는 지역만 찾을때 사용
+    @Query(value = "select * from  WEATHER e where e.city like %:city% ", nativeQuery = true)
+    List<Weather> findByCurrentLocalWeather(@Param("city") String city);
+
+    // 날짜, 지역, 오전/오후인지와 일치하는 값 뽑기
+    @Query(value = "select * from  WEATHER e where e.base_date like %:base_date%  and e.city like %:city% and e.meridiem like %:meridiem%", nativeQuery = true)
+    List<Weather> findCurrentDateTemperature(@Param("base_date") String currentDate,
+                                             @Param("city") String city,
+                                             @Param("meridiem") String meridiem
+    );
 }
