@@ -13,27 +13,27 @@
                     <div class="row" style="position: relative; height: 400px; width: 400px; background-color: #F8EAC3">
                         <!--                               하의-->
                         <div class="col" style="position: absolute">
-                            <img th:id="bottomCody" style="position: absolute; top:10px; left: 170px; width:60%;">
+                            <img th:id="bottomCody" style="position: absolute; top:20px; left: 170px; width:60%;">
                             <input th:id="bottomId" type="hidden" th:attr="name='bottomId'">
                         </div>
                         <!--                                상의-->
                         <div class="col" style="position: absolute">
-                            <img th:id="topCody" style="position: absolute; top:10px; left: 45px; width:50%">
+                            <img th:id="topCody" style="position: absolute; top:20px; left: 45px; width:50%">
                             <input th:id="topId" type="hidden" th:attr="name='topId'">
                         </div>
                         <!--                                아우터-->
                         <div class="col" style="position: absolute">
-                            <img th:id="outerCody" style="position: absolute;top:110px; left: 105px; width:50%">
+                            <img th:id="outerCody" style="position: absolute;top:120px; left: 105px; width:50%">
                             <input th:id="outerId" type="hidden" th:attr="name='outerId'">
                         </div>
                         <!--                                ACC-->
                         <div class="col" style="position: absolute">
-                            <img th:id="accCody" style="position: absolute;top:220px; left: 20px; width:30%">
+                            <img th:id="accCody" style="position: absolute;top:220px; left: 20px; width:35%">
                             <input th:id="accId" type="hidden" th:attr="name='accId'">
                         </div>
                         <!--                                신발-->
                         <div class="col" style="position: absolute">
-                            <img th:id="shoesCody" style="position: absolute; top:330px; left: 275px; width:20%">
+                            <img th:id="shoesCody" style="position: absolute; top:230px; left: 200px; width:35%">
                             <input th:id="shoesId" type="hidden" th:attr="name='shoesId'">
                         </div>
 
@@ -92,50 +92,50 @@
 
     <div class="container px-5 py-5" style="text-align: center">
         <!--                아우터-->
-        <div class="likeList" id="outerList" style="display: none">
-            <li th:if="${outerList.size()== 0}">Add Outer List</li>
-            <li th:each="item:${outerList}">
-                <img th:class="outerimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
-                     th:alt="${item.getId()}">
-            </li>
-        </div>
+            <div class="likeList" id="outerList" style="display: none">
+                <li th:if="${outerList.size()== 0}">Add Outer List</li>
+                <li th:each="item:${outerList}">
+                    <img th:class="outerimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
+                         th:alt="${item.getId()}">
+                </li>
+            </div>
 
         <!--                상의-->
-        <div class="likeList" id="topList" style="display: none">
-            <li th:if="${topList.size()== 0}">Add Top List</li>
-            <li th:each="item:${topList}">
-                <img th:class="topimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
-                     th:alt="${item.getId()}">
-            </li>
-        </div>
+            <div class="likeList" id="topList" style="display: none">
+                <li th:if="${topList.size()== 0}">Add Top List</li>
+                <li th:each="item:${topList}">
+                    <img th:class="topimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
+                         th:alt="${item.getId()}">
+                </li>
+            </div>
 
 
         <!--                하의-->
-        <div class="likeList" id="bottomList" style="display: none">
-            <li th:if="${bottomList.size()== 0}">Add Bottom List</li>
-            <li th:each="item:${bottomList}">
-                <img th:class="bottomimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
-                     th:alt="${item.getId()}">
-            </li>
-        </div>
+            <div class="likeList" id="bottomList" style="display: none">
+                <li th:if="${bottomList.size()== 0}">Add Bottom List</li>
+                <li th:each="item:${bottomList}">
+                    <img th:class="bottomimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
+                         th:alt="${item.getId()}">
+                </li>
+            </div>
 
         <!--                가방-->
-        <div class="likeList" id="accList" style="display: none">
-            <li th:if="${accList.size()== 0}">Add Acc List</li>
-            <li th:each="item:${accList}">
-                <img th:class="accimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
-                     th:alt="${item.getId()}">
-            </li>
-        </div>
+            <div class="likeList" id="accList" style="display: none">
+                <li th:if="${accList.size()== 0}">Add Acc List</li>
+                <li th:each="item:${accList}">
+                    <img th:class="accimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
+                         th:alt="${item.getId()}">
+                </li>
+            </div>
 
         <!--                신발-->
-        <div class="likeList" id="shoesList" style="display: none">
-            <li th:if="${shoesList.size()== 0}">Add Shoes List</li>
-            <li th:class="shoes" th:each="item:${shoesList}">
-                <img th:class="shoesimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
-                     th:alt="${item.getId()}">
-            </li>
-        </div>
+            <div class="likeList" id="shoesList" style="display: none">
+                <li th:if="${shoesList.size()== 0}">Add Shoes List</li>
+                <li th:class="shoes" th:each="item:${shoesList}">
+                    <img th:class="shoesimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
+                         th:alt="${item.getId()}">
+                </li>
+            </div>
 
 
     </div>
