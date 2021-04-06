@@ -69,6 +69,7 @@ public class OrderService {
         if(cartOrder == null){
             throw new IllegalArgumentException("empty.cart");
         }
+        log.info("get cart list complete.");
 
         return cartOrder.getOrderItems();
 
@@ -82,7 +83,6 @@ public class OrderService {
         Orders orders = orderRepository.findByMemberAndStatus(member, Status.CART);
         List<OrderItem> orderItemList = orders.getOrderItems();
 
-        //
         log.info("deleteItemId : " + deleteItemId);
         orderItemList.removeIf(item -> item.getId().equals(deleteItemId));
         orderItemRepository.deleteById(deleteItemId);
@@ -92,11 +92,11 @@ public class OrderService {
         orderRepository.save(orders);
 
     }
-    
-    
+
+
     public int getTotalPrice(List<OrderItem> list){
         // 장바구니에 담긴 Item 객체들의 총 가격을 계산
 //        return list.stream().mapToInt(OrderItem::getOrderPrice).sum();
-         return list.stream().mapToInt(orderItem -> orderItem.getOrderPrice()).sum();
+        return list.stream().mapToInt(orderItem -> orderItem.getOrderPrice()).sum();
     }
 }

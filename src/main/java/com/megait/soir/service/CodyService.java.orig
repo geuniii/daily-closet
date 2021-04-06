@@ -15,37 +15,40 @@ public class CodyService {
 
     public Cody createNewCody(Member member,CodyForm codyForm) {
 
-<<<<<<< HEAD
         if (codyForm.getTopId()==null){
             codyForm.setTopId(0L);
         }
-=======
->>>>>>> origin/origin/geunii
 
         Cody cody = Cody.builder()
                 .member(member)
                 .topId(codyForm.getTopId())
                 .bottomId(codyForm.getBottomId())
                 .shoesId(codyForm.getShoesId())
+<<<<<<< HEAD
+                .backgroundId(codyForm.getBackgroundId())
+                .topSize(codyForm.getTopSize())
+                .bottomSize(codyForm.getBottomSize())
+                .shoesSize(codyForm.getShoesSize())
                 .build();
 
-<<<<<<< HEAD
+        if(codyForm.getOuterId()!=null){
+            cody.setOuterId(codyForm.getOuterId());
+            cody.setOuterSize(codyForm.getOuterSize());
+        }
+
+        if(codyForm.getAccId()!=null){
+            cody.setAccId(codyForm.getAccId());
+            cody.setAccSize(codyForm.getAccSize());
+=======
+                .build();
+
         if(codyForm.getOuterId()!=null){
             cody.setOuterId((codyForm.getOuterId()));
         }
 
         if(codyForm.getAccId()!=null){
             cody.setAccId(((codyForm.getAccId())));
-=======
-        System.out.println("TOP----->"+cody.getTopId());
-
-        if(codyForm.getOuterId()!=null){
-            cody.setOuterId(codyForm.getOuterId());
-        }
-
-        if(codyForm.getAccId()!=null){
-            cody.setAccId(codyForm.getAccId());
->>>>>>> origin/origin/geunii
+>>>>>>> origin/main
         }
 
         codyRepository.save(cody);

@@ -7,12 +7,13 @@
     <div class="container px-5 py-5">
         <h3 class="text-center">My Cart</h3>
         <p class="text-center" th:if="${'empty.cart' == error_message}">empty cart.</p>
-<!--        <hr class = "col-12 my-4"/>-->
+        <!--        <hr class = "col-12 my-4"/>-->
 
-        <br/><br/>
+        <br/>
         <form th:if="${error_message == null}" th:action="@{/cart/list}" method="post" name="buyForm">
             <table id="cart_table" class="table table-bordered table-responsive-sm">
 
+                <br/>
                 <thead class="thead-light">
                 <tr>
                     <th scope="col" style="width:8%">select</th>
@@ -38,14 +39,14 @@
                         </a>
 
 
-<!--                        <form id="minusform" th:action="@{/cart/minus}" method="post" style="text-align: center;">-->
-<!--                            <button id="cartMinusBtn"-->
-<!--                                    type="submit"-->
-<!--                                    name="orderItem_id"-->
-<!--                                    th:value="${orderItem.id}">-->
+                        <!--                        <form id="minusform" th:action="@{/cart/minus}" method="post" style="text-align: center;">-->
+                        <!--                            <button id="cartMinusBtn"-->
+                        <!--                                    type="submit"-->
+                        <!--                                    name="orderItem_id"-->
+                        <!--                                    th:value="${orderItem.id}">-->
 
-<!--                            </button>-->
-<!--                        </form>-->
+                        <!--                            </button>-->
+                        <!--                        </form>-->
                     </td>
                 </tr>
                 </tbody>

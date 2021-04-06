@@ -2,7 +2,7 @@
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="layout">
+      layout:decorate="layout" th:with="title='Hello!'">
 
 <th:block layout:fragement="css">
     <link rel="stylesheet" th:href="@{/css/user/style.css}">
@@ -10,16 +10,11 @@
 
 <div layout:fragment="content" class="container" style="background-color: white;">
 
-    <br/><br/>
+    <br/>
     <div class="py-`5` ml-2" id="pagebox">
-        <div>
-            <h2 th:if="${title == 'BEST'}" class="pageLogo" th:text="${title}"></h2>
-            <h2 th:if="${title == '아우터'}" class="pageLogo">OUTER</h2>
-            <h2 th:if="${title == '상의'}" class="pageLogo">TOP</h2>
-            <h2 th:if="${title == '바지'}" class="pageLogo">BOTTOM</h2>
-            <h2 th:if="${title == '신발_스니커즈'}" class="pageLogo">SHOES</h2>
-            <h2 th:if="${title == '가방_여성가방'}" class="pageLogo">ACC</h2>
-
+        <div id="catetitle">
+            <!-- -->
+<!--            <h2 th:text="This is ${title} Page."><h2>-->
         </div>
 
         <th:block th:insert="item_fragements :: item_list(${itemList})"/>

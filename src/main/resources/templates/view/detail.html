@@ -37,17 +37,14 @@
                                                                                th:src="${item.urls.get(8)}"></div>
                 <div class="imgbox_mini" th:if="${item.urls.size()} >= 10"><img class="mini" id="mini9"
                                                                                 th:src="${item.urls.get(9)}"></div>
-
             </div>
-
         </div>
 
         <div id="product_info">
             <h4 th:text="${item.name}"/>
             <p th:text="${item.brand}" id="brandinfo"/> / <p th:text="${item.code}" id="codeinfo"/>
             <hr>
-            <i id="ic-like" th:class="${like_status} ? 'fas fa-heart':'far fa-heart'"><p id="likecount"
-                                                                                         th:text="${item.liked}"/>
+            <i id="ic-like"><p id="likecount" th:text="${item.liked}"/>
                 <p id="likeinfo"> people like this product. </p></i>
             <p><h6>Gender</h6>Unisex</p>
             <p><h6>Size</h6>사이즈 드롭다운 배치</p>
@@ -64,110 +61,103 @@
                             th:value="${item.id}">
                         Add Cart
                     </button>
+
                 </form>
 
                 <button id="like" class="btn btn-light">
                     <i id="like_status" th:class="${like_status} ? 'fas fa-heart':'far fa-heart'"
                        class="far fa-heart"></i>
-                    Like
-                </button>
-                <!--                <button id="review" class="btn btn-dark col-12 mx-1 my-21" >review</button>-->
-                <!--                <button id="review" class="btn btn-dark col-12 mx-1 my-21"-->
-                <!--                        th:onclick="location.href='/review/[[${item.getId()}]]'">review-->
-                <!--                </button>-->
-                <button id="wr-review" class="btn btn-light">Review</button>
-            </div>
-
-        </div>
-
-        <div th:if="${item.getReview().size()!=0}" class="row" style="text-align:center"
-             th:each="review:${item.getReview()}">
-
-            <div th:if="${review.getParentId()!=0}">
-                <p class="col-1" th:text="${review.getMember.getEmail()}"/>
-                <p class="col-7">${review.getContent()}</p>
-                <p class="col-3" th:type="${review.getCreateDate()}"></p>
-                <button class="btn btn-link" style="color:gray;font-size:small"
-                        th:if="${currentUser.getId()}==${review.getMember().getId()}"
-                        th:onclick="deleteComment(${review.getId()})">DELETE
+                    찜하기
                 </button>
 
+                <button type="button" class="btn btn-light" id="createBtn">Write Review</button>
             </div>
         </div>
+
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <th:block th:insert="review_fragment :: review_list(${item.getReview()}, ${currentUser})"/>
+
+    <!--like Modal -->
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog"
+         aria-labelledby="modalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">My Store</h5>
+                    <h5 class="modal-title" id="modalTitle"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&times</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    ...
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal"
+                            th:onclick="location.href='/store/detail/[[${item.id}]]'">닫기
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <<!-- Review Modal -->
+    <!--delete review Modal -->
+    <div class="modal fade" id="delReviewModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form class="needs-validation" th:id="deleteReview" th:action="@{/review/delete}" th:method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete Review</h5>
+                        <input type="hidden" id="reviewId" name="reviewId">
+                        <input type="hidden" name="itemId" th:value="${item.getId()}">
+                    </div>
+                    <div class="modal-body">해당 글을 삭제합니다</div>
+                    <div class="modal-footer">
+                        <button id="submitBtn" type="submit" class="btn btn-dark">확인</button>
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
     <div class="modal fade" id="writeReview" role="dialog">
         <div class="modal-dialog">
-
             <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 id="modal-title" class="modal-title"></h4>
+            <form class="needs-validation" th:id="reviewForm" th:object="${reviewForm}" th:action="@{/review}"
+                  th:method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 id="modal-title" class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <tr>
+                                <input type="hidden" th:id="title" th:attr="name='itemId'" th:value="${item.getId()}">
+                                <input type="hidden" th:id="modal-review-id" th:attr="name='reviewId'">
+                                <td>Title</td>
+                                <td><input class="form-control" id="modal-review-title" th:attr="name='title'" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Content</td>
+                                <td><textarea class="form-control" id="modal-review-content" th:attr="name='contents'"
+                                              rows="10"></textarea></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button th:id="modalSubmit" type="submit" class="btn btn-success">submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <table class="table">
-                        <tr>
-                            <td>사용자명</td>
-                            <td><input class="form-control" id="userName" type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>내용</td>
-                            <td><textarea class="form-control" id="contents" rows="10"></textarea></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button id="modalSubmit" type="button" class="btn btn-success">Submit</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 
     <script th:inline="javascript">
-
-        // function commentWrite() {
-        //     $.ajax({
-        //         type: "POST",
-        //         url: "/review",
-        //         // data: {itemId: ${currentUser.getId()}, title: $("#title").val(), content: $("#content").val()},
-        //         data: {itemId: 102618, content: $("#content").val()},
-        //         dataType: 'json',
-        //         success: () => {
-        //             console.log("commentWrite()성공");
-        //             // window.location.href = '${pageContext.request.contextPath }/store/detail?id=${item.id}';
-        //         }
-        //         // error: () => {
-        //         //     console.log("commentWrite()실패");
-        //         //
-        //         // }
-        //     });
-        //
-        // }
-
         $(document).ready(function () {
             $("#like").click(function () {
                 $.ajax({
@@ -178,28 +168,27 @@
                     dataType: 'json', // 응답메시지의 content-type 을 json으로 (json타입으로 받겠다!)
                     success: function (result) {
                         // Modal 띄우기
-
                         $('.modal-body').html(result.message);
-                        $('#exampleModalCenter').modal('show');
-
+                        $('#modal').modal('show');
                         if (result.status) {
                             $("like_status").attr('class', 'fas fa-heart');
                         } else {
                             $("like_status").attr('class', 'far fa-heart');
                         }
                     }
+
                 });
             });
         });
 
         $(document).ready(function () { // document loading 후 실행할 함수
 
+            <!-- TODO : 이미지 누르면 해당 이미지를 큰 사진으로 보여주기-->
             var bigpic = document.querySelector("#nowimg");
             var smallpics = document.querySelectorAll(".mini"); // 작은 사진
 
             for (var i = 0; i < smallpics.length; i++) {
                 smallpics[i].addEventListener("click", changepic); // 이벤트 처리 부여
-
             }
 
             function changepic() {
@@ -210,79 +199,45 @@
 
         });
 
-        var action = '';
-        var url = '';
-        var type = '';
-        var bno = 0;
-
         $(document).ready(function () {
 
             // 새 글 쓰기 버튼 클릭
-            $("#wr-review").click(function () {
-                action = 'create';
-                type = 'POST'
-                $("#modal-title").text("새 글 작성");
+            $("#createBtn").click(function () {
+                $("#modal-title").text("Write Your Review");
                 $("#writeReview").modal();
             });
 
-            // 수정하기 버튼 클릭
-            $("button[name='modify']").click(function () {
-                action = 'modify';
-                type = 'PUT';
-                bno = this.value;
-
-                // content 담기
-                var row = $(this).parent().parent().parent();
-                var tr = row.children();
-
-                var userName = tr.eq(2).text();
-                var contents = tr.eq(1).text();
-
-                $("#modal-title").text("수정하기");
-
-                $("#userName").val(userName);
-                $("#contents").val(contents);
-
-                $("#myModal").modal();
-            });
-
             // 삭제하기 버튼 클릭
-            $("button[name='delete']").click(function () {
-                bno = this.value;
-                $.ajax({
-                    url: '/board/' + bno,
-                    type: 'DELETE',
-                });
-                location.reload();
-            })
-
-            // Modal의 Submit 버튼 클릭
-            $("#modalSubmit").click(function () {
-
-                if (action == 'create') {
-                    bno = 0;
-                    url = '/board';
-                } else if (action == 'modify') {
-                    url = '/board';
-                }
-
-                var data = {
-                    "bno": bno,
-                    "userName": $("#userName").val(),
-                    "contents": $("#contents").val()
-                };
-
-                $.ajax({
-                    url: url,
-                    type: type,
-                    data: data
-                })
-
-                location.reload();
+            $("#delete-review").click(function () {
+                $("#modal-title").text("Delete Your Review");
+                var reviewId = document.getElementById('delete-review').value;
+                $("#reviewId").val(reviewId);
+                console.log(reviewId);
+                $("#delReviewModal").modal();
             });
-
 
         });
+
+        function modifyReview(reviewForm) {
+            var title = reviewForm.reviewTitle.value;
+            var content = reviewForm.reviewContent.value;
+            var id = reviewForm.reviewId.value;
+
+            $("#modal-title").text("Modify Your Review");
+            $('#modal-review-title').val(title);
+            $('#modal-review-content').val(content);
+            $('#modal-review-id').val(id);
+
+            // document.getElementById("review-title").value = title;
+            // document.getElementById("review-content").value = content;
+            // document.getElementById("review-id").value = id;
+
+            console.log(document.getElementById("modal-review-title").value);
+            console.log(document.getElementById("modal-review-content").value);
+            console.log(document.getElementById("modal-review-id").value);
+
+            $("#writeReview").modal();
+        };
 
     </script>
 </div>

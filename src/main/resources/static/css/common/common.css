@@ -6,7 +6,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oi&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
 
 * {
     margin: 0;
@@ -21,48 +21,47 @@ body {
     text-align: center;
 }
 
-.lead{
+.lead {
     color: white;
 }
 
-#header{
+#header {
     background-color: white;
 }
 
 #wrapper {
-    /*width: 980px;*/
+    width: 980px;
     text-align: left;
     margin-left: auto;
     margin-right: auto;
+    background-color: pink;
 }
 
 
-
-#logo{
+#logo {
     padding-top: 70px;
     font-size: 5.0em;
     color: black;
-    font-family: 'Permanent Marker', cursive;
-    margin-bottom: 50px;
+    font-family: 'Rock Salt', cursive;
+    margin-: 50px;
 }
 
-
-#bigLogo{
+#bigLogo {
     margin-top: 100px;
     font-size: 9.0em;
-    font-family: "Permanent Marker", cursive;
+    font-family: "Rock Salt", cursive;
     text-shadow: 0px 0px 0px 5px grey;
 
 }
 
-#headlogo{
+#headlogo {
     background-color: darkgray;
-    font-family: "Permanent Marker", cursive;
+    font-family: "Rock Salt", cursive;
     height: 300px;
 }
 
-#navlogo{
-    font-family: "Permanent Marker", cursive;
+#navlogo {
+    font-family: "Rock Salt", cursive;
     font-size: 1.0em;
     font-weight: 700;
     margin-top: 25px;
@@ -70,22 +69,23 @@ body {
     margin-left: 20px;
 }
 
-
-.pageLogo{
-    font-family: "Permanent Marker", cursive;
+.pageLogo {
+    font-family: "Rock Salt", cursive;
     margin-left: 25px;
     margin-top: 50px;
 }
+
 
 table {
     border-spacing: 0;
     border-collapse: collapse;
 }
 
-.xs{
+.xs {
     text-align: left;
     font-size: 0.8rem;
 }
+
 
 td {
     text-align: left;
@@ -96,11 +96,10 @@ h1 {
     font-size: 4.0em;
     color: white;
     font-family: 'Oi', cursive;
-    text-shadow:
-            -1px -1px 0 #000,
-            1px -1px 0 #000,
-            -1px 1px 0 #000,
-            1px 1px 0 #000;
+    text-shadow: -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
 }
 
 h2 {
@@ -119,7 +118,7 @@ h5 {
     font-size: 1.6em;
 }
 
-h6{
+h6 {
     font-size: 1.4em;
     font-weight: 500;
 }
@@ -127,58 +126,101 @@ h6{
 p {
     font-size: 1.4em;
 }
+
 .banner {
     text-align: center;
     color: gray;
 }
+
 .container {
     max-width: 1500px;
 }
 
-li{
-    list-style:none;
+li {
+    list-style: none;
+}
+
+ol {
+    list-style: none;
 }
 
 .imgbox_middle {
     margin: 5px;
     padding: 7px;
     display: inline;
-    width:200px;
-    height:200px;
+    width: 200px;
+    height: 200px;
 }
 
-.codybox {
-    border: 1px solid grey;
+
+.outerimgbox, .topimgbox, .bottomimgbox, .accimgbox, .shoesimgbox {
+
+    /*writing-mode:vertical-lr;*/
+    text-align: center;
+    width: 200px;
+    height: 200px;
     display: inline;
-    width: 100px;
-    height: 100px;
-    margin: 20px;
 }
 
-.outerimgbox , .topimgbox,  .bottomimgbox,  .accimgbox,  .shoesimgbox{
-
-    writing-mode:vertical-lr;
-    width: 100px;
-    height: 100px;
+.vertical-data {
+    writing-mode: vertical-lr
 }
 
-.vertical-data{
-    writing-mode:vertical-lr
+.review-tr {
+    text-align: center;
+}
+
+.slidecontainer {
+    width: 50%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background: #A9A9A9;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #161616;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #161616;
+    cursor: pointer;
 }
 
 
-#back{
+#back {
     margin-left: 0;
     background-color: white;
 }
 
-#navbar{
+#navbar {
     background-color: darkgray;
     height: 70px;
 }
 
 
-#navp{
+#navp {
     text-align: center;
     font-weight: 700;
     font-size: 1.0em;
@@ -191,13 +233,21 @@ li{
     /*box-shadow: 2px 2px gray;*/
 }
 
+#usernav {
+    text-align: right;
+    float: right;
+}
 
-#searchType{
+#nav_left {
+    margin-left: 20%;
+}
+
+#searchType {
     margin: 10px;
 }
 
 
-#navbar_right{
+#navbar_right {
     margin-top: 7px;
     display: inline;
     float: right;
@@ -205,31 +255,31 @@ li{
     font-size: 1.0em;
 }
 
-#carousel{
+#carousel {
     width: 50%;
     height: 250px;
 }
 
-.user{
+.user {
     display: inline;
     text-decoration: black;
     margin-left: 10px;
     margin-right: 10px;
 }
 
-#memberInfo{
+#memberInfo {
     color: darkgrey;
 }
 
 
-#pagebox{
+#pagebox {
     width: 95%;
 }
 
 
-#logoutbtn{
+#logoutbtn {
     /*margin-top: 7px;*/
-    background-color: rgba( 255, 255, 255, 0 );
+    background-color: rgba(255, 255, 255, 0);
     color: grey;
     margin-top: 5px;
     margin-left: 7px;
@@ -237,70 +287,70 @@ li{
     font-size: 1.0em;
 }
 
-.component{
+.component {
     text-align: center;
 }
 
-#component_img{
+#component_img {
     width: 300px;
     height: 400px;
     margin: 15px 15px 15px -10px;
 }
 
-#component_info{
+#component_info {
     text-align: center;
     margin-left: 40px;
 }
 
-#component_name{
+#component_name {
     display: block;
     text-align: center;
 }
 
-#catetitle{
+#catetitle {
     margin-left: 360px;
     text-align: center;
     width: 50%;
 
 }
 
-#detailbox{
+#detailbox {
     margin-bottom: 50px;
 }
 
-#brandname{
+#brandname {
     text-align: left;
     display: block;
 }
 
-#imgbox{
+#imgbox {
     width: 400px;
     height: 400px;
     margin: 20px;
     margin-bottom: 50px;
 }
 
-#nowimg{
+#nowimg {
     width: 400px;
     height: 500px;
 }
 
-#product_info{
+#product_info {
     width: 450px;
 }
 
-#brandinfo, #codeinfo{
+#brandinfo, #codeinfo {
     display: inline;
 }
 
-#imgboxs_mini{
+#imgboxs_mini {
     text-align: center;
     width: 400px;
     height: 40px;
     margin-top: 130px;
 }
 
-.imgbox_mini{
+.imgbox_mini {
     width: 40px;
     height: 40px;
     display: inline;
@@ -308,34 +358,61 @@ li{
     padding: 7px;
 }
 
-.mini{
+.mini {
     width: 40px;
     height: 40px;
     border: 1px solid lightgrey;
 }
 
-#product_img{
+.color_box {
+    text-align: center;
+}
+
+.color_square {
+    width: 35px;
+    height: 35px;
+    margin-right: 5%;
+}
+
+.color_box {
+    text-align: center;
+}
+
+.color_square {
+    width: 35px;
+    height: 35px;
+    margin-right: 5%;
+}
+
+#product_img {
     margin-right: 20px;
 }
 
-#product_info{
+#cody_info {
+    width: 450px;
+    text-align: center;
+    margin-left: 5%;
+    margin-top: 150px;
+}
+
+
+#product_info {
     margin-top: 100px;
     margin-left: 5%;
     text-align: left;
 }
 
-#ic-like{
+#ic-like {
     display: inline;
 }
 
-#likecount{
+#likecount {
     display: inline;
 }
 
-#likeinfo{
+#likeinfo {
     display: inline;
 }
-
 
 #likeitem_table {
     text-align: center;
@@ -343,17 +420,17 @@ li{
     margin-left: 10%;
 }
 
-#likeitem_div{
+#likeitem_div {
     padding-left: 80px;
     padding-right: 80px;
 }
 
-.col-4{
+.col-4 {
     max-width: 350px;
     margin-bottom: 20px;
 }
 
-#likeitem_imgbox{
+#likeitem_imgbox {
     display: inline;
     margin: 15px;
     width: 210px;
@@ -362,89 +439,82 @@ li{
 
 }
 
-#likeitem_img{
+#likeitem_img {
     margin-left: 60px;
     display: block;
     border: 1px solid darkgrey;
     border-radius: 100px;
     width: 200px;
-    height:200px;
+    height: 200px;
     text-align: center;
 }
 
-#likeitem_info{
+#likeitem_info {
     text-align: left;
     width: 210px;
 }
 
-#likeitem_name{
+#likeitem_name {
     margin-top: 15px;
     margin-left: 60px;
     width: 50px;
 }
 
-#likeitem_price{
+#likeitem_price {
     margin-left: 60px;
 }
 
-#buyandcartbtn{
+#buyandcartbtn {
     margin-top: 20px;
 }
 
-/*#like{*/
-/*    margin-top: 20px;*/
-/*}*/
-
-/*#wr-review{*/
-/*    margin-top: 20px;*/
-/*}*/
-
-#buybtn{
+#buybtn {
     padding: 10px;
     /*margin-top: 10px;*/
     margin-bottom: 0px;
     margin-right: 10px;
 }
 
-#cartbtn{
+#cartbtn {
     display: inline;
     padding: 10px;
 }
 
-#cartform{
+#cartform {
     margin-top: 5px;
     display: inline;
 }
 
-#cart_table{
+#cart_table {
     text-align: center;
     width: 70%;
     margin-left: 15%;
 }
 
-#cart_minus{
+#cart_minus {
     display: inline;
 }
 
-#cartMinusBtn{
+#cartMinusBtn {
+    color: black;
     background: none;
 }
 
-#minus_icon{
+#minus_icon {
     background: none;
 }
 
-#like, #wr-review{
+#like, #wr-review {
     padding: 10px;
 }
 
 
-#codybox{
+#codybox {
     text-align: center;
     display: inline;
 }
 
-.cody{
+.cody {
     display: inline;
     text-align: center;
     border: 1px solid grey;
@@ -452,28 +522,112 @@ li{
     height: 100px;
 }
 
-#likelist_container{
+
+#likelist_container {
     text-align: center;
 }
 
-#wishlist_table_box{
+#wishlist_table_box {
     text-align: center;
 }
 
-#wishlist_table{
+#wishlist_table {
     margin-left: 21%;
     text-align: center;
     width: 800px;
 }
-/*#reviewbox{*/
-/*    width: 1200px;*/
-/*    height: 400px;*/
-/*    margin: 15px 15px 15px -10px;*/
-/*}*/
-#reivewInput{
+
+#reivewInput {
     width: 600px;
     height: 100px;
     margin: 15px 15px 15px -10px;
 }
 
+.likeListForCody {
+    text-align: center;
+    width: 900px;
+    height: 300px;
+}
 
+.likeList {
+    text-align: center;
+}
+
+.codyContainer {
+    text-align: center;
+    height: 900px;
+    display: inline;
+}
+
+.pagetitle {
+    text-align: left;
+    margin-left: 100px;
+}
+
+.codyArea {
+    class: row;
+    position: relative;
+    height: 400px;
+    width: 400px;
+    background-color: #F8EAC3;
+}
+
+
+.bottomCody {
+    position: absolute;
+    top: 20px;
+    left: 160px;
+    width: 60%;
+}
+
+.topCody {
+    position: absolute;
+    top: 20px;
+    left: 35px;
+    width: 50%;
+}
+
+.outerCody {
+    position: absolute;
+    top: 120px;
+    left: 95px;
+    width: 50%;
+}
+
+.shoesCody {
+    position: absolute;
+    top: 245px;
+    left: 215px;
+    width: 30%;
+}
+
+.accCody {
+    position: absolute;
+    top: 210px;
+    left: 10px;
+    width: 30%;
+}
+
+/*올빼미캐러셀 네비*/
+.owl-nav, .owl-dots {
+    display: block;
+    text-align: center;
+}
+
+.owl-nav .owl-prev, .owl-nav .owl-next {
+    display: inline-block;
+    margin: 5px;
+}
+
+.owl-dots .owl-dot {
+    display: inline-block;
+    background-color: #ccc;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.owl-dots .active {
+    background-color: #666;
+}
