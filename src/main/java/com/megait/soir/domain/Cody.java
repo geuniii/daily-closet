@@ -29,7 +29,6 @@ public class Cody {
     private long accId;
 
     private long shoesId;
-<<<<<<< HEAD
 
     private String backgroundId;
 
@@ -42,6 +41,5 @@ public class Cody {
     private long shoesSize;
 
     private long accSize;
-=======
->>>>>>> jaejae
+
 }

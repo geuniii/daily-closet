@@ -44,7 +44,7 @@ public class WeatherService {
     private final WeatherRepository weatherRepository;
 
 
-    @PostConstruct
+//    @PostConstruct
     @Transactional
     public void Init() {
         insertRegion();

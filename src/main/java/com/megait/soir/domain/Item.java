@@ -49,9 +49,6 @@ public class Item {
     @OneToMany(mappedBy = "item")
     private List<Review> review  = new ArrayList<>();;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private ChildCategory childCategory;
-
     @Transient
     private String mainUrl;
 

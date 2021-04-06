@@ -136,28 +136,18 @@ p {
     max-width: 1500px;
 }
 
-<<<<<<< HEAD
 li {
     list-style: none;
 }
 
 ol {
     list-style: none;
-=======
-li{
-    list-style:none;
-}
-
-ol{
-    list-style:none;
->>>>>>> jaejae
 }
 
 .imgbox_middle {
     margin: 5px;
     padding: 7px;
     display: inline;
-<<<<<<< HEAD
     width: 200px;
     height: 200px;
 }
@@ -220,36 +210,6 @@ ol{
 
 
 #back {
-=======
-    width:200px;
-    height:200px;
-}
-
-.codybox {
-    border: 1px solid grey;
-    display: inline;
-    width: 100px;
-    height: 100px;
-    margin: 20px;
-}
-
-.outerimgbox , .topimgbox,  .bottomimgbox,  .accimgbox,  .shoesimgbox{
-
-    writing-mode:vertical-lr;
-    width: 100px;
-    height: 100px;
-}
-
-.vertical-data{
-    writing-mode:vertical-lr
-}
-.review-tr{
-    text-align: center;
-}
-
-
-#back{
->>>>>>> jaejae
     margin-left: 0;
     background-color: white;
 }
@@ -278,7 +238,6 @@ ol{
     float: right;
 }
 
-<<<<<<< HEAD
 #nav_left {
     margin-left: 20%;
 }
@@ -289,19 +248,11 @@ ol{
 
 
 #navbar_right {
-=======
-#nav_left{
-    margin-left: 20%;
-}
-
-#navbar_right{
->>>>>>> jaejae
     margin-top: 7px;
     display: inline;
     float: right;
     font-weight: 700;
     font-size: 1.0em;
-<<<<<<< HEAD
 }
 
 #carousel {
@@ -318,14 +269,6 @@ ol{
 
 #memberInfo {
     color: darkgrey;
-=======
-    margin-left: 30%;
-}
-
-#carousel{
-    width: 50%;
-    height: 250px;
->>>>>>> jaejae
 }
 
 
@@ -593,7 +536,6 @@ ol{
     text-align: center;
     width: 800px;
 }
-<<<<<<< HEAD
 
 #reivewInput {
     width: 600px;
@@ -688,15 +630,4 @@ ol{
 
 .owl-dots .active {
     background-color: #666;
-=======
-/*#reviewbox{*/
-/*    width: 1200px;*/
-/*    height: 400px;*/
-/*    margin: 15px 15px 15px -10px;*/
-/*}*/
-#reivewInput{
-    width: 600px;
-    height: 100px;
-    margin: 15px 15px 15px -10px;
->>>>>>> jaejae
 }
