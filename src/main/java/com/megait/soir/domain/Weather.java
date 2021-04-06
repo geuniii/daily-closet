@@ -37,4 +37,12 @@ public class Weather {
         this.temperature = temperature;
         this.localWeather = localWeather;
     }
+<<<<<<< HEAD
+=======
+
+    public interface WeatherMapping {
+        int getTemperature();
+    }
+
+>>>>>>> jaejae
 }

@@ -30,6 +30,20 @@ public class Item {
     @Convert(converter = ItemImageListConverter.class)
     @Column(length = 2048)
     private List<String> urls = new ArrayList<>();
+<<<<<<< HEAD
+
+    @Convert(converter = ItemImageListConverter.class)
+    @Column(length = 2048)
+    private List<String> sizes = new ArrayList<>();
+
+    private int liked;
+
+    /**
+     * 수정
+     */
+    @ManyToOne(cascade = CascadeType.ALL)
+    private ParentCategory parentCategory;
+=======
 
     @Convert(converter = ItemImageListConverter.class)
     @Column(length = 2048)
@@ -48,12 +62,18 @@ public class Item {
 
     @OneToMany(mappedBy = "item")
     private List<Review> review  = new ArrayList<>();;
+>>>>>>> jaejae
 
     @ManyToOne(cascade = CascadeType.ALL)
     private ChildCategory childCategory;
 
+<<<<<<< HEAD
+    @OneToMany(mappedBy = "item")
+    private List<Review> review  = new ArrayList<>();;
+=======
     @Transient
     private String mainUrl;
+>>>>>>> jaejae
 
 
 

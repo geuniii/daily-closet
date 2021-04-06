@@ -12,6 +12,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 public interface WeatherRepository extends JpaRepository<Weather, Long> {
+<<<<<<< HEAD
+    @Query("SELECT w FROM Weather w ORDER BY w.id DESC")
+    List <Weather> findAllDesc();
+
+//    @Query(value = "SELECT * FROM WEATHER WHERE (MERIDIEM LIKE '%mer%') AND (CITY LIKE '%서%') AND (BASE_DATE BETWEEN '20210325' AND '20210402')", nativeQuery = true)
+//    List <Weather> findByNameLike(String city);
+//
+    @Query(value = "select * from  WEATHER w where w.meridiem = :meridiem and w.city like %:weatherCity% and w.BASE_DATE BETWEEN :startDate and :endDate", nativeQuery = true)
+    List <Weather> findByWeatherCityAndBaseDateAndMeridiemOrderByBaseDateDesc(
+            @Param("weatherCity")String weatherCity,
+            @Param("meridiem")String meridiem,
+            @Param("startDate")String startDate,
+            @Param("endDate")String endDate);
+
+//    @Query(value = "select * from  Item e where e.Name like %:keyword% or e.Brand like %:keyword%", nativeQuery = true)
+//    List<Item> findByAllKeyword(@Param("keyword") String keyword);
+=======
     @Query("SELECT w FROM Weather w ORDER BY w.id ASC")
     List<Weather> findAllDesc();
 
@@ -50,5 +67,6 @@ public interface WeatherRepository extends JpaRepository<Weather, Long> {
     //
    // List<Weather.WeatherMapping> findAllBy(String city);
 
+>>>>>>> jaejae
 
 }

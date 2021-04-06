@@ -1,5 +1,9 @@
 package com.megait.soir.service;
 
+<<<<<<< HEAD
+import com.megait.soir.domain.Item;
+=======
+>>>>>>> jaejae
 import com.megait.soir.form.CodyForm;
 import com.megait.soir.domain.Cody;
 import com.megait.soir.domain.Member;
@@ -7,6 +11,12 @@ import com.megait.soir.repository.CodyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+<<<<<<< HEAD
+import java.util.List;
+import java.util.Optional;
+
+=======
+>>>>>>> jaejae
 @Service
 @RequiredArgsConstructor
 public class CodyService {
@@ -48,7 +58,7 @@ public class CodyService {
 
         if(codyForm.getAccId()!=null){
             cody.setAccId(((codyForm.getAccId())));
->>>>>>> origin/main
+>>>>>>> jaejae
         }
 
         codyRepository.save(cody);
@@ -56,4 +66,12 @@ public class CodyService {
         return cody;
 
     }
+<<<<<<< HEAD
+
+    public List<Cody> getCodyList(Member member) {
+        List<Cody> codyList = codyRepository.findAllByMember(member);
+        return codyList;
+    }
+=======
+>>>>>>> jaejae
 }

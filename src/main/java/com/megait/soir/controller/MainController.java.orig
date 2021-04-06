@@ -20,9 +20,12 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+<<<<<<< HEAD
+=======
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+>>>>>>> jaejae
 import java.util.*;
 
 
@@ -40,8 +43,11 @@ public class MainController {
     private final CodyService codyService;
     private final ReviewService reviewService;
     private final WeatherService weatherService;
+<<<<<<< HEAD
+=======
     private final CityNameService cityNameService;
     private final DateService dateService;
+>>>>>>> jaejae
 
 //    @GetMapping("/") // root context가 들어오면 index page를 보여준다.
 //    public String index(@CurrentUser Member member, Model model) {
@@ -78,6 +84,35 @@ public class MainController {
     else{
         model.addAttribute("clothsList", itemService.getItemList());
 
+<<<<<<< HEAD
+    }
+    return "/view/index";
+    }
+
+    /**
+     * 날씨 전체조회
+     * @return
+     */
+    @GetMapping("/weather/index")
+    public String weatherList(Model model) {
+        model.addAttribute("weatherList", weatherService.findAllDesc());
+
+        return "/view/weather";
+    }
+
+
+
+    /**
+     * 도시 날씨 조회
+     * @param city
+     * @param model
+     * @return
+     */
+    @GetMapping("/weather/weatherList")
+    public String weatherCityList(String city, Model model) {
+        model.addAttribute("weatherList", weatherService.findByWeatherCity(city));
+        return "/view/weather :: #weatherList";
+=======
     }
     return "/view/index";
     }
@@ -239,12 +274,11 @@ public class MainController {
 
       //  System.out.println("현재 온도 : " + temperature);
         return "/view/daily-recommend";
+>>>>>>> jaejae
     }
 /////////
 
-
-/////////
-
+<<<<<<< HEAD
     // 회원정보 조회
     @GetMapping("/memberInfo")
     public String findMember(@CurrentUser Member member, Model model) {
@@ -287,8 +321,58 @@ public class MainController {
         json.put("status", 200);
         json.put("id", id);
         return json;
+=======
+
+/////////
+
+    // 회원정보 조회
+    @GetMapping("/memberInfo")
+    public String findMember(@CurrentUser Member member, Model model) {
+        model.addAttribute(member);
+        return "/view/memberInfo";
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // 회원정보 수정 Get
+    @GetMapping("/update-memberInfo")
+    public String update(@CurrentUser Member member, Model model) {
+        model.addAttribute(member);
+        model.addAttribute(new UpdateForm());
+        return "/view/update-memberInfo";
+>>>>>>> jaejae
+    }
+    // 회원정보 수정 Post
+    @PostMapping("/update-memberInfo") // post 요청 시 실행되는 메소드 -> 즉 회원가입 form 작성 시 수행된다.
+    public String updateSubmit(@CurrentUser Member member, @Valid UpdateForm updateForm) {
+
+<<<<<<< HEAD
+=======
+        memberService.updateMember(member, updateForm);
+        return "redirect:/"; // root로 redirect
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ajax
+
+    /**
+     * 회원탈퇴
+     * @param id
+     * @return
+     */
+    @PostMapping("/delete/{id}")
+    @ResponseBody
+    public Map<String, Object> delete(@PathVariable Long id) {
+        memberService.delete(id);
+        System.out.println("======================================================컨트롤러==============================");
+
+        Map<String, Object> json = new HashMap<>();
+        json.put("status", 200);
+        json.put("id", id);
+        return json;
     }
 
+>>>>>>> jaejae
     /**
      * 카테고리 아이템 조회
      * @param itemRequest
@@ -454,6 +538,17 @@ public class MainController {
             result = memberService.addLike(member, itemId);
             // 찜 목록 추가
             if (result) {
+<<<<<<< HEAD
+                jsonObject.addProperty("message", "Add like list Complelte!");
+            }
+            // 찜 목록 삭제
+            else {
+                jsonObject.addProperty("message", "Delete from like list.");
+            }
+            jsonObject.addProperty("status", result);
+        } catch (IllegalArgumentException e) {
+            jsonObject.addProperty("message", "Wrong access.");
+=======
                 jsonObject.addProperty("message", "찜 목록에 추가하였습니다");
             }
             // 찜 목록 삭제
@@ -463,6 +558,7 @@ public class MainController {
             jsonObject.addProperty("status", result);
         } catch (IllegalArgumentException e) {
             jsonObject.addProperty("message", "잘못된 정보입니다");
+>>>>>>> jaejae
         } catch (UsernameNotFoundException e) {
 
         }
@@ -507,6 +603,7 @@ public class MainController {
         return "/view/cart";
     }
 
+<<<<<<< HEAD
     @GetMapping("/cart/minus")
     public String cartMinus(@RequestParam("id") String itemId, @CurrentUser Member member, Model model){
         // cart 아이템 삭제
@@ -517,6 +614,8 @@ public class MainController {
         return cartList(member, model);
     }
 
+=======
+>>>>>>> jaejae
     @PostMapping("/find-pw")
     @ResponseBody
     // @EventListener(ApplicationReadyEvent.class)
@@ -579,9 +678,14 @@ public class MainController {
         model.addAttribute("bottomList", bottom);
         model.addAttribute("accList", acc);
         model.addAttribute("shoesList", shoes);
+<<<<<<< HEAD
         model.addAttribute("member", member);
 
         System.out.println("상의--------->" + top);
+=======
+
+        System.out.println("찜리스트--------->" + likeList.toString());
+>>>>>>> jaejae
         return "/view/cody";
     }
 
@@ -628,10 +732,14 @@ public class MainController {
 
     }
 
+<<<<<<< HEAD
     @GetMapping("/codyList")
     public String codyList(@CurrentUser Member member, Model model) {
 
         model.addAttribute("codyList",codyService.getCodyList(member));
         return "/view/codyList";
     }
+=======
+
+>>>>>>> jaejae
 }

@@ -180,15 +180,20 @@ public class ItemService {
         Optional<Item> optional = itemRepository.findById(id);
         return optional.orElseGet(() -> itemRepository.findById(id).get());
     }
+<<<<<<< HEAD
+=======
 
     //추천 옷 (아우터, 상의 ,하의 )
     public Item findRecommendCategory(Long parent, Long child){
         ParentCategory parentCategory = parentCategoryRepository.getOne(parent);
         ChildCategory childCategory = childCategoryRepository.getOne(child);
+>>>>>>> jaejae
 
         // 카테고리에 해당하는 아이템들을 받는다.
         List<Item> itemList = itemRepository.findAllByParentCategoryAndChildCategory(parentCategory, childCategory);
 
+<<<<<<< HEAD
+=======
         // 이 중 랜덤하게 1개를 선택한다.
         int index = (int)(Math.random() * itemList.size());
         Item item = itemList.get(index);
@@ -198,4 +203,5 @@ public class ItemService {
         return item;
     }
 
+>>>>>>> jaejae
 }
