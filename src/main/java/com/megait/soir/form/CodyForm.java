@@ -11,11 +11,4 @@ public class CodyForm {
     private Long bottomId;
     private Long accId;
     private Long shoesId;
-    private String backgroundId;
-    private Long outerSize;
-    private Long topSize;
-    private Long bottomSize;
-    private Long shoesSize;
-    private Long accSize;
-
 }

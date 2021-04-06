@@ -76,10 +76,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a id="navp_right" class="nav-link" th:href="@{/daily-recommend}" sec:authorize="!isAuthenticated()">Weather</a>
-                </li>
-                <li class="nav-item">
-                    <a id="navp_right" class="nav-link" th:href="@{/daily-recommend}" sec:authorize="isAuthenticated()">Weather</a>
+                    <a id="navp_right" class="nav-link" th:href="@{/weather/index}" sec:authorize="!isAuthenticated()">Weather</a>
                 </li>
 
                 <li class="nav-item">

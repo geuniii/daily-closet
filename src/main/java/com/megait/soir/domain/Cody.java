@@ -29,17 +29,4 @@ public class Cody {
     private long accId;
 
     private long shoesId;
-
-    private String backgroundId;
-
-    private long outerSize;
-
-    private long topSize;
-
-    private long bottomSize;
-
-    private long shoesSize;
-
-    private long accSize;
 }
-

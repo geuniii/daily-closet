@@ -1,15 +1,11 @@
 package com.megait.soir.service;
 
-import com.megait.soir.domain.Item;
 import com.megait.soir.form.CodyForm;
 import com.megait.soir.domain.Cody;
 import com.megait.soir.domain.Member;
 import com.megait.soir.repository.CodyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,20 +24,14 @@ public class CodyService {
                 .topId(codyForm.getTopId())
                 .bottomId(codyForm.getBottomId())
                 .shoesId(codyForm.getShoesId())
-                .backgroundId(codyForm.getBackgroundId())
-                .topSize(codyForm.getTopSize())
-                .bottomSize(codyForm.getBottomSize())
-                .shoesSize(codyForm.getShoesSize())
                 .build();
 
         if(codyForm.getOuterId()!=null){
-            cody.setOuterId(codyForm.getOuterId());
-            cody.setOuterSize(codyForm.getOuterSize());
+            cody.setOuterId((codyForm.getOuterId()));
         }
 
         if(codyForm.getAccId()!=null){
-            cody.setAccId(codyForm.getAccId());
-            cody.setAccSize(codyForm.getAccSize());
+            cody.setAccId(((codyForm.getAccId())));
         }
 
         codyRepository.save(cody);
@@ -49,10 +39,4 @@ public class CodyService {
         return cody;
 
     }
-
-    public List<Cody> getCodyList(Member member) {
-        List<Cody> codyList = codyRepository.findAllByMember(member);
-        return codyList;
-    }
 }
-

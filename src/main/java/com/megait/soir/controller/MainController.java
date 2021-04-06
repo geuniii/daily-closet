@@ -20,7 +20,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -38,8 +37,6 @@ public class MainController {
     private final CodyService codyService;
     private final ReviewService reviewService;
     private final WeatherService weatherService;
-    private final CityNameService cityNameService;
-    private final DateService dateService;
 
 //    @GetMapping("/") // root context가 들어오면 index page를 보여준다.
 //    public String index(@CurrentUser Member member, Model model) {
@@ -90,54 +87,6 @@ public class MainController {
 
         return "/view/weather";
     }
-
-    @GetMapping("/daily-recommend")
-    public String daily_recommend(Model model, String city){
-        //String weatherCity = "서울_인천_경기도";;
-
-        String baseDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
-        String meridien = dateService.currentHour();
-        if(city != null) {
-            String cityName = cityNameService.renameCity(city);
-            model.addAttribute("currentTemperature", weatherService.findCurrentDateTemperature(baseDate, cityName, meridien));
-            model.addAttribute("weatherList", weatherService.findCurrentLocalWeather(cityName));
-            System.out.println("주소가 null 아님");
-
-        }
-        else{
-            model.addAttribute("currentTemperature", weatherService.findCurrentDateTemperature(baseDate, "서울_인천_경기도", meridien));
-            System.out.println("주소가 null일 경우");
-        }
-        // id=3 상의 {자식 id : id=2 후드티셔츠, id=4 맨투맨 id=6 반팔, id=5 기타상의(춘추체육복느낌) , id=7 긴팔티셔츠}
-
-        // id=12 아우터 {자식 id : 29=트레이닝 자켓, 28= 겨울 기타 코트,27 = 트러커 재킷(봄,가을), 26 =롱 패딩/롱 헤비 아우터 ,24 = 플리스/뽀글이 ,
-        // 23=슈트/블레이저 재킷(봄,가을), 22 =숏 패딩/숏 헤비 아우터, 21=아노락 재킷(봄/가을) ,20 = 레더/라이더스 재킷(봄/가을) ,
-        // 19= 기타 아우터 (봄/가을) ,18 =블루종/MA-1(봄/가을),17 = 베스트(봄/가을, 얇음),15= 나일론/코치 재킷(봄/가을, 얇),
-        // 14= 후드 집업 (가을/봄),13=카디건(봄/가을), 11=사파리/헌팅 재킷(봄/가을)}
-
-        // id=31 바지 {자식 id : 36,35,34,33,32,31,30,}
-
-        //아우터 : 봄, 가을
-        //상의   : 봄 ,가을= 2,4,5,7 / 여름 = 6 / 겨울 = 2,3,5
-        //아우터
-        Long parent1 = Long.valueOf("12");
-        Long child1 = Long.valueOf("29");
-        //상의
-        Long parent2 = Long.valueOf("3");
-        Long child2 = Long.valueOf("2");
-        //하의
-        Long parent3 = Long.valueOf("31");
-        Long child3 = Long.valueOf("36");
-        //아우터 가져오기
-        model.addAttribute("outer", itemService.findRecommendCategory(parent1, child1));
-        // 상의 가져오기
-        model.addAttribute("top", itemService.findRecommendCategory(parent2, child2));
-        //하의 가져오기
-        model.addAttribute("bottom", itemService.findRecommendCategory(parent3, child3));
-
-        return "/view/daily-recommend";
-    }
-
 
 
 
@@ -535,12 +484,6 @@ public class MainController {
         reviewService.deleteReview(reviewId);
         return "redirect:/store/detail/"+itemId;
 
-    }
-    @GetMapping("/codyList")
-    public String codyList(@CurrentUser Member member, Model model) {
-
-        model.addAttribute("codyList",codyService.getCodyList(member));
-        return "/view/codyList";
     }
 
 }

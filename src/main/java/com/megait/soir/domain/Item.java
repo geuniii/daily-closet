@@ -49,8 +49,6 @@ public class Item {
     @OneToMany(mappedBy = "item")
     private List<Review> review  = new ArrayList<>();;
 
-    @Transient
-    private String mainUrl;
 
 
 }
