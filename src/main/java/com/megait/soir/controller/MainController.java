@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
@@ -83,44 +81,16 @@ public class MainController {
     }
 
     /**
-     * 도시 날씨 조회
-     * @param city
-     * @param model
+     * 날씨 전체조회
      * @return
      */
-    @GetMapping("/weather")
-    public String weatherList(Model model, String city) {
-        String cityName ="";
-        if (city != null) { //NullPointException
-            cityName = cityNameService.renameCity(city); //city 값과 cityName 값이 다를 경우에 사용할 것
-            model.addAttribute("weatherList", weatherService.findCurrentLocalWeather(cityName));
-            //System.out.println(cityName);
-            //System.out.println(weatherService.findCurrentLocalWeather(cityName));
-        }
-        else {
-
-
-            model.addAttribute("weatherList", weatherService.findAllDesc());
-        }
+    @GetMapping("/weather/index")
+    public String weatherList(Model model) {
+        model.addAttribute("weatherList", weatherService.findAllDesc());
 
         return "/view/weather";
     }
-    /**
-     * 도시 날씨 조회
-     * @param city
-     * @param model
-     * @return
-     */
-    @GetMapping("/weather/weatherList")
-    public String weatherCityList(String city, Model model) {
-        model.addAttribute("weatherList", weatherService.findByWeatherCity(city));
-        return "/view/weather :: #weatherList";
-    }
 
-    /**
-     * 옷 추천
-     * @return
-     */
     @GetMapping("/daily-recommend")
     public String daily_recommend(Model model, String city){
         //String weatherCity = "서울_인천_경기도";;
@@ -147,101 +117,41 @@ public class MainController {
 
         // id=31 바지 {자식 id : 36,35,34,33,32,31,30,}
 
-
         //아우터 : 봄, 가을
-       //상의   : 봄 ,가을= 2,4,5,7 / 여름 = 6 / 겨울 = 2,3,5
-       // int temperature = weatherService.WeeklyTemperatureAverage(city);
+        //상의   : 봄 ,가을= 2,4,5,7 / 여름 = 6 / 겨울 = 2,3,5
         //아우터
         Long parent1 = Long.valueOf("12");
         Long child1 = Long.valueOf("29");
         //상의
         Long parent2 = Long.valueOf("3");
         Long child2 = Long.valueOf("2");
-
         //하의
         Long parent3 = Long.valueOf("31");
         Long child3 = Long.valueOf("36");
-
-
-
-//        ArrayList<Long> arr = new ArrayList<>();
-//
-//        Long fall_spring[] = {Long.valueOf("29"), Long.valueOf("27")
-//        ,Long.valueOf("23"),Long.valueOf("21"),Long.valueOf("20")
-//                ,Long.valueOf("19"),Long.valueOf("18"),Long.valueOf("17"),Long.valueOf("15"),Long.valueOf("14")
-//                ,Long.valueOf("13"),Long.valueOf("11")
-//        };
-//
-//        Long winter[] = {Long.valueOf("27"),Long.valueOf("26"),Long.valueOf("24"),Long.valueOf("22")};
-//
-//        //겨울온도
-//        if(temperature>5){
-//            for(int i=0; i< winter.length; i++){
-//                arr.add(winter[i]);
-//            }
-//            //아우터
-//            Long parent1 = Long.valueOf("12");
-//            Long child1 = Long.valueOf("27");
-//            //상의
-//            Long parent2 = Long.valueOf("3");
-//            Long child2 = Long.valueOf("2");
-//            //하의
-//            Long parent3 = Long.valueOf("31");
-//            Long child3 = Long.valueOf("36");
-//            model.addAttribute("outer", itemService.findRecommendCategory(parent1, child1));
-//            model.addAttribute("top", itemService.findRecommendCategory(parent2, child2));
-//            model.addAttribute("bottom", itemService.findRecommendCategory(parent3, child3));
-//        }
-//        // 봄,가을 온도
-//        else if(temperature>=5 || temperature <20){
-//            for(int i=0; i< winter.length; i++){
-//                arr.add(winter[i]);
-//            }
-//            //아우터
-//            Long parent1 = Long.valueOf("12");
-//            Long child1 = Long.valueOf("27");
-//            //상의
-//            Long parent2 = Long.valueOf("3");
-//            Long child2 = Long.valueOf("2");
-//            //하의
-//            Long parent3 = Long.valueOf("31");
-//            Long child3 = Long.valueOf("36");
-//            model.addAttribute("outer", itemService.findRecommendCategory(parent1, child1));
-//            model.addAttribute("top", itemService.findRecommendCategory(parent2, child2));
-//            model.addAttribute("bottom", itemService.findRecommendCategory(parent3, child3));
-//
-//        }
-//        else if(temperature>=20){
-//            for(int i=0; i< winter.length; i++){
-//                arr.add(winter[i]);
-//            }
-//            //아우터
-//            Long parent1 = Long.valueOf("12");
-//            Long child1 = Long.valueOf("27");
-//            //상의
-//            Long parent2 = Long.valueOf("3");
-//            Long child2 = Long.valueOf("2");
-//            //하의
-//            Long parent3 = Long.valueOf("31");
-//            Long child3 = Long.valueOf("36");
-//            model.addAttribute("outer", itemService.findRecommendCategory(parent1, child1));
-//            model.addAttribute("top", itemService.findRecommendCategory(parent2, child2));
-//            model.addAttribute("bottom", itemService.findRecommendCategory(parent3, child3));
-//
-//        }
-
         //아우터 가져오기
         model.addAttribute("outer", itemService.findRecommendCategory(parent1, child1));
-       // 상의 가져오기
+        // 상의 가져오기
         model.addAttribute("top", itemService.findRecommendCategory(parent2, child2));
         //하의 가져오기
         model.addAttribute("bottom", itemService.findRecommendCategory(parent3, child3));
 
-      //  System.out.println("현재 온도 : " + temperature);
         return "/view/daily-recommend";
     }
 
 
+
+
+    /**
+     * 도시 날씨 조회
+     * @param city
+     * @param model
+     * @return
+     */
+    @GetMapping("/weather/weatherList")
+    public String weatherCityList(String city, Model model) {
+        model.addAttribute("weatherList", weatherService.findByWeatherCity(city));
+        return "/view/weather :: #weatherList";
+    }
 /////////
 
     // 회원정보 조회
@@ -453,15 +363,15 @@ public class MainController {
             result = memberService.addLike(member, itemId);
             // 찜 목록 추가
             if (result) {
-                jsonObject.addProperty("message", "찜 목록에 추가하였습니다");
+                jsonObject.addProperty("message", "Add like list Complelte!");
             }
             // 찜 목록 삭제
             else {
-                jsonObject.addProperty("message", "찜 목록에서 삭제되었습니다");
+                jsonObject.addProperty("message", "Delete from like list.");
             }
             jsonObject.addProperty("status", result);
         } catch (IllegalArgumentException e) {
-            jsonObject.addProperty("message", "잘못된 정보입니다");
+            jsonObject.addProperty("message", "Wrong access.");
         } catch (UsernameNotFoundException e) {
 
         }
@@ -504,6 +414,16 @@ public class MainController {
         }
 
         return "/view/cart";
+    }
+
+    @GetMapping("/cart/minus")
+    public String cartMinus(@RequestParam("id") String itemId, @CurrentUser Member member, Model model){
+        // cart 아이템 삭제
+
+        Long deleteItemId = Long.parseLong(itemId);
+        orderService.minusCart(member, deleteItemId);
+
+        return cartList(member, model);
     }
 
     @PostMapping("/find-pw")
@@ -568,8 +488,9 @@ public class MainController {
         model.addAttribute("bottomList", bottom);
         model.addAttribute("accList", acc);
         model.addAttribute("shoesList", shoes);
+        model.addAttribute("member", member);
 
-        System.out.println("찜리스트--------->" + likeList.toString());
+        System.out.println("상의--------->" + top);
         return "/view/cody";
     }
 
@@ -615,6 +536,11 @@ public class MainController {
         return "redirect:/store/detail/"+itemId;
 
     }
+    @GetMapping("/codyList")
+    public String codyList(@CurrentUser Member member, Model model) {
 
+        model.addAttribute("codyList",codyService.getCodyList(member));
+        return "/view/codyList";
+    }
 
 }

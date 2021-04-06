@@ -3,48 +3,34 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout">
 
-<div layout:fragment="content">
-    <div class="container px-5 py-5">
-        <form th:action="@{/cart/list}" method="post" name="cartForm">
-            <table class="table table-bordered table-responsive-sm">
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col" style="width:8%">선택</th>
-                    <th scope="col">이미지</th>
-                    <th scope="col">이름</th>
-                    <th scope="col">가격</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="item:${likeList}">
-                    <td class="text-center align-middle">
+<th:block layout:fragement="css">
+    <link rel="stylesheet" th:href="@{/css/user/style.css}">
+</th:block>
 
-                        <input type="checkbox" id="customCheck1" name="item_id" th:value="${item.id}">
+<div layout:fragment="content" class="container" style="background-color: white;">
 
-                    </td>
-                    <td class="align-middle text-center"
-                        th:onclick="location.href='/store/detail/[[${item.id}]]'"><img th:src="${item.urls.get(0)}" style="width: 50px;"></td>
+    <div>
+        <h2 class="pageLogo">Like List</h2>
+        <small>Check your favorite products and add them to your cart.</small>
+    </div>
 
-                    <td class="align-middle" th:text="${item.name}"
-                        th:onclick="location.href='/store/detail/[[${item.id}]]'"></td>
+    <br>
+    <br>
 
-                    <td class="align-middle">
-                        <span class="lead" th:text="${#numbers.formatInteger(item.price, 3, 'COMMA')}"
-                              th:onclick="location.href='/store/detail/[[${item.id}]]'"></span>
-                        <span class="lead"> 원</span>
-                    </td>
+    <p th:if="${'empty.list' == error_message}">
+        Empty list.
+    </p>
 
-                </tr>
-                </tbody>
-                <tfoot>
-                <td colspan="4" class="text-center">
-                    <button class="btn btn-dark" onclick="forms['cartForm'].submit()">장바구니에 추가</button>
-                </td>
-                </tfoot>
-            </table>
-        </form>
+    <div th:if="${error_message == null}" class="row" id="likeitem_div">
+        <div class="col-4" th:each="item:${likeList}">
+            <img id="likeitem_img" th:src="${item.urls.get(0)}"
+                 th:onclick="location.href='/store/detail/[[${item.id}]]'"/>
+            <p class="xs" id="likeitem_name" th:text="${item.name}"></p>
+            <p class="xs" id="likeitem_price" th:text="${#numbers.formatInteger(item.price, 3, 'COMMA')}"></p>
+        </div>
     </div>
 </div>
+<br>
 
 
 </html>
