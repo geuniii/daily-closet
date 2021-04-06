@@ -4,7 +4,6 @@
       layout:decorate="layout" th:with="title='Cody Page'">
 
 
-
 <div layout:fragment="content" class="container" style="background-color: #FFFFFF;">
 
     <br><br><br>
@@ -140,15 +139,6 @@
             </div>
         </div>
 
-    <div class="container px-5 py-5" style="text-align: center">
-        <!--                아우터-->
-        <div class="likeList" id="outerList" style="display: none">
-            <li th:if="${outerList.size()== 0}">Add Outer List</li>
-            <li th:each="item:${outerList}">
-                <img th:class="outerimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
-                     th:alt="${item.getId()}">
-            </li>
-        </div>
 
         <!--                하의-->
         <div class="likeList" id="bottomList" style="display: none">
