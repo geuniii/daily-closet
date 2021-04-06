@@ -5,6 +5,9 @@
 
 <div th:fragment="review_list(reviewList, currentUser)">
     <div class="container">
+<<<<<<< HEAD
+        <div class="row">
+=======
 
         <div>
             <H4>REVIEW</H4>
@@ -13,6 +16,7 @@
         </div>
 
         <div class="row" style="margin-left: 15%; width: 50%;">
+>>>>>>> newheejin
             <div class="col" width="20%" style="font-weight: bold">
                 WRITER
             </div>

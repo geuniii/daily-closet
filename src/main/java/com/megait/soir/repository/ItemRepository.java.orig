@@ -3,7 +3,10 @@ package com.megait.soir.repository;
 import com.megait.soir.domain.Category;
 import com.megait.soir.domain.ChildCategory;
 import com.megait.soir.domain.Item;
+<<<<<<< HEAD
 import com.megait.soir.domain.ParentCategory;
+=======
+>>>>>>> newheejin
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

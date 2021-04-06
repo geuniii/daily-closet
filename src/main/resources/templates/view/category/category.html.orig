@@ -10,11 +10,18 @@
 
 <div layout:fragment="content" class="container" style="background-color: white;">
 
-    <h2>QnA</h2>
-    <small>Please ask me questions.</small>
+    <br/>
+    <div class="py-`5` ml-2" id="pagebox">
+        <div id="catetitle">
+            <!-- -->
+<<<<<<< HEAD
+            <!--            <h2 th:text="This is ${title} Page."><h2>-->
+=======
+<!--            <h2 th:text="This is ${title} Page."><h2>-->
+>>>>>>> newheejin
+        </div>
 
-    <div>
-        <h2> This is QnA page.</h2>
+        <th:block th:insert="item_fragements :: item_list(${itemList})"/>
     </div>
 </div>
 

@@ -2,7 +2,7 @@
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="layout" th:with="title='Hello!'">
+      layout:decorate="layout">
 
 <th:block layout:fragement="css">
     <link rel="stylesheet" th:href="@{/css/user/style.css}">
@@ -10,12 +10,11 @@
 
 <div layout:fragment="content" class="container" style="background-color: white;">
 
-    <h2>QnA</h2>
-    <small>Please ask me questions.</small>
-
     <div>
-        <h2> This is QnA page.</h2>
+        <h2 id="pageLogo">Notice</h2>
+        <small id="pageInfo">Check the announcement.</small>
     </div>
+
 </div>
 
 </html>

@@ -1,11 +1,63 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="layout" th:with="title='Detail Page'">
+      layout:decorate="layout" th:with="title='Cody Page'">
 
-<<<<<<< HEAD
+
 
 <div layout:fragment="content" class="container" style="background-color: #FFFFFF;">
+
+<<<<<<< HEAD
+    <br><br><br>
+    <h3 class="text-left" style="margin-left: 100px"><b>New Cody</b></h3>
+    <hr>
+    <br><br>
+    <form class="needs-validation" th:id="codyForm" th:action="@{/cody}" th:object="${codyForm}" method="post"
+          novalidate>
+        <div class="row justify-content-center py-5">
+            <div class="codybox">
+                <div class="col-5">
+                    <div class="codyArea" id="codyArea">
+                        <!--                        배경색-->
+                        <input th:id="backgroundId" type="hidden" th:attr="name='backgroundId'">
+                        <!--                               하의-->
+                        <div class="col" style="position: absolute">
+                            <img class="bottomCody" th:id="bottomCody">
+                            <input th:id="bottomId" type="hidden" th:attr="name='bottomId'">
+                            <input th:id="bottomSize" id="bottomSize" type="hidden" th:value="60"
+                                   th:attr="name='bottomSize'">
+                        </div>
+                        <!--                                상의-->
+                        <div class="col" style="position: absolute">
+                            <img class="topCody" th:id="topCody">
+                            <input th:id="topId" type="hidden" th:attr="name='topId'">
+                            <input th:id="topSize" id="topSize" type="hidden" th:value="50" th:attr="name='topSize'">
+                        </div>
+                        <!--                                아우터-->
+                        <div class="col" style="position: absolute">
+                            <img class="outerCody" th:id="outerCody">
+                            <input th:id="outerId" type="hidden" th:attr="name='outerId'">
+                            <input th:id="outerSize" id="outerSize" type="hidden" th:value="50"
+                                   th:attr="name='outerSize'">
+                        </div>
+                        <!--                                ACC-->
+                        <div class="col" style="position: absolute">
+                            <img class="accCody" th:id="accCody">
+                            <input th:id="accId" type="hidden" th:attr="name='accId'">
+                            <input th:id="accSize" id="accSize" type="hidden" th:value="30" th:attr="name='accSize'">
+                        </div>
+                        <!--                                신발-->
+                        <div class="col" style="position: absolute">
+                            <img class="shoesCody" th:id="shoesCody">
+                            <input th:id="shoesId" type="hidden" th:attr="name='shoesId'">
+                            <input th:id="shoesSize" id="shoesSize" type="hidden" th:value="30"
+                                   th:attr="name='shoesSize'">
+=======
+    <div>
+        <h2 id="pageLogo">Cody</h2>
+        <small>Coordinate your own style.</small>
+    </div>
+
     <form class="needs-validation" th:id="codyForm" th:action="@{/cody}" th:object="${codyForm}" method="post"
           novalidate>
         <div class="row justify-content-center py-5">
@@ -36,13 +88,13 @@
                         <div class="col" style="position: absolute">
                             <img th:id="shoesCody" style="position: absolute; top:330px; left: 275px; width:20%">
                             <input th:id="shoesId" type="hidden" th:attr="name='shoesId'">
+>>>>>>> newheejin
                         </div>
 
                         <div class="col" style="position: absolute">
                             <h5 th:id="userId" th:value="'@ '+${member.getEmail()}"
                                 style="writing-mode: sideways-lr; margin-right:0px; margin-bottom: 0px; background-color: #F8EAC3">
                             </h5>
-
                         </div>
                     </div>
                 </div>
@@ -53,6 +105,19 @@
                 <div style="text-align: left"><span><b>#BACKGROUND COLOR</b></span></div>
                 <div class="row">
                     <!--                    남색-->
+<<<<<<< HEAD
+                    <div class="color_square" style="background-color:#37505B" onclick="changeColor('#37505B');"></div>
+                    <!--                    빨강-->
+                    <div class="color_square" style="background-color:#AB5B54" onclick="changeColor('#AB5B54');"></div>
+                    <!--                    노랑-->
+                    <div class="color_square" style="background-color:#F8EAC3" onclick="changeColor('#F8EAC3');"></div>
+                    <!--                    민트-->
+                    <div class="color_square" style="background-color:#779792" onclick="changeColor('#779792');"></div>
+                    <!--                    다크 그레이-->
+                    <div class="color_square" style="background-color:#888679" onclick="changeColor('#888679');"></div>
+                    <!--                    그레이-->
+                    <div class="color_square" style="background-color:#9DAAA1" onclick="changeColor('#9DAAA1');"></div>
+=======
                     <div class="color_square" style="background-color:#37505B"></div>
                     <!--                    빨강-->
                     <div class="color_square" style="background-color:#AB5B54"></div>
@@ -64,6 +129,7 @@
                     <div class="color_square" style="background-color:#888679"></div>
                     <!--                    그레이-->
                     <div class="color_square" style="background-color:#9DAAA1"></div>
+>>>>>>> newheejin
                 </div>
 
                 <br/>
@@ -71,13 +137,32 @@
                 <div class="row">
                     <!--        슬라이더-->
                     <div class="slidecontainer">
+<<<<<<< HEAD
+                        <input type="range" min="1" max="65" value="60" class="slider" id="outerRange"
+                               style="display: none" onchange="changeSize(this.id, this.value)">
+                        <input type="range" min="1" max="85" value="50" class="slider" id="topRange"
+                               style="display: none" onchange="changeSize(this.id, this.value)">
+                        <input type="range" min="1" max="75" value="50" class="slider" id="bottomRange"
+                               style="display: none" onchange="changeSize(this.id, this.value)">
+                        <input type="range" min="1" max="45" value="30" class="slider" id="shoesRange"
+                               style="display: none" onchange="changeSize(this.id, this.value)">
+                        <input type="range" min="1" max="50" value="30" class="slider" id="accRange"
+                               style="display: none" onchange="changeSize(this.id, this.value)">
+=======
                         <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+>>>>>>> newheejin
 
                     </div>
                 </div>
 
                 <div class="row">
+<<<<<<< HEAD
+                    <input type="button" th:id="submit_btn" class="btn btn-light" value="Save">&nbsp&nbsp
+                    <input type="button" th:id="myCody_btn" class="btn btn-light" value="My Cody List"
+                           th:onclick="location.href='/codyList'">
+=======
                     <input type="button" th:id="submit_btn" class="btn btn-light" value="submit">
+>>>>>>> newheejin
                 </div>
             </div>
 
@@ -90,185 +175,98 @@
         <button type="button" class="btn btn-light" onclick="navEvent('bottom-id')">BOTTOM</button>
         <button type="button" class="btn btn-light" onclick="navEvent('shoes-id')">SHOES</button>
         <button type="button" class="btn btn-light" onclick="navEvent('acc-id')">ACC</button>
-=======
-<div layout:fragment="content" class="container" style="background-color: #FFFFFF;">
-    <div class="row justify-content-center py-5">
-
-        <form class="needs-validation" th:id="codyForm" th:action="@{/cody}" th:object="${codyForm}" method="post"
-              novalidate>
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th width="20%">아우터</th>
-                    <th width="20%">상의</th>
-                    <th width="20%">하의</th>
-                    <th width="20%">가방</th>
-                    <th width="20%">신발</th>
-                </tr>
-                </tr>
-                </thead>
-
-                <tbody>
-                <tr>
-                    <!--                아우터-->
-                    <td>
-                        <img th:id="outerCody" class="imgbox_middle" >
-                        <input th:id="outerId" type="hidden" th:attr="name='outerId'"></input>
-                    </td>
-                    <!--                상의-->
-                    <td>
-                        <img th:id="topCody" class="imgbox_middle"
-                             >
-                        <input th:id="topId" type="hidden" th:attr="name='topId'"></input>
-                    </td>
-
-                    <!--                                하의-->
-                    <td>
-                        <img th:id="bottomCody" class="imgbox_middle"
-                             >
-                        <input th:id="bottomId" type="hidden" th:attr="name='bottomId'"></input>
-                    </td>
-                    <!--                가방-->
-                    <td>
-                        <img th:id="accCody" class="imgbox_middle"
-                            >
-                        <input th:id="accId" type="hidden" th:attr="name='accId'"></input>
-                    </td>
-
-                    <!--                신발-->
-                    <td>
-                        <img th:id="shoesCody" class="imgbox_middle">
-
-                        <input th:id="shoesId" type="hidden" th:attr="name='shoesId'"
-                              ></input>
-                    </td>
-
-
-                </tr>
-
-                <tr>
-                    <input type="button" th:id="submit_btn" class="w-50 btn btn-dark btn-lg" value="submit">
-                </tr>
-            </table>
-
-            </tbody>
-
-
-        </form>
-
-
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th width="20%">상의</th>
-                <th width="20%">아우터</th>
-                <th width="20%">하의</th>
-                <th width="20%">가방</th>
-                <th width="20%">신발</th>
-            </tr>
-            </thead>
-
-            <tbody>
-            <tr>
-                <!--                아우터-->
-                <td>
-                    <li th:if="${outerList.size()== 0}">Add Outer List</li>
-                    <li th:each="item:${outerList}">
-                        <img th:class="outerimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
-                             th:alt="${item.getId()}">
-                    </li>
-                </td>
-                <!--                상의-->
-                <td>
-                    <li th:if="${topList.size()== 0}">Add Top List</li>
-                    <li th:each="item:${topList}">
-                        <img th:class="topimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
-                             th:alt="${item.getId()}">
-                    </li>
-                </td>
-
-                <!--                하의-->
-                <td>
-                    <li th:if="${bottomList.size()== 0}">Add Bottom List</li>
-                    <li th:each="item:${bottomList}">
-                        <img th:class="bottomimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
-                             th:alt="${item.getId()}">
-                    </li>
-                </td>
-
-
-                <!--                가방-->
-                <td>
-                    <li th:if="${accList.size()== 0}">Add Acc List</li>
-                    <li th:each="item:${accList}">
-                        <img th:class="accimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
-                             th:alt="${item.getId()}">
-                    </li>
-                </td>
-
-                <!--                신발-->
-                <td>
-                    <li th:if="${shoesList.size()== 0}">Add Shoes List</li>
-                    <li th:class="shoes" th:each="item:${shoesList}">
-                        <img th:class="shoesimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
-                             th:alt="${item.getId()}">
-                    </li>
-                </td>
-
-            </tr>
-
-            </tbody>
-
-        </table>
-    <br>
->>>>>>> 798598d (update : 04.02 14:07)
     </div>
 
     <div class="container px-5 py-5" style="text-align: center">
         <!--                아우터-->
         <div class="likeList" id="outerList" style="display: none">
             <li th:if="${outerList.size()== 0}">Add Outer List</li>
+<<<<<<< HEAD
+            <div class="owl-carousel" style="text-align: center">
+                <div class="col" th:each="item:${outerList}">
+                    <img th:class="outerimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
+                         th:alt="${item.getId()}">
+                </div>
+            </div>
+=======
             <li th:each="item:${outerList}">
                 <img th:class="outerimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
                      th:alt="${item.getId()}">
             </li>
+>>>>>>> newheejin
         </div>
 
         <!--                상의-->
         <div class="likeList" id="topList" style="display: none">
             <li th:if="${topList.size()== 0}">Add Top List</li>
+<<<<<<< HEAD
+            <div class="owl-carousel" style="text-align: center">
+                <div class="col" th:each="item:${topList}">
+                    <img th:class="topimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
+                         th:alt="${item.getId()}">
+                </div>
+            </div>
+=======
             <li th:each="item:${topList}">
                 <img th:class="topimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
                      th:alt="${item.getId()}">
             </li>
+>>>>>>> newheejin
         </div>
 
 
         <!--                하의-->
         <div class="likeList" id="bottomList" style="display: none">
             <li th:if="${bottomList.size()== 0}">Add Bottom List</li>
+<<<<<<< HEAD
+            <div class="owl-carousel" style="text-align: center">
+                <div class="col" th:each="item:${bottomList}">
+                    <img th:class="bottomimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
+                         th:alt="${item.getId()}">
+                </div>
+            </div>
+=======
             <li th:each="item:${bottomList}">
                 <img th:class="bottomimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
                      th:alt="${item.getId()}">
             </li>
+>>>>>>> newheejin
         </div>
 
         <!--                가방-->
         <div class="likeList" id="accList" style="display: none">
             <li th:if="${accList.size()== 0}">Add Acc List</li>
+<<<<<<< HEAD
+            <div class="owl-carousel" style="text-align: center">
+                <div class="col" th:each="item:${accList}">
+                    <img th:class="accimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
+                         th:alt="${item.getId()}">
+                </div>
+            </div>
+=======
             <li th:each="item:${accList}">
                 <img th:class="accimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
                      th:alt="${item.getId()}">
             </li>
+>>>>>>> newheejin
         </div>
 
         <!--                신발-->
         <div class="likeList" id="shoesList" style="display: none">
             <li th:if="${shoesList.size()== 0}">Add Shoes List</li>
+<<<<<<< HEAD
+            <div class="owl-carousel" style="text-align: center">
+                <div class="col" th:class="shoes" th:each="item:${shoesList}">
+                    <img th:class="shoesimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
+                         th:alt="${item.getId()}">
+                </div>
+            </div>
+=======
             <li th:class="shoes" th:each="item:${shoesList}">
                 <img th:class="shoesimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
                      th:alt="${item.getId()}">
             </li>
+>>>>>>> newheejin
         </div>
 
 
@@ -345,38 +343,157 @@
                 if (this.getAttribute("class") == "shoesimgbox") {
                     shoesCody.setAttribute("src", pickSrc);
                     shoesId.setAttribute("value", pickAlt);
+<<<<<<< HEAD
+=======
                     console.log(shoesId.getAttribute(value))
+>>>>>>> newheejin
                 }
 
                 if (this.getAttribute("class") == "outerimgbox") {
                     outerCody.setAttribute("src", pickSrc);
                     outerId.setAttribute("value", pickAlt);
+<<<<<<< HEAD
+=======
                     console.log(shoesId.getAttribute(value))
+>>>>>>> newheejin
                 }
                 ;
 
                 if (this.getAttribute("class") == "topimgbox") {
                     topCody.setAttribute("src", pickSrc);
                     topId.setAttribute("value", pickAlt);
+<<<<<<< HEAD
+=======
                     console.log(shoesId.getAttribute(value))
+>>>>>>> newheejin
                 }
                 ;
                 if (this.getAttribute("class") == "bottomimgbox") {
                     bottomCody.setAttribute("src", pickSrc);
                     bottomId.setAttribute("value", pickAlt);
+<<<<<<< HEAD
+=======
                     console.log(shoesId.getAttribute(value))
+>>>>>>> newheejin
                 }
                 ;
                 if (this.getAttribute("class") == "accimgbox") {
                     accCody.setAttribute("src", pickSrc);
                     accId.setAttribute("value", pickAlt);
+<<<<<<< HEAD
+=======
                     console.log(shoesId.getAttribute(value))
+>>>>>>> newheejin
                 }
                 ;
 
 
             };
+<<<<<<< HEAD
 
+        });
+
+
+        //navBar 이벤트
+        function navEvent(divId) {
+
+            switch (divId) {
+                case "outer-id":
+                    $(".likeList").hide();
+                    $(".slider").hide();
+                    $("#outerList").show();
+                    $("#outerRange").show();
+                    break;
+
+                case "top-id":
+                    $(".likeList").hide();
+                    $(".slider").hide();
+                    $("#topList").show();
+                    $("#topRange").show();
+                    break;
+
+                case "bottom-id":
+                    $(".likeList").hide();
+                    $(".slider").hide();
+                    $("#bottomList").show()
+                    $("#bottomRange").show();
+                    ;
+
+                    break;
+
+                case "shoes-id":
+                    $(".likeList").hide();
+                    $(".slider").hide();
+                    $("#shoesList").show();
+                    $("#shoesRange").show();
+                    break;
+
+                case "acc-id":
+                    $(".likeList").hide();
+                    $(".slider").hide();
+                    $("#accList").show();
+                    $("#accRange").show();
+                    break;
+            }
+        }
+
+        // background color event
+        function changeColor(backgroundColor) {
+            document.getElementById("codyArea").style.backgroundColor = backgroundColor;
+            document.getElementById("backgroundId").setAttribute("value", backgroundColor);
+            console.log(backgroundColor);
+            console.log(document.getElementById("backgroundId").getAttribute("value"));
+
+        };
+
+        // slider event
+        function changeSize(id, value) {
+
+            switch (id.toString()) {
+                case "outerRange" :
+                    document.getElementById("outerCody").style.width = value + "%";
+                    document.getElementById("outerSize").setAttribute("value", value);
+                    break;
+                case "topRange" :
+                    document.getElementById("topCody").style.width = value + "%";
+                    document.getElementById("topSize").setAttribute("value", value);
+                    break;
+                case "bottomRange" :
+                    document.getElementById("bottomCody").style.width = value + "%";
+                    document.getElementById("bottomSize").setAttribute("value", value);
+                    break;
+                case "shoesRange" :
+                    document.getElementById("shoesCody").style.width = value + "%";
+                    document.getElementById("shoesSize").setAttribute("value", value);
+                    break;
+                case "accRange" :
+                    document.getElementById("accCody").style.width = value + "%";
+                    document.getElementById("accSize").setAttribute("value", value);
+                    break;
+            }
+        };
+=======
+>>>>>>> newheejin
+
+        $(document).ready(function () {
+            $(".owl-carousel").owlCarousel();
+        });
+
+        $(".owl-carousel").owlCarousel({
+            center: true,
+            nav: false,
+            loop: false,
+            dots: true,
+            autoplay: false,
+            rewind: true,
+            autoplayTimeout: 2000,
+            margin: 10,
+            responsiveClass: true,
+            responsive: {
+                // 0: {items: 2, nav: false},
+                // 600: {items: 3, nav: false, loop: false},
+                1000: {items: 6, nav: false,}
+            }
         });
 
 
