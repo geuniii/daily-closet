@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+
+<th:block layout:fragement="css">
+    <link rel="stylesheet" th:href="@{/css/user/style.css}">
+</th:block>
+
+<div layout:fragment="content" class="container" style="background-color: white;">
+    <br/><br/>
+    <div class="py-`5` ml-2">
+        <p>main page</p>
+    </div>
+</div>
+
+</html>
