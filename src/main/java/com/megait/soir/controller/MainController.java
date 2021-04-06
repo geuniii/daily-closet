@@ -251,8 +251,6 @@ public class MainController {
         model.addAttribute(member);
         return "/view/memberInfo";
     }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // 회원정보 수정 Get
     @GetMapping("/update-memberInfo")
@@ -268,9 +266,8 @@ public class MainController {
         memberService.updateMember(member, updateForm);
         return "redirect:/"; // root로 redirect
     }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ajax
+
+
 
     /**
      * 회원탈퇴
@@ -454,15 +451,15 @@ public class MainController {
             result = memberService.addLike(member, itemId);
             // 찜 목록 추가
             if (result) {
-                jsonObject.addProperty("message", "찜 목록에 추가하였습니다");
+                jsonObject.addProperty("message", "Add like list Complelte!");
             }
             // 찜 목록 삭제
             else {
-                jsonObject.addProperty("message", "찜 목록에서 삭제되었습니다");
+                jsonObject.addProperty("message", "Delete from like list.");
             }
             jsonObject.addProperty("status", result);
         } catch (IllegalArgumentException e) {
-            jsonObject.addProperty("message", "잘못된 정보입니다");
+            jsonObject.addProperty("message", "Wrong access.");
         } catch (UsernameNotFoundException e) {
 
         }

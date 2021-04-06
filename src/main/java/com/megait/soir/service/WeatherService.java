@@ -23,7 +23,10 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+<<<<<<< HEAD
 import java.util.Iterator;
+=======
+>>>>>>> newheejin
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,7 +47,11 @@ public class WeatherService {
     private final WeatherRepository weatherRepository;
 
 
+<<<<<<< HEAD
 //    @PostConstruct
+=======
+    @PostConstruct
+>>>>>>> newheejin
     @Transactional
     public void Init() {
         insertRegion();

@@ -5,103 +5,49 @@
 
 <div layout:fragment="content" class="container" style="background-color: #FFFFFF;">
     <!-- 현재 날 조회 목록 -->
-    <h1>10Days Weather</h1>
-<<<<<<< HEAD
     <div>
-        <label for="city"><b>City :</b></label>
-       <input class="w-25" id="city" type="text" placeholder="검색하고 싶은 도시를 입력해주세요.">
-        <div>
-            <button type="button" class="btn btn-light" id="btn-weatherList">조회</button>
-        </div>
-=======
-    <div class="container">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <label for="city"><b>City :</b></label>
-               <input class="w-25" id="city" type="text" placeholder="검색하고 싶은 도시를 입력해주세요.">
-                <div>
-                    <button type="button" class="btn btn-light" id="btn-weatherList">조회</button>
-                </div>
-            </div>
-            <div class="col-md-2"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-                <button id="locationBtn" class="w-10 btn btn-dark btn">Search my location</button>
-            </div>
-            <div class="col-md-4"></div>
-        </div>
-
->>>>>>> jaejae
+        <h2 id="pageLogo">Weather</h2>
+        <small>We'll show you the weather within 10 days or less.</small>
     </div>
-    <table class="table table-horizontal table-bordered">
+
+    <div>
+        <br>
+        <input class="w-15" id="city" type="text" placeholder=" Seoul">
+        <button type="button" class="btn btn-white" id="weatherSearchBtn">Search</button>
+    </div>
+
+    <table class="table table-horizontal table-bordered" id="weatherTable">
         <thead class="thead-strong">
         <tr align="center">
-            <th>날짜</th>
-            <th>지역</th>
-            <th>예보</th>
-            <th>오전/오후</th>
-            <th>온도</th>
+            <th>Day</th>
+            <th>Area</th>
+            <th>Weather</th>
+            <th>AM/PM</th>
+            <th>Temperature</th>
         </tr>
         </thead>
         <tbody id="weatherList">
-            <tr th:each="weather:${weatherList}" align="center">
-                <td th:text="${weather.baseDate}"></td>
-                <td th:text="${weather.city}"></td>
-                <td th:text="${weather.localWeather}"></td>
-                <td th:text="${weather.meridiem}"></td>
-                <td th:text="${weather.temperature}"></td>
-            </tr>
+        <tr th:each="weather:${weatherList}" align="center">
+            <td th:text="${weather.baseDate}"></td>
+            <td th:text="${weather.city}"></td>
+            <td th:text="${weather.localWeather}"></td>
+            <td th:text="${weather.meridiem}"></td>
+            <td th:text="${weather.temperature}"></td>
+        </tr>
         </tbody>
     </table>
-<<<<<<< HEAD
 </div>
-=======
-    <script>
-        const KEY ="AIzaSyBRIdueEX0Qeqz8Wyztxks_rSof_IdTNWM";
-
-        $("#locationBtn").click(function(){
-            // e.preventDefault();
-            let url;
-            let city;
-
-            navigator.geolocation.getCurrentPosition(function(pos) {
-                var latitude = pos.coords.latitude;
-                var longitude = pos.coords.longitude;
-                url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+latitude+","+longitude+"&key="+KEY;
-                console.log("lat: "+latitude+", lng:"+longitude);
-
-                fetch(url)
-                    .then(response => response.json())
-                    .then(data => {
-                        //console.log(data);
-                        let parts = data.results[0].formatted_address
-                        city = parts.split(" ")[1];
-
-                        console.log(city+" fetch");
-
-                        window.location.href='/weather?city='+city;//
-                    });
-            });
-
-        });
-    </script>
-</div>
-
->>>>>>> jaejae
 </html>
 
 <script>
     var main = {
-        init : function () {
+        init: function () {
             var _this = this;
-            $('#btn-weatherList').on('click', function () {
+            $('#weatherSearchBtn').on('click', function () {
                 _this.weatherList();
             });
         },
-        weatherList : function () {
+        weatherList: function () {
             var data = {
                 baseDate: $('#baseDate').val(),
                 meridiem: $('#meridiem').val(),
@@ -111,11 +57,7 @@
             };
             $.ajax({
                 type: 'get',
-<<<<<<< HEAD
                 url: '/weather/weatherList?city=' + data.city,
-=======
-                url: '/weather/weatherList?city='+data.city,
->>>>>>> jaejae
                 // dataType: 'json',
                 // contentType: 'application/json; charset=utf-8',
                 // data: JSON.stringify(data),

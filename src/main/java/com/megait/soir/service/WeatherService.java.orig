@@ -24,9 +24,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 <<<<<<< HEAD
-=======
 import java.util.Iterator;
->>>>>>> jaejae
+=======
+>>>>>>> newheejin
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,7 +51,7 @@ public class WeatherService {
 //    @PostConstruct
 =======
     @PostConstruct
->>>>>>> jaejae
+>>>>>>> newheejin
     @Transactional
     public void Init() {
         insertRegion();
@@ -272,6 +272,30 @@ public class WeatherService {
             .collect(Collectors.toList());
     }
 <<<<<<< HEAD
+    public List<Weather> findCurrentLocalWeather(String city){
+        return weatherRepository.findByCurrentLocalWeather(city);
+    }
+
+    public List<Weather> findCurrentDateTemperature(String currentdate, String city, String meridien){
+        return weatherRepository.findCurrentDateTemperature(currentdate, city, meridien);
+    }
+//    public int WeeklyTemperatureAverage(String city){
+//         int sum= 0;
+//         int average=0;
+//         List<Weather.WeatherMapping> temp = weatherRepository.findAllBy(city);
+//
+//        Iterator iter  = temp.iterator();
+//        while (iter.hasNext()){
+//            sum += Long.valueOf("iter.next()");
+//            average = sum/temp.size();
+//        }
+//        System.out.println(average);
+//        return average;
+//    }
+
+
+
+=======
 
     // 재우
 
@@ -299,29 +323,5 @@ public class WeatherService {
 ////        String result = restTemplate.getForObject(url, String.class);
 //        System.out.println(result);
 //    }
-=======
-    public List<Weather> findCurrentLocalWeather(String city){
-        return weatherRepository.findByCurrentLocalWeather(city);
-    }
-
-    public List<Weather> findCurrentDateTemperature(String currentdate, String city, String meridien){
-        return weatherRepository.findCurrentDateTemperature(currentdate, city, meridien);
-    }
-//    public int WeeklyTemperatureAverage(String city){
-//         int sum= 0;
-//         int average=0;
-//         List<Weather.WeatherMapping> temp = weatherRepository.findAllBy(city);
-//
-//        Iterator iter  = temp.iterator();
-//        while (iter.hasNext()){
-//            sum += Long.valueOf("iter.next()");
-//            average = sum/temp.size();
-//        }
-//        System.out.println(average);
-//        return average;
-//    }
-
-
-
->>>>>>> jaejae
+>>>>>>> newheejin
 }

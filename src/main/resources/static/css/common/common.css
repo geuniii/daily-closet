@@ -43,10 +43,10 @@ body {
     font-size: 5.0em;
     color: black;
     font-family: 'Rock Salt', cursive;
-    margin-: 50px;
+    margin-bottom: 50px;
 }
 
-#bigLogo {
+#bigLogo{
     margin-top: 100px;
     font-size: 9.0em;
     font-family: "Rock Salt", cursive;
@@ -60,7 +60,7 @@ body {
     height: 300px;
 }
 
-#navlogo {
+#navlogo{
     font-family: "Rock Salt", cursive;
     font-size: 1.0em;
     font-weight: 700;
@@ -69,11 +69,15 @@ body {
     margin-left: 20px;
 }
 
-.pageLogo {
+#pageLogo{
     font-family: "Rock Salt", cursive;
-    margin-left: 25px;
-    margin-top: 50px;
+    margin-top: 80px;
 }
+
+#cartLogo{
+    font-family: "Rock Salt", cursive;
+}
+
 
 
 table {
@@ -90,6 +94,11 @@ table {
 td {
     text-align: left;
     font-weight: normal;
+}
+
+
+small{
+    font-size: 1.0rem;
 }
 
 h1 {
@@ -144,6 +153,71 @@ ol {
     list-style: none;
 }
 
+ol{
+    list-style:none;
+}
+
+#signUpDiv{
+    width: 60%;
+    margin-left: 20%;
+}
+
+.col-9{
+    text-align: center;
+    margin-left: 12%;
+}
+
+.mb-2{
+    text-align: center;
+}
+
+#policyDiv{
+    margin-top: 10px;
+}
+
+#agreement{
+    margin-left: 72%;
+}
+
+#agreePolicyLabel{
+    text-align: right;
+    margin-left: 77%;
+}
+
+#pageInfo{
+    margin-bottom: 40px;
+}
+
+#infoLabel{
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+#infoLabel2{
+    margin-top: 10px;
+}
+
+#pageInfo{
+    text-align: center;
+}
+
+.form-label{
+    text-align: left;
+}
+
+#passwordDiv{
+    margin-top: 30px;
+}
+
+#email{
+}
+
+#password{
+}
+
+
+
+
 .imgbox_middle {
     margin: 5px;
     padding: 7px;
@@ -189,6 +263,46 @@ ol {
 .slider:hover {
     opacity: 1;
 }
+.review-tr{
+    text-align: center;
+}
+.slidecontainer {
+    width: 50%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background: #A9A9A9;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #161616;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #161616;
+    cursor: pointer;
+}
 
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -220,26 +334,22 @@ ol {
 }
 
 
-#navp {
+.nav-link{
     text-align: center;
     font-weight: 700;
     font-size: 1.0em;
     margin-top: 7px;
     margin-left: 10px;
-    /*margin-right: 10px;*/
-    /*background-color: #474747;*/
-    /*color: white;*/
-    /*border-radius: 100px;*/
-    /*box-shadow: 2px 2px gray;*/
+    background: transparent;
 }
 
-#usernav {
+#usernav{
     text-align: right;
     float: right;
 }
 
-#nav_left {
-    margin-left: 20%;
+#nav_left{
+    margin-left: 15px;
 }
 
 #searchType {
@@ -247,12 +357,10 @@ ol {
 }
 
 
-#navbar_right {
-    margin-top: 7px;
-    display: inline;
-    float: right;
-    font-weight: 700;
-    font-size: 1.0em;
+#navbar_right{
+    position: absolute;
+    right: 25px;
+    margin-top: 10px;
 }
 
 #carousel {
@@ -271,19 +379,34 @@ ol {
     color: darkgrey;
 }
 
+#memberIdTag{
+    color: black;
+    text-decoration: none;
+}
+
+#modifyIcon{
+    color: black;
+    display: inline;
+}
+
+#memberInfoTable{
+    width: 60%;
+    margin-top: 30px;
+    margin-left: 30%;
+}
+
 
 #pagebox {
     width: 95%;
 }
 
 
-#logoutbtn {
-    /*margin-top: 7px;*/
-    background-color: rgba(255, 255, 255, 0);
+#logoutbtn{
+    background-color: rgba( 255, 255, 255, 0 );
     color: grey;
     margin-top: 5px;
     margin-left: 7px;
-    font-weight: 400;
+    font-weight: 700;
     font-size: 1.0em;
 }
 
@@ -314,11 +437,11 @@ ol {
 
 }
 
-#detailbox {
+#detailbox{
+    margin-top: 30px;
     margin-bottom: 50px;
 }
-
-#brandname {
+#brandname{
     text-align: left;
     display: block;
 }
@@ -363,6 +486,14 @@ ol {
     height: 40px;
     border: 1px solid lightgrey;
 }
+.color_box{
+    text-align: center;
+}
+.color_square{
+    width: 35px;
+    height: 35px;
+    margin-right: 5%;
+}
 
 .color_box {
     text-align: center;
@@ -396,7 +527,7 @@ ol {
 }
 
 
-#product_info {
+#product_info{
     margin-top: 100px;
     margin-left: 5%;
     text-align: left;
@@ -425,8 +556,8 @@ ol {
     padding-right: 80px;
 }
 
-.col-4 {
-    max-width: 350px;
+.col-4{
+    max-width: 320px;
     margin-bottom: 20px;
 }
 
@@ -468,7 +599,7 @@ ol {
     margin-top: 20px;
 }
 
-#buybtn {
+#buybtn{
     padding: 10px;
     /*margin-top: 10px;*/
     margin-bottom: 0px;
@@ -495,7 +626,7 @@ ol {
     display: inline;
 }
 
-#cartMinusBtn {
+#cartMinusBtn{
     color: black;
     background: none;
 }
@@ -523,7 +654,8 @@ ol {
 }
 
 
-#likelist_container {
+
+#likelist_container{
     text-align: center;
 }
 
@@ -537,21 +669,18 @@ ol {
     width: 800px;
 }
 
-#reivewInput {
+#reivewInput{
     width: 600px;
     height: 100px;
     margin: 15px 15px 15px -10px;
 }
 
-.likeListForCody {
+.likeListForCody{
     text-align: center;
     width: 900px;
     height: 300px;
 }
 
-.likeList {
-    text-align: center;
-}
 
 .codyContainer {
     text-align: center;
@@ -559,10 +688,6 @@ ol {
     display: inline;
 }
 
-.pagetitle {
-    text-align: left;
-    margin-left: 100px;
-}
 
 .codyArea {
     class: row;
@@ -630,4 +755,45 @@ ol {
 
 .owl-dots .active {
     background-color: #666;
+}
+.likeList{
+    text-align: center;
+}
+
+.codyContainer{
+    text-align: center;
+    height: 900px;
+    display: inline;
+}
+.pagetitle{
+    text-align: left;
+    margin-left: 100px;
+}
+
+
+#weatherTable{
+    align-content: center;
+    width: 60%;
+    margin-top: 50px;
+    margin-left: 20%;
+}
+
+
+#city{
+    height: 33px;
+    border: 1px solid darkgray;
+    border-radius: 5px;
+    padding-left: 10px;
+    margin-top: 5px;
+    margin-right: 10px;
+    color: black;
+
+}
+
+#weatherSearchBtn{
+    display: inline;
+    border: 1px solid darkgray;
+    border-radius: 20px;
+    background-color: lemonchiffon;
+    color: black;
 }

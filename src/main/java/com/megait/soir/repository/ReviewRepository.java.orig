@@ -28,5 +28,5 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 //    public void delete(long id);
 
 
->>>>>>> jaejae
+>>>>>>> newheejin
 }
