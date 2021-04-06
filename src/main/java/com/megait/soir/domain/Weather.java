@@ -37,8 +37,4 @@ public class Weather {
         this.temperature = temperature;
         this.localWeather = localWeather;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> newheejin
