@@ -64,7 +64,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a id="navp_right" class="nav-link" th:href="@{/daily-recommend}" sec:authorize="!isAuthenticated()">Weather</a>
+                    <a id="navp_right" class="nav-link" th:href="@{/daily-recommend}"
+                       sec:authorize="!isAuthenticated()">Weather</a>
                 </li>
                 <li class="nav-item">
                     <a id="navp_right" class="nav-link" th:href="@{/daily-recommend}" sec:authorize="isAuthenticated()">Weather</a>
@@ -128,20 +129,22 @@
         </div>
 
 
-        <div class="collapse navbar-collapse" id="navbar_right">
-            <!-- 재우 -->
-            <!-- Search bar -->
-            <form class="form-inline my-2 my-lg-0" th:action="@{/searchList}" th:method="get">
-                <select id="searchType" name="searchType">
-                    <option th:value="item_all" >Category</option>
-                    <option th:value="item_name">Product name</option>
-                    <option th:value="brand_name" >Brand</option>
+<!--                Search-->
+<!--        <div class="collapse navbar-collapse" id="navbar_right">-->
+<!--            &lt;!&ndash; 재우 &ndash;&gt;-->
+<!--            &lt;!&ndash; Search bar &ndash;&gt;-->
+<!--            <form class="form-inline my-2 my-lg-0" th:action="@{/searchList}" th:method="get">-->
+<!--                <select id="searchType" name="searchType">-->
+<!--                    <option th:value="item_all">Category</option>-->
+<!--                    <option th:value="item_name">Product name</option>-->
+<!--                    <option th:value="brand_name">Brand</option>-->
 
-                </select>
-                <input class="form-control mr-sm-2" name="keyword" id="keyword" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">search</button>
-            </form>
-        </div>
+<!--                </select>-->
+<!--                <input class="form-control mr-sm-2" name="keyword" id="keyword" type="search" placeholder="Search"-->
+<!--                       aria-label="Search">-->
+<!--                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">search</button>-->
+<!--            </form>-->
+<!--        </div>-->
 
 
     </nav>
@@ -154,7 +157,8 @@
 
 
 <!-- footer -->
-<div id="footer" th:fragment="footer" class="jumbotron text-center bg-white banner" style="margin-bottom: 0; background-color: darkgray;">
+<div id="footer" th:fragment="footer" class="jumbotron text-center bg-white banner"
+     style="margin-bottom: 0; background-color: darkgray;">
 
     <br><br>
     <xs>&copy;2021. Daily Closet. All Rights Reserved.</xs>
