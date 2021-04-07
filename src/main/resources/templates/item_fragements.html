@@ -4,7 +4,7 @@
       layout:decorate="layout" th:with="title='Cody Page'">
 
 <div th:fragment="item_list(itemList)">
-    <div class="row" style="text-align: center; margin-bottom: 100px;">
+    <div class="row justify-content-center py-5" style="text-align: center; margin-bottom: 100px;">
         <div th:each="item:${itemList}" class="col-sm-2 justify-content-center" style="text-align: center; margin: 50px;">
             <div class="component">
                 <img id="component_img" th:src="${item.urls.get(0)}">

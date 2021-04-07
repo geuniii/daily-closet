@@ -44,7 +44,7 @@
             <h4 th:text="${item.name}"/>
             <p th:text="${item.brand}" id="brandinfo"/> / <p th:text="${item.code}" id="codeinfo"/>
             <hr>
-            <i id="ic-like"><p id="likecount" th:text="${item.liked}"/>
+            <i id="ic-like"><p id="likecount" th:value="${item.liked}"/>
                 <p id="likeinfo"> people like this product. </p></i>
             <p><h6>Gender</h6>Unisex</p>
             <p><h6>Size</h6>사이즈 드롭다운 배치</p>
@@ -172,6 +172,7 @@
                         $('#modal').modal('show');
                         if (result.status) {
                             $("like_status").attr('class', 'fas fa-heart');
+                            $("likecount").attr('value',$("likecount").getAttribute("value")+1);
                         } else {
                             $("like_status").attr('class', 'far fa-heart');
                         }

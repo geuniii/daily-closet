@@ -1,6 +1,5 @@
 package com.megait.soir.repository;
 
-import com.megait.soir.domain.Category;
 import com.megait.soir.domain.ChildCategory;
 import com.megait.soir.domain.Item;
 import com.megait.soir.domain.ParentCategory;

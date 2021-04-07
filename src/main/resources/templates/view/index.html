@@ -8,20 +8,26 @@
     <link rel="stylesheet" th:href="@{/css/user/style.css}">
 </th:block>
 
-<div layout:fragment="content" class="container justify-content-center" style="background-color: #37505B" >
+<div layout:fragment="content">
 
     <!--    Today's Weather-->
-    <th:block th:insert="weather_fragment :: weather()"/>
+    <div>
+        <th:block th:insert="weather_fragment :: weather()"/>
+    </div>
 
-    <!--    Today's Weather-->
-    <th:block th:insert="search_fragment :: search()"/>
+    <div class="justify-content-center py-5" style="height: 900px;">
+        <!--    Today's Weather-->
+        <th:block th:insert="search_fragment :: search()"/>
 
-    <!--    Cody Carosel-->
-    <th:block th:insert="cody_fragment :: cody(${codyList})"/>
+        <!--        Cody Carosel-->
+        <th:block th:insert="cody_fragment :: cody(${codyList})"/>
+    </div>
 
-    <!--    Recommend-->
-    <th:block th:insert="recommend_fragment :: recommend(${top},${outer},${bottom})"/>
 
+    <div class="row justify-content-center py-5" style="background-color: #A0A19D;height: 700px;">
+        <!— Recommend—>
+        <th:block th:insert="recommend_fragment :: recommend(${top},${outer},${bottom})"/>
+    </div>
 </div>
 
 </html>

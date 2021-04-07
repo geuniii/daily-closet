@@ -49,7 +49,7 @@ public class MainController {
         model.addAttribute(new SearchForm());
 
         //////////////////////////////////코디/////////////////////////////////////
-        model.addAttribute("codyList",codyService.getCodyList(member));
+        model.addAttribute("codyList",codyService.getAllList());
 
         model.addAttribute("itemList",itemService.getItemList());
 
@@ -572,7 +572,7 @@ public class MainController {
         return json.toString();
 
     }
-
+    @GetMapping("/cody")
     public String cody(@CurrentUser Member member, Model model) {
 
         model.addAttribute(new CodyForm());

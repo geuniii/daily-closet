@@ -237,14 +237,14 @@ ol{
     display: inline;
 }
 
-#reviewHeadDiv, #reviewFragDiv{
-    margin-left: 10%;
-    margin-right: 10%;
-}
+/*#reviewHeadDiv, #reviewFragDiv{*/
+/*    margin-left: 10%;*/
+/*    margin-right: 10%;*/
+/*}*/
 
-#reviewTableHead{
-    display: inline;
-}
+/*#reviewTableHead{*/
+/*    display: inline;*/
+/*}*/
 
 .vertical-data {
     writing-mode: vertical-lr
@@ -835,10 +835,10 @@ ol{
     margin-top: 70px;
 }
 
-#carousel1, #carousel2, #carousel3{
-    width: 500px;
-    height: 600px;
-}
+/*#carousel1, #carousel2, #carousel3{*/
+/*    width: 500px;*/
+/*    height: 600px;*/
+/*}*/
 
 #carouselExampleIndicators{
     margin-left: 10%;
