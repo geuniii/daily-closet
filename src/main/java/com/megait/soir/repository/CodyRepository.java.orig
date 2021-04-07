@@ -5,17 +5,23 @@ import com.megait.soir.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-<<<<<<< HEAD
+
 import java.util.List;
+<<<<<<< HEAD
+import java.util.Optional;
+=======
+>>>>>>> newheejin
 
 @Repository
 public interface CodyRepository extends JpaRepository<Cody, Long> {
 
     public List<Cody> findAllByMember(Member member);
-=======
-@Repository
-public interface CodyRepository extends JpaRepository<Cody, Long> {
 
-    public Member findById(String id);
->>>>>>> jaejae
+<<<<<<< HEAD
+    public List<Cody> findAll();
+
+    public Optional<Cody> findById(Long id);
+
+=======
+>>>>>>> newheejin
 }

@@ -4,12 +4,13 @@
       layout:decorate="layout" th:with="title='Cody Page'">
 
 
-
 <div layout:fragment="content" class="container" style="background-color: #FFFFFF;">
 
-    <br><br><br>
-    <h3 class="text-left" style="margin-left: 100px"><b>New Cody</b></h3>
-    <hr>
+    <div>
+        <h2 id="pageLogo">New Cody</h2>
+        <small id="pageInfo">Coordinate your own Style!</small>
+    </div>
+
     <br><br>
     <form class="needs-validation" th:id="codyForm" th:action="@{/cody}" th:object="${codyForm}" method="post"
           novalidate>
@@ -88,7 +89,7 @@
                         <input type="range" min="1" max="65" value="60" class="slider" id="outerRange"
                                style="display: none" onchange="changeSize(this.id, this.value)">
                         <input type="range" min="1" max="85" value="50" class="slider" id="topRange"
-                               style="display: none" onchange="changeSize(this.id, this.value)">
+                               onchange="changeSize(this.id, this.value)">
                         <input type="range" min="1" max="75" value="50" class="slider" id="bottomRange"
                                style="display: none" onchange="changeSize(this.id, this.value)">
                         <input type="range" min="1" max="45" value="30" class="slider" id="shoesRange"
@@ -98,12 +99,20 @@
 
                     </div>
                 </div>
+                <br><br>
+                <div class="row">
+                    <input type="button" th:id="submit_btn" class="btn btn-light" value="Save" style="width:200px">&nbsp&nbsp
+                    <input  type="button" th:id="submit_btn" class="btn btn-light" value="Reset" style="width:200px">
+                </div>
+                <br>
 
                 <div class="row">
-                    <input type="button" th:id="submit_btn" class="btn btn-light" value="Save">&nbsp&nbsp
                     <input type="button" th:id="myCody_btn" class="btn btn-light" value="My Cody List"
-                           th:onclick="location.href='/codyList'">
+                           th:onclick="location.href='/codyList'" style="width:200px">&nbsp&nbsp
+                    <input type="button" th:id="myCody_btn" class="btn btn-light" value="Other Cody List"
+                           th:onclick="location.href='/allCodyList'" style="width:200px">
                 </div>
+
             </div>
 
         </div>
@@ -130,7 +139,7 @@
         </div>
 
         <!--                상의-->
-        <div class="likeList" id="topList" style="display: none">
+        <div class="likeList" id="topList">
             <li th:if="${topList.size()== 0}">Add Top List</li>
             <div class="owl-carousel" style="text-align: center">
                 <div class="col" th:each="item:${topList}">
@@ -377,39 +386,6 @@
                 1000: {items: 6, nav: false,}
             }
         });
-
-
-        //navBar 이벤트
-        function navEvent(divId) {
-
-            switch (divId) {
-                case "outer-id":
-                    $(".likeList").hide();
-                    $("#outerList").show();
-                    break;
-
-                case "top-id":
-                    $(".likeList").hide();
-                    $("#topList").show();
-                    break;
-
-                case "bottom-id":
-                    $(".likeList").hide();
-                    $("#bottomList").show();
-
-                    break;
-
-                case "shoes-id":
-                    $(".likeList").hide();
-                    $("#shoesList").show();
-                    break;
-
-                case "acc-id":
-                    $(".likeList").hide();
-                    $("#accList").show();
-                    break;
-            }
-        }
 
     </script>
 </div>

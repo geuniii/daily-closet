@@ -1,9 +1,7 @@
 package com.megait.soir.service;
 
-import com.megait.soir.domain.Address;
-import com.megait.soir.domain.Item;
-import com.megait.soir.domain.Member;
-import com.megait.soir.domain.MemberType;
+import com.megait.soir.domain.*;
+import com.megait.soir.repository.CodyRepository;
 import com.megait.soir.repository.ItemRepository;
 import com.megait.soir.repository.MemberRepository;
 import com.megait.soir.user.MemberUser;
@@ -25,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 // Controller의 부담을 줄이기 위해 생성.
 @Service
@@ -35,6 +34,7 @@ public class MemberService implements UserDetailsService {
     private final JavaMailSender javaMailSender;
     private final PasswordEncoder passwordEncoder; // password encoding
     private final ItemRepository itemRepository;
+    private final CodyRepository codyRepository;
 
     // 회원정보 수정
     @Transactional
@@ -226,5 +226,32 @@ public class MemberService implements UserDetailsService {
 
     public List<Item> getLikeList(Member member) {
         return memberRepository.findByEmail(member.getEmail()).getLikes();
+    }
+
+
+    @Transactional
+    public boolean addCodyLike(Member member, Long codyId) {
+        if (member == null){
+            throw new UsernameNotFoundException("wrong user");
+        }
+        Optional<Cody> optional = codyRepository.findById(codyId);
+        Cody cody = optional.get();
+
+        // codyId의 유효성 판별
+        if(cody == null){
+            throw new IllegalArgumentException("wrong cody info!");
+        }
+
+        // member는 detach 상태 -> Repo를 통해 Select문으로 한 번 조회해야 한다.
+        member = memberRepository.getOne(member.getId()); // detach -> persist 상태로 변환된다.
+        List<Cody> codyLikeList = member.getCodyLikes();
+
+        if(codyLikeList.contains(cody)){
+            codyLikeList.remove(cody);
+            return false;
+        }
+
+        codyLikeList.add(cody);
+        return true;
     }
 }

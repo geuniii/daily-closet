@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.megait.soir.form.CodyForm;
 import com.megait.soir.domain.*;
 import com.megait.soir.form.ReviewForm;
+import com.megait.soir.form.SearchForm;
 import com.megait.soir.repository.MemberRepository;
 import com.megait.soir.service.*;
 import com.megait.soir.user.CurrentUser;
@@ -21,8 +22,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
@@ -43,42 +42,55 @@ public class MainController {
     private final CityNameService cityNameService;
     private final DateService dateService;
 
-//    @GetMapping("/") // root context가 들어오면 index page를 보여준다.
-//    public String index(@CurrentUser Member member, Model model) {
-//
-//        if (member != null) {
-//            model.addAttribute("member", member);
-//        }
-//        model.addAttribute("albumList", itemService.getItemList());
-//        model.addAttribute("bookList", itemService.getItemList());
-//        model.addAttribute("title", "Soir.");
-//        return "/view/index";
-//    }
-
-
     // 재우
     @GetMapping("/") // root context가 들어오면 index page를 보여준다.
-    public String index(@CurrentUser Member member, Model model, String keyword, String searchType){
+    public String index(@CurrentUser Member member, Model model, String keyword, String searchType, String city){
 
-    if(member != null){
-        model.addAttribute("member", member);
-    }
+        model.addAttribute(new SearchForm());
 
-    model.addAttribute("title", "Soir.");
+        //////////////////////////////////코디/////////////////////////////////////
+        model.addAttribute("codyList",codyService.getCodyList(member));
 
-    //common_fragments 에서 SearchType 받아서 처리 (검색)
-    if(keyword != null){
-        if(searchType.equals("item_all"))
-            model.addAttribute("clothsList", itemService.findByAllKeyword(keyword));
-        else if(searchType.equals("item_name"))
-            model.addAttribute("clothsList", itemService.findByNameKeyword(keyword));
-        else if(searchType.equals("brand_name"))
-            model.addAttribute("clothsList", itemService.findByBrandKeyword(keyword));
-    }
-    else{
-        model.addAttribute("clothsList", itemService.getItemList());
+        model.addAttribute("itemList",itemService.getItemList());
 
-    }
+
+        /////////////////////////////////오늘의 날씨/////////////////////////////////
+        String baseDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
+        String meridien = dateService.currentHour();
+        if(city != null) {
+            String cityName = cityNameService.renameCity(city);
+            model.addAttribute("currentTemperature", weatherService.findCurrentDateTemperature(baseDate, cityName, meridien));
+            model.addAttribute("weatherList", weatherService.findCurrentLocalWeather(cityName));
+            System.out.println("주소가 null 아님");
+
+        }
+        else{
+            model.addAttribute("currentTemperature", weatherService.findCurrentDateTemperature(baseDate, "서울_인천_경기도", meridien));
+            System.out.println("주소가 null일 경우");
+        }
+
+
+        //////////////////////////////////옷 추천/////////////////////////////////////
+
+        //아우터
+        Long parent1 = Long.valueOf("12");
+        Long child1 = Long.valueOf("29");
+        //상의
+        Long parent2 = Long.valueOf("3");
+        Long child2 = Long.valueOf("2");
+
+        //하의
+        Long parent3 = Long.valueOf("31");
+        Long child3 = Long.valueOf("36");
+
+
+        //아우터 가져오기
+        model.addAttribute("outer", itemService.findRecommendCategory(parent1, child1));
+        // 상의 가져오기
+        model.addAttribute("top", itemService.findRecommendCategory(parent2, child2));
+        //하의 가져오기
+        model.addAttribute("bottom", itemService.findRecommendCategory(parent3, child3));
+
     return "/view/index";
     }
 
@@ -303,8 +315,32 @@ public class MainController {
         }
         // <h2 th:text="This is ${title} Page."><h2>
         model.addAttribute("title", categoryName);
-        return "/view/category/category";
+        return "/view/category";
     }
+
+
+    @GetMapping("/searchList")
+    public String searchList(@Valid SearchForm searchForm, Model model) {
+
+
+        System.out.println("durlsfdsfse");
+
+        if(searchForm.getOption().equals("item_all")){
+            model.addAttribute("itemList", itemService.findByAllKeyword(searchForm.getKeyword()));
+        }
+        else if(searchForm.getOption().equals("item_name")){
+            model.addAttribute("itemList", itemService.findByNameKeyword(searchForm.getKeyword()));
+        }
+        else if(searchForm.getOption().equals("brand_name")){
+            model.addAttribute("itemList", itemService.findByBrandKeyword(searchForm.getKeyword()));
+        }
+
+        else{
+            model.addAttribute("itemList", itemService.getItemList());
+        }
+        return "/view/category";
+    }
+
 
     @GetMapping("/signup")
     public String signUp(Model model) {
@@ -537,7 +573,6 @@ public class MainController {
 
     }
 
-    @GetMapping("/cody")
     public String cody(@CurrentUser Member member, Model model) {
 
         model.addAttribute(new CodyForm());
@@ -630,5 +665,45 @@ public class MainController {
 
         model.addAttribute("codyList",codyService.getCodyList(member));
         return "/view/codyList";
+    }
+
+    @GetMapping("/allCodyList")
+    public String allCodyList(@CurrentUser Member member,Model model) {
+
+        model.addAttribute("codyList",codyService.getAllList());
+
+        model.addAttribute("cody_like_status", false);
+//        if (member != null) {
+//            member = memberRepository.findByEmail(member.getEmail());
+//            model.addAttribute("cody_like_status", member.getCodyLikes().contains(cody));
+//        }
+        return "/view/allCodyList";
+    }
+
+    @GetMapping("/cody/like")
+    @ResponseBody
+    public String addCodyLike(@CurrentUser Member member, @RequestParam("id") Long codyId) {
+
+        boolean result = false;
+
+        JsonObject jsonObject = new JsonObject();
+
+        try {
+            result = memberService.addLike(member, codyId);
+            // 찜 목록 추가
+            if (result) {
+                jsonObject.addProperty("message", "Add like list Complelte!");
+            }
+            // 찜 목록 삭제
+            else {
+                jsonObject.addProperty("message", "Delete from like list.");
+            }
+            jsonObject.addProperty("status", result);
+        } catch (IllegalArgumentException e) {
+            jsonObject.addProperty("message", "Wrong access.");
+        } catch (UsernameNotFoundException e) {
+
+        }
+        return jsonObject.toString();
     }
 }
