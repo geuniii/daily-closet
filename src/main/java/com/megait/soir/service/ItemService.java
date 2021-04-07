@@ -34,7 +34,7 @@ public class ItemService {
     private final ParentCategoryRepository parentCategoryRepository;
     private final ChildCategoryRepository childCategoryRepository;
 
-    @PostConstruct
+//    @PostConstruct
     public void initAlbumItems() throws IOException, ParseException {
 
 

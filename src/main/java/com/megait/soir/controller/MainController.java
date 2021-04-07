@@ -640,4 +640,45 @@ public class MainController {
         model.addAttribute("codyList",codyService.getCodyList(member));
         return "/view/codyList";
     }
+
+    @GetMapping("/allCodyList")
+    public String allCodyList(@CurrentUser Member member,Model model) {
+
+        model.addAttribute("codyList",codyService.getAllList());
+
+        model.addAttribute("cody_like_status", false);
+//        if (member != null) {
+//            member = memberRepository.findByEmail(member.getEmail());
+//            model.addAttribute("cody_like_status", member.getCodyLikes().contains(cody));
+//        }
+        return "/view/allCodyList";
+    }
+
+    @GetMapping("/cody/like")
+    @ResponseBody
+    public String addCodyLike(@CurrentUser Member member, @RequestParam("id") Long codyId) {
+
+        boolean result = false;
+
+        JsonObject jsonObject = new JsonObject();
+
+        try {
+            result = memberService.addLike(member, codyId);
+            // 찜 목록 추가
+            if (result) {
+                jsonObject.addProperty("message", "Add like list Complelte!");
+            }
+            // 찜 목록 삭제
+            else {
+                jsonObject.addProperty("message", "Delete from like list.");
+            }
+            jsonObject.addProperty("status", result);
+        } catch (IllegalArgumentException e) {
+            jsonObject.addProperty("message", "Wrong access.");
+        } catch (UsernameNotFoundException e) {
+
+        }
+        return jsonObject.toString();
+    }
+
 }
