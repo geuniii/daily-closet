@@ -17,46 +17,26 @@
             </div>
 
             <div id="imgboxs_mini">
-
-                <div class="imgbox_mini" th:if="${item.urls.size()} >= 2">
-                    <img class="mini" id="mini0" th:src="${item.urls.get(0)}">
-                </div>
-
-                <div class="imgbox_mini" th:if="${item.urls.size()} >= 2">
-                    img class="mini" id="mini1" th:src="${item.urls.get(1)}">
-                </div>
-
-                <div class="imgbox_mini" th:if="${item.urls.size()} >= 3">
-                    <img class="mini" id="mini2" th:src="${item.urls.get(2)}">
-                </div>
-
-                <div class="imgbox_mini" th:if="${item.urls.size()} >= 4">
-                    <img class="mini" id="mini3" th:src="${item.urls.get(3)}">
-                </div>
-
-                <div class="imgbox_mini" th:if="${item.urls.size()} >= 5">
-                    <img class="mini" id="mini4" th:src="${item.urls.get(4)}">
-                </div>
-
-                <div class="imgbox_mini" th:if="${item.urls.size()} >= 6">
-                    <img class="mini" id="mini5" th:src="${item.urls.get(5)}">
-                </div>
-
-                <div class="imgbox_mini" th:if="${item.urls.size()} >= 7">
-                    <img class="mini" id="mini6" th:src="${item.urls.get(6)}">
-                </div>
-
-                <div class="imgbox_mini" th:if="${item.urls.size()} >= 8">
-                    <img class="mini" id="mini7" th:src="${item.urls.get(7)}">
-                </div>
-
-                <div class="imgbox_mini" th:if="${item.urls.size()} >= 9">
-                    <img class="mini" id="mini8" th:src="${item.urls.get(8)}">
-                </div>
-
-                <div class="imgbox_mini" th:if="${item.urls.size()} >= 10">
-                    <img class="mini" id="mini9" th:src="${item.urls.get(9)}">
-                </div>
+                <div class="imgbox_mini" th:if="${item.urls.size()} >= 2"><img class="mini" id="mini0"
+                                                                               th:src="${item.urls.get(0)}"></div>
+                <div class="imgbox_mini" th:if="${item.urls.size()} >= 2"><img class="mini" id="mini1"
+                                                                               th:src="${item.urls.get(1)}"></div>
+                <div class="imgbox_mini" th:if="${item.urls.size()} >= 3"><img class="mini" id="mini2"
+                                                                               th:src="${item.urls.get(2)}"></div>
+                <div class="imgbox_mini" th:if="${item.urls.size()} >= 4"><img class="mini" id="mini3"
+                                                                               th:src="${item.urls.get(3)}"></div>
+                <div class="imgbox_mini" th:if="${item.urls.size()} >= 5"><img class="mini" id="mini4"
+                                                                               th:src="${item.urls.get(4)}"></div>
+                <div class="imgbox_mini" th:if="${item.urls.size()} >= 6"><img class="mini" id="mini5"
+                                                                               th:src="${item.urls.get(5)}"></div>
+                <div class="imgbox_mini" th:if="${item.urls.size()} >= 7"><img class="mini" id="mini6"
+                                                                               th:src="${item.urls.get(6)}"></div>
+                <div class="imgbox_mini" th:if="${item.urls.size()} >= 8"><img class="mini" id="mini7"
+                                                                               th:src="${item.urls.get(7)}"></div>
+                <div class="imgbox_mini" th:if="${item.urls.size()} >= 9"><img class="mini" id="mini8"
+                                                                               th:src="${item.urls.get(8)}"></div>
+                <div class="imgbox_mini" th:if="${item.urls.size()} >= 10"><img class="mini" id="mini9"
+                                                                                th:src="${item.urls.get(9)}"></div>
             </div>
         </div>
 
@@ -87,7 +67,7 @@
                 <button id="like" class="btn btn-light">
                     <i id="like_status" th:class="${like_status} ? 'fas fa-heart':'far fa-heart'"
                        class="far fa-heart"></i>
-                    찜하기
+                    like!
                 </button>
 
                 <button type="button" class="btn btn-light" id="createBtn">Write Review</button>
@@ -113,7 +93,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-dark" data-dismiss="modal"
-                            th:onclick="location.href='/store/detail/[[${item.id}]]'">Close
+                            th:onclick="location.href='/store/detail/[[${item.id}]]'">닫기
                     </button>
                 </div>
             </div>
@@ -131,10 +111,10 @@
                         <input type="hidden" id="reviewId" name="reviewId">
                         <input type="hidden" name="itemId" th:value="${item.getId()}">
                     </div>
-                    <div class="modal-body">Delete this review.</div>
+                    <div class="modal-body">해당 글을 삭제합니다</div>
                     <div class="modal-footer">
-                        <button id="submitBtn" type="submit" class="btn btn-dark">OK</button>
-                        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                        <button id="submitBtn" type="submit" class="btn btn-dark">확인</button>
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
                     </div>
                 </form>
             </div>
@@ -188,7 +168,6 @@
                     dataType: 'json', // 응답메시지의 content-type 을 json으로 (json타입으로 받겠다!)
                     success: function (result) {
                         // Modal 띄우기
-                        $('.modal-title').html("Add Like-List");
                         $('.modal-body').html(result.message);
                         $('#modal').modal('show');
                         if (result.status) {
