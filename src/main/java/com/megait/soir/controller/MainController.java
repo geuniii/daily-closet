@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.megait.soir.form.CodyForm;
 import com.megait.soir.domain.*;
 import com.megait.soir.form.ReviewForm;
+import com.megait.soir.form.SearchForm;
 import com.megait.soir.repository.MemberRepository;
 import com.megait.soir.service.*;
 import com.megait.soir.user.CurrentUser;
@@ -45,8 +46,12 @@ public class MainController {
     @GetMapping("/") // root context가 들어오면 index page를 보여준다.
     public String index(@CurrentUser Member member, Model model, String keyword, String searchType, String city){
 
+        model.addAttribute(new SearchForm());
+
         //////////////////////////////////코디/////////////////////////////////////
         model.addAttribute("codyList",codyService.getCodyList(member));
+
+        model.addAttribute("itemList",itemService.getItemList());
 
 
         /////////////////////////////////오늘의 날씨/////////////////////////////////
@@ -313,6 +318,30 @@ public class MainController {
         return "/view/category";
     }
 
+
+    @GetMapping("/searchList")
+    public String searchList(@Valid SearchForm searchForm, Model model) {
+
+
+        System.out.println("durlsfdsfse");
+
+        if(searchForm.getOption().equals("item_all")){
+            model.addAttribute("itemList", itemService.findByAllKeyword(searchForm.getKeyword()));
+        }
+        else if(searchForm.getOption().equals("item_name")){
+            model.addAttribute("itemList", itemService.findByNameKeyword(searchForm.getKeyword()));
+        }
+        else if(searchForm.getOption().equals("brand_name")){
+            model.addAttribute("itemList", itemService.findByBrandKeyword(searchForm.getKeyword()));
+        }
+
+        else{
+            model.addAttribute("itemList", itemService.getItemList());
+        }
+        return "/view/category";
+    }
+
+
     @GetMapping("/signup")
     public String signUp(Model model) {
         model.addAttribute(new SignUpForm()); // 빈 DTO를 view에게 전달?
@@ -544,7 +573,6 @@ public class MainController {
 
     }
 
-    @GetMapping("/cody")
     public String cody(@CurrentUser Member member, Model model) {
 
         model.addAttribute(new CodyForm());

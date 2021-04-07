@@ -126,6 +126,24 @@
             </div>
 
         </div>
+
+
+        <div class="collapse navbar-collapse" id="navbar_right">
+            <!-- 재우 -->
+            <!-- Search bar -->
+            <form class="form-inline my-2 my-lg-0" th:action="@{/searchList}" th:method="get">
+                <select id="searchType" name="searchType">
+                    <option th:value="item_all" >Category</option>
+                    <option th:value="item_name">Product name</option>
+                    <option th:value="brand_name" >Brand</option>
+
+                </select>
+                <input class="form-control mr-sm-2" name="keyword" id="keyword" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">search</button>
+            </form>
+        </div>
+
+
     </nav>
 
     <!--    <div class="alert alert-warning" role="alert" th:if="${member != null && !member.emailVerified}">-->
