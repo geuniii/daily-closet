@@ -7,6 +7,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
 * {
     margin: 0;
@@ -708,8 +709,16 @@ ol{
     width: 400px;
     background-color: #F8EAC3;
     border: solid 1px darkgrey;
-    border-radius: 200px;
 }
+
+.codyArea_carousel {
+    class: row;
+    position: relative;
+    height: 400px;
+    width: 400px;
+    background-color: #F8EAC3;
+}
+
 
 
 .bottomCody {

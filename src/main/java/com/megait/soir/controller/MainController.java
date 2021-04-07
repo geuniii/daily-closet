@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
@@ -312,7 +310,7 @@ public class MainController {
         }
         // <h2 th:text="This is ${title} Page."><h2>
         model.addAttribute("title", categoryName);
-        return "/view/category/category";
+        return "/view/category";
     }
 
     @GetMapping("/signup")

@@ -42,8 +42,4 @@ public class Cody {
 
     private long accSize;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> newheejin
 }
