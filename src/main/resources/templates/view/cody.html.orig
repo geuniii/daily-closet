@@ -2,15 +2,25 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout" th:with="title='Cody Page'">
+<<<<<<< HEAD
+=======
+
+>>>>>>> newheejin
 
 
 <div layout:fragment="content" class="container" style="background-color: #FFFFFF;">
 
+<<<<<<< HEAD
+    <br><br><br>
+    <h3 class="text-left" style="margin-left: 100px"><b>New Cody</b></h3>
+    <hr>
+=======
     <div>
         <h2 id="pageLogo">New Cody</h2>
         <small id="pageInfo">Coordinate your own Style!</small>
     </div>
 
+>>>>>>> newheejin
     <br><br>
     <form class="needs-validation" th:id="codyForm" th:action="@{/cody}" th:object="${codyForm}" method="post"
           novalidate>
@@ -89,7 +99,11 @@
                         <input type="range" min="1" max="65" value="60" class="slider" id="outerRange"
                                style="display: none" onchange="changeSize(this.id, this.value)">
                         <input type="range" min="1" max="85" value="50" class="slider" id="topRange"
+<<<<<<< HEAD
                                onchange="changeSize(this.id, this.value)">
+=======
+                               style="display: none" onchange="changeSize(this.id, this.value)">
+>>>>>>> newheejin
                         <input type="range" min="1" max="75" value="50" class="slider" id="bottomRange"
                                style="display: none" onchange="changeSize(this.id, this.value)">
                         <input type="range" min="1" max="45" value="30" class="slider" id="shoesRange"
@@ -107,10 +121,16 @@
                 <br>
 
                 <div class="row">
+<<<<<<< HEAD
                     <input type="button" th:id="myCody_btn" class="btn btn-light" value="My Cody List"
                            th:onclick="location.href='/codyList'" style="width:200px">&nbsp&nbsp
                     <input type="button" th:id="myCody_btn" class="btn btn-light" value="Other Cody List"
                            th:onclick="location.href='/allCodyList'" style="width:200px">
+=======
+                    <input type="button" th:id="submit_btn" class="btn btn-light" value="Save">&nbsp&nbsp
+                    <input type="button" th:id="myCody_btn" class="btn btn-light" value="My Cody List"
+                           th:onclick="location.href='/codyList'">
+>>>>>>> newheejin
                 </div>
 
             </div>
@@ -294,6 +314,109 @@
                 case "outer-id":
                     $(".likeList").hide();
                     $(".slider").hide();
+<<<<<<< HEAD
+=======
+                    $("#outerList").show();
+                    $("#outerRange").show();
+                    break;
+
+                case "top-id":
+                    $(".likeList").hide();
+                    $(".slider").hide();
+                    $("#topList").show();
+                    $("#topRange").show();
+                    break;
+
+                case "bottom-id":
+                    $(".likeList").hide();
+                    $(".slider").hide();
+                    $("#bottomList").show()
+                    $("#bottomRange").show();
+                    ;
+
+                    break;
+
+                case "shoes-id":
+                    $(".likeList").hide();
+                    $(".slider").hide();
+                    $("#shoesList").show();
+                    $("#shoesRange").show();
+                    break;
+
+                case "acc-id":
+                    $(".likeList").hide();
+                    $(".slider").hide();
+                    $("#accList").show();
+                    $("#accRange").show();
+                    break;
+            }
+        }
+
+        // background color event
+        function changeColor(backgroundColor) {
+            document.getElementById("codyArea").style.backgroundColor = backgroundColor;
+            document.getElementById("backgroundId").setAttribute("value", backgroundColor);
+            console.log(backgroundColor);
+            console.log(document.getElementById("backgroundId").getAttribute("value"));
+
+        };
+
+        // slider event
+        function changeSize(id, value) {
+
+            switch (id.toString()) {
+                case "outerRange" :
+                    document.getElementById("outerCody").style.width = value + "%";
+                    document.getElementById("outerSize").setAttribute("value", value);
+                    break;
+                case "topRange" :
+                    document.getElementById("topCody").style.width = value + "%";
+                    document.getElementById("topSize").setAttribute("value", value);
+                    break;
+                case "bottomRange" :
+                    document.getElementById("bottomCody").style.width = value + "%";
+                    document.getElementById("bottomSize").setAttribute("value", value);
+                    break;
+                case "shoesRange" :
+                    document.getElementById("shoesCody").style.width = value + "%";
+                    document.getElementById("shoesSize").setAttribute("value", value);
+                    break;
+                case "accRange" :
+                    document.getElementById("accCody").style.width = value + "%";
+                    document.getElementById("accSize").setAttribute("value", value);
+                    break;
+            }
+        };
+
+        $(document).ready(function () {
+            $(".owl-carousel").owlCarousel();
+        });
+
+        $(".owl-carousel").owlCarousel({
+            center: true,
+            nav: false,
+            loop: false,
+            dots: true,
+            autoplay: false,
+            rewind: true,
+            autoplayTimeout: 2000,
+            margin: 10,
+            responsiveClass: true,
+            responsive: {
+                // 0: {items: 2, nav: false},
+                // 600: {items: 3, nav: false, loop: false},
+                1000: {items: 6, nav: false,}
+            }
+        });
+
+
+        //navBar 이벤트
+        function navEvent(divId) {
+
+            switch (divId) {
+                case "outer-id":
+                    $(".likeList").hide();
+>>>>>>> newheejin
                     $("#outerList").show();
                     $("#outerRange").show();
                     break;

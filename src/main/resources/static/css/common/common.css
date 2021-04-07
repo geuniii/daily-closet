@@ -236,6 +236,15 @@ ol{
     display: inline;
 }
 
+#reviewHeadDiv, #reviewFragDiv{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#reviewTableHead{
+    display: inline;
+}
+
 .vertical-data {
     writing-mode: vertical-lr
 }
@@ -348,6 +357,10 @@ ol{
     float: right;
 }
 
+#userEmail{
+    color: black;
+}
+
 #nav_left{
     margin-left: 15px;
 }
@@ -356,11 +369,10 @@ ol{
     margin: 10px;
 }
 
-
-#navbar_right{
+#rightNavigation{
     position: absolute;
-    right: 25px;
-    margin-top: 10px;
+    right: 40px;
+    margin-top: -5px;
 }
 
 #carousel {
@@ -695,6 +707,8 @@ ol{
     height: 400px;
     width: 400px;
     background-color: #F8EAC3;
+    border: solid 1px darkgrey;
+    border-radius: 200px;
 }
 
 
@@ -796,4 +810,34 @@ ol{
     border-radius: 20px;
     background-color: lemonchiffon;
     color: black;
+}
+
+#loadWeather{
+    font-size: 2.5rem;
+}
+
+
+#loadWeatherIcon{
+    margin-bottom: 25px;
+}
+
+
+#recommendDiv{
+    margin-top: 70px;
+}
+
+#carousel1, #carousel2, #carousel3{
+    width: 500px;
+    height: 600px;
+}
+
+#carouselExampleIndicators{
+    margin-left: 10%;
+    width: 80%;
+    text-align: center;
+}
+
+.carousel-inner{
+    /*width: 60%;*/
+    /*height: 350px;*/
 }
