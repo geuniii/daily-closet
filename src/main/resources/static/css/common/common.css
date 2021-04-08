@@ -515,6 +515,8 @@ ol{
     width: 35px;
     height: 35px;
     margin-right: 5%;
+    border: 1px solid darkgrey;
+    border-radius: 5px;
 }
 
 .color_box {
@@ -541,16 +543,18 @@ ol{
     margin-right: 20px;
 }
 
+
+
 #cody_info {
     width: 450px;
     text-align: center;
-    margin-left: 5%;
-    margin-top: 100px;
+    margin-left: 30px;
+    margin-top: 30px;
 }
 
 
 #product_info{
-    margin-top: 100px;
+    margin-top: 50px;
     margin-left: 5%;
     text-align: left;
 }
@@ -574,6 +578,8 @@ ol{
 }
 
 #likeitem_div {
+    margin-left: 10%;
+    margin-right: 10%;
     padding-left: 80px;
     padding-right: 80px;
 }
@@ -718,14 +724,7 @@ ol{
     width: 400px;
     background-color: #F8EAC3;
     border: solid 1px darkgrey;
-}
-
-.codyArea_carousel {
-    class: row;
-    position: relative;
-    height: 400px;
-    width: 400px;
-    background-color: #F8EAC3;
+    border-radius: 20px;
 }
 
 .codyArea_carousel {
@@ -851,6 +850,19 @@ ol{
     text-align: left;
 }
 
+#recoFragDiv{
+    margin-left: -50px;
+}
+
+#recoFragTitle{
+    font-family: "Noto Sans KR", "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sansserif;
+    font-size: 3.2rem;
+}
+
+#recoFragInfo{
+    font-family: "Noto Sans KR", "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sansserif;
+    font-size: 2.0rem;
+}
 
 #city{
     height: 33px;

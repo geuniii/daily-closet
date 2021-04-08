@@ -8,10 +8,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
-<<<<<<< HEAD
-=======
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
->>>>>>> newheejin
 
 * {
     margin: 0;
@@ -518,6 +515,8 @@ ol{
     width: 35px;
     height: 35px;
     margin-right: 5%;
+    border: 1px solid darkgrey;
+    border-radius: 5px;
 }
 
 .color_box {
@@ -544,16 +543,23 @@ ol{
     margin-right: 20px;
 }
 
+
+
 #cody_info {
     width: 450px;
     text-align: center;
+<<<<<<< HEAD
     margin-left: 5%;
-    margin-top: 150px;
+    margin-top: 100px;
+=======
+    margin-left: 30px;
+    margin-top: 30px;
+>>>>>>> newheejin
 }
 
 
 #product_info{
-    margin-top: 100px;
+    margin-top: 50px;
     margin-left: 5%;
     text-align: left;
 }
@@ -577,6 +583,8 @@ ol{
 }
 
 #likeitem_div {
+    margin-left: 10%;
+    margin-right: 10%;
     padding-left: 80px;
     padding-right: 80px;
 }
@@ -722,6 +730,8 @@ ol{
     background-color: #F8EAC3;
     border: solid 1px darkgrey;
 <<<<<<< HEAD
+=======
+    border-radius: 20px;
 }
 
 .codyArea_carousel {
@@ -730,7 +740,14 @@ ol{
     height: 400px;
     width: 400px;
     background-color: #F8EAC3;
-=======
+}
+
+.codyArea_carousel {
+    class: row;
+    position: relative;
+    height: 400px;
+    width: 400px;
+    background-color: #F8EAC3;
 >>>>>>> newheejin
 }
 
@@ -741,6 +758,16 @@ ol{
     width: 400px;
     background-color: #F8EAC3;
 }
+
+.codyArea_carousel {
+    class: row;
+    position: relative;
+    height: 400px;
+    width: 400px;
+    background-color: #F8EAC3;
+}
+
+
 
 
 
@@ -803,6 +830,7 @@ ol{
 .owl-dots .active {
     background-color: #666;
 }
+
 .likeList{
     text-align: center;
 }
@@ -827,12 +855,27 @@ ol{
 
 #full_address{
     font-family: "Noto Sans KR", "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sansserif;
+<<<<<<< HEAD
+    font-size: 25px;
+=======
     font-size: 2.2rem;
+>>>>>>> newheejin
 }
 
 #loadWeather{
     color: black;
     font-family: "Noto Sans KR", "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sansserif;
+<<<<<<< HEAD
+    font-size: 25px;
+}
+
+#loadWeatherIcon{
+    /*margin-left: 6%;*/
+    /*margin-top: 10%;*/
+    text-align: center;
+    width: 100px;
+    height: 100px;
+=======
     font-size: 3.0rem;
 }
 
@@ -842,6 +885,7 @@ ol{
     text-align: center;
     width: 250px;
     height: 250px;
+>>>>>>> newheejin
 }
 
 #weatherFragDiv{
@@ -856,6 +900,22 @@ ol{
     text-align: left;
 }
 
+<<<<<<< HEAD
+=======
+#recoFragDiv{
+    margin-left: -50px;
+}
+
+#recoFragTitle{
+    font-family: "Noto Sans KR", "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sansserif;
+    font-size: 3.2rem;
+}
+
+#recoFragInfo{
+    font-family: "Noto Sans KR", "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sansserif;
+    font-size: 2.0rem;
+}
+>>>>>>> newheejin
 
 #city{
     height: 33px;
@@ -886,35 +946,38 @@ ol{
     margin-top: 70px;
 }
 
-<<<<<<< HEAD
+
+
 /*#carousel1, #carousel2, #carousel3{*/
-/*    width: 500px;*/
-/*    height: 600px;*/
+/*    width: 400px;*/
+/*    height: 500px;*/
 /*}*/
-=======
-
-
-#carousel1, #carousel2, #carousel3{
-    width: 400px;
-    height: 500px;
-}
 
 #carouselDiv{
     /*text-align: center;*/
+<<<<<<< HEAD
+    /*margin-left: 7%;*/
+    width: 10%;
+=======
     margin-left: 7%;
     width: 700px;
+>>>>>>> newheejin
     height: 800px;
 }
 
 .carouselImg{
+<<<<<<< HEAD
+    width: 7%;
+    height: 7%;
+=======
     width: 400px;
     height: 500px;
-}
 >>>>>>> newheejin
+}
 
 #carouselExampleIndicators{
-    margin-left: 10%;
-    width: 80%;
+    /*margin-left: 10%;*/
+    /*width: 80%;*/
     text-align: center;
 }
 

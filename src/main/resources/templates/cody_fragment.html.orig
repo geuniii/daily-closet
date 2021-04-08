@@ -5,12 +5,15 @@
 
 <div th:fragment="cody(codyList)" class="container">
 
+<<<<<<< HEAD
+=======
     <div>
         <h2 id="pageLogo">Recommend Cody</h2>
         <small id="pageInfo">Choose your own style.</small>
         <br/><br/>
     </div>
 
+>>>>>>> newheejin
     <div class="owl-carousel" style="position: relative">
         <div th:each="cody:${codyList}">
             <div class="codybox">

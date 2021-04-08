@@ -18,9 +18,13 @@
 
         <th:block th:insert="item_fragements :: item_list(${itemList})"/>
     </div>
+<<<<<<< HEAD
+    <!— 페이징 뷰 —>
+=======
 
 
 
+>>>>>>> newheejin
     <div class="row" th:if="${pageInfo ne null}">
         <div class="col-12">
             <ul class="pagination pagination justify-content-center">

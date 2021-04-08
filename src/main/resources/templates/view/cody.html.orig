@@ -102,8 +102,12 @@
                 <br><br>
                 <div class="row">
                     <input type="button" th:id="submit_btn" class="btn btn-light" value="Save" style="width:200px">&nbsp&nbsp
+<<<<<<< HEAD
                     <input  type="button" th:id="submit_btn" class="btn btn-light" value="Reset" style="width:200px"
                             th:onclick="location.href='/cody'">
+=======
+                    <input  type="button" th:id="submit_btn" class="btn btn-light" value="Reset" style="width:200px">
+>>>>>>> newheejin
                 </div>
                 <br>
 

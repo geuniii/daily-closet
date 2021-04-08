@@ -44,17 +44,29 @@
             <h4 th:text="${item.name}"/>
             <p th:text="${item.brand}" id="brandinfo"/> / <p th:text="${item.code}" id="codeinfo"/>
             <hr>
+<<<<<<< HEAD
+<!--            <i id="ic-like"><p id="likecount" th:value="${item.liked}"/>-->
+<!--                <p id="likeinfo"> people like this product. </p></i>-->
+=======
             <i id="ic-like"><p id="likecount" th:value="${item.liked}"/>
                 <p id="likeinfo"> people like this product. </p></i>
+>>>>>>> newheejin
             <p><h6>Gender</h6>Unisex</p>
             <p><h6>Size</h6>
                 <div class="container">
                     <div class="dropdown">
+<<<<<<< HEAD
+                        <button class="btn btn-light dropdown-toggle" type = "button" data-toggle="dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Size</button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li th:each="size:${item.sizes}">
+                            <a class="dropdown-item" th:href="@{#}" th:text="${size}"></a>
+=======
                         <button class="btn btn-light dropdown-toggle" type = "button" data-toggle="dropdown"
                                 id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Size</button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li th:each="size:${item.sizes}">
                             <a class="dropdown-item" th:href="@{#}" th:text="${size}" th:onclick="getSize([[${size}]])"></a>
+>>>>>>> newheejin
                         </li>
                         </ul>
                     </div>
@@ -71,6 +83,10 @@
                             name="item_id"
                             class="btn btn-light"
                             th:value="${item.id}">Add Cart</button>
+<<<<<<< HEAD
+=======
+
+>>>>>>> newheejin
                 </form>
 
                 <button id="like" class="btn btn-light">
@@ -210,7 +226,7 @@
 
         $(document).ready(function () { // document loading 후 실행할 함수
 
-            // <!-- TODO : 이미지 누르면 해당 이미지를 큰 사진으로 보여주기-->
+            <!-- TODO : 이미지 누르면 해당 이미지를 큰 사진으로 보여주기-->
             var bigpic = document.querySelector("#nowimg");
             var smallpics = document.querySelectorAll(".mini"); // 작은 사진
 
