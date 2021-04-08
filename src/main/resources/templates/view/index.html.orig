@@ -8,6 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/user/style.css}">
 </th:block>
 
+<<<<<<< HEAD
 <div layout:fragment="content">
 
     <!--    Today's Weather-->
@@ -25,8 +26,24 @@
 
 
     <div class="row justify-content-center py-5" style="background-color:#F8F7F5;height: 700px;">
+        <!— Recommend—>
         <th:block th:insert="recommend_fragment :: recommend(${top},${outer},${bottom})"/>
     </div>
+=======
+<div layout:fragment="content" class="container" >
+
+    <!--    Today's Weather-->
+    <th:block th:insert="weather_fragment :: weather()"/>
+
+
+    <!--    Cody Carosel-->
+    <th:block th:insert="cody_fragment :: cody(${codyList})"/>
+
+    <!--    Recommend-->
+    <th:block th:insert="recommend_fragment :: recommend(${top},${outer},${bottom})"/>
+
+
+>>>>>>> newheejin
 </div>
 
 </html>

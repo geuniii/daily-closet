@@ -164,8 +164,13 @@
 
 
 <!-- footer -->
+<<<<<<< HEAD
 <div id="footer" th:fragment="footer" class="jumbotron text-center banner"
      style="margin-bottom: 0;">
+=======
+<div id="footer" th:fragment="footer" class="jumbotron text-center bg-white banner"
+     style="margin-bottom: 0; background-color: darkgray;">
+>>>>>>> newheejin
 
     <xs>&copy;2021. Daily Closet. All Rights Reserved.</xs>
 

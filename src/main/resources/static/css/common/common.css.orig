@@ -8,7 +8,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+<<<<<<< HEAD
+=======
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
+>>>>>>> newheejin
 
 * {
     margin: 0;
@@ -718,6 +721,7 @@ ol{
     width: 400px;
     background-color: #F8EAC3;
     border: solid 1px darkgrey;
+<<<<<<< HEAD
 }
 
 .codyArea_carousel {
@@ -726,6 +730,8 @@ ol{
     height: 400px;
     width: 400px;
     background-color: #F8EAC3;
+=======
+>>>>>>> newheejin
 }
 
 .codyArea_carousel {
@@ -880,6 +886,12 @@ ol{
     margin-top: 70px;
 }
 
+<<<<<<< HEAD
+/*#carousel1, #carousel2, #carousel3{*/
+/*    width: 500px;*/
+/*    height: 600px;*/
+/*}*/
+=======
 
 
 #carousel1, #carousel2, #carousel3{
@@ -898,6 +910,7 @@ ol{
     width: 400px;
     height: 500px;
 }
+>>>>>>> newheejin
 
 #carouselExampleIndicators{
     margin-left: 10%;
