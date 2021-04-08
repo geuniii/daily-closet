@@ -30,6 +30,6 @@ public class DevConfiguration {
 
 //        member.generateEmailCheckToken();
         memberRepository.save(member);
-        log.info("TestUser(" + member.getEmail() + ") has been created.");
+//        log.info("TestUser(" + member.getEmail() + ") has been created.");
     }
 }

@@ -13,7 +13,7 @@
     </div>
 
     <!-- 전체조회 목록 -->
-    <table class="table table-horizontal table-bordered" id="memberInfoTable">
+    <table class="table table-horizontal table-bordered">
         <thead class="thead-strong">
         <tr align="center">
             <th>ID</th>
@@ -24,7 +24,7 @@
         </thead>
         <tbody id="tbody">
         <tr align="center">
-            <td><a id="memberIdTag" th:text="${member.email}"></a><i id="modifyIcon" class="far fa-edit" th:href="/update-memberInfo"></i></td>
+            <td><a href="/update-memberInfo" th:text="${member.email}"></a></td>
             <td th:text="${member.address.zipcode}"></td>
             <td th:text="${member.address.city}"></td>
             <td th:text="${member.address.street}"></td>

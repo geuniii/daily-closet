@@ -49,6 +49,10 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Review> reviews = new ArrayList<>();
 
+    @OneToMany // Member : Cody => 1 : N Relationship(단방향)
+    private List<Cody> codyLikes = new ArrayList<>();
+    // convention : NullPointerException 방지
+
     @Transactional
     public void generateEmailCheckToken() {
         /*

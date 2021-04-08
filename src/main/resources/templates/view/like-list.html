@@ -25,7 +25,7 @@
         <div class="col-4" th:each="item:${likeList}">
             <img id="likeitem_img" th:src="${item.urls.get(0)}"
                  th:onclick="location.href='/store/detail/[[${item.id}]]'"/>
-            <p class="xs" id="likeitem_name" th:text="${item.name}"></p>
+            <p class="xs" id="likeitem_name" th:text="${item.name}" style="width:180px; overflow:hidden;"></p>
             <p class="xs" id="likeitem_price" th:text="${#numbers.formatInteger(item.price, 3, 'COMMA')}"></p>
         </div>
     </div>

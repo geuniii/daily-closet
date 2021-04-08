@@ -29,37 +29,35 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto" id="nav_left">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/itemList(categoryName='best',page=0,limit=20,sort='name')}">BEST</a>
+                    <a class="nav-link" th:href="@{/itemList(categoryName='best',page=1,limit=20)}">BEST</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/itemList(categoryName='아우터',page=0,limit=20,sort='name')}">Outer</a>
+                    <a class="nav-link" th:href="@{/itemList(categoryName='아우터',page=1,limit=20,sort='name')}">Outer</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/itemList(categoryName='상의',page=0,limit=20,sort='name')}">Top</a>
+                    <a class="nav-link" th:href="@{/itemList(categoryName='상의',page=1,limit=20,sort='name')}">Top</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/itemList(categoryName='바지',page=0,limit=20,sort='name')}">Bottom</a>
+                    <a class="nav-link" th:href="@{/itemList(categoryName='바지',page=1,limit=20,sort='name')}">Bottom</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link"
-                       th:href="@{/itemList(categoryName='신발_스니커즈',page=0,limit=20,sort='name')}">Shoes</a>
+                    <a class="nav-link" th:href="@{/itemList(categoryName='신발_스니커즈',page=1,limit=20,sort='name')}">Shoes</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link"
-                       th:href="@{/itemList(categoryName='가방_여성가방',page=0,limit=20,sort='name')}">Acc</a>
+                    <a class="nav-link" th:href="@{/itemList(categoryName='가방_여성가방',page=1,limit=20,sort='name')}">Acc</a>
                 </li>
 
                 <li class="nav-item">
-                    <a id="navp_right" class="nav-link" th:href="@{/daily-recommend}"
-                       sec:authorize="!isAuthenticated()">Weather</a>
+                    <a class="nav-link" th:href="@{/daily-recommend}" sec:authorize="!isAuthenticated()">Weather</a>
                 </li>
+
                 <li class="nav-item">
-                    <a id="navp_right" class="nav-link" th:href="@{/daily-recommend}" sec:authorize="isAuthenticated()">Weather</a>
+                    <a class="nav-link" th:href="@{/daily-recommend}" sec:authorize="isAuthenticated()">Weather</a>
                 </li>
 
             </ul>
@@ -112,6 +110,26 @@
             </div>
 
         </div>
+
+
+<!--                Search-->
+<!--        <div class="collapse navbar-collapse" id="navbar_right">-->
+<!--            &lt;!&ndash; 재우 &ndash;&gt;-->
+<!--            &lt;!&ndash; Search bar &ndash;&gt;-->
+<!--            <form class="form-inline my-2 my-lg-0" th:action="@{/searchList}" th:method="get">-->
+<!--                <select id="searchType" name="searchType">-->
+<!--                    <option th:value="item_all">Category</option>-->
+<!--                    <option th:value="item_name">Product name</option>-->
+<!--                    <option th:value="brand_name">Brand</option>-->
+
+<!--                </select>-->
+<!--                <input class="form-control mr-sm-2" name="keyword" id="keyword" type="search" placeholder="Search"-->
+<!--                       aria-label="Search">-->
+<!--                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">search</button>-->
+<!--            </form>-->
+<!--        </div>-->
+
+
     </nav>
 
     <!--    <div class="alert alert-warning" role="alert" th:if="${member != null && !member.emailVerified}">-->
@@ -122,11 +140,11 @@
 
 
 <!-- footer -->
-<div id="footer" th:fragment="footer" class="jumbotron text-center bg-white banner" style="margin-bottom: 0; background-color: darkgray;">
+<div id="footer" th:fragment="footer" class="jumbotron text-center banner"
+     style="margin-bottom: 0;">
 
-    <br><br>
     <xs>&copy;2021. Daily Closet. All Rights Reserved.</xs>
-    <br>
+
 </div>
 
 </html>

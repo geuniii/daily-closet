@@ -7,6 +7,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
 
 * {
     margin: 0;
@@ -55,9 +57,20 @@ body {
 }
 
 #headlogo {
-    background-color: darkgray;
+    background: #F4EFE9;
     font-family: "Rock Salt", cursive;
     height: 300px;
+}
+
+#navbar {
+    background-color: #F4EFE9;
+    height: 70px;
+}
+
+
+
+#footer{
+    background: #F4EFE9;
 }
 
 #navlogo{
@@ -142,7 +155,7 @@ p {
 }
 
 .container {
-    max-width: 1500px;
+    max-width: 2000px;
 }
 
 li {
@@ -166,6 +179,8 @@ ol{
     text-align: center;
     margin-left: 12%;
 }
+
+
 
 .mb-2{
     text-align: center;
@@ -236,14 +251,14 @@ ol{
     display: inline;
 }
 
-#reviewHeadDiv, #reviewFragDiv{
-    margin-left: 10%;
-    margin-right: 10%;
-}
+/*#reviewHeadDiv, #reviewFragDiv{*/
+/*    margin-left: 10%;*/
+/*    margin-right: 10%;*/
+/*}*/
 
-#reviewTableHead{
-    display: inline;
-}
+/*#reviewTableHead{*/
+/*    display: inline;*/
+/*}*/
 
 .vertical-data {
     writing-mode: vertical-lr
@@ -337,11 +352,6 @@ ol{
     background-color: white;
 }
 
-#navbar {
-    background-color: darkgray;
-    height: 70px;
-}
-
 
 .nav-link{
     text-align: center;
@@ -374,12 +384,6 @@ ol{
     right: 40px;
     margin-top: -5px;
 }
-
-/*#navbar_right{*/
-/*    position: absolute;*/
-/*    right: 25px;*/
-/*    margin-top: 5px;*/
-/*}*/
 
 #carousel {
     width: 50%;
@@ -511,6 +515,8 @@ ol{
     width: 35px;
     height: 35px;
     margin-right: 5%;
+    border: 1px solid darkgrey;
+    border-radius: 5px;
 }
 
 .color_box {
@@ -537,16 +543,18 @@ ol{
     margin-right: 20px;
 }
 
+
+
 #cody_info {
     width: 450px;
     text-align: center;
-    margin-left: 5%;
-    margin-top: 150px;
+    margin-left: 30px;
+    margin-top: 30px;
 }
 
 
 #product_info{
-    margin-top: 100px;
+    margin-top: 50px;
     margin-left: 5%;
     text-align: left;
 }
@@ -570,6 +578,8 @@ ol{
 }
 
 #likeitem_div {
+    margin-left: 10%;
+    margin-right: 10%;
     padding-left: 80px;
     padding-right: 80px;
 }
@@ -714,8 +724,26 @@ ol{
     width: 400px;
     background-color: #F8EAC3;
     border: solid 1px darkgrey;
-    border-radius: 200px;
+    border-radius: 20px;
 }
+
+.codyArea_carousel {
+    class: row;
+    position: relative;
+    height: 400px;
+    width: 400px;
+    background-color: #F8EAC3;
+}
+
+.codyArea_carousel {
+    class: row;
+    position: relative;
+    height: 400px;
+    width: 400px;
+    background-color: #F8EAC3;
+}
+
+
 
 
 .bottomCody {
@@ -798,6 +826,50 @@ ol{
     margin-left: 20%;
 }
 
+#full_address{
+    font-family: "Noto Sans KR", "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sansserif;
+    font-size: 2.2rem;
+}
+
+#loadWeather{
+    color: black;
+    font-family: "Noto Sans KR", "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sansserif;
+    font-size: 3.0rem;
+}
+
+#loadWeatherIcon{
+    margin-left: 6%;
+    margin-top: 10%;
+    text-align: center;
+    width: 250px;
+    height: 250px;
+}
+
+#weatherFragDiv{
+    margin-top: 5%;
+}
+
+#weatherIconDiv{
+    margin-left: 10%;
+}
+
+#weatherInfoDiv{
+    text-align: left;
+}
+
+#recoFragDiv{
+    margin-left: -50px;
+}
+
+#recoFragTitle{
+    font-family: "Noto Sans KR", "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sansserif;
+    font-size: 3.2rem;
+}
+
+#recoFragInfo{
+    font-family: "Noto Sans KR", "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sansserif;
+    font-size: 2.0rem;
+}
 
 #city{
     height: 33px;
@@ -818,10 +890,6 @@ ol{
     color: black;
 }
 
-#loadWeather{
-    font-size: 2.5rem;
-}
-
 
 #loadWeatherIcon{
     margin-bottom: 25px;
@@ -832,18 +900,31 @@ ol{
     margin-top: 70px;
 }
 
-#carousel1, #carousel2, #carousel3{
-    width: 500px;
-    height: 600px;
+
+
+/*#carousel1, #carousel2, #carousel3{*/
+/*    width: 400px;*/
+/*    height: 500px;*/
+/*}*/
+
+#carouselDiv{
+    /*text-align: center;*/
+    margin-left: 7%;
+    width: 700px;
+    height: 800px;
+}
+
+.carouselImg{
+    width: 400px;
+    height: 500px;
 }
 
 #carouselExampleIndicators{
-    margin-left: 10%;
-    width: 80%;
+    /*margin-left: 10%;*/
+    /*width: 80%;*/
     text-align: center;
 }
 
 .carousel-inner{
     /*width: 60%;*/
-    /*height: 350px;*/
 }

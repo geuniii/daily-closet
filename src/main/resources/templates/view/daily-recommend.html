@@ -31,27 +31,26 @@
             <!--            }-->
             <!--        </style>-->
 
-            <h2 id="pageLogo">Today's Weather</h2>
-            <br><br/>
             <!--현재 날씨-->
-            <div id="loadWeatherIcon"></div>
-            <br/>
+            <!--날씨 아이콘-->
+            <div>
+                <div class="row" id="weatherFragDiv">
+                    <div class="col" id="weatherIconDiv">
+                        <img src="#" id="loadWeatherIcon">
+                    </div>
+                    <div class="col" id="weatherInfoDiv">
+                        <br/><br>
+                        <h2 id="pageLogo">Today's Weather</h2>
+                        <div id="loadWeather">
 
-            <!--현재 온도-->
-            <div class="row">
-            <span id="loadWeather">
-                <div class="spinner-border text-primary" role="status"></div>
-            </span>
+                            <div class="spinner-border text-primary" role="status"></div>
+                        </div>
+                        <span id="full_address">Loading...</span>
+                        <br/>
+                    </div>
+                </div>
             </div>
 
-            <div class="row">
-                <span id="clock">00:00</span>
-            </div>
-
-            <!--현위치 주소-->
-            <div class="row">
-                <span id="full_address">Loading now location...</span>
-            </div>
 
             <hr style="color: #FFFFFF">
             <div class="row">
@@ -60,42 +59,45 @@
                     <h2 id="pageLogo">Today's Pick!</h2>
                     <small>How about this?</small>
                     <br/><br/>
+                    <div class="col-md-6 justify-content-center py-5">
+                        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"
+                             style="width: 400px;">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                        class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                        aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                        aria-label="Slide 3"></button>
+                            </div>
 
-                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                                    class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                                    aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                                    aria-label="Slide 3"></button>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img id="carousel1" th:src="@{'/assets/'+${outer.img_name}}" alt="1번 이미지">
+                                </div>
+                                <div class="carousel-item">
+                                    <img id="carousel2" th:src="@{'/assets/'+${top.img_name}}" alt="2번 이미지">
+                                </div>
+                                <div class="carousel-item">
+                                    <img id="carousel3" th:src="@{'/assets/'+${bottom.img_name}}" alt="3번 이미지">
+                                </div>
+                            </div>
+
+                            <button class="carousel-control-prev" type="button"
+                                    onclick="$('#carouselExampleIndicators').carousel('prev')"
+                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+
+                            <button class="carousel-control-next" type="button"
+                                    onclick="$('#carouselExampleIndicators').carousel('next')"
+                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
 
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img id="carousel1" th:src="@{${outer.mainUrl}}" alt="1번 이미지">
-                            </div>
-                            <div class="carousel-item">
-                                <img id="carousel2" th:src="@{${top.mainUrl}}" alt="2번 이미지">
-                            </div>
-                            <div class="carousel-item">
-                                <img id="carousel3" th:src="@{${bottom.mainUrl}}" alt="3번 이미지">
-                            </div>
-                        </div>
-
-                        <button class="carousel-control-prev" style="background-color: #FFFFFF" type="button"
-                                onclick="$('#carouselExampleIndicators').carousel('prev')"
-                                data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-
-                        <button class="carousel-control-next" type="button" style="background-color: #FFFFFF"
-                                onclick="$('#carouselExampleIndicators').carousel('next')"
-                                data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
                     </div>
                 </div>
 
@@ -215,28 +217,28 @@
                             currentWeather.innerText = temperature + "°C";
                             switch (data.weather[0].description) {
                                 case "clear sky": {
-                                    loadWeatherIcon.innerHTML = "<i class='fas fa-sun fa-5x'></i>"
+                                    loadWeatherIcon.src = "[[@{/images/icon/sunny.png}]]";
                                     break;
                                 }
                                 case "few clouds": {
-                                    loadWeatherIcon.innerHTML = "<i class='fas fa-cloud-su fa-5x'></i>"
+                                    loadWeatherIcon.src = "[[@{/images/icon/cloudy.png}]]";
                                     break;
                                 }
                                 case "scattered clouds":
                                 case "broken clouds": {
-                                    loadWeatherIcon.innerHTML = "<i class='fas fa-cloud fa-5x'></i>"
+                                    loadWeatherIcon.src = "[[@{/images/icon/cloudy.png}]]";
                                     break;
                                 }
                                 case "shower rain": {
-                                    loadWeatherIcon.innerHTML = "<i class='fas fa-cloud-showers-heavy fa-5x'></i>"
+                                    loadWeatherIcon.src = "[[@{/images/icon/snower rain.png}]]";
                                     break;
                                 }
                                 case "rain": {
-                                    loadWeatherIcon.innerHTML = "<i class='fas fa-cloud-rain fa-5x'></i>"
+                                    loadWeatherIcon.src = "[[@{/images/icon/rainy.png}]]";
                                     break;
                                 }
                                 case "thunderstorm": {
-                                    loadWeatherIcon.innerHTML = "<i class='fas fa-poo-storm fa-5x'></i>"
+                                    loadWeatherIcon.src = "[[@{/images/icon/thunder.png}]]";
                                     break;
                                 }
                                 case "snow": {

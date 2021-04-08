@@ -7,6 +7,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+<<<<<<< HEAD
+=======
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
+>>>>>>> newheejin
 
 * {
     margin: 0;
@@ -43,17 +48,10 @@ body {
     font-size: 5.0em;
     color: black;
     font-family: 'Rock Salt', cursive;
-<<<<<<< HEAD
-    margin-: 50px;
-}
-
-#bigLogo {
-=======
     margin-bottom: 50px;
 }
 
 #bigLogo{
->>>>>>> newheejin
     margin-top: 100px;
     font-size: 9.0em;
     font-family: "Rock Salt", cursive;
@@ -62,16 +60,23 @@ body {
 }
 
 #headlogo {
-    background-color: darkgray;
+    background: #F4EFE9;
     font-family: "Rock Salt", cursive;
     height: 300px;
 }
 
-<<<<<<< HEAD
-#navlogo {
-=======
+#navbar {
+    background-color: #F4EFE9;
+    height: 70px;
+}
+
+
+
+#footer{
+    background: #F4EFE9;
+}
+
 #navlogo{
->>>>>>> newheejin
     font-family: "Rock Salt", cursive;
     font-size: 1.0em;
     font-weight: 700;
@@ -80,15 +85,6 @@ body {
     margin-left: 20px;
 }
 
-<<<<<<< HEAD
-.pageLogo {
-    font-family: "Rock Salt", cursive;
-    margin-left: 25px;
-    margin-top: 50px;
-}
-
-
-=======
 #pageLogo{
     font-family: "Rock Salt", cursive;
     margin-top: 80px;
@@ -100,7 +96,6 @@ body {
 
 
 
->>>>>>> newheejin
 table {
     border-spacing: 0;
     border-collapse: collapse;
@@ -163,7 +158,7 @@ p {
 }
 
 .container {
-    max-width: 1500px;
+    max-width: 2000px;
 }
 
 li {
@@ -187,6 +182,8 @@ ol{
     text-align: center;
     margin-left: 12%;
 }
+
+
 
 .mb-2{
     text-align: center;
@@ -257,7 +254,15 @@ ol{
     display: inline;
 }
 
-<<<<<<< HEAD
+/*#reviewHeadDiv, #reviewFragDiv{*/
+/*    margin-left: 10%;*/
+/*    margin-right: 10%;*/
+/*}*/
+
+/*#reviewTableHead{*/
+/*    display: inline;*/
+/*}*/
+
 .vertical-data {
     writing-mode: vertical-lr
 }
@@ -280,14 +285,6 @@ ol{
     opacity: 0.7;
     -webkit-transition: .2s;
     transition: opacity .2s;
-=======
-.outerimgbox , .topimgbox,  .bottomimgbox,  .accimgbox,  .shoesimgbox {
-
-    /*writing-mode:vertical-lr;*/
-    text-align: center;
-    width: 200px;
-    height: 200px;
->>>>>>> newheejin
 }
 
 .slider:hover {
@@ -358,17 +355,8 @@ ol{
     background-color: white;
 }
 
-#navbar {
-    background-color: darkgray;
-    height: 70px;
-}
 
-
-<<<<<<< HEAD
-#navp {
-=======
 .nav-link{
->>>>>>> newheejin
     text-align: center;
     font-weight: 700;
     font-size: 1.0em;
@@ -377,42 +365,27 @@ ol{
     background: transparent;
 }
 
-<<<<<<< HEAD
-#usernav {
-=======
 #usernav{
->>>>>>> newheejin
     text-align: right;
     float: right;
 }
 
-<<<<<<< HEAD
-#nav_left {
-    margin-left: 20%;
-=======
+#userEmail{
+    color: black;
+}
+
 #nav_left{
     margin-left: 15px;
->>>>>>> newheejin
 }
 
 #searchType {
     margin: 10px;
 }
 
-
-<<<<<<< HEAD
-#navbar_right {
-    margin-top: 7px;
-    display: inline;
-    float: right;
-    font-weight: 700;
-    font-size: 1.0em;
-=======
-#navbar_right{
+#rightNavigation{
     position: absolute;
-    right: 25px;
-    margin-top: 10px;
->>>>>>> newheejin
+    right: 40px;
+    margin-top: -5px;
 }
 
 #carousel {
@@ -453,14 +426,8 @@ ol{
 }
 
 
-<<<<<<< HEAD
-#logoutbtn {
-    /*margin-top: 7px;*/
-    background-color: rgba(255, 255, 255, 0);
-=======
 #logoutbtn{
     background-color: rgba( 255, 255, 255, 0 );
->>>>>>> newheejin
     color: grey;
     margin-top: 5px;
     margin-left: 7px;
@@ -495,19 +462,11 @@ ol{
 
 }
 
-<<<<<<< HEAD
-#detailbox {
-    margin-bottom: 50px;
-}
-
-#brandname {
-=======
 #detailbox{
     margin-top: 30px;
     margin-bottom: 50px;
 }
 #brandname{
->>>>>>> newheejin
     text-align: left;
     display: block;
 }
@@ -585,15 +544,7 @@ ol{
     margin-right: 20px;
 }
 
-<<<<<<< HEAD
 #cody_info {
-=======
-#codybox{
-    margin-right: 20px;
-}
-
-#cody_info{
->>>>>>> newheejin
     width: 450px;
     text-align: center;
     margin-left: 5%;
@@ -601,11 +552,7 @@ ol{
 }
 
 
-<<<<<<< HEAD
-#product_info {
-=======
 #product_info{
->>>>>>> newheejin
     margin-top: 100px;
     margin-left: 5%;
     text-align: left;
@@ -634,13 +581,8 @@ ol{
     padding-right: 80px;
 }
 
-<<<<<<< HEAD
-.col-4 {
-    max-width: 350px;
-=======
 .col-4{
     max-width: 320px;
->>>>>>> newheejin
     margin-bottom: 20px;
 }
 
@@ -682,11 +624,7 @@ ol{
     margin-top: 20px;
 }
 
-<<<<<<< HEAD
-#buybtn {
-=======
 #buybtn{
->>>>>>> newheejin
     padding: 10px;
     /*margin-top: 10px;*/
     margin-bottom: 0px;
@@ -713,11 +651,7 @@ ol{
     display: inline;
 }
 
-<<<<<<< HEAD
-#cartMinusBtn {
-=======
 #cartMinusBtn{
->>>>>>> newheejin
     color: black;
     background: none;
 }
@@ -745,12 +679,8 @@ ol{
 }
 
 
-<<<<<<< HEAD
-#likelist_container {
-=======
 
 #likelist_container{
->>>>>>> newheejin
     text-align: center;
 }
 
@@ -764,30 +694,18 @@ ol{
     width: 800px;
 }
 
-<<<<<<< HEAD
-#reivewInput {
-=======
 #reivewInput{
->>>>>>> newheejin
     width: 600px;
     height: 100px;
     margin: 15px 15px 15px -10px;
 }
 
-<<<<<<< HEAD
-.likeListForCody {
-=======
 .likeListForCody{
->>>>>>> newheejin
     text-align: center;
     width: 900px;
     height: 300px;
 }
 
-<<<<<<< HEAD
-.likeList {
-    text-align: center;
-}
 
 .codyContainer {
     text-align: center;
@@ -795,10 +713,6 @@ ol{
     display: inline;
 }
 
-.pagetitle {
-    text-align: left;
-    margin-left: 100px;
-}
 
 .codyArea {
     class: row;
@@ -806,7 +720,29 @@ ol{
     height: 400px;
     width: 400px;
     background-color: #F8EAC3;
+    border: solid 1px darkgrey;
+<<<<<<< HEAD
 }
+
+.codyArea_carousel {
+    class: row;
+    position: relative;
+    height: 400px;
+    width: 400px;
+    background-color: #F8EAC3;
+=======
+>>>>>>> newheejin
+}
+
+.codyArea_carousel {
+    class: row;
+    position: relative;
+    height: 400px;
+    width: 400px;
+    background-color: #F8EAC3;
+}
+
+
 
 
 .bottomCody {
@@ -867,7 +803,6 @@ ol{
 .owl-dots .active {
     background-color: #666;
 }
-=======
 .likeList{
     text-align: center;
 }
@@ -890,6 +825,37 @@ ol{
     margin-left: 20%;
 }
 
+#full_address{
+    font-family: "Noto Sans KR", "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sansserif;
+    font-size: 2.2rem;
+}
+
+#loadWeather{
+    color: black;
+    font-family: "Noto Sans KR", "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sansserif;
+    font-size: 3.0rem;
+}
+
+#loadWeatherIcon{
+    margin-left: 6%;
+    margin-top: 10%;
+    text-align: center;
+    width: 250px;
+    height: 250px;
+}
+
+#weatherFragDiv{
+    margin-top: 5%;
+}
+
+#weatherIconDiv{
+    margin-left: 10%;
+}
+
+#weatherInfoDiv{
+    text-align: left;
+}
+
 
 #city{
     height: 33px;
@@ -909,4 +875,49 @@ ol{
     background-color: lemonchiffon;
     color: black;
 }
+
+
+#loadWeatherIcon{
+    margin-bottom: 25px;
+}
+
+
+#recommendDiv{
+    margin-top: 70px;
+}
+
+<<<<<<< HEAD
+/*#carousel1, #carousel2, #carousel3{*/
+/*    width: 500px;*/
+/*    height: 600px;*/
+/*}*/
+=======
+
+
+#carousel1, #carousel2, #carousel3{
+    width: 400px;
+    height: 500px;
+}
+
+#carouselDiv{
+    /*text-align: center;*/
+    margin-left: 7%;
+    width: 700px;
+    height: 800px;
+}
+
+.carouselImg{
+    width: 400px;
+    height: 500px;
+}
 >>>>>>> newheejin
+
+#carouselExampleIndicators{
+    margin-left: 10%;
+    width: 80%;
+    text-align: center;
+}
+
+.carousel-inner{
+    /*width: 60%;*/
+}

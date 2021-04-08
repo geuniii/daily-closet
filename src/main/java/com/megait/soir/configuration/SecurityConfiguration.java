@@ -86,8 +86,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/delete/**",
                         "/weather/**",
                         "/review/delete",
-                        "/review/modify"
-
+                        "/review/modify",
+                        "/view/category"
 
                 )
                 .permitAll()
