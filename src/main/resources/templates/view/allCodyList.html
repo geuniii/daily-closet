@@ -9,7 +9,7 @@
     <h3 class="text-left" style="margin-left: 100px"><b>New Cody</b></h3>
     <hr>
     <br><br><br>
-    <div class="component">
+    <div class="component justify-content-center ">
         <div class="row justify-content-center py-5" style="margin-bottom: 200px;">
             <!--                코디박스-->
             <div class="col-3 justify-content-center py-5" th:each="cody:${codyList}"
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <!--                좋아요 버튼-->
-                <button id="like" class="btn btn-light" style="width: 200px" onclick="">
+                <button id="like" class="btn btn-light justify-content-center" style="width: 200px" onclick="">
                     <i id="cody_like_status" class="far fa-heart"></i>
                     <b>Like It!</b>
                     <!--                    <i id="cody_like_status" th:class="${like_status} ? 'fas fa-heart':'far fa-heart'"-->

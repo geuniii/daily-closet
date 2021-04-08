@@ -545,7 +545,7 @@ ol{
     width: 450px;
     text-align: center;
     margin-left: 5%;
-    margin-top: 150px;
+    margin-top: 100px;
 }
 
 
@@ -797,6 +797,7 @@ ol{
 .owl-dots .active {
     background-color: #666;
 }
+
 .likeList{
     text-align: center;
 }
@@ -821,21 +822,21 @@ ol{
 
 #full_address{
     font-family: "Noto Sans KR", "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sansserif;
-    font-size: 2.2rem;
+    font-size: 25px;
 }
 
 #loadWeather{
     color: black;
     font-family: "Noto Sans KR", "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sansserif;
-    font-size: 3.0rem;
+    font-size: 25px;
 }
 
 #loadWeatherIcon{
-    margin-left: 6%;
-    margin-top: 10%;
+    /*margin-left: 6%;*/
+    /*margin-top: 10%;*/
     text-align: center;
-    width: 250px;
-    height: 250px;
+    width: 100px;
+    height: 100px;
 }
 
 #weatherFragDiv{
@@ -889,14 +890,14 @@ ol{
 
 #carouselDiv{
     /*text-align: center;*/
-    margin-left: 7%;
-    width: 700px;
+    /*margin-left: 7%;*/
+    width: 10%;
     height: 800px;
 }
 
 .carouselImg{
-    width: 400px;
-    height: 500px;
+    width: 7%;
+    height: 7%;
 }
 
 #carouselExampleIndicators{
