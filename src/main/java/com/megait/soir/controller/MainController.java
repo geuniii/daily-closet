@@ -308,13 +308,14 @@ public class MainController {
     public String itemList(ItemRequest itemRequest, Model model) {
         String categoryName = itemRequest.getCategoryName();
         Pageable pageable = itemService.getPageable(itemRequest);
-        if (itemRequest.getCategoryName().equals("best")) {
-            model.addAttribute("itemList", itemService.getBestItemList());
-        } else {
-            model.addAttribute("itemList", itemService.getParentCategoryItemList(categoryName, pageable));
-        }
-        // <h2 th:text="This is ${title} Page."><h2>
-        model.addAttribute("title", categoryName);
+
+        Paginator paginator = new Paginator(5, itemRequest.getLimit(), itemService.getCountItemListByCategory(categoryName));
+        Map<String, Object> pageInfo = paginator.getFixedBlock(itemRequest.getPage());
+//        Map<String, Object> pageInfo = paginator.getElasticBlock(itemRequest.getPage());
+        model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("itemList", itemService.getItemListByCategory(categoryName, pageable));
+        model.addAttribute("categoryName", categoryName);
+
         return "/view/category";
     }
 

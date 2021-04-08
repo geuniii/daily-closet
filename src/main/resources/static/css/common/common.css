@@ -56,9 +56,20 @@ body {
 }
 
 #headlogo {
-    background-color: darkgray;
+    background: #F4EFE9;
     font-family: "Rock Salt", cursive;
     height: 300px;
+}
+
+#navbar {
+    background-color: #F4EFE9;
+    height: 70px;
+}
+
+
+
+#footer{
+    background: #F4EFE9;
 }
 
 #navlogo{
@@ -336,11 +347,6 @@ ol{
 #back {
     margin-left: 0;
     background-color: white;
-}
-
-#navbar {
-    background-color: darkgray;
-    height: 70px;
 }
 
 
