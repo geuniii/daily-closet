@@ -35,6 +35,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     @Query(value = "SELECT count(i) FROM Item i WHERE i.parentCategory IN (SELECT pc.id FROM ParentCategory pc WHERE pc.name = ?1 or pc.name = ?2)")
     Long countItemByParentCategory(String category_1, String category_2);
 
+
     // 재우
     //상품이름, 브랜드 이름으로 전체 검색
     @Query(value = "select * from  Item e where e.Name like %:keyword% or e.Brand like %:keyword%", nativeQuery = true)

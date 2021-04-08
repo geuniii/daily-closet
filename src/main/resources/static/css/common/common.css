@@ -882,10 +882,10 @@ ol{
 
 
 
-#carousel1, #carousel2, #carousel3{
-    width: 400px;
-    height: 500px;
-}
+/*#carousel1, #carousel2, #carousel3{*/
+/*    width: 400px;*/
+/*    height: 500px;*/
+/*}*/
 
 #carouselDiv{
     /*text-align: center;*/
@@ -900,8 +900,8 @@ ol{
 }
 
 #carouselExampleIndicators{
-    margin-left: 10%;
-    width: 80%;
+    /*margin-left: 10%;*/
+    /*width: 80%;*/
     text-align: center;
 }
 
