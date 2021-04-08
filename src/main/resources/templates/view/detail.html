@@ -47,7 +47,18 @@
             <i id="ic-like"><p id="likecount" th:text="${item.liked}"/>
                 <p id="likeinfo"> people like this product. </p></i>
             <p><h6>Gender</h6>Unisex</p>
-            <p><h6>Size</h6>사이즈 드롭다운 배치</p>
+            <p><h6>Size</h6>
+                <div class="container">
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" type = "button" data-toggle="dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Size</button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li th:each="size:${item.sizes}">
+                            <a class="dropdown-item" th:href="@{#}" th:text="${size}"></a>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+            </p>
             <p><h6>Price</h6>₩ <span th:text="${#numbers.formatInteger(item.price, 3, 'COMMA')}"></span></p>
 
             <hr>
@@ -58,9 +69,7 @@
                             type="submit"
                             name="item_id"
                             class="btn btn-light"
-                            th:value="${item.id}">
-                        Add Cart
-                    </button>
+                            th:value="${item.id}">Add Cart</button>
 
                 </form>
 

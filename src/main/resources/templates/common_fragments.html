@@ -55,11 +55,20 @@
                 </li>
 
                 <li class="nav-item">
-                    <a id="navp_right" class="nav-link" th:href="@{/daily-recommend}"
+                    <a class="nav-link" th:href="@{/daily-recommend}"
                        sec:authorize="!isAuthenticated()">Weather</a>
                 </li>
+
                 <li class="nav-item">
-                    <a id="navp_right" class="nav-link" th:href="@{/daily-recommend}" sec:authorize="isAuthenticated()">Weather</a>
+                    <a class="nav-link" th:href="@{/signup}" sec:authorize="!isAuthenticated()">Sign up</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/daily-recommend}" sec:authorize="!isAuthenticated()">Weather</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/daily-recommend}" sec:authorize="isAuthenticated()">Weather</a>
                 </li>
 
             </ul>
@@ -122,7 +131,8 @@
 
 
 <!-- footer -->
-<div id="footer" th:fragment="footer" class="jumbotron text-center bg-white banner" style="margin-bottom: 0; background-color: darkgray;">
+<div id="footer" th:fragment="footer" class="jumbotron text-center bg-white banner"
+     style="margin-bottom: 0; background-color: darkgray;">
 
     <br><br>
     <xs>&copy;2021. Daily Closet. All Rights Reserved.</xs>
