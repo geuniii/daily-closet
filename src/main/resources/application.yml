@@ -6,9 +6,13 @@ spring:
     driver-class-name: org.h2.Driver
   jpa:
     hibernate:
-      ddl-auto: create
-
+             ddl-auto: validate
+#      ddl-auto: create
     properties:
+      hibernate:
+        event:
+          merge:
+            entity_copy_observer: allow
       format_sql: true
   profiles:
     active: dev
@@ -24,6 +28,7 @@ spring:
           auth: true
           starttls:
             enable: true
+
 
 logging:
   level:

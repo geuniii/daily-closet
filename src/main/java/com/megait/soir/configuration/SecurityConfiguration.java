@@ -1,5 +1,6 @@
 package com.megait.soir.configuration;
 
+
 import com.megait.soir.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -8,22 +9,13 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-import java.io.IOException;
-import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -89,7 +81,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/store/like",
                         "/find-pw/**",
                         "/cody",
-                        "/review"
+                        "/review",
+                        "/best",
+                        "/delete/**",
+                        "/weather/**",
+                        "/review/delete",
+                        "/review/modify",
+                        "/view/category",
+                        "/cody/like"
 
                 )
                 .permitAll()
@@ -113,5 +112,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/"); // logout 성공 시 이동할 경로
 
 
+        http.cors().configurationSource(corsConfigurationSource());
     }
+
+
 }

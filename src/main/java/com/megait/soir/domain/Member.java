@@ -12,11 +12,15 @@ import java.util.Random;
 import java.util.UUID;
 
 @Entity
-@Getter @Setter @Builder
-@AllArgsConstructor @NoArgsConstructor
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Member {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private long id;
 
     private String email;
@@ -36,7 +40,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private MemberType type;
 
-    @OneToMany // Member : Item => 1 : N Relationship(단방향)
+    @ManyToMany // Member : Item => 1 : N Relationship(단방향)
     private List<Item> likes = new ArrayList<>();
     // convention : NullPointerException 방지
 
@@ -49,6 +53,11 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Review> reviews = new ArrayList<>();
 
+
+    //    @OneToMany // Member : Item => 1 : N Relationship(단방향)
+    @ManyToMany
+    private List<Cody> codyLikes = new ArrayList<>();
+
     @Transactional
     public void generateEmailCheckToken() {
         /*
@@ -57,13 +66,12 @@ public class Member {
         따라서 JpaRepository를 상속받은 interface를 통해 수정하지 않고 값을 변경할 경우 해당 annotation을 사용한다.
         이 경우 method 시작 시점에 transaction이 begin되고, exception이 나지 않을 경우 commit된다(exception 발생 시 rollback)
          */
-
         //email token value 생성
         emailCheckToken = UUID.randomUUID().toString();
     }
 
     @Transactional
-    public void encodePassword(PasswordEncoder passwordEncoder){
+    public void encodePassword(PasswordEncoder passwordEncoder) {
         password = passwordEncoder.encode(password);
     }
 }

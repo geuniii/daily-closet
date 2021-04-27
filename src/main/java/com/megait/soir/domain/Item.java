@@ -37,6 +37,9 @@ public class Item {
 
     private int liked;
 
+    /**
+     * 수정
+     */
     @ManyToOne(cascade = CascadeType.ALL)
     private ParentCategory parentCategory;
 
@@ -45,6 +48,9 @@ public class Item {
 
     @OneToMany(mappedBy = "item")
     private List<Review> review  = new ArrayList<>();;
+
+    @Transient
+    private String mainUrl;
 
 
 

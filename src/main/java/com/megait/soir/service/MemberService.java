@@ -1,13 +1,12 @@
 package com.megait.soir.service;
 
-import com.megait.soir.domain.Address;
-import com.megait.soir.domain.Item;
-import com.megait.soir.domain.Member;
-import com.megait.soir.domain.MemberType;
+import com.megait.soir.domain.*;
+import com.megait.soir.repository.CodyRepository;
 import com.megait.soir.repository.ItemRepository;
 import com.megait.soir.repository.MemberRepository;
 import com.megait.soir.user.MemberUser;
 import com.megait.soir.user.SignUpForm;
+import com.megait.soir.user.UpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.SimpleMailMessage;
@@ -23,7 +22,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 // Controller의 부담을 줄이기 위해 생성.
 @Service
@@ -34,6 +35,37 @@ public class MemberService implements UserDetailsService {
     private final JavaMailSender javaMailSender;
     private final PasswordEncoder passwordEncoder; // password encoding
     private final ItemRepository itemRepository;
+    private final CodyRepository codyRepository;
+
+    // 회원정보 수정
+    @Transactional
+    public Member updateMember(Member member, UpdateForm updateForm) {
+        Member member1 = memberRepository.getOne(member.getId());
+        member1.getAddress().setZipcode(updateForm.getZipcode());
+        member1.getAddress().setCity(updateForm.getCity());
+        member1.getAddress().setStreet(updateForm.getStreet());
+        return member1;
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ajax
+
+    // 회원탈퇴
+    @Transactional
+    public void delete(Long id) {
+        Member member = memberRepository.findById(id).orElseThrow(()
+                -> new IllegalArgumentException("해당 아이디가 없습니다. id=" + id));
+        // memberRepository.delete(posts)
+        // JpaRepository에서 이미 delete 메소드를 지원하고 있으니 이를 활용함.
+        // 엔티티를 파라미터로 삭제할 수도 있고, dleteById 메소드를 이용하면
+        // id로 삭제할 수 있음.
+        // 존재하는 Member 인지 확인을 위해 엔티티 조회 후 그대로 삭제함.
+        System.out.println("=============================================================================서비스==============================================");
+        memberRepository.delete(member);
+    }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     @Transactional
@@ -195,5 +227,33 @@ public class MemberService implements UserDetailsService {
 
     public List<Item> getLikeList(Member member) {
         return memberRepository.findByEmail(member.getEmail()).getLikes();
+    }
+
+
+    @Transactional
+    public boolean addCodyLike(Member member, Long codyId) {
+        if (member == null){
+            throw new UsernameNotFoundException("wrong user");
+        }
+        Optional<Cody> optional = codyRepository.findById(codyId);
+        Cody cody = optional.get();
+
+        // codyId의 유효성 판별
+        if(cody == null){
+            throw new IllegalArgumentException("wrong cody info!");
+        }
+
+        // member는 detach 상태 -> Repo를 통해 Select문으로 한 번 조회해야 한다.
+        member = memberRepository.getOne(member.getId()); // detach -> persist 상태로 변환된다.
+
+        List<Cody> codyLikeList = member.getCodyLikes();
+
+        if(codyLikeList.contains(cody)){
+            codyLikeList.remove(cody);
+            return false;
+        }
+
+        codyLikeList.add(cody);
+        return true;
     }
 }

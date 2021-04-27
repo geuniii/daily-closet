@@ -2,9 +2,7 @@ package com.megait.soir.service;
 
 
 import com.megait.soir.domain.*;
-import com.megait.soir.repository.AlbumRepository;
-import com.megait.soir.repository.BookRepository;
-import com.megait.soir.repository.ItemRepository;
+import com.megait.soir.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
@@ -13,6 +11,9 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,10 +31,10 @@ import java.util.Optional;
 public class ItemService {
 
     private final ItemRepository itemRepository;
-    private final AlbumRepository albumRepository;
-    private final BookRepository bookRepository;
+    private final ParentCategoryRepository parentCategoryRepository;
+    private final ChildCategoryRepository childCategoryRepository;
 
-    @PostConstruct
+//    @PostConstruct
     public void initAlbumItems() throws IOException, ParseException {
 
 
@@ -56,18 +57,28 @@ public class ItemService {
             item.setCode((String) object.get("item_code"));
             item.setImg_name((String) object.get("img_name"));
 
-            //category
-            ParentCategory parent = new ParentCategory();
-            parent.setName((String) object.get("big_category"));
-            item.setParentCategory(parent);
+            //parentcategory
+            ParentCategory parent = parentCategoryRepository.findByName((String)object.get("big_category"));
+            if(parent == null){
+                ParentCategory newParent = new ParentCategory();
+                newParent.setName((String) object.get("big_category"));
+                item.setParentCategory(newParent);
+            }
+            else{
+                item.setParentCategory(parent);
+            }
 
-            ChildCategory child = new ChildCategory();
-            child.setName((String) object.get("small_category"));
-            child.setParentCategory(parent);
-            item.setChildCategory(child);
+            //childcategory
+            ChildCategory child = childCategoryRepository.findByname((String) object.get("small_category"));
+            if(child == null){
+                ChildCategory newChild = new ChildCategory();
+                newChild.setName((String) object.get("small_category"));
+                item.setChildCategory(newChild);
+            }
+            else{
+                item.setChildCategory(child);
+            }
 
-            System.out.println("부모-------->"+parent.getName());
-            System.out.println("자식-------->"+child.getName());
 
             // image urls
             JSONArray urlArr = (JSONArray) object.get("detail_img");
@@ -89,41 +100,74 @@ public class ItemService {
             itemRepository.save(item);
         }
     }
-
-    @PostConstruct
-    public void initBookItems() throws IOException {
-//        Resource resource = new ClassPathResource("album.CSV");
-//        List<String> list = Files.readAllLines(resource.getFile().toPath(), StandardCharsets.UTF_8);
-//
-//        Stream<String> stream = list.stream();
-//
-//        Stream<Item> stream2 = stream.map(
-//                line->{
-//                    String[] split = line.split("\\|");
-//                    Book book = new Book();
-//                    book.setName(split[0]);
-//                    book.setImageUrl(split[1]);
-//                    book.setPrice(Integer.parseInt(split[2]));
-//                    return book;
-//                });
-//
-//        List<Item> items = stream2.collect(Collectors.toList());
-//
-//        // 위에서 만든 List<에 저장
-//        itemRepository.saveAll(items);
-
-    }
-
-    public List<Album> getAlbumList() {
-        return albumRepository.findAll();
-    }
-
-    public List<Book> getBookList() {
-        return bookRepository.findAll();
-    }
-
     public List<Item> getItemList() {
         return itemRepository.findAll();
+    }
+
+    // 재우
+    //Get Item by All keyword (name, brand 전체검색)
+    public List<Item> findByAllKeyword(String keyword){
+        return itemRepository.findByAllKeyword(keyword);
+    }
+
+        //Get Item by Name keyword (name 만 검색)
+        public List<Item> findByNameKeyword(String keyword){
+            return itemRepository.findByNameKeyword(keyword);
+        }
+
+        //Get Item by Brand keyword (brand 만 검색)
+        public List<Item> findByBrandKeyword(String keyword){
+            return itemRepository.findByBrandKeyword(keyword);
+        }
+        //
+    /**
+     * 카테고리 아이템 조회
+     * @param category
+     * @param pageable
+     * @return
+     */
+    public List <Item> getItemListByCategory(String category, Pageable pageable) {
+        if (category.equals("best")) {
+            return itemRepository.findItem(pageable);
+        } else if (category.indexOf("_") > -1) {
+            return itemRepository.findItemByParentCategory(category.split("_")[0], category.split("_")[1], pageable);
+        } else {
+            return itemRepository.findItemByParentCategory(category, pageable);
+        }
+    }
+
+    public Long getCountItemListByCategory(String category) {
+        if (category.equals("best")) {
+            return itemRepository.count();
+        } else if (category.indexOf("_") > -1) {
+            return itemRepository.countItemByParentCategory(category.split("_")[0], category.split("_")[1]);
+        } else {
+            return itemRepository.countItemByParentCategory(category);
+        }
+    }
+
+    /**
+     * 베스트 아이템 페이징처리 및 정렬 가져오기
+     * @param itemRequest
+     * @return
+     */
+    public Pageable getPageable(ItemRequest itemRequest) {
+        String sort = itemRequest.getSort() != null ? itemRequest.getSort() : "liked";
+        int page = itemRequest.getPage() - 1;
+        int limit = itemRequest.getLimit();
+
+        if (limit == 0) {
+            limit = 20;
+        }
+        Sort sortBy = null;
+        if (sort.equals("price_high")) {
+            sortBy = Sort.by(Sort.Direction.DESC, "price");
+        } else if (sort.equals("price_low")) {
+            sortBy = Sort.by(Sort.Direction.ASC, "price");
+        } else {
+            sortBy = Sort.by(Sort.Direction.ASC, sort);
+        }
+        return PageRequest.of(page, limit, sortBy);
     }
 
     public Item findItem(Long id){
@@ -136,4 +180,28 @@ public class ItemService {
         Optional<Item> optional = itemRepository.findById(id);
         return optional.orElseGet(() -> itemRepository.findById(id).get());
     }
+
+    //추천 옷 (아우터, 상의 ,하의 )
+    public Item findRecommendCategory(Long parent, Long child){
+        ParentCategory parentCategory = parentCategoryRepository.getOne(parent);
+        ChildCategory childCategory = childCategoryRepository.getOne(child);
+
+        // 카테고리에 해당하는 아이템들을 받는다.
+        List<Item> itemList = itemRepository.findAllByParentCategoryAndChildCategory(parentCategory, childCategory);
+
+        // 이 중 랜덤하게 1개를 선택한다.
+        int index = (int)(Math.random() * itemList.size());
+        Item item = itemList.get(index);
+
+        // 아이템의 url들 중, 0번 url을 mainUrl로
+        item.setMainUrl(item.getUrls().get(0));
+        return item;
+    }
+
+    public int likeCount(Item item){
+        System.out.println("item_id: "+item.getId());
+        int likeCount = itemRepository.countLikeMembers(item.getId());
+        return  likeCount;
+    }
+
 }
