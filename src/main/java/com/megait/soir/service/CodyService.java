@@ -59,7 +59,6 @@ public class CodyService {
         List<Cody> codyList = codyRepository.findAll();
         return codyList;
     }
-<<<<<<< HEAD
 
     public Cody getOne(Long codyId){
         return codyRepository.getOne(codyId);
@@ -70,6 +69,4 @@ public class CodyService {
         List<String> codyList = codyRepository.findRankCodyLikes();
         return  codyList;
     }
-=======
->>>>>>> 92340efb077d430eafd5db9e35fa4c111bf0f4b6
 }

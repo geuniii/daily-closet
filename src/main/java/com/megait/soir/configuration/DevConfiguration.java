@@ -20,7 +20,7 @@ public class DevConfiguration {
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository memberRepository;
 
-//    @PostConstruct
+    @PostConstruct
     public void createTestUser(){
         Member member = Member.builder()
                 .email("test@test.com")

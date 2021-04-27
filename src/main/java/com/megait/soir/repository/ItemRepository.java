@@ -47,20 +47,10 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     @Query(value = "select * from  Item e where e.Brand like %:keyword%", nativeQuery = true)
     List<Item> findByBrandKeyword(@Param("keyword") String keyword);
 
-<<<<<<< HEAD
     List<Item> findAllByParentCategoryAndChildCategory(ParentCategory parent, ChildCategory child);
 
     @Query(value = "SELECT COUNT(*) FROM MEMBER_LIKES m WHERE m.LIKES_ID =:id", nativeQuery = true)
     int countLikeMembers(@Param("id") Long id);
-=======
-//    @Query(value = "select * from  ITEM e where e.PARENT_CATEGORY_ID  like %:parent_category_id%  and " +
-//            "e.CHILD_CATEGORY_ID like %:child_category_id%", nativeQuery = true)
-//    List <Item> findRecommendCategory(@Param("parent_category_id") Long parent,
-//                                      @Param("child_category_id") Long child
-//    );
-
-    List<Item> findAllByParentCategoryAndChildCategory(ParentCategory parent, ChildCategory child);
->>>>>>> 92340efb077d430eafd5db9e35fa4c111bf0f4b6
 }
 
 

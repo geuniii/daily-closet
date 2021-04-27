@@ -46,7 +46,6 @@ public class Member {
 
     @OneToMany(mappedBy = "member") // Orders와 1:N 양방향
     private List<Orders> orders = new ArrayList<>();
-<<<<<<< HEAD
 
     @OneToMany(mappedBy = "member")
     private List<Cody> codies = new ArrayList<>();
@@ -58,18 +57,6 @@ public class Member {
     //    @OneToMany // Member : Item => 1 : N Relationship(단방향)
     @ManyToMany
     private List<Cody> codyLikes = new ArrayList<>();
-=======
-
-    @OneToMany(mappedBy = "member")
-    private List<Cody> codies = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member")
-    private List<Review> reviews = new ArrayList<>();
-
-    @OneToMany // Member : Cody => 1 : N Relationship(단방향)
-    private List<Cody> codyLikes = new ArrayList<>();
-    // convention : NullPointerException 방지
->>>>>>> 92340efb077d430eafd5db9e35fa4c111bf0f4b6
 
     @Transactional
     public void generateEmailCheckToken() {

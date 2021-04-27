@@ -2,16 +2,9 @@ package com.megait.soir.domain;
 
 import lombok.*;
 
-<<<<<<< HEAD
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-=======
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
->>>>>>> 92340efb077d430eafd5db9e35fa4c111bf0f4b6
 
 
 @Entity
@@ -47,11 +40,8 @@ public class Cody {
     private long shoesSize;
 
     private long accSize;
-<<<<<<< HEAD
 //
 //    @ManyToMany(mappedBy = "codyLikes",cascade = CascadeType.ALL)
 //    private List<Member> likeMember  = new ArrayList<>();
-=======
->>>>>>> 92340efb077d430eafd5db9e35fa4c111bf0f4b6
 
 }

@@ -34,7 +34,7 @@ public class ItemService {
     private final ParentCategoryRepository parentCategoryRepository;
     private final ChildCategoryRepository childCategoryRepository;
 
-//    @PostConstruct
+    @PostConstruct
     public void initAlbumItems() throws IOException, ParseException {
 
 
@@ -196,15 +196,12 @@ public class ItemService {
         // 아이템의 url들 중, 0번 url을 mainUrl로
         item.setMainUrl(item.getUrls().get(0));
         return item;
-<<<<<<< HEAD
     }
 
     public int likeCount(Item item){
         System.out.println("item_id: "+item.getId());
         int likeCount = itemRepository.countLikeMembers(item.getId());
         return  likeCount;
-=======
->>>>>>> 92340efb077d430eafd5db9e35fa4c111bf0f4b6
     }
 
 }

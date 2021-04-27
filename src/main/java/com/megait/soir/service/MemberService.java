@@ -245,10 +245,7 @@ public class MemberService implements UserDetailsService {
 
         // member는 detach 상태 -> Repo를 통해 Select문으로 한 번 조회해야 한다.
         member = memberRepository.getOne(member.getId()); // detach -> persist 상태로 변환된다.
-<<<<<<< HEAD
 
-=======
->>>>>>> 92340efb077d430eafd5db9e35fa4c111bf0f4b6
         List<Cody> codyLikeList = member.getCodyLikes();
 
         if(codyLikeList.contains(cody)){

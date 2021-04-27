@@ -49,7 +49,6 @@ public class MainController {
         model.addAttribute(new SearchForm());
 
         //////////////////////////////////코디/////////////////////////////////////
-<<<<<<< HEAD
 
         List<String> codyIdList = codyService.codyLikeRank();
 
@@ -76,23 +75,6 @@ public class MainController {
             System.out.println("주소가 null 아님");
 
         }
-=======
-        model.addAttribute("codyList",codyService.getAllList());
-
-        model.addAttribute("itemList",itemService.getItemList());
-
-
-        /////////////////////////////////오늘의 날씨/////////////////////////////////
-        String baseDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
-        String meridien = dateService.currentHour();
-        if(city != null) {
-            String cityName = cityNameService.renameCity(city);
-            model.addAttribute("currentTemperature", weatherService.findCurrentDateTemperature(baseDate, cityName, meridien));
-            model.addAttribute("weatherList", weatherService.findCurrentLocalWeather(cityName));
-            System.out.println("주소가 null 아님");
-
-        }
->>>>>>> 92340efb077d430eafd5db9e35fa4c111bf0f4b6
         else{
             model.addAttribute("currentTemperature", weatherService.findCurrentDateTemperature(baseDate, "서울_인천_경기도", meridien));
             System.out.println("주소가 null일 경우");
@@ -100,7 +82,6 @@ public class MainController {
 
 
         //////////////////////////////////옷 추천/////////////////////////////////////
-<<<<<<< HEAD
 
         //아우터
         Long parent1 = Long.valueOf("12");
@@ -121,28 +102,6 @@ public class MainController {
         //하의 가져오기
         model.addAttribute("bottom", itemService.findRecommendCategory(parent3, child3));
 
-=======
-
-        //아우터
-        Long parent1 = Long.valueOf("12");
-        Long child1 = Long.valueOf("29");
-        //상의
-        Long parent2 = Long.valueOf("3");
-        Long child2 = Long.valueOf("2");
-
-        //하의
-        Long parent3 = Long.valueOf("31");
-        Long child3 = Long.valueOf("36");
-
-
-        //아우터 가져오기
-        model.addAttribute("outer", itemService.findRecommendCategory(parent1, child1));
-        // 상의 가져오기
-        model.addAttribute("top", itemService.findRecommendCategory(parent2, child2));
-        //하의 가져오기
-        model.addAttribute("bottom", itemService.findRecommendCategory(parent3, child3));
-
->>>>>>> 92340efb077d430eafd5db9e35fa4c111bf0f4b6
     return "/view/index";
     }
 
@@ -404,17 +363,10 @@ public class MainController {
     @PostMapping("/signup") // post 요청 시 실행되는 메소드 -> 즉 회원가입 form 작성 시 수행된다.
     public String signUpSubmit(@Valid SignUpForm signUpForm, Errors errors) {
 
-<<<<<<< HEAD
 //        if (errors.hasErrors()) { // annotation error가 발생 시 error가 담김 -> errors의 error 포함 여부로 판단.
 //            log.info("validation error occur!");
 //            return "/view/signup";
 //        }
-=======
-        if (errors.hasErrors()) { // annotation error가 발생 시 error가 담김 -> errors의 error 포함 여부로 판단.
-            log.info("validation error occur!");
-            return "/view/signup";
-        }
->>>>>>> 92340efb077d430eafd5db9e35fa4c111bf0f4b6
 
         signUpValidator.validate(signUpForm, errors); // 여기서 이메일 유효성 검증
         log.info("check validation complete!");
@@ -514,10 +466,6 @@ public class MainController {
         log.info("id : " + id);
 
         Item item = itemService.findItem(id);
-<<<<<<< HEAD
-=======
-//        List<Review> reviewList = reviewService.findAll(item);
->>>>>>> 92340efb077d430eafd5db9e35fa4c111bf0f4b6
 
         model.addAttribute(new ReviewForm());
         model.addAttribute("like_status", false);
@@ -527,11 +475,7 @@ public class MainController {
         }
         model.addAttribute("item", item);
         model.addAttribute("currentUser",member);
-<<<<<<< HEAD
         model.addAttribute("likeMember",itemService.likeCount(item));
-=======
-//        model.addAttribute("reviewList",reviewList);
->>>>>>> 92340efb077d430eafd5db9e35fa4c111bf0f4b6
 
         System.out.println();
 
@@ -546,15 +490,9 @@ public class MainController {
 
         // JSON 객체를 만든다.
         JsonObject jsonObject = new JsonObject();
-<<<<<<< HEAD
 
         //사용자의 likes (Member 엔티티의 likes)에 해당 상품을 추가
 
-=======
-
-        //사용자의 likes (Member 엔티티의 likes)에 해당 상품을 추가
-
->>>>>>> 92340efb077d430eafd5db9e35fa4c111bf0f4b6
         try {
             result = memberService.addLike(member, itemId);
             // 찜 목록 추가
@@ -744,7 +682,6 @@ public class MainController {
 
         model.addAttribute("codyList",codyService.getAllList());
 
-<<<<<<< HEAD
         HashMap hashMap = new HashMap();
 
         if (member != null) {
@@ -756,13 +693,6 @@ public class MainController {
         }
         System.out.println();
         model.addAttribute("codyLikes",hashMap);
-=======
-        model.addAttribute("cody_like_status", false);
-//        if (member != null) {
-//            member = memberRepository.findByEmail(member.getEmail());
-//            model.addAttribute("cody_like_status", member.getCodyLikes().contains(cody));
-//        }
->>>>>>> 92340efb077d430eafd5db9e35fa4c111bf0f4b6
         return "/view/allCodyList";
     }
 
@@ -775,12 +705,8 @@ public class MainController {
         JsonObject jsonObject = new JsonObject();
 
         try {
-<<<<<<< HEAD
             System.out.println("코디라이크 들어옴");
             result = memberService.addCodyLike(member, codyId);
-=======
-            result = memberService.addLike(member, codyId);
->>>>>>> 92340efb077d430eafd5db9e35fa4c111bf0f4b6
             // 찜 목록 추가
             if (result) {
                 jsonObject.addProperty("message", "Add like list Complelte!");
