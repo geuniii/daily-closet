@@ -34,7 +34,7 @@ public class ItemService {
     private final ParentCategoryRepository parentCategoryRepository;
     private final ChildCategoryRepository childCategoryRepository;
 
-    @PostConstruct
+//    @PostConstruct
     public void initAlbumItems() throws IOException, ParseException {
 
 
@@ -120,28 +120,30 @@ public class ItemService {
             return itemRepository.findByBrandKeyword(keyword);
         }
         //
-
-    /**
-     * 베스트 아이템 조회
-     * @return
-     */
-    public List<Item> getBestItemList() {
-        return itemRepository.findAll(Sort.by(Sort.Direction.DESC, "liked"));
-    }
-
     /**
      * 카테고리 아이템 조회
      * @param category
      * @param pageable
      * @return
      */
-    public List <Item> getParentCategoryItemList(String category, Pageable pageable) {
-        if (category.indexOf("_") > -1) {
+    public List <Item> getItemListByCategory(String category, Pageable pageable) {
+        if (category.equals("best")) {
+            return itemRepository.findItem(pageable);
+        } else if (category.indexOf("_") > -1) {
             return itemRepository.findItemByParentCategory(category.split("_")[0], category.split("_")[1], pageable);
         } else {
             return itemRepository.findItemByParentCategory(category, pageable);
         }
+    }
 
+    public Long getCountItemListByCategory(String category) {
+        if (category.equals("best")) {
+            return itemRepository.count();
+        } else if (category.indexOf("_") > -1) {
+            return itemRepository.countItemByParentCategory(category.split("_")[0], category.split("_")[1]);
+        } else {
+            return itemRepository.countItemByParentCategory(category);
+        }
     }
 
     /**
@@ -150,23 +152,21 @@ public class ItemService {
      * @return
      */
     public Pageable getPageable(ItemRequest itemRequest) {
-        String sort = itemRequest.getSort() != null ? itemRequest.getSort() : "name";
-        int page = itemRequest.getPage();
+        String sort = itemRequest.getSort() != null ? itemRequest.getSort() : "liked";
+        int page = itemRequest.getPage() - 1;
         int limit = itemRequest.getLimit();
 
         if (limit == 0) {
             limit = 20;
         }
-
         Sort sortBy = null;
-        if (sort == "price_high") {
+        if (sort.equals("price_high")) {
             sortBy = Sort.by(Sort.Direction.DESC, "price");
-        } else if (sort == "price_low") {
+        } else if (sort.equals("price_low")) {
             sortBy = Sort.by(Sort.Direction.ASC, "price");
         } else {
             sortBy = Sort.by(Sort.Direction.ASC, sort);
         }
-
         return PageRequest.of(page, limit, sortBy);
     }
 
@@ -197,6 +197,5 @@ public class ItemService {
         item.setMainUrl(item.getUrls().get(0));
         return item;
     }
-
 
 }

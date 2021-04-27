@@ -8,20 +8,25 @@
     <link rel="stylesheet" th:href="@{/css/user/style.css}">
 </th:block>
 
-<div layout:fragment="content" class="container" style="background-color: white;">
-    <br/><br/>
-    <div class="py-`5` ml-2">
-        <span id="bigLogo">main page</span>
-        <h2>Today's Pick!</h2>
-        <p>Hottest Cody</p>
+<div layout:fragment="content">
+
+    <!--    Today's Weather-->
+    <div>
+        <th:block th:insert="weather_fragment :: weather()"/>
     </div>
-<!--    &lt;!&ndash; 재우 &ndash;&gt;-->
-<!--    <th:block th:insert="item_fragements :: item_list(${clothsList})"/>-->
-<!--    <hr class="col-10 my-4">-->
-<!--    <div class="py-5 ml-2">-->
-<!--        <h2>Category name</h2>-->
-<!--        <p>옷정보..</p>-->
-<!--    </div>-->
+
+    <div class="justify-content-center " style="height: 800px;">
+        <!--    Today's Weather-->
+        <th:block th:insert="search_fragment :: search()"/>
+
+        <!--        Cody Carosel-->
+        <th:block th:insert="cody_fragment :: cody(${codyList})"/>
+    </div>
+
+
+    <div class="row justify-content-center py-5" style="background-color:#F8F7F5;height: 700px;">
+        <th:block th:insert="recommend_fragment :: recommend(${top},${outer},${bottom})"/>
+    </div>
 </div>
 
 </html>

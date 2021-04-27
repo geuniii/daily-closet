@@ -20,7 +20,7 @@ public class DevConfiguration {
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository memberRepository;
 
-    @PostConstruct
+//    @PostConstruct
     public void createTestUser(){
         Member member = Member.builder()
                 .email("test@test.com")
@@ -30,6 +30,6 @@ public class DevConfiguration {
 
 //        member.generateEmailCheckToken();
         memberRepository.save(member);
-        log.info("TestUser(" + member.getEmail() + ") has been created.");
+//        log.info("TestUser(" + member.getEmail() + ") has been created.");
     }
 }

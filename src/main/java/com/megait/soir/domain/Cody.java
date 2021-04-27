@@ -41,5 +41,5 @@ public class Cody {
     private long shoesSize;
 
     private long accSize;
-}
 
+}

@@ -13,16 +13,27 @@ import java.util.List;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
-    @Query("SELECT i FROM Item i WHERE i.parentCategory IN (SELECT pc.id FROM ParentCategory pc WHERE pc.name = ?1)")
-//          SELECT * FROM item WHERE PARENT_CATEGORY_ID IN (SELECT ID FROM PARENT_CATEGORY pc WHERE name ='아우터') ORDER BY name asc;
+    /**
+     * 수환
+     * @param pageable
+     * @return
+     */
+    @Query("SELECT i FROM Item i")
+    List<Item> findItem(Pageable pageable);
 
-    //    List<Item> findByParentCategory(String category, Pageable pageable);
+    @Query("SELECT i FROM Item i WHERE i.parentCategory IN (SELECT pc.id FROM ParentCategory pc WHERE pc.name = ?1)")
     List<Item> findItemByParentCategory(String category, Pageable pageable);
 
     // 신발과 스니커즈 & 가방과 여성가방
     @Query("SELECT i FROM Item i WHERE i.parentCategory IN (SELECT pc.id FROM ParentCategory pc WHERE pc.name = ?1 or pc.name = ?2)")
-//    List<Item> findByParentCategory(String category, Pageable pageable);
     List<Item> findItemByParentCategory(String category_1, String category_2, Pageable pageable);
+
+    @Query(value = "SELECT count(i) FROM Item i WHERE i.parentCategory IN (SELECT pc.id FROM ParentCategory pc WHERE pc.name = ?1)")
+    Long countItemByParentCategory(String category);
+
+    // 신발과 스니커즈 & 가방과 여성가방
+    @Query(value = "SELECT count(i) FROM Item i WHERE i.parentCategory IN (SELECT pc.id FROM ParentCategory pc WHERE pc.name = ?1 or pc.name = ?2)")
+    Long countItemByParentCategory(String category_1, String category_2);
 
 
     // 재우
@@ -35,6 +46,12 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     @Query(value = "select * from  Item e where e.Brand like %:keyword%", nativeQuery = true)
     List<Item> findByBrandKeyword(@Param("keyword") String keyword);
+
+//    @Query(value = "select * from  ITEM e where e.PARENT_CATEGORY_ID  like %:parent_category_id%  and " +
+//            "e.CHILD_CATEGORY_ID like %:child_category_id%", nativeQuery = true)
+//    List <Item> findRecommendCategory(@Param("parent_category_id") Long parent,
+//                                      @Param("child_category_id") Long child
+//    );
 
     List<Item> findAllByParentCategoryAndChildCategory(ParentCategory parent, ChildCategory child);
 }

@@ -54,5 +54,9 @@ public class CodyService {
         List<Cody> codyList = codyRepository.findAllByMember(member);
         return codyList;
     }
-}
 
+    public List<Cody> getAllList(){
+        List<Cody> codyList = codyRepository.findAll();
+        return codyList;
+    }
+}

@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 public class WeatherService {
     final int API_TYPE_WEATHER = 1;
     final int API_TYPE_TEMPERATURE = 2;
-//    @Autowired
+    //    @Autowired
 //    private RestTemplateBuilder restTemplateBuilder;
 //    @Autowired
 //    private RegionRepository    regionRepository;
@@ -43,7 +43,7 @@ public class WeatherService {
     private final WeatherRepository weatherRepository;
 
 
-    @PostConstruct
+//    @PostConstruct
     @Transactional
     public void Init() {
         insertRegion();
@@ -190,15 +190,15 @@ public class WeatherService {
 
     private void insertRegion() {
         regionRepository.saveAll(List.of(
-            Region.builder().city("서울_인천_경기도").regionTemperatureId("11B10101").regionWeatherId("11B00000").build(),
-            Region.builder().city("부산_울산_경상남도").regionTemperatureId("11H20201").regionWeatherId("11D10000").build(),
-            Region.builder().city("대구_경상북도").regionTemperatureId("11H10701").regionWeatherId("11D20000").build(),
-            Region.builder().city("광주_전라남도").regionTemperatureId("11F20501").regionWeatherId("11C20000").build(),
-            Region.builder().city("전라북도").regionTemperatureId("11F10201").regionWeatherId("11F20000").build(),
-            Region.builder().city("대전_세종_충청남도").regionTemperatureId("11C20401").regionWeatherId("11F10000").build(),
-            Region.builder().city("충청북도").regionTemperatureId("11C10301").regionWeatherId("11H10000").build(),
-            Region.builder().city("강원도").regionTemperatureId("11D10301").regionWeatherId("11H20000").build(),
-            Region.builder().city("제주도").regionTemperatureId("11G00201").regionWeatherId("11G00000").build())
+                Region.builder().city("서울_인천_경기도").regionTemperatureId("11B10101").regionWeatherId("11B00000").build(),
+                Region.builder().city("부산_울산_경상남도").regionTemperatureId("11H20201").regionWeatherId("11D10000").build(),
+                Region.builder().city("대구_경상북도").regionTemperatureId("11H10701").regionWeatherId("11D20000").build(),
+                Region.builder().city("광주_전라남도").regionTemperatureId("11F20501").regionWeatherId("11C20000").build(),
+                Region.builder().city("전라북도").regionTemperatureId("11F10201").regionWeatherId("11F20000").build(),
+                Region.builder().city("대전_세종_충청남도").regionTemperatureId("11C20401").regionWeatherId("11F10000").build(),
+                Region.builder().city("충청북도").regionTemperatureId("11C10301").regionWeatherId("11H10000").build(),
+                Region.builder().city("강원도").regionTemperatureId("11D10301").regionWeatherId("11H20000").build(),
+                Region.builder().city("제주도").regionTemperatureId("11G00201").regionWeatherId("11G00000").build())
         );
     }
 
@@ -258,10 +258,10 @@ public class WeatherService {
         return weatherRepository.findByWeatherCityAndBaseDateAndMeridiemOrderByBaseDateDesc(
                 weatherCity, getMeridiem(getCurrentDate()).toUpperCase(),
                 getCurrentDate().split(":")[0], getAddDate(10)
-            )
-            .stream()
-            .map(WeatherListResponse::new)
-            .collect(Collectors.toList());
+        )
+                .stream()
+                .map(WeatherListResponse::new)
+                .collect(Collectors.toList());
     }
 
     public List<Weather> findCurrentLocalWeather(String city){
