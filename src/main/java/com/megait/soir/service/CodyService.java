@@ -59,4 +59,14 @@ public class CodyService {
         List<Cody> codyList = codyRepository.findAll();
         return codyList;
     }
+
+    public Cody getOne(Long codyId){
+        return codyRepository.getOne(codyId);
+    }
+
+
+    public List<String> codyLikeRank(){
+        List<String> codyList = codyRepository.findRankCodyLikes();
+        return  codyList;
+    }
 }

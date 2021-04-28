@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -244,6 +245,7 @@ public class MemberService implements UserDetailsService {
 
         // member는 detach 상태 -> Repo를 통해 Select문으로 한 번 조회해야 한다.
         member = memberRepository.getOne(member.getId()); // detach -> persist 상태로 변환된다.
+
         List<Cody> codyLikeList = member.getCodyLikes();
 
         if(codyLikeList.contains(cody)){

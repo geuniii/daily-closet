@@ -12,11 +12,15 @@ import java.util.Random;
 import java.util.UUID;
 
 @Entity
-@Getter @Setter @Builder
-@AllArgsConstructor @NoArgsConstructor
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Member {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private long id;
 
     private String email;
@@ -36,7 +40,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private MemberType type;
 
-    @OneToMany // Member : Item => 1 : N Relationship(단방향)
+    @ManyToMany // Member : Item => 1 : N Relationship(단방향)
     private List<Item> likes = new ArrayList<>();
     // convention : NullPointerException 방지
 
@@ -49,9 +53,10 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Review> reviews = new ArrayList<>();
 
-    @OneToMany // Member : Cody => 1 : N Relationship(단방향)
+
+    //    @OneToMany // Member : Item => 1 : N Relationship(단방향)
+    @ManyToMany
     private List<Cody> codyLikes = new ArrayList<>();
-    // convention : NullPointerException 방지
 
     @Transactional
     public void generateEmailCheckToken() {
@@ -66,7 +71,7 @@ public class Member {
     }
 
     @Transactional
-    public void encodePassword(PasswordEncoder passwordEncoder){
+    public void encodePassword(PasswordEncoder passwordEncoder) {
         password = passwordEncoder.encode(password);
     }
 }

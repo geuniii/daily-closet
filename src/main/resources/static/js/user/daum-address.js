@@ -22,8 +22,9 @@ function search(form) {
                 extraRoadAddr = ' (' + extraRoadAddr + ')';
             }
 
-            form.zipcode.value = data.zipcode;
+            form.zipcode.value = data.zonecode;
             form.city.value = roadAddr;
+
         }
     }).open();
 }

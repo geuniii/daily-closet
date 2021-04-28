@@ -49,7 +49,18 @@ public class MainController {
         model.addAttribute(new SearchForm());
 
         //////////////////////////////////코디/////////////////////////////////////
-        model.addAttribute("codyList",codyService.getCodyList(member));
+
+        List<String> codyIdList = codyService.codyLikeRank();
+
+        List<Cody> codyList = new ArrayList<>();
+        if(codyIdList !=null){
+            for(int i = 0; i<codyIdList.size(); i++){
+                Cody cody = codyService.getOne(Long.parseLong(String.valueOf(codyIdList.get(i))));
+                codyList.add(cody);
+                System.out.println(codyList.get(i).getId());
+            }
+        }
+        model.addAttribute("codyList",codyList);
 
         model.addAttribute("itemList",itemService.getItemList());
 
@@ -308,13 +319,14 @@ public class MainController {
     public String itemList(ItemRequest itemRequest, Model model) {
         String categoryName = itemRequest.getCategoryName();
         Pageable pageable = itemService.getPageable(itemRequest);
-        if (itemRequest.getCategoryName().equals("best")) {
-            model.addAttribute("itemList", itemService.getBestItemList());
-        } else {
-            model.addAttribute("itemList", itemService.getParentCategoryItemList(categoryName, pageable));
-        }
-        // <h2 th:text="This is ${title} Page."><h2>
-        model.addAttribute("title", categoryName);
+
+        Paginator paginator = new Paginator(5, itemRequest.getLimit(), itemService.getCountItemListByCategory(categoryName));
+        Map<String, Object> pageInfo = paginator.getFixedBlock(itemRequest.getPage());
+//        Map<String, Object> pageInfo = paginator.getElasticBlock(itemRequest.getPage());
+        model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("itemList", itemService.getItemListByCategory(categoryName, pageable));
+        model.addAttribute("categoryName", categoryName);
+
         return "/view/category";
     }
 
@@ -351,10 +363,10 @@ public class MainController {
     @PostMapping("/signup") // post 요청 시 실행되는 메소드 -> 즉 회원가입 form 작성 시 수행된다.
     public String signUpSubmit(@Valid SignUpForm signUpForm, Errors errors) {
 
-        if (errors.hasErrors()) { // annotation error가 발생 시 error가 담김 -> errors의 error 포함 여부로 판단.
-            log.info("validation error occur!");
-            return "/view/signup";
-        }
+//        if (errors.hasErrors()) { // annotation error가 발생 시 error가 담김 -> errors의 error 포함 여부로 판단.
+//            log.info("validation error occur!");
+//            return "/view/signup";
+//        }
 
         signUpValidator.validate(signUpForm, errors); // 여기서 이메일 유효성 검증
         log.info("check validation complete!");
@@ -445,7 +457,6 @@ public class MainController {
         model.addAttribute("result_code", "password.reset.complete");
 
         // 자동 로그인 실행
-
         return "/view/notify";
     }
 
@@ -455,7 +466,6 @@ public class MainController {
         log.info("id : " + id);
 
         Item item = itemService.findItem(id);
-//        List<Review> reviewList = reviewService.findAll(item);
 
         model.addAttribute(new ReviewForm());
         model.addAttribute("like_status", false);
@@ -465,7 +475,7 @@ public class MainController {
         }
         model.addAttribute("item", item);
         model.addAttribute("currentUser",member);
-//        model.addAttribute("reviewList",reviewList);
+        model.addAttribute("likeMember",itemService.likeCount(item));
 
         System.out.println();
 
@@ -572,7 +582,7 @@ public class MainController {
         return json.toString();
 
     }
-
+    @GetMapping("/cody")
     public String cody(@CurrentUser Member member, Model model) {
 
         model.addAttribute(new CodyForm());
@@ -672,11 +682,17 @@ public class MainController {
 
         model.addAttribute("codyList",codyService.getAllList());
 
-        model.addAttribute("cody_like_status", false);
-//        if (member != null) {
-//            member = memberRepository.findByEmail(member.getEmail());
-//            model.addAttribute("cody_like_status", member.getCodyLikes().contains(cody));
-//        }
+        HashMap hashMap = new HashMap();
+
+        if (member != null) {
+            member = memberRepository.findByEmail(member.getEmail());
+            for(Cody cody:codyService.getAllList()){
+                hashMap.put(cody.getId(),member.getCodyLikes().contains(cody));
+            }
+            System.out.println(hashMap);
+        }
+        System.out.println();
+        model.addAttribute("codyLikes",hashMap);
         return "/view/allCodyList";
     }
 
@@ -689,7 +705,8 @@ public class MainController {
         JsonObject jsonObject = new JsonObject();
 
         try {
-            result = memberService.addLike(member, codyId);
+            System.out.println("코디라이크 들어옴");
+            result = memberService.addCodyLike(member, codyId);
             // 찜 목록 추가
             if (result) {
                 jsonObject.addProperty("message", "Add like list Complelte!");

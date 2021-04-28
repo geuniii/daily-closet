@@ -3,7 +3,13 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<div th:fragment="cody(codyList)">
+<div th:fragment="cody(codyList)" class="container">
+
+    <div>
+        <h2 id="pageLogo">Recommend Cody</h2>
+        <small id="pageInfo">Choose your own style.</small>
+        <br/><br/>
+    </div>
 
     <div class="owl-carousel" style="position: relative">
         <div th:each="cody:${codyList}">
@@ -52,8 +58,6 @@
     </div>
 
     <br><br><br>
-    <hr>
-
 
     <script type="text/javascript">
 
