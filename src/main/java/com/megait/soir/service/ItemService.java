@@ -20,9 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional // 객체가 사용하는 모든 method에 transaction이 적용된다.
@@ -196,6 +194,126 @@ public class ItemService {
         // 아이템의 url들 중, 0번 url을 mainUrl로
         item.setMainUrl(item.getUrls().get(0));
         return item;
+    }
+
+    // 날씨에따른 아우터, 상의, 하의 랜덤 추천 리스트
+    public String random_outer_list(String season){
+        Random random = new Random();
+
+        switch (season){
+            // 여름 아우터
+            case "summer" :
+                List<String> summer_outer = new ArrayList<>();
+                summer_outer.add("27");
+                summer_outer.add("17");
+                summer_outer.add("15");
+                String random_summer_outer = summer_outer.get(random.nextInt(summer_outer.size() - 1));
+                return random_summer_outer;
+
+            // 봄, 가을 아우터
+            case "spring_fall" :
+                List<String> spring_fall_outer = new ArrayList<>();
+                spring_fall_outer.add("29");
+                spring_fall_outer.add("27");
+                spring_fall_outer.add("24");
+                spring_fall_outer.add("23");
+                spring_fall_outer.add("21");
+                spring_fall_outer.add("20");
+                spring_fall_outer.add("19");
+                spring_fall_outer.add("18");
+                spring_fall_outer.add("17");
+                spring_fall_outer.add("15");
+                spring_fall_outer.add("14");
+                spring_fall_outer.add("13");
+                spring_fall_outer.add("11");
+
+                String random_spring_fall = spring_fall_outer.get(random.nextInt(spring_fall_outer.size() - 1));
+                return random_spring_fall;
+
+            // 겨울 아우터
+            case "winter" :
+                List<String> winter_outer = new ArrayList<>();
+                winter_outer.add("28");
+                winter_outer.add("26");
+                winter_outer.add("24");
+                winter_outer.add("22");
+                String random_winter_outer = winter_outer.get(random.nextInt(winter_outer.size() - 1));
+                return random_winter_outer;
+        }
+
+        return "29";
+//        return null;
+    }
+    public String random_top_list(String season){
+        Random random = new Random();
+
+        switch (season){
+
+            // 여름 상의
+            case "summer" :
+                List<String> summer_top = new ArrayList<>();
+                summer_top.add("6");
+//                String random_summer_top = summer_top.get(random.nextInt(summer_top.size() - 1));
+//                return random_summer_top;
+                return "6";
+            case  "spring_fall" :
+                List<String> spring_fall_top = new ArrayList<>();
+                spring_fall_top.add("2");
+                spring_fall_top.add("4");
+                spring_fall_top.add("5");
+                spring_fall_top.add("7");
+                String random_spring_fall_top = spring_fall_top.get(random.nextInt(spring_fall_top.size() - 1));
+                return random_spring_fall_top;
+
+            case "winter" :
+                List<String> winter_top = new ArrayList<>();
+                winter_top.add("2");
+                winter_top.add("3");
+                winter_top.add("5");
+                String random_winter_top = winter_top.get(random.nextInt(winter_top.size() - 1));
+                return random_winter_top;
+        }
+        return "2";
+        //       return null;
+    }
+    public String random_bottom_list(String season){
+        Random random = new Random();
+        switch (season){
+
+            // 여름 하의
+            case "summer" :
+                List<String> summer_bottom = new ArrayList<>();
+                summer_bottom.add("36");
+                summer_bottom.add("35");
+                summer_bottom.add("34");
+                summer_bottom.add("30");
+
+                String random_summer_bottom = summer_bottom.get(random.nextInt(summer_bottom.size() - 1));
+                return random_summer_bottom;
+
+            // 봄,가을 하의
+            case  "spring_fall" :
+                List<String> spring_fall_bottom = new ArrayList<>();
+                spring_fall_bottom.add("36");
+                spring_fall_bottom.add("35");
+                spring_fall_bottom.add("33");
+                spring_fall_bottom.add("32");
+                spring_fall_bottom.add("30");
+
+                String random_spring_fall_bottom = spring_fall_bottom.get(random.nextInt(spring_fall_bottom.size() - 1));
+                return random_spring_fall_bottom;
+
+            // 겨울 하의
+            case "winter" :
+                List<String> winter_bottom = new ArrayList<>();
+                winter_bottom.add("33");
+                winter_bottom.add("32");
+
+                String random_winter_bottom = winter_bottom.get(random.nextInt(winter_bottom.size() - 1));
+                return random_winter_bottom;
+        }
+        return "36";
+//        return null;
     }
 
     public int likeCount(Item item){
