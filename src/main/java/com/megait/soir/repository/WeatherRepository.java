@@ -38,6 +38,8 @@ public interface WeatherRepository extends JpaRepository<Weather, Long> {
                                              @Param("meridiem") String meridiem
     );
 
+    public Weather findAllById(Long id);
+
     // 부모
     // id=3 상의 {자식 id : id=2 후드티셔츠, id=4 맨투맨 6, 5, 7}
     // id=12 아우터 {자식 id : 29,28,27,26,24,23,22,21,20,19,18,17,15,14,13,11}

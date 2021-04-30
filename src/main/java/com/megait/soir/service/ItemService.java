@@ -196,7 +196,7 @@ public class ItemService {
         return item;
     }
 
-    // 날씨에따른 아우터, 상의, 하의 랜덤 추천 리스트
+    // 계절에 따른 아우터 랜덤 추천 리스트
     public String random_outer_list(String season){
         Random random = new Random();
 
@@ -244,6 +244,7 @@ public class ItemService {
         return "29";
 //        return null;
     }
+    // 계절에 따른 상의 랜덤 추천 리스트
     public String random_top_list(String season){
         Random random = new Random();
 
@@ -276,6 +277,7 @@ public class ItemService {
         return "2";
         //       return null;
     }
+    // 계절에 따른 하의 랜덤 추천 리스트
     public String random_bottom_list(String season){
         Random random = new Random();
         switch (season){

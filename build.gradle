@@ -61,6 +61,9 @@ dependencies {
 
 	compile('org.springframework.boot:spring-boot-starter-mustache')
 
+	// JAVA Geocoder (lat, lng) google
+	implementation 'com.google.code.geocoder-java:geocoder-java:0.16'
+
 
 }
 

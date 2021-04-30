@@ -270,4 +270,14 @@ public class WeatherService {
     public List<Weather> findCurrentDateTemperature(String currentdate, String city, String meridien){
         return weatherRepository.findCurrentDateTemperature(currentdate, city, meridien);
     }
+    public Long am_temperature(){
+        Weather weather = weatherRepository.getOne(Long.valueOf("76")); // 4일째 오전 온도, id = 76
+        return weather.getTemperature();
+
+    }
+    public Long pm_temperature(){
+        Weather weather = weatherRepository.getOne(Long.valueOf("77")); // 4일째 오후 온도,  id = 77
+        return weather.getTemperature();
+    }
+
 }

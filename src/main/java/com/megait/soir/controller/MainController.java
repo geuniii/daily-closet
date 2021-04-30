@@ -83,16 +83,16 @@ public class MainController {
 
         //////////////////////////////////옷 추천/////////////////////////////////////
 
+        // int temperature = weatherService.WeeklyTemperatureAverage(city);
         //아우터
-        Long parent1 = Long.valueOf("12");
-        Long child1 = Long.valueOf("29");
+        Long parent1 = Long.valueOf("12"); // 아우터값 (고정값)
+        Long child1 = Long.valueOf(itemService.random_outer_list("summer"));
         //상의
-        Long parent2 = Long.valueOf("3");
-        Long child2 = Long.valueOf("2");
-
+        Long parent2 = Long.valueOf("3"); // 상의값 (고정값)
+        Long child2 = Long.valueOf(itemService.random_top_list("summer"));
         //하의
-        Long parent3 = Long.valueOf("31");
-        Long child3 = Long.valueOf("36");
+        Long parent3 = Long.valueOf("31"); // 하의값 (고정값)
+        Long child3 = Long.valueOf(itemService.random_bottom_list("summer"));
 
 
         //아우터 가져오기
@@ -101,7 +101,6 @@ public class MainController {
         model.addAttribute("top", itemService.findRecommendCategory(parent2, child2));
         //하의 가져오기
         model.addAttribute("bottom", itemService.findRecommendCategory(parent3, child3));
-
     return "/view/index";
     }
 
@@ -148,6 +147,14 @@ public class MainController {
     public String daily_recommend(Model model, String city){
         //String weatherCity = "서울_인천_경기도";;
 
+        // 현재 '시간' 만 얻기
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH"); // 24시간제로 표시
+        String hour = sdf.format(calendar.getTime());
+        int currentHour = Integer.parseInt(hour);
+        //System.out.println("hour : "+hour);
+
+
         String baseDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
         String meridien = dateService.currentHour();
         if(city != null) {
@@ -163,20 +170,48 @@ public class MainController {
         }
 
         // int temperature = weatherService.WeeklyTemperatureAverage(city);
+
+        String season = "winter";
+        if(currentHour > 11 && currentHour < 24 ){ //오후
+            Long pm_temperature = weatherService.pm_temperature();
+            // 봄, 가을 날씨 온도
+            if (pm_temperature > Long.valueOf("12") && pm_temperature < Long.valueOf("28")){
+                season = "spring_fall";
+            }
+            else if (pm_temperature <= Long.valueOf("12")){ // 겨울
+                season = "winter";
+            }
+            else if(pm_temperature >= Long.valueOf("28")){// 여름
+                season = "summer";
+            }
+        }
+        else{ //오전
+            Long am_temperature = weatherService.am_temperature();
+            // 봄, 가을 날씨 온도
+            if (am_temperature > Long.valueOf("12") && am_temperature < Long.valueOf("28")){
+                season = "spring_fall";
+            }
+            else if (am_temperature <= Long.valueOf("12")){ // 겨울
+                season = "winter";
+            }
+            else if(am_temperature >= Long.valueOf("28")){// 여름
+                season = "summer";
+            }
+        }
         //아우터
         Long parent1 = Long.valueOf("12"); // 아우터값 (고정값)
-        Long child1 = Long.valueOf(itemService.random_outer_list("summer"));
+        Long child1 = Long.valueOf(itemService.random_outer_list(season));
         //상의
         Long parent2 = Long.valueOf("3"); // 상의값 (고정값)
-        Long child2 = Long.valueOf(itemService.random_top_list("summer"));
+        Long child2 = Long.valueOf(itemService.random_top_list(season));
         //하의
         Long parent3 = Long.valueOf("31"); // 하의값 (고정값)
-        Long child3 = Long.valueOf(itemService.random_bottom_list("summer"));
-
+        Long child3 = Long.valueOf(itemService.random_bottom_list(season));
+        //System.out.println("@@@@@@@@@날씨온도@@@@@@@@@"+season);
 
         //아우터 가져오기
         model.addAttribute("outer", itemService.findRecommendCategory(parent1, child1));
-       // 상의 가져오기
+        //상의 가져오기
         model.addAttribute("top", itemService.findRecommendCategory(parent2, child2));
         //하의 가져오기
         model.addAttribute("bottom", itemService.findRecommendCategory(parent3, child3));
