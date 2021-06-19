@@ -75,6 +75,11 @@ JavaScript
 ##### MainController.java
 
 ```java
+   /**
+     * 상품 코디
+     * @param member : 로그인한 사용자
+     * @return : 상품 코디 페이지
+     */
     @GetMapping("/cody")
     public String cody(@CurrentUser Member member, Model model) {
 
@@ -87,26 +92,21 @@ JavaScript
         List<Item> acc = new ArrayList<>();
         List<Item> shoes = new ArrayList<>();
 
-        for(int i = 0; i<likeList.size(); i++){
+        for(int i = 0; i<likeList.size(); i++){ // 찜한 상품들 조회
             if(likeList.get(i).getParentCategory().getName().equals("상의")){
                 top.add(likeList.get(i));
-                System.out.println(likeList.get(i).getParentCategory().getName());
             }
             if(likeList.get(i).getParentCategory().getName().equals("아우터")){
                 outer.add(likeList.get(i));
-                System.out.println(likeList.get(i).getParentCategory().getName());
             }
             if(likeList.get(i).getParentCategory().getName().equals("바지")){
                 bottom.add(likeList.get(i));
-                System.out.println(likeList.get(i).getParentCategory().getName());
             }
             if(likeList.get(i).getParentCategory().getName().equals("신발")||likeList.get(i).getParentCategory().getName().equals("스니커즈") ){
                 shoes.add(likeList.get(i));
-                System.out.println(likeList.get(i).getParentCategory().getName());
             }
             if(likeList.get(i).getParentCategory().getName().equals("가방")){
                 acc.add(likeList.get(i));
-                System.out.println(likeList.get(i).getParentCategory().getName());
             }
         }
         model.addAttribute("topList", top);
@@ -115,15 +115,8 @@ JavaScript
         model.addAttribute("accList", acc);
         model.addAttribute("shoesList", shoes);
         model.addAttribute("member", member);
+
         return "/view/cody";
-    }
-
-    @PostMapping("/cody")
-    public String codySubmit(@CurrentUser Member member, @Valid CodyForm codyForm) {
-
-        Cody cody = codyService.createNewCody(member,codyForm);
-
-        return "redirect:/cody";
     }
 ```
 
@@ -144,17 +137,17 @@ Google Map API와 기상청 API를 통해 위치와 10일치 기온 데이터를
 ##### MainController.java
 
 ```java
-   @GetMapping("/daily-recommend")
+    /**
+     * 날씨별 옷 추천
+     * @return : 상품 추천 fragment
+     */
+    @GetMapping("/daily-recommend")
     public String daily_recommend(Model model, String city){
-        //String weatherCity = "서울_인천_경기도";;
 
-        // 현재 '시간' 만 얻기
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance(); // 현재 '시간' 만 얻기
         SimpleDateFormat sdf = new SimpleDateFormat("HH"); // 24시간제로 표시
         String hour = sdf.format(calendar.getTime());
         int currentHour = Integer.parseInt(hour);
-        //System.out.println("hour : "+hour);
-
 
         String baseDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
         String meridien = dateService.currentHour();
@@ -169,8 +162,6 @@ Google Map API와 기상청 API를 통해 위치와 10일치 기온 데이터를
             model.addAttribute("currentTemperature", weatherService.findCurrentDateTemperature(baseDate, "서울_인천_경기도", meridien));
             System.out.println("주소가 null일 경우");
         }
-
-        // int temperature = weatherService.WeeklyTemperatureAverage(city);
 
         String season = "winter";
         if(currentHour > 11 && currentHour < 24 ){ //오후
@@ -188,35 +179,34 @@ Google Map API와 기상청 API를 통해 위치와 10일치 기온 데이터를
         }
         else{ //오전
             Long am_temperature = weatherService.am_temperature();
-            
+            // 봄, 가을 날씨 온도
             if (am_temperature > Long.valueOf("12") && am_temperature < Long.valueOf("28")){
                 season = "spring_fall";
             }
-            else if (am_temperature <= Long.valueOf("12")){
+            else if (am_temperature <= Long.valueOf("12")){ // 겨울
                 season = "winter";
             }
-            else if(am_temperature >= Long.valueOf("28")){
+            else if(am_temperature >= Long.valueOf("28")){// 여름
                 season = "summer";
             }
         }
-        //아우터
-        Long parent1 = Long.valueOf("12"); // 아우터값
+
+        Long parent1 = Long.valueOf("12");
         Long child1 = Long.valueOf(itemService.random_outer_list(season));
-        //상의
-        Long parent2 = Long.valueOf("3"); // 상의값
+
+        Long parent2 = Long.valueOf("3");
         Long child2 = Long.valueOf(itemService.random_top_list(season));
-        //하의
-        Long parent3 = Long.valueOf("31"); // 하의값
+
+        Long parent3 = Long.valueOf("31");
         Long child3 = Long.valueOf(itemService.random_bottom_list(season));
 
-        //아우터 가져오기
+
         model.addAttribute("outer", itemService.findRecommendCategory(parent1, child1));
-        //상의 가져오기
+
         model.addAttribute("top", itemService.findRecommendCategory(parent2, child2));
-        //하의 가져오기
+
         model.addAttribute("bottom", itemService.findRecommendCategory(parent3, child3));
 
-      //  System.out.println("현재 온도 : " + temperature);
         return "/view/daily-recommend";
     }
 ```
@@ -238,6 +228,11 @@ Google Map API와 기상청 API를 통해 위치와 10일치 기온 데이터를
 ##### MainController.java
 
 ```java
+      /**
+     * 카테고리 별 아이템 조회
+     * @param itemRequest : 카테고리
+     * @return : 아이템 페이지
+     */
     @GetMapping("/itemList")
     public String itemList(ItemRequest itemRequest, Model model) {
         String categoryName = itemRequest.getCategoryName();
@@ -245,12 +240,14 @@ Google Map API와 기상청 API를 통해 위치와 10일치 기온 데이터를
 
         Paginator paginator = new Paginator(5, itemRequest.getLimit(), itemService.getCountItemListByCategory(categoryName));
         Map<String, Object> pageInfo = paginator.getFixedBlock(itemRequest.getPage());
+
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("itemList", itemService.getItemListByCategory(categoryName, pageable));
         model.addAttribute("categoryName", categoryName);
 
         return "/view/category";
     }
+
 ```
 
 
