@@ -7,7 +7,7 @@
 
 ## 개발환경
 
-#### - Back-end
+### - Back-end
 
 Java : JDK 11
 
@@ -27,7 +27,7 @@ Beautiful Soup 4.9.3
 
 
 
-#### - Front-end
+### - Front-end
 
 Bootstrap  5.0.0
 
@@ -39,6 +39,7 @@ JavaScript
 
 
 
+
 ## 주요 기능
 
 - 기온별 상품 추천 
@@ -46,9 +47,11 @@ JavaScript
 
 
 
+
 ## 시연 영상
 
-[![img](https://user-images.githubusercontent.com/62981623/103178871-2b2e9980-48ca-11eb-87d6-0f6b41e68480.jpg)](https://youtu.be/IIp5B48cUWA")
+[![image](https://user-images.githubusercontent.com/62981623/122639563-816fed00-d135-11eb-8bed-42808cfbc60a.png)
+](https://www.youtube.com/watch?v=WPs8O315-P4")
 
 
 
@@ -63,8 +66,10 @@ JavaScript
 - 코디 페이지
 ![image](https://user-images.githubusercontent.com/62981623/122635312-12d36500-d11e-11eb-9bad-b27636ffeabc.png)
 
+
 - 코디 리스트 페이지
 ![image](https://user-images.githubusercontent.com/62981623/122635415-c76d8680-d11e-11eb-9f2f-bc8df9b07ff9.png)
+
 
 
 ##### MainController.java
@@ -124,12 +129,15 @@ JavaScript
 
 
 
+
+
 ### 2. 날씨별 상품 추천 기능
 
 Google Map API와 기상청 API를 통해 위치와 10일치 기온 데이터를 받아와서 적절한 상품을 추천해 주는 기능을 제공한다.
 
 
 ![weather_service](https://user-images.githubusercontent.com/62981623/122636916-bfb1e000-d126-11eb-9de6-45d329e763c9.jpg)
+
 
 
 
@@ -215,11 +223,16 @@ Google Map API와 기상청 API를 통해 위치와 10일치 기온 데이터를
 
 
 
+
+
+
 ### 3. 페이징 처리
 
 상품들을 페이지로 나누어 보여주는 기능을 제공한다. 
 
 ![image](https://user-images.githubusercontent.com/62981623/122637391-4f588e00-d129-11eb-9ac4-01815853dfef.png)
+
+
 
 
 ##### MainController.java
@@ -239,6 +252,8 @@ Google Map API와 기상청 API를 통해 위치와 10일치 기온 데이터를
         return "/view/category";
     }
 ```
+
+
 
 
 
@@ -277,11 +292,17 @@ Thymeleaf 엔진의 특성상 csrf 토큰 유효성을 판단하는데, Ajax POS
 
 
 
+
+
+
 ## 개선방안
 
 ### - 검색 시 Physical DB Access가 아닌 검색 엔진 오픈소스를 사용
 
 ### - AWS 운영 서버 추가
+
+
+
 
 
 ## 팀 역할
