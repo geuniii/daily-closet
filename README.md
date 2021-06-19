@@ -297,9 +297,9 @@ Thymeleaf 엔진의 특성상 csrf 토큰 유효성을 판단하는데, Ajax POS
 
 ## 개선방안
 
-### - 검색 시 Physical DB Access가 아닌 검색 엔진 오픈소스를 사용
+- 검색 시 Physical DB Access가 아닌 검색 엔진 오픈소스를 사용
 
-### - AWS 운영 서버 추가
+- AWS 운영 서버 추가
 
 
 
